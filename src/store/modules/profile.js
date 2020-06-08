@@ -1,0 +1,133 @@
+import * as types from '@/store/mutation-types'
+import api from '@/services/profile'
+import { buildSuccess, handleError } from '@/utils/utils.js'
+import auth from '../../api/auth'
+
+const getters = {
+  user: (state) => state.user,
+}
+
+const actions = {
+  changeMyPassword({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true)
+      api
+        .changeMyPassword(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            buildSuccess(
+              {
+                msg: 'myProfile.PASSWORD_CHANGED',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  getProfile({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true)
+      auth
+        .getAccountDetails()
+        .then((response) => {
+          if (response.status === 200) {
+            commit(types.FILL_USER, response.data)
+            buildSuccess(null, commit, resolve)
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  saveUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      //  commit(types.SHOW_LOADING, true)
+      auth
+        .updateAccountDetails(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            commit(types.FILL_USER, response.data)
+            /* buildSuccess(
+              {
+                msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )*/
+            alert('it works', commit, resolve)
+          }
+        })
+        .catch((error) => {
+          //handleError(error, commit, reject)
+          alert('doesnt work', error, commit, reject)
+        })
+    })
+  },
+  addUserData({ commit }, data) {
+    commit(types.ADD_USER_DATA, data)
+  },
+}
+
+const mutations = {
+  [types.FILL_USER](state, data) {
+    state.user.email = data.email
+    state.user.empleado.nombre = data.empleado.nombre
+    state.user.empleado.apellido = data.empleado.apellido
+    state.user.empleado.direccion = data.empleado.direccion
+    state.user.empleado.telefono = data.empleado.telefono
+    state.user.tipo_usuario.nombre = data.tipo_usuario.nombre
+  },
+  [types.ADD_USER_DATA](state, data) {
+    switch (data.key) {
+      case 'email':
+        state.user.email = data.value
+        break
+      case 'name':
+        state.user.empleado.nombre = data.value
+        break
+      case 'lastName':
+        state.user.empleado.apellido = data.value
+        break
+      case 'address':
+        state.user.empleado.direccion = data.value
+        break
+      case 'phone':
+        state.user.empleado.telefono = data.value
+        break
+      case 'type':
+        state.user.tipo_usuario.nombre = data.value
+        break
+      default:
+        break
+    }
+  },
+}
+
+const state = {
+  user: {
+    email: '',
+    empleado: {
+      nombre: '',
+      apellido: '',
+      direccion: '',
+      telefono: '',
+    },
+    tipo_usuario: {
+      nombre: '',
+    },
+  },
+}
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations,
+}

@@ -10,6 +10,9 @@ export default {
   updateUser(id, payload) {
     return api.patch(`/auth/update-user/${id}`, payload)
   },
+  getUserAuth() {
+    return api.get('/auth/user/')
+  },
 }
 
 /*

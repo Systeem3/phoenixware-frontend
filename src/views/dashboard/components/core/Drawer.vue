@@ -74,6 +74,23 @@ export default {
         title: 'dashboard',
         to: '/',
       },
+       {
+        group: '/users',
+        icon: 'mdi mdi-account-circle',
+        title: 'Empleados',
+        children: [
+          {
+            title: 'Registrar Empleado',
+            to: 'create',
+            icon: 'mdi mdi-account-plus',
+          },
+          {
+            title: 'Lista de Empleados',
+            to: 'list',
+            icon: 'mdi-account-multiple',
+          },
+        ],
+      },
       {
         group: '/pages',
         icon: 'mdi-image',
@@ -177,7 +194,7 @@ export default {
           },
         ],
       },
-      {
+       {
         group: '/tables',
         icon: 'mdi-grid',
         title: 'tables',
@@ -245,20 +262,16 @@ export default {
     profile() {
       return {
         avatar: true,
-        group: '',
+        group: '/users',
         title: this.$t('avatar'),
         children: [
           {
-            href: '',
+            to: 'show/',
             title: this.$t('my-profile'),
           },
           {
-            to: '',
+            to: 'edit/',
             title: this.$t('edit-profile'),
-          },
-          {
-            to: '',
-            title: this.$t('settings'),
           },
         ],
       }

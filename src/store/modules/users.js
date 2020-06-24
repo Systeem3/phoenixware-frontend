@@ -14,9 +14,7 @@ const state = {
       direccion: '',
       telefono: '',
     },
-    tipo_usuario: {
-      nombre: '',
-    },
+    tipo_usuario: ''
   },
 }
 
@@ -148,6 +146,20 @@ const actions = {
           dispatch('notification/add', notification, { root: true })
         })
     }
+  },
+
+  fetchUser2({ commit,dispatch }) {
+    UserService.getUserAuth()
+      .then((response) => {
+        commit('SET_USER', response.data)
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching event: ' + error.message,
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
   },
   /*saveUser({ commit }, payload) {
     return new Promise((resolve, reject) => {

@@ -214,8 +214,9 @@ const routes = [
       // Users
       {
         name: 'UserList',
-        path: '/users/',
+        path: '/users/list',
         component: () => import('@/views/dashboard/pages/user/List'),
+        //beforeEnter: requireAuthenticated,
       },
       {
         name: 'UserCreate',
@@ -224,13 +225,13 @@ const routes = [
       },
       {
         name: 'UserUpdate',
-        path: '/users/edit/:id',
+        path: '/users/edit/',
         component: () => import('@/views/dashboard/pages/user/Update'),
         props: true,
       },
       {
         name: 'UserShow',
-        path: '/users/show/:id',
+        path: '/users/show/',
         component: () => import('@/views/dashboard/pages/user/Show'),
         props: true,
         //    beforeEnter: requireAuthenticated,

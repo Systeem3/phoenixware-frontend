@@ -27,7 +27,6 @@
                         <v-tooltip top>
                           <template slot="activator">
                             <v-icon>mdi-phone</v-icon>
-                            <span>Teléfono</span>
                             {{ user.empleado.telefono }}
                           </template>
                         </v-tooltip>
@@ -45,7 +44,7 @@
                       <v-flex xs12 sm6 md6>
                         <v-tooltip top>
                           <template slot="activator">
-                            <v-icon>cake</v-icon>
+                            <v-icon>mdi-crosshairs-gps</v-icon>
                             {{ user.empleado.direccion }}
                           </template>
                         </v-tooltip>
@@ -53,7 +52,7 @@
                       <v-flex xs12 sm6 md6>
                         <v-tooltip top>
                           <template slot="activator">
-                            <v-icon>email</v-icon>
+                           
                             {{ user.tipo_usuario.nombre }}
                           </template>
                         </v-tooltip>
@@ -76,11 +75,14 @@ import { mapActions, mapState } from 'vuex'
 export default {
   props: ['id'],
   created() {
-    this.fetchUser(this.id)
+  	  this.fetchUser2()	
+    //this.fetchUser(this.id)	
+    //console.log(this.fetchUser2())	
+
   },
   computed: {
     ...mapState('users', ['user']),
   },
-  methods: mapActions('users', ['fetchUser']),
+  methods: mapActions('users', ['fetchUser2']),
 }
 </script>

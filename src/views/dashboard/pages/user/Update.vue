@@ -110,9 +110,9 @@ export default {
   data() {
     return {
       items: [
-        { name: 'administrador', id: '1' },
-        { name: 'director', id: '2' },
-        { name: 'regular', id: '3' },
+        { name: 'Administrador', id: '1' },
+        { name: 'Director', id: '2' },
+        { name: 'Regular', id: '3' },
       ],
     }
   },

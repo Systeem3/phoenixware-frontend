@@ -71,17 +71,6 @@ export default {
     clearActivationStatus({ commit }) {
       commit(ACTIVATION_CLEAR)
     },
-    /*retrieveTutorials() {
-      TutorialDataService.getAll()
-        .then((response) => {
-          this.loader = false
-          this.items = response.data
-          console.log(response.data)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    },*/
     fetchUsers({ commit, dispatch }) {
       auth
         .getAllAccounts()

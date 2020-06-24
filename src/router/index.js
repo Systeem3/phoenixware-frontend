@@ -225,16 +225,15 @@ const routes = [
       },
       {
         name: 'UserUpdate',
-        path: '/users/edit/',
+        path: '/users/edit/:id',
         component: () => import('@/views/dashboard/pages/user/Update'),
         props: true,
       },
       {
         name: 'UserShow',
-        path: '/users/show/',
+        path: '/users/show/:id',
         component: () => import('@/views/dashboard/pages/user/Show'),
         props: true,
-        //    beforeEnter: requireAuthenticated,
       },
       // Client
       {

@@ -184,9 +184,8 @@ export default {
     },
     type: {
       get() {
-        return this.$store.state.users.user.tipo_usuario.nombre
+        return this.$store.state.users.user.tipo_usuario
       },
-
       set(value) {
         const data = {
           key: 'type',
@@ -220,9 +219,7 @@ export default {
           direccion: this.address,
           telefono: this.phone,
         },
-        tipo_usuario: {
-          nombre: this.type,
-        },
+        tipo_usuario: this.type,
       })
     },
   },

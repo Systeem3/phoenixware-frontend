@@ -52,7 +52,6 @@
                       <v-flex xs12 sm6 md6>
                         <v-tooltip top>
                           <template slot="activator">
-                           
                             {{ user.tipo_usuario.nombre }}
                           </template>
                         </v-tooltip>
@@ -75,14 +74,13 @@ import { mapActions, mapState } from 'vuex'
 export default {
   props: ['id'],
   created() {
-  	  this.fetchUser2()	
-    //this.fetchUser(this.id)	
-    //console.log(this.fetchUser2())	
-
+    this.fetchUser()
+    //this.fetchUser(this.id)
+    //console.log(this.fetchUser2())
   },
   computed: {
     ...mapState('users', ['user']),
   },
-  methods: mapActions('users', ['fetchUser2']),
+  methods: mapActions('users', ['fetchUser']),
 }
 </script>

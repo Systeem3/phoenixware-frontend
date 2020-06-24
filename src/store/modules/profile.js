@@ -81,7 +81,7 @@ const mutations = {
     state.user.empleado.apellido = data.empleado.apellido
     state.user.empleado.direccion = data.empleado.direccion
     state.user.empleado.telefono = data.empleado.telefono
-    state.user.tipo_usuario.nombre = data.tipo_usuario.nombre
+    state.user.tipo_usuario = data.tipo_usuario
   },
   [types.ADD_USER_DATA](state, data) {
     switch (data.key) {
@@ -101,7 +101,7 @@ const mutations = {
         state.user.empleado.telefono = data.value
         break
       case 'type':
-        state.user.tipo_usuario.nombre = data.value
+        state.user.tipo_usuario = data.value
         break
       default:
         break
@@ -118,9 +118,7 @@ const state = {
       direccion: '',
       telefono: '',
     },
-    tipo_usuario: {
-      nombre: '',
-    },
+    tipo_usuario: '',
   },
 }
 

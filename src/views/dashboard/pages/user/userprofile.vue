@@ -184,7 +184,7 @@ export default {
     },
     type: {
       get() {
-        return this.$store.state.profile.user.tipo_usuario.nombre
+        return this.$store.state.profile.user.tipo_usuario
       },
       set(value) {
         const data = {
@@ -206,9 +206,7 @@ export default {
           direccion: this.address,
           telefono: this.phone,
         },
-        tipo_usuario: {
-          nombre: this.type,
-        },
+        tipo_usuario: this.type,
       })
     },
   },

@@ -1,11 +1,11 @@
 <template>
-  <v-content>
+  <v-main>
     <dashboard-core-breadcrumbs />
 
     <router-view />
 
     <dashboard-core-footer />
-  </v-content>
+  </v-main>
 </template>
 
 <script>

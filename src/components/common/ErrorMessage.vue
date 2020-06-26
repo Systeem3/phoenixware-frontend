@@ -33,19 +33,19 @@ export default {
         return this.$store.state.error.showErrorMessage
       },
       set(value) {
-        this.$store.commit(types.SHOW_ERROR, value)
-      }
+        this.$store.commit(types.SHOW_ERROR, value, { root: true })
+      },
     },
     error() {
       return formatErrorMessages('errors', this.$store.state.error.errorMessage)
-    }
+    },
   },
   watch: {
     error() {
       setTimeout(() => {
         this.showErrorMessage = this.error !== null
       }, 100)
-    }
-  }
+    },
+  },
 }
 </script>

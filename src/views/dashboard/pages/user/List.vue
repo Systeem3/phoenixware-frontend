@@ -144,6 +144,10 @@ export default {
   },
 
   methods: {
+    async editItem(item) {
+      // this.$store.dispatch('UserUpdate')
+      this.$router.push(`/users/edit/${item.id}/`)
+    },
     ...mapActions('users', ['deleteUser']),
     success() {
       /* Vue.swal({

@@ -36,6 +36,15 @@ const actions = {
       .then(() => commit(LOGOUT))
       .finally(() => commit(REMOVE_TOKEN))
   },
+  /*  userLogout({ commit }) {
+    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('tokenExpiration')
+    window.localStorage.removeItem('user')
+    commit(types.LOGOUT)
+    router.push({
+      name: 'login'
+    })
+  } */
   initialize({ commit }) {
     const token = localStorage.getItem(TOKEN_STORAGE_KEY)
 

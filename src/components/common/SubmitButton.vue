@@ -16,7 +16,7 @@ export default {
     color: String,
     buttonText: String,
     customClass: String,
-    text: Boolean
+    text: Boolean,
   },
   computed: {
     disabledButton() {
@@ -24,7 +24,7 @@ export default {
     },
     colorString() {
       return this.color ? this.color : 'secondary'
-    }
-  }
+    },
+  },
 }
 </script>

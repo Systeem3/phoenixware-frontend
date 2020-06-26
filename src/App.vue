@@ -1,5 +1,6 @@
 <template>
   <v-app id="bg">
+    <loading />
     <router-view></router-view>
   </v-app>
 </template>
@@ -7,9 +8,15 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import Loading from '@/components/core/Loading.vue'
+
 export default {
   name: 'App',
   computed: mapGetters('auth', ['isAuthenticated']),
+
+  components: {
+    Loading,
+  },
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <div v-if="$vuetify.breakpoint.smAndUp">
       <v-img src="@/static/logo2.png" class="mx-auto my-4" max-width="450px" />
     </div>
@@ -7,7 +7,7 @@
     <div v-else>
       <v-img src="@/static/logo2.png" class="mx-auto my-4" max-width="240px" />
     </div>
-  </v-content>
+  </v-main>
   <!--  <div class="d-flex justify-space-between mt-6">
     <v-btn
       class="text-none letter-spacing-0"

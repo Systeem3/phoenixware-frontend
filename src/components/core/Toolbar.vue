@@ -151,51 +151,51 @@ export default {
     return {
       title: this.$store.getters.appTitle,
       htmlAttrs: {
-        lang: this.$i18n.locale
+        lang: this.$i18n.locale,
       },
       meta: [
         { name: 'msapplication-TileColor', content: '#ffc40d' },
         { name: 'theme-color', content: '#ffffff' },
         {
           name: 'apple-mobile-web-app-title',
-          content: this.$store.getters.appTitle
+          content: this.$store.getters.appTitle,
         },
-        { name: 'application-name', content: this.$store.getters.appTitle }
+        { name: 'application-name', content: this.$store.getters.appTitle },
       ],
       link: [
         {
           rel: 'apple-touch-icon',
           sizes: '180x180',
-          href: '/apple-touch-icon.png'
+          href: '/apple-touch-icon.png',
         },
         {
           rel: 'icon',
           type: 'image/png',
           sizes: '32x32',
-          href: '/favicon-32x32.png'
+          href: '/favicon-32x32.png',
         },
         {
           rel: 'icon',
           type: 'image/png',
           sizes: '16x16',
-          href: '/favicon-16x16.png'
+          href: '/favicon-16x16.png',
         },
         { rel: 'manifest', href: '/site.webmanifest' },
         { rel: 'mask-icon', color: '#5bbad5', href: '/safari-pinned-tab.svg' },
-        { rel: 'favicon', href: '/favicon.ico' }
-      ]
+        { rel: 'favicon', href: '/favicon.ico' },
+      ],
     }
   },
   components: {
-    LocaleChanger
+    LocaleChanger,
   },
   directives: {
-    ResizeText
+    ResizeText,
   },
   data() {
     return {
       isDark: false,
-      sidebar: false
+      sidebar: false,
     }
   },
   computed: {
@@ -209,14 +209,14 @@ export default {
           title: this.$t('adminItems.CITIES'),
           link: 'admin-cities',
           icon: 'mdi-city',
-          class: 'btnAdminCities'
+          class: 'btnAdminCities',
         },
         {
           title: this.$t('adminItems.USERS'),
           link: 'admin-users',
           icon: 'mdi-account-supervisor',
-          class: 'btnAdminUsers'
-        }
+          class: 'btnAdminUsers',
+        },
       ]
     },
     menuItems() {
@@ -226,63 +226,63 @@ export default {
             title: this.$t('menuItems.HOME'),
             link: 'home',
             icon: 'mdi-home',
-            class: 'btnHome'
+            class: 'btnHome',
           },
           {
             title: this.$t('menuItems.ABOUT'),
             link: 'about',
             icon: 'mdi-help-circle-outline',
-            class: 'btnAbout'
+            class: 'btnAbout',
           },
           {
             title: this.$t('menuItems.MY_PROFILE'),
             link: 'profile',
             icon: 'mdi-face',
-            class: 'btnProfile'
-          }
+            class: 'btnProfile',
+          },
         ]
       }
       return [
         {
           title: this.$t('menuItems.HOME'),
           link: 'landing',
-          icon: 'mdi-home'
+          icon: 'mdi-home',
         },
         {
           title: this.$t('menuItems.ABOUT'),
           link: 'about',
           icon: 'mdi-help-circle-outline',
-          class: 'btnAbout'
+          class: 'btnAbout',
         },
         {
           title: this.$t('menuItems.LOGIN'),
           link: 'login',
           icon: 'mdi-lock',
-          class: 'btnLogin'
+          class: 'btnLogin',
         },
         {
           title: this.$t('menuItems.SIGNUP'),
           link: 'signup',
           icon: 'mdi-plus-circle-outline',
-          class: 'btnLogin'
-        }
+          class: 'btnLogin',
+        },
       ]
-    }
+    },
   },
   methods: {
     userLogout() {
       this.$store.dispatch('userLogout')
-    }
+    },
   },
   watch: {
     isDark() {
       this.$vuetify.theme.dark = this.isDark
       localStorage.setItem('dark', this.isDark)
-    }
+    },
   },
   created() {
     const dark = localStorage.getItem('dark')
     this.isDark = dark ? JSON.parse(dark) : false
-  }
+  },
 }
 </script>

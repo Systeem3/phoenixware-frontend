@@ -9,6 +9,9 @@ import signup from './modules/auth/signup'
 import users from './modules/users'
 import * as notification from './modules/notification'
 import profile from './modules/profile'
+import loading from './modules/loading'
+import error from './modules/error'
+import success from './modules/success'
 
 //import * as user from '@/store/modules/user.js'
 
@@ -42,6 +45,9 @@ export default new Vuex.Store({
     users,
     notification,
     profile,
+    loading,
+    error,
+    success,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

@@ -206,6 +206,7 @@ export default {
 
       return typeId
     },
+    //...mapState('users', ['SHOW_LOADING', 'SUCCESS', 'ERROR']),
   },
   methods: {
     ...mapActions('users', ['fetchUser', 'addUserData', 'saveUser']),
@@ -222,6 +223,7 @@ export default {
         tipo_usuario: this.type,
       })
     },
+    //  ...mapMutations('users', ['SHOW_LOADING', 'ERROR']),
   },
   props: ['id'],
   async mounted() {

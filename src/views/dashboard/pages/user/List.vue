@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 //import { Vue } from 'vue-property-decorator'
 
 export default {
@@ -144,6 +144,7 @@ export default {
   },
 
   methods: {
+    ...mapActions('users', ['deleteUser']),
     success() {
       /* Vue.swal({
         type: 'success',
@@ -152,10 +153,12 @@ export default {
       })*/
       this.$swal('Oops...', 'Something went wrong!', 'success')
     },
+    props: ['id'],
     async deleteItem(item) {
       try {
         const response = await this.$confirm(
           this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
+
           {
             title: this.$t('common.WARNING'),
             buttonTrueText: this.$t('common.DELETE'),
@@ -165,13 +168,26 @@ export default {
           }
         )
         if (response) {
+          console.log(item.id)
           //  this.dataTableLoading = true
-          await this.deleteUser(item._id)
-          await this
-            .getUsers
+          //await this.deleteUser(item.id, {})
+          await this.deleteUser({
+            id: item.id,
+            is_active: false,
+            email: this.email,
+            empleado: {
+              nombre: this.name,
+              apellido: this.lastName,
+              direccion: this.address,
+              telefono: this.phone,
+            },
+            tipo_usuario: this.type,
+          })
+          /* await this
+            .fetchUsers
             // buildPayloadPagination(this.pagination, this.buildSearch())
             ()
-          this.dataTableLoading = false
+          this.dataTableLoading = false*/
         }
         // eslint-disable-next-line no-unused-vars
       } catch (error) {

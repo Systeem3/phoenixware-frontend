@@ -20,6 +20,8 @@ export const RESET_EMAIL_SENT = 'RESET_EMAIL_SENT'
 export const SHOW_CHANGE_PASSWORD_INPUTS = 'SHOW_CHANGE_PASSWORD_INPUTS'
 // user
 export const FILL_USER = 'FILL_USER'
+export const CHANGE_STATE = 'CHANGE_STATE'
+
 export const ADD_USER_DATA = 'ADD_USER_DATA'
 // cities
 export const FILL_ALL_CITIES = 'FILL_ALL_CITIES'

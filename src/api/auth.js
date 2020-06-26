@@ -55,4 +55,7 @@ export default {
   updateUser(id, payload) {
     return session.patch(`/api/auth/update-user/${id}/`, payload)
   },
+  deleteUser(id, payload) {
+    return session.patch(`/api/auth/update-user/${id}/`, payload)
+  },
 }

@@ -216,6 +216,7 @@ const routes = [
         name: 'UserList',
         path: '/users/list',
         component: () => import('@/views/dashboard/pages/user/List'),
+        props: true,
         //beforeEnter: requireAuthenticated,
       },
       {

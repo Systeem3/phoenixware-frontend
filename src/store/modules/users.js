@@ -2,12 +2,13 @@ import UserService from '@/services/UserService.js'
 //import { buildSuccess, handleError } from '@/utils/utils.js'
 import * as types from '@/store/mutation-types'
 import auth from '../../api/auth'
-import { buildSuccess, handleError } from '@/utils/utils.js'
+//import { buildSuccess, handleError } from '@/utils/utils.js'
 
 const state = {
   users: [],
   usersTotal: 0,
   user: {
+    //id: '',
     email: '',
     empleado: {
       nombre: '',
@@ -51,6 +52,9 @@ const mutations = {
     state.user.empleado.direccion = data.empleado.direccion
     state.user.empleado.telefono = data.empleado.telefono
     state.user.tipo_usuario = data.tipo_usuario
+  },
+  [types.CHANGE_STATE](state) {
+    state.user.is_active = false
   },
   [types.ADD_USER_DATA](state, data) {
     switch (data.key) {
@@ -228,7 +232,7 @@ const actions = {
     commit(types.ADD_USER_DATA, data)
   },
 
-  deleteUser({ commit }, payload) {
+  /*deleteUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
       UserService.deleteUser(payload)
         .then((response) => {
@@ -244,6 +248,44 @@ const actions = {
         })
         .catch((error) => {
           handleError(error, commit, reject)
+        })
+    })
+  },*/
+  deleteUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      // var user = getters.getUserById(id)
+      //console.log(user.id)
+      /*const data = {
+        email: payload.email,
+        empleado: {
+          nombre: payload.nombre,
+          apellido: payload.apellido,
+          direccion: payload.direccion,
+          telefono: payload.telefono,
+        },
+        tipo_usuario: {
+          nombre: payload.nombre,
+        },
+      }*/
+      //  commit(types.SHOW_LOADING, true)
+      auth
+        .deleteUser(payload.id, payload)
+        .then((response) => {
+          if (response.status === 200) {
+            commit(types.CHANGE_STATE, response.data)
+            /* buildSuccess(
+              {
+                msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )*/
+            alert('it works', commit, resolve)
+          }
+        })
+        .catch((error) => {
+          //handleError(error, commit, reject)
+          alert('doesnt work', error, commit, reject)
         })
     })
   },

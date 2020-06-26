@@ -16,4 +16,7 @@ export default {
   postUser(user) {
     return api.post('/auth/registration/', user)
   },
+  deleteUser(id) {
+    return api.delete(`/auth/update-user/${id}`)
+  },
 }

@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "..\\..\\vue-skeleton-mvp-master\\vue-skeleton-mvp-master"
 		}
 	]
 }

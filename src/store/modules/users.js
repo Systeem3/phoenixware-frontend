@@ -2,6 +2,7 @@ import UserService from '@/services/UserService.js'
 //import { buildSuccess, handleError } from '@/utils/utils.js'
 import * as types from '@/store/mutation-types'
 import auth from '../../api/auth'
+import { buildSuccess, handleError } from '@/utils/utils.js'
 
 const state = {
   users: [],
@@ -225,6 +226,26 @@ const actions = {
 
   addUserData({ commit }, data) {
     commit(types.ADD_USER_DATA, data)
+  },
+
+  deleteUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      UserService.deleteUser(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            buildSuccess(
+              {
+                msg: 'common.DELETED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
   },
 }
 const getters = {

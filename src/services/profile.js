@@ -10,5 +10,4 @@ export default {
   saveProfile(payload) {
     return axios.patch('/auth/user', payload)
   },
-  //test
 }

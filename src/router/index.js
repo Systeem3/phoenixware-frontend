@@ -235,27 +235,6 @@ const routes = [
         component: () => import('@/views/dashboard/pages/user/Show'),
         props: true,
       },
-      // Client
-      {
-        name: 'ClientList',
-        path: '/clients/',
-        component: () => import('@/views/dashboard/pages/client/List'),
-      },
-      {
-        name: 'ClientCreate',
-        path: '/clients/create',
-        component: () => import('@/views/dashboard/pages/client/Create'),
-      },
-      {
-        name: 'ClientUpdate',
-        path: '/clients/edit/:id',
-        component: () => import('@/views/dashboard/pages/client/Update'),
-      },
-      {
-        name: 'ClientShow',
-        path: '/clients/show/:id',
-        component: () => import('@/views/dashboard/pages/client/Show'),
-      },
       // Meeting
       {
         name: 'MeetingList',
@@ -277,26 +256,9 @@ const routes = [
         path: '/meetings/show/:id',
         component: () => import('@/views/dashboard/pages/meeting/Show'),
       },
-      // Company
-      {
-        name: 'CompanyCreate',
-        path: '/company/create',
-        component: () => import('@/views/dashboard/pages/company/Create'),
-      },
-      {
-        name: 'CompanyUpdate',
-        path: '/company/edit/:id',
-        component: () => import('@/views/dashboard/pages/company/Update'),
-      },
-      {
-        name: 'CompanyShow',
-        path: '/company/show/:id',
-        component: () => import('@/views/dashboard/pages/company/Show'),
-      },
-
       {
         name: 'Profile',
-        path: '/userprofile/',
+        path: '/userprofile/edit',
         component: () => import('@/views/dashboard/pages/user/userprofile'),
       },
     ],

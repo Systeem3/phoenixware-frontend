@@ -21,6 +21,9 @@ import './plugins/vee-validate'
 import vuetify from './plugins/vuetify'
 import i18n from './locales'
 
+import '@/plugins/common'
+import VuetifyConfirm from 'vuetify-confirm'
+
 import './plugins/vue-world-map'
 //import { sync } from 'vuex-router-sync'
 //sync(store, router)
@@ -35,6 +38,7 @@ const options = {
 }
 
 Vue.use(VueSweetalert2, options)
+Vue.use(VuetifyConfirm, { vuetify })
 
 Vue.config.productionTip = false
 

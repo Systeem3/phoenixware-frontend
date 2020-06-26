@@ -74,7 +74,7 @@ export default {
         title: 'dashboard',
         to: '/',
       },
-       {
+      {
         group: '/users',
         icon: 'mdi mdi-account-circle',
         title: 'Empleados',
@@ -194,7 +194,7 @@ export default {
           },
         ],
       },
-       {
+      {
         group: '/tables',
         icon: 'mdi-grid',
         title: 'tables',
@@ -262,15 +262,11 @@ export default {
     profile() {
       return {
         avatar: true,
-        group: '/users',
+        group: '/userprofile/',
         title: this.$t('avatar'),
         children: [
           {
-            to: 'show/',
-            title: this.$t('my-profile'),
-          },
-          {
-            to: 'edit/',
+            to: 'edit',
             title: this.$t('edit-profile'),
           },
         ],

@@ -152,6 +152,32 @@ export default {
       })*/
       this.$swal('Oops...', 'Something went wrong!', 'success')
     },
+    async deleteItem(item) {
+      try {
+        const response = await this.$confirm(
+          this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
+          {
+            title: this.$t('common.WARNING'),
+            buttonTrueText: this.$t('common.DELETE'),
+            buttonFalseText: this.$t('common.CANCEL'),
+            buttonTrueColor: 'red lighten3',
+            buttonFalseColor: 'yellow',
+          }
+        )
+        if (response) {
+          //  this.dataTableLoading = true
+          await this.deleteUser(item._id)
+          await this
+            .getUsers
+            // buildPayloadPagination(this.pagination, this.buildSearch())
+            ()
+          this.dataTableLoading = false
+        }
+        // eslint-disable-next-line no-unused-vars
+      } catch (error) {
+        this.dataTableLoading = false
+      }
+    },
   },
   mounted() {},
 }

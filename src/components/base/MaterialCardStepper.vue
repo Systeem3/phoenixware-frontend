@@ -1,42 +1,6 @@
 <template>
   <v-card v-bind="$attrs" :class="classes" class="v-card--material pa-3">
     <div class="d-flex grow flex-wrap">
-      <v-avatar
-        v-if="avatar"
-        size="128"
-        class="mx-auto v-card--material__avatar elevation-6"
-        color="grey"
-      >
-        <v-img :src="avatar" />
-      </v-avatar>
-
-      <v-sheet
-        v-else
-        :class="{
-          'pa-7': !$slots.image,
-        }"
-        :color="color"
-        :max-height="icon ? 90 : undefined"
-        :width="inline || icon ? 'auto' : '100%'"
-        elevation="6"
-        class="text-start v-card--material__heading mb-n6"
-        dark
-      >
-        <slot v-if="$slots.heading" name="heading" />
-
-        <slot v-else-if="$slots.image" name="image" />
-
-        <div
-          v-else-if="title && !icon"
-          class="display-1 font-weight-light"
-          v-text="title"
-        />
-
-        <v-icon v-else-if="icon" size="32" v-text="icon" />
-
-        <div v-if="text" class="headline font-weight-thin" v-text="text" />
-      </v-sheet>
-
       <div v-if="$slots['after-heading']" class="ml-6">
         <slot name="after-heading" />
       </div>
@@ -64,7 +28,7 @@
 
 <script>
 export default {
-  name: 'MaterialCard',
+  name: 'MaterialCardStepper',
 
   props: {
     avatar: {

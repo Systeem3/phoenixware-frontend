@@ -33,7 +33,7 @@ export default {
         return this.$store.state.error.showErrorMessage
       },
       set(value) {
-        this.$store.commit(types.SHOW_ERROR, value, { root: true })
+        this.$store.commit(types.SHOW_ERROR, value)
       },
     },
     error() {

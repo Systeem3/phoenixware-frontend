@@ -13,6 +13,8 @@ import loading from './modules/loading'
 import error from './modules/error'
 import success from './modules/success'
 
+import projects from './modules/projects'
+
 //import * as user from '@/store/modules/user.js'
 
 Vue.use(Vuex)
@@ -48,6 +50,7 @@ export default new Vuex.Store({
     loading,
     error,
     success,
+    projects,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

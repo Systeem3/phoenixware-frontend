@@ -78,8 +78,8 @@ export const buildPayloadPagination = (pagination, search) => {
 export const handleError = (error, commit, reject) => {
   let errMsg = ''
   // Resets errors in store
-  commit(types.SHOW_LOADING, false)
-  commit(types.ERROR, null)
+  commit(types.SHOW_LOADING, false, { root: true })
+  commit(types.ERROR, null, { root: true })
 
   // Checks if unauthorized
   if (error.response.status === 401) {
@@ -91,8 +91,8 @@ export const handleError = (error, commit, reject) => {
       : 'SERVER_TIMEOUT_CONNECTION_ERROR'
     setTimeout(() => {
       return errMsg
-        ? commit(types.ERROR, errMsg)
-        : commit(types.SHOW_ERROR, false)
+        ? commit(types.ERROR, errMsg, { root: true })
+        : commit(types.SHOW_ERROR, false, { root: true })
     }, 0)
   }
   reject(error)
@@ -104,12 +104,14 @@ export const buildSuccess = (
   resolve,
   resolveParam = undefined
 ) => {
-  commit(types.SHOW_LOADING, false)
-  commit(types.SUCCESS, null)
+  commit(types.SHOW_LOADING, false, { root: true })
+  commit(types.SUCCESS, null, { root: true })
   setTimeout(() => {
-    return msg ? commit(types.SUCCESS, msg) : commit(types.SHOW_SUCCESS, false)
+    return msg
+      ? commit(types.SUCCESS, msg, { root: true })
+      : commit(types.SHOW_SUCCESS, false, { root: true })
   }, 0)
-  commit(types.ERROR, null)
+  commit(types.ERROR, null, { root: true })
   resolve(resolveParam)
 }
 

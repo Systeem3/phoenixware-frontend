@@ -257,6 +257,22 @@ const routes = [
         path: '/meetings/show/:id',
         component: () => import('@/views/dashboard/pages/meeting/Show'),
       },
+
+      //Project
+      {
+        name: 'ProjectList',
+        path: '/projects/list',
+        component: () => import('@/views/dashboard/pages/project/List'),
+        props: true,
+        //beforeEnter: requireAuthenticated,
+      },
+      {
+        name: 'ProjectList',
+        path: '/projects/create',
+        component: () => import('@/views/dashboard/pages/project/Wizard'),
+        props: true,
+        //beforeEnter: requireAuthenticated,
+      },
       {
         name: 'Profile',
         path: '/userprofile/edit',

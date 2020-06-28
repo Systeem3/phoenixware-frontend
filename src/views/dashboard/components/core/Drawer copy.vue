@@ -264,7 +264,6 @@ export default {
         avatar: true,
         group: '/userprofile/',
         title: this.$t('avatar'),
-        //title: this.$t(user.employee.name),
         children: [
           {
             to: 'edit',

@@ -85,7 +85,7 @@
                       {{ registrationCompleted }}
                     </v-btn>
                     <v-btn
-                      color="#581845"
+                      color="success"
                       class="mr-0"
                       @click.stop.prevent="submit"
                       @click="createUser(inputs)"
@@ -100,9 +100,6 @@
         </base-material-card>
       </v-col>
     </v-row>
-
-    <ErrorMessage />
-    <SuccessMessage />
   </v-container>
 </template>
 

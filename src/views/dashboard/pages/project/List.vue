@@ -12,17 +12,14 @@
       class="px-5 py-3"
     >
       <template v-slot:after-heading>
-        <div class="display-2 font-weight-light">
-          Lista de Empleados
-        </div>
+        <div class="display-2 font-weight-light">Lista de Proyectos</div>
 
         <v-btn
           @click="success"
           class="btn btn-outline-primary col s12 m3"
           type="button"
+          >success</v-btn
         >
-          success
-        </v-btn>
       </template>
 
       <v-text-field
@@ -39,61 +36,25 @@
 
       <v-data-table
         :headers="headers"
-        :items="users"
+        :items="projects"
         :search.sync="search"
         :sort-by="['name', 'office']"
         :sort-desc="[false, true]"
         multi-sort
       >
-        <!-- <template v-slot:item.actions="{ item }">
-          <v-btn icon slot="activator">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-          <v-list>
-            <v-list-title
-              small
-              class="mr-2"
-              @click="showItem()"
-              :to="{ name: 'UserShow' }"
-            >
-              <v-list-tile-title>
-                <v-icon small class="mr-2"> mdi-eye </v-icon>
-              </v-list-tile-title>
-            </v-list-title>
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(item)"
-              :to="{ name: 'UserUpdate' }"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon small @click="deleteItem(item)">
-              mdi-delete
-            </v-icon>
-          </v-list>
-        </template>-->
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="showItem(item)">
-            mdi-eye
-          </v-icon>
+          <v-icon small class="mr-2" @click="showItem(item)">mdi-eye</v-icon>
           <v-icon
             small
             class="mr-2"
             @click="editItem(item)"
-            :to="{ name: 'UserUpdate' }"
+            :to="{ name: 'ProjectUpdate' }"
+            >mdi-pencil</v-icon
           >
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item)">
-            mdi-delete
-          </v-icon>
+          <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
       </v-data-table>
     </base-material-card>
-
-    <ErrorMessage />
-    <SuccessMessage />
   </v-container>
 </template>
 
@@ -109,23 +70,27 @@ export default {
       headers: [
         {
           text: 'Nombre',
-          value: 'empleado.nombre',
+          value: 'nombre',
         },
         {
-          text: 'Apellido',
-          value: 'empleado.apellido',
+          text: 'Tipo',
+          value: 'tipo',
         },
         {
-          text: 'Dirección',
-          value: 'empleado.direccion',
+          text: 'Descripción',
+          value: 'descripcion',
         },
         {
-          text: 'Correo Electrónico',
-          value: 'email',
+          text: 'Fecha Inicio',
+          value: 'fecha_inicio',
         },
         {
-          text: 'Teléfono',
-          value: 'empleado.telefono',
+          text: 'Fecha Finalización',
+          value: 'fecha_finalizacion',
+        },
+        {
+          text: 'Metodología',
+          value: 'metodologia',
         },
         {
           sortable: false,
@@ -140,18 +105,18 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('users/fetchUsers')
+    this.$store.dispatch('projects/fetchProjects')
   },
   computed: {
-    ...mapGetters('users', ['users']),
+    ...mapGetters('projects', ['projects']),
   },
 
   methods: {
     async editItem(item) {
       // this.$store.dispatch('UserUpdate')
-      this.$router.push(`/users/edit/${item.id}/`)
+      this.$router.push(`/projects/edit/${item.id}/`)
     },
-    ...mapActions('users', ['deleteUser']),
+    ...mapActions('projects', ['deleteProjects']),
     success() {
       /* Vue.swal({
         type: 'success',

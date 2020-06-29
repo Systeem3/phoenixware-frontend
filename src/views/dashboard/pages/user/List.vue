@@ -5,24 +5,11 @@
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
-    <base-material-card
-      color="indigo"
-      icon="mdi-vuetify"
-      inline
-      class="px-5 py-3"
-    >
+    <base-material-card color="secondary" icon="mdi-vuetify" inline class="px-5 py-3">
       <template v-slot:after-heading>
-        <div class="display-2 font-weight-light">
-          Lista de Empleados
-        </div>
+        <div class="display-2 font-weight-light">Lista de Empleados</div>
 
-        <v-btn
-          @click="success"
-          class="btn btn-outline-primary col s12 m3"
-          type="button"
-        >
-          success
-        </v-btn>
+        <v-btn @click="success" class="btn btn-outline-primary col s12 m3" type="button">success</v-btn>
       </template>
 
       <v-text-field
@@ -45,49 +32,10 @@
         :sort-desc="[false, true]"
         multi-sort
       >
-        <!-- <template v-slot:item.actions="{ item }">
-          <v-btn icon slot="activator">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-          <v-list>
-            <v-list-title
-              small
-              class="mr-2"
-              @click="showItem()"
-              :to="{ name: 'UserShow' }"
-            >
-              <v-list-tile-title>
-                <v-icon small class="mr-2"> mdi-eye </v-icon>
-              </v-list-tile-title>
-            </v-list-title>
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(item)"
-              :to="{ name: 'UserUpdate' }"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon small @click="deleteItem(item)">
-              mdi-delete
-            </v-icon>
-          </v-list>
-        </template>-->
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="showItem(item)">
-            mdi-eye
-          </v-icon>
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(item)"
-            :to="{ name: 'UserUpdate' }"
-          >
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item)">
-            mdi-delete
-          </v-icon>
+          <v-icon small class="mr-2" @click="showItem(item)" :to="{ name: 'UserShow' }">mdi-eye</v-icon>
+          <v-icon small class="mr-2" @click="editItem(item)" :to="{ name: 'UserUpdate' }">mdi-pencil</v-icon>
+          <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
       </v-data-table>
     </base-material-card>
@@ -96,7 +44,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-//import { Vue } from 'vue-property-decorator'
 
 export default {
   name: 'UsersTable',
@@ -126,7 +73,7 @@ export default {
         },
         {
           sortable: false,
-          text: 'Actions',
+          text: 'Acciones',
           value: 'actions',
         },
       ],

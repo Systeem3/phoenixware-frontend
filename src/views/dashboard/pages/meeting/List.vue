@@ -1,20 +1,15 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'UserCreate' }">
+      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'MeetingCreate' }">
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
-    <base-material-card
-      color="indigo"
-      icon="mdi-vuetify"
-      inline
-      class="px-5 py-3"
-    >
+    <base-material-card color="secondary" icon="mdi-vuetify" inline class="px-5 py-3">
       <template v-slot:after-heading>
-        <div class="display-2 font-weight-light">
-          Lista de Empleados
-        </div>
+        <div class="display-2 font-weight-light">Lista de Reuniones</div>
+
+        <v-btn @click="success" class="btn btn-outline-primary col s12 m3" type="button">success</v-btn>
       </template>
 
       <v-text-field
@@ -31,27 +26,21 @@
 
       <v-data-table
         :headers="headers"
-        :items="items"
+        :items="meetings"
         :search.sync="search"
-        :sort-by="['name', 'office']"
-        :sort-desc="[false, true]"
+        :sort-by="['name']"
+        :sort-desc="[false]"
         multi-sort
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
-            mdi-account
-          </v-icon>
+          <v-icon small class="mr-2" @click="showItem(item)" :to="{ name: 'MeetingShow' }">mdi-eye</v-icon>
           <v-icon
             small
             class="mr-2"
             @click="editItem(item)"
-            :to="{ name: 'UserUpdate' }"
-          >
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item)">
-            mdi-delete
-          </v-icon>
+            :to="{ name: 'MeetingUpdate' }"
+          >mdi-pencil</v-icon>
+          <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
       </v-data-table>
     </base-material-card>
@@ -59,61 +48,92 @@
 </template>
 
 <script>
-export default {
-  name: 'DashboardDataTables',
+import { mapGetters, mapActions } from 'vuex'
+//import { Vue } from 'vue-property-decorator'
 
-  data: () => ({
-    actions: [
-      {
-        color: 'info',
-        icon: 'mdi-account',
-      },
-      {
-        color: 'success',
-        icon: 'mdi-pencil',
-      },
-      {
-        color: 'error',
-        icon: 'mdi-close',
-      },
-    ],
-    headers: [
-      {
-        text: 'Nombre',
-        value: 'nombre',
-      },
-      {
-        text: 'Apellido',
-        value: 'apellido',
-      },
-      {
-        text: 'Dirección',
-        value: 'dirección',
-      },
-      {
-        text: 'Correo Electrónico',
-        value: 'correo',
-      },
-      {
-        text: 'Teléfono',
-        value: 'teléfono',
-      },
-      {
-        sortable: false,
-        text: 'Actions',
-        value: 'actions',
-      },
-    ],
-    items: [
-      {
-        nombre: 'Airi Satou',
-        apellido: 'Accountant',
-        dirección: 'Tokyo',
-        correo: 33,
-        teléfono: '2008/11/28',
-      },
-    ],
-    search: undefined,
-  }),
+export default {
+  name: 'MeetingTable',
+  data() {
+    return {
+      headers: [
+        {
+          text: 'Nombre',
+          value: 'meeting.nombre',
+        },
+        {
+          text: 'Descripción',
+          value: 'meeting.descripcion',
+        },
+        {
+          text: 'Fecha',
+          value: 'meeting.direccion',
+        },
+        {
+          text: 'Lugar',
+          value: 'meeting.lugar',
+        },
+        {
+          sortable: false,
+          text: 'Acciones',
+          value: 'actions',
+        },
+      ],
+      loader: true,
+
+      search: undefined,
+    }
+  },
+
+  created() {
+    this.$store.dispatch('meetings/fetchMeetings')
+  },
+  computed: {
+    ...mapGetters('meetings', ['meetings']),
+  },
+
+  methods: {
+    async editItem(item) {
+      this.$router.push(`/meetings/edit/${item.id}/`)
+    },
+    ...mapActions('meetings', ['deleteMeeting']),
+    success() {
+      /* Vue.swal({
+        type: 'success',
+        title: 'Hello',
+        text: 'Hello brave new world!',
+      })*/
+      this.$swal('Oops...', 'Something went wrong!', 'success')
+    },
+    props: ['id'],
+    async deleteItem(item) {
+      try {
+        const response = await this.$confirm(
+          this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
+
+          {
+            title: this.$t('common.WARNING'),
+            buttonTrueText: this.$t('common.DELETE'),
+            buttonFalseText: this.$t('common.CANCEL'),
+            buttonTrueColor: 'red lighten3',
+            buttonFalseColor: 'yellow',
+          }
+        )
+        if (response) {
+          console.log(item.id)
+          await this.deleteMeeting({
+            id: item.id,
+            is_active: false,
+            nombre: this.name,
+            descripcion: this.description,
+            fecha: this.date,
+            lugar: this.place,
+          })
+        }
+      } catch (error) {
+        this.dataTableLoading = false
+      }
+    },
+  },
+  mounted() {},
 }
 </script>

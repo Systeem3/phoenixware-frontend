@@ -1,5 +1,5 @@
 {
-  "avatar": "Usario",
+  "avatar": "Usuario",
   "buttons": "Botones",
   "calendar": "Calendario",
   "charts": "Gráficos",
@@ -41,47 +41,47 @@
   "vforms": "Validation Forms",
   "widgets": "Widgets",
   "wizard": "Wizard",
-    "messages": {
-      "email": "Se requiere de un email válido",
-      "required": "Este campo es requerido",
-      "password": "Ingrese una contraseña",
-      "min": "Este campo no debe tener más de {length} caracteres",
-      "url": "La URL debe ser válida",
-      "confirmed": "Las contraseñas no coinciden"
-    },
-    "errors": {
-      "BAD_TOKEN": "Bad token",
-      "WRONG_PASSWORD": "Contraseña Incorrecta",
-      "USER_DOES_NOT_EXIST": "El usuario no existe",
-      "PASSWORDS_DONT_MATCH": "Las contraseñas no coinciden",
-      "PASSWORD_TOO_SHORT_MIN_5": "La contraseña es muy corta, el mínimo es 5 caracteres",
-      "BLOCKED_USER": "Muchos intentos fallidos, el ususario se ha bloqueado",
-      "SERVER_TIMEOUT_CONNECTION_ERROR": "Server is not responding, connection error",
-      "404": "404 Page not found",
-      "EMAIL_IS_NOT_VALID": "E-mail inválido",
-      "IS_EMPTY": "Campos vacíos",
-      "ERROR": "Error",
-      "MISSING": "Hay campos que están vacíos",
-      "NOT_FOUND_OR_ALREADY_VERIFIED": "No se encontró o ya fue verificado",
-      "NOT_FOUND_OR_ALREADY_USED": "No encontrado o ya está en uso",
-      "NOT_FOUND": "No fue encontrado",
-      "UNAUTHORIZED": "No autorizado",
-      "EMAIL_ALREADY_EXISTS": "El E-mail ya existe",
-      "ID_MALFORMED": "ID malformed",
-      "ERROR_WITH_FILTER": "Error with filter",
-      "CITY_ALREADY_EXISTS": "City already exists"
-    },
-    "common": {
-      "DELETE": "Eliminar",
-      "CANCEL": "Cancelar",
-      "WARNING": "Advertencia",
-      "DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM": "Seguro quieres eliminar es?",
-      "CLOSE": "Cerrar",
-      "SAVED_SUCCESSFULLY": "Saved successfully",
-      "DELETED_SUCCESSFULLY": "Deleted successfully",
-      "CREATED": "Created At",
-      "UPDATED": "Updated At",
-      "GO_BACK": "Go back",
+  "messages": {
+    "email": "Se requiere de un email válido",
+    "required": "Este campo es requerido",
+    "password": "Ingrese una contraseña",
+    "min": "Este campo no debe tener más de {length} caracteres",
+    "url": "La URL debe ser válida",
+    "confirmed": "Las contraseñas no coinciden"
+  },
+  "errors": {
+    "BAD_TOKEN": "Bad token",
+    "WRONG_PASSWORD": "Contraseña Incorrecta",
+    "USER_DOES_NOT_EXIST": "El usuario no existe",
+    "PASSWORDS_DONT_MATCH": "Las contraseñas no coinciden",
+    "PASSWORD_TOO_SHORT_MIN_5": "La contraseña es muy corta, el mínimo es 5 caracteres",
+    "BLOCKED_USER": "Muchos intentos fallidos, el ususario se ha bloqueado",
+    "SERVER_TIMEOUT_CONNECTION_ERROR": "Server is not responding, connection error",
+    "404": "404 Page not found",
+    "EMAIL_IS_NOT_VALID": "E-mail inválido",
+    "IS_EMPTY": "Campos vacíos",
+    "ERROR": "Error",
+    "MISSING": "Hay campos que están vacíos",
+    "NOT_FOUND_OR_ALREADY_VERIFIED": "No se encontró o ya fue verificado",
+    "NOT_FOUND_OR_ALREADY_USED": "No encontrado o ya está en uso",
+    "NOT_FOUND": "No fue encontrado",
+    "UNAUTHORIZED": "No autorizado",
+    "EMAIL_ALREADY_EXISTS": "El E-mail ya existe",
+    "ID_MALFORMED": "ID malformed",
+    "ERROR_WITH_FILTER": "Error with filter",
+    "CITY_ALREADY_EXISTS": "City already exists"
+  },
+  "common": {
+    "DELETE": "Eliminar",
+    "CANCEL": "Cancelar",
+    "WARNING": "Advertencia",
+    "DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM": "Seguro quieres eliminar es?",
+    "CLOSE": "Cerrar",
+    "SAVED_SUCCESSFULLY": "Saved successfully",
+    "DELETED_SUCCESSFULLY": "Deleted successfully",
+    "CREATED": "Created At",
+    "UPDATED": "Updated At",
+    "GO_BACK": "Go back",
     "loading": {
       "PLEASE_WAIT": "Por..."
     },
@@ -213,6 +213,5 @@
       "SAVE": "Save",
       "PROFILE_SAVED_SUCCESSFULLY": "Profile saved successfuly"
     }
+  }
 }
-}
-

@@ -2,7 +2,7 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="8">
-        <base-material-card icon="mdi-account-outline">
+        <base-material-card icon="mdi-account-outline" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Empleado
@@ -78,20 +78,18 @@
 
                   <v-col cols="12" class="text-right">
                     <v-btn
-                      color="success"
-                      class="ml-0"
+                      color="primary"
+                      float="right"
+                      margin-left="6px"
                       :to="{ name: 'UserList' }"
-                    >
-                      {{ registrationCompleted }}
-                    </v-btn>
+                    >Usuarios</v-btn>
                     <v-btn
-                      color="success"
-                      class="mr-0"
+                      color="primary"
+                      float="right"
+                      margin-left="6px"
                       @click.stop.prevent="submit"
                       @click="createUser(inputs)"
-                    >
-                      Registrar
-                    </v-btn>
+                    >Registrar</v-btn>
                   </v-col>
                 </v-row>
               </v-container>

@@ -7,7 +7,8 @@
         <base-material-card color="success" icon="mdi-calendar-today">
           <template v-slot:after-heading>
             <div class="display-1 mt-2 font-weight-light">
-              Date Picker <span class="body-1">— labeled</span>
+              Date Picker
+              <span class="body-1">— labeled</span>
             </div>
           </template>
 
@@ -31,20 +32,11 @@
               />
             </template>
 
-            <v-date-picker
-              v-model="date"
-              color="secondary"
-              landscape
-              scrollable
-            >
+            <v-date-picker v-model="date" color="secondary" landscape scrollable>
               <v-spacer />
-              <v-btn color="secondary" large @click="menu = false">
-                Cancel
-              </v-btn>
+              <v-btn color="secondary" large @click="menu = false">Cancel</v-btn>
 
-              <v-btn color="secondary" large @click="$refs.menu.save(date)">
-                OK
-              </v-btn>
+              <v-btn color="secondary" large @click="$refs.menu.save(date)">OK</v-btn>
             </v-date-picker>
           </v-menu>
         </base-material-card>
@@ -54,7 +46,8 @@
         <base-material-card color="success" icon="mdi-calendar-today">
           <template v-slot:after-heading>
             <div class="display-1 mt-2 font-weight-light">
-              Date Picker <span class="body-1">— date selected</span>
+              Date Picker
+              <span class="body-1">— date selected</span>
             </div>
           </template>
 
@@ -78,16 +71,9 @@
               />
             </template>
 
-            <v-date-picker
-              v-model="date"
-              color="secondary"
-              landscape
-              scrollable
-            >
+            <v-date-picker v-model="date" color="secondary" landscape scrollable>
               <v-spacer />
-              <v-btn color="secondary" large @click="menu2 = false">
-                Cancel
-              </v-btn>
+              <v-btn color="secondary" large @click="menu2 = false">Cancel</v-btn>
             </v-date-picker>
           </v-menu>
         </base-material-card>
@@ -97,7 +83,8 @@
         <base-material-card color="success" icon="mdi-calendar-today">
           <template v-slot:after-heading>
             <div class="display-1 mt-2 font-weight-light">
-              Date Picker <span class="body-1">— close on select</span>
+              Date Picker
+              <span class="body-1">— close on select</span>
             </div>
           </template>
 
@@ -129,9 +116,7 @@
             >
               <v-spacer />
 
-              <v-btn color="secondary" large @click="menu3 = false">
-                Cancel
-              </v-btn>
+              <v-btn color="secondary" large @click="menu3 = false">Cancel</v-btn>
             </v-date-picker>
           </v-menu>
         </base-material-card>
@@ -141,9 +126,7 @@
         <v-card class="pa-6">
           <v-row>
             <v-col cols="12" md="6">
-              <base-subheading>
-                Switches
-              </base-subheading>
+              <base-subheading>Switches</base-subheading>
 
               <v-switch hide-details label="Toggle is on" input-value="true" />
 
@@ -151,9 +134,7 @@
 
               <div class="my-6" />
 
-              <base-subheading>
-                Tags
-              </base-subheading>
+              <base-subheading>Tags</base-subheading>
 
               <v-combobox v-model="items" color="secondary" multiple>
                 <template v-slot:selection="{ attrs, item, select, selected }">
@@ -165,17 +146,13 @@
                     small
                     @click="select"
                     @click:close="remove(item)"
-                  >
-                    {{ item }}
-                  </v-chip>
+                  >{{ item }}</v-chip>
                 </template>
               </v-combobox>
 
               <div class="my-6" />
 
-              <base-subheading class="mb-6">
-                Progress Bar
-              </base-subheading>
+              <base-subheading class="mb-6">Progress Bar</base-subheading>
 
               <v-progress-linear color="secondary" :value="30" />
 
@@ -185,18 +162,11 @@
 
               <div class="my-6" />
 
-              <v-progress-linear
-                :value="40"
-                color="warning"
-                buffer-value="0"
-                stream
-              />
+              <v-progress-linear :value="40" color="warning" buffer-value="0" stream />
 
               <div class="my-6" />
 
-              <base-subheading class="mb-6">
-                File Input
-              </base-subheading>
+              <base-subheading class="mb-6">File Input</base-subheading>
 
               <v-file-input
                 v-model="files"
@@ -210,37 +180,20 @@
                 :display-size="1000"
               >
                 <template v-slot:selection="{ index, text }">
-                  <v-chip
-                    v-if="index < 2"
-                    color="deep-purple accent-4"
-                    dark
-                    label
-                    small
-                  >
-                    {{ text }}
-                  </v-chip>
+                  <v-chip v-if="index < 2" color="deep-purple accent-4" dark label small>{{ text }}</v-chip>
 
                   <span
                     v-else-if="index === 2"
                     class="overline grey--text text--darken-3 mx-2"
-                  >
-                    +{{ files.length - 2 }} File(s)
-                  </span>
+                  >+{{ files.length - 2 }} File(s)</span>
                 </template>
               </v-file-input>
             </v-col>
 
             <v-col cols="12" md="6">
-              <base-subheading>
-                Customizable Select
-              </base-subheading>
+              <base-subheading>Customizable Select</base-subheading>
 
-              <v-select
-                color="secondary"
-                item-color="secondary"
-                label="Movie"
-                :items="movies"
-              >
+              <v-select color="secondary" item-color="secondary" label="Movie" :items="movies">
                 <template v-slot:item="{ attrs, item, on }">
                   <v-list-item
                     v-bind="attrs"
@@ -286,9 +239,7 @@
 
               <div class="my-3" />
 
-              <base-subheading class="mb-6">
-                Dropdown & Dropup
-              </base-subheading>
+              <base-subheading class="mb-6">Dropdown & Dropup</base-subheading>
 
               <v-row class="mb-6" dense>
                 <v-col cols="auto">
@@ -296,9 +247,7 @@
                     :items="dropdown"
                     color="success"
                     default
-                  >
-                    MultiLevel Dropdown
-                  </base-material-dropdown>
+                  >MultiLevel Dropdown</base-material-dropdown>
                 </v-col>
 
                 <v-col cols="auto">
@@ -306,9 +255,7 @@
                     :items="dropdown"
                     color="success"
                     origin="top right"
-                  >
-                    Dropdown
-                  </base-material-dropdown>
+                  >Dropdown</base-material-dropdown>
                 </v-col>
 
                 <v-col cols="auto">
@@ -317,28 +264,15 @@
                     color="success"
                     origin="bottom right"
                     top
-                  >
-                    Dropup
-                  </base-material-dropdown>
+                  >Dropup</base-material-dropdown>
                 </v-col>
               </v-row>
 
-              <base-subheading>
-                Sliders
-              </base-subheading>
+              <base-subheading>Sliders</base-subheading>
 
-              <v-slider
-                v-model="slider"
-                :max="max"
-                :min="min"
-                color="secondary"
-              />
+              <v-slider v-model="slider" :max="max" :min="min" color="secondary" />
 
-              <v-range-slider
-                v-model="slider2"
-                color="info"
-                track-color="info lighten-4"
-              />
+              <v-range-slider v-model="slider2" color="info" track-color="info lighten-4" />
             </v-col>
           </v-row>
         </v-card>

@@ -241,6 +241,7 @@ const routes = [
         name: 'MeetingList',
         path: '/meetings/',
         component: () => import('@/views/dashboard/pages/meeting/List'),
+        props: true,
       },
       {
         name: 'MeetingCreate',
@@ -251,12 +252,15 @@ const routes = [
         name: 'MeetingUpdate',
         path: '/meetings/edit/:id',
         component: () => import('@/views/dashboard/pages/meeting/Update'),
+        props: true,
       },
       {
         name: 'MeetingShow',
         path: '/meetings/show/:id',
         component: () => import('@/views/dashboard/pages/meeting/Show'),
+        props: true,
       },
+      //Profile
       {
         name: 'Profile',
         path: '/userprofile/edit',

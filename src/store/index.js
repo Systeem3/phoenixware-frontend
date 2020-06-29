@@ -7,6 +7,7 @@ import password from './modules/auth/password'
 import signup from './modules/auth/signup'
 //import * as users from './modules/users'
 import users from './modules/users'
+import meetings from './modules/meetings'
 import * as notification from './modules/notification'
 import profile from './modules/profile'
 import loading from './modules/loading'
@@ -48,6 +49,7 @@ export default new Vuex.Store({
     loading,
     error,
     success,
+    meetings,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

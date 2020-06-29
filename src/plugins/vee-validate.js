@@ -15,7 +15,7 @@ import { email, max, min, required } from 'vee-validate/dist/rules'
 })*/
 extend('required', {
   ...required,
-  message: 'Campo es requerido.',
+  message: 'Campo requerido.',
 })
 extend('max', {
   ...max,

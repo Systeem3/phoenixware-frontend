@@ -35,9 +35,6 @@
       <v-divider class="mt-3" />
 
       <v-data-table
-        :loading="dataTableLoading"
-        :no-data-text="$t('dataTable.NO_DATA')"
-        :no-results-text="$t('dataTable.NO_RESULTS')"
         :headers="headers"
         :items="users"
         :search.sync="search"
@@ -62,25 +59,18 @@
           >
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
-        <template v-slot:no-data>{{ $t('dataTable.NO_DATA') }}</template>
-        <template v-slot:no-results>{{ $t('dataTable.NO_RESULTS') }}</template>
       </v-data-table>
     </base-material-card>
-    <ErrorMessage />
-    <SuccessMessage />
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-
 export default {
   name: 'UsersTable',
   data() {
     return {
       //users: [],
-
-      //dataTableLoading: true,
       headers: [
         {
           text: 'Nombre',
@@ -109,18 +99,15 @@ export default {
         },
       ],
       loader: true,
-
       search: undefined,
     }
   },
-
   created() {
     this.$store.dispatch('users/fetchUsers')
   },
   computed: {
     ...mapGetters('users', ['users']),
   },
-
   methods: {
     async editItem(item) {
       // this.$store.dispatch('UserUpdate')
@@ -140,7 +127,6 @@ export default {
       try {
         const response = await this.$confirm(
           this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
-
           {
             title: this.$t('common.WARNING'),
             buttonTrueText: this.$t('common.DELETE'),
@@ -180,9 +166,3 @@ export default {
   mounted() {},
 }
 </script>
-
-<style scoped>
-.theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
-  background-image: linear-gradient(69.1deg, #4a148c 3%, #4a148c 100.6%);
-}
-</style>

@@ -92,6 +92,18 @@ export default {
         ],
       },
       {
+        group: '/members',
+        icon: 'mdi mdi-account-circle',
+        title: 'Miembros',
+        children: [
+          {
+            title: 'Lista de Miembros',
+            to: 'list',
+            icon: 'mdi-account-multiple',
+          },
+        ],
+      },
+      {
         group: '/pages',
         icon: 'mdi-image',
         title: 'pages',

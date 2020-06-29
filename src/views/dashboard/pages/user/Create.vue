@@ -2,7 +2,7 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="8">
-        <base-material-card icon="mdi-account-outline">
+        <base-material-card icon="mdi-account-outline" color="pink darken-1">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Empleado
@@ -251,3 +251,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
+  background-image: linear-gradient(69.1deg, #4a148c 3%, #4a148c 100.6%);
+}
+</style>
+<!--t(69.1deg, #651544 3%, #ba0340 100.6%);-->

@@ -262,6 +262,13 @@ const routes = [
         path: '/userprofile/edit',
         component: () => import('@/views/dashboard/pages/user/userprofile'),
       },
+
+      // Members
+      {
+        name: 'MembersList',
+        path: '/members/list',
+        component: () => import('@/views/dashboard/pages/members/List'),
+      },
     ],
   },
   {

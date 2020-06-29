@@ -1,9 +1,9 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'UserCreate' }">
-        <v-icon dark>mdi-plus</v-icon>
-      </v-btn>
+      <!-- <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'UserCreate' }">
+       <v-icon dark>mdi-plus</v-icon>
+      </v-btn>-->
     </div>
     <base-material-card
       color="indigo"
@@ -13,7 +13,7 @@
     >
       <template v-slot:after-heading>
         <div class="display-2 font-weight-light">
-          Lista de Empleados
+          Lista de Miembros
         </div>
 
         <v-btn
@@ -99,7 +99,7 @@ import { mapGetters, mapActions } from 'vuex'
 //import { Vue } from 'vue-property-decorator'
 
 export default {
-  name: 'UsersTable',
+  name: 'MembersTable',
   data() {
     return {
       //users: [],
@@ -109,20 +109,16 @@ export default {
           value: 'empleado.nombre',
         },
         {
-          text: 'Apellido',
-          value: 'empleado.apellido',
-        },
-        {
-          text: 'Dirección',
-          value: 'empleado.direccion',
-        },
-        {
           text: 'Correo Electrónico',
-          value: 'email',
+          value: 'usuario.email',
         },
         {
-          text: 'Teléfono',
-          value: 'empleado.telefono',
+          text: 'Rol',
+          value: 'miembro.rol',
+        },
+        {
+          text: 'Proyecto',
+          value: 'proyecto.nombre',
         },
         {
           sortable: false,
@@ -202,8 +198,3 @@ export default {
   mounted() {},
 }
 </script>
-
-<style scoped>
-.theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
-  background-image: linear-gradient(69.1deg, #4a148c 3%, #4a148c 100.6%);
-}

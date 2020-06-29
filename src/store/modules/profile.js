@@ -31,7 +31,7 @@ const actions = {
   },
   getProfile({ commit }) {
     return new Promise((resolve, reject) => {
-      commit(types.SHOW_LOADING, true)
+      commit(types.SHOW_LOADING, true, { root: true })
       auth
         .getAccountDetails()
         .then((response) => {
@@ -47,25 +47,25 @@ const actions = {
   },
   saveUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      //  commit(types.SHOW_LOADING, true)
+      commit(types.SHOW_LOADING, true, { root: true })
       auth
         .updateAccountDetails(payload)
         .then((response) => {
           if (response.status === 200) {
             commit(types.FILL_USER, response.data)
-            /* buildSuccess(
+            buildSuccess(
               {
                 msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',
               },
               commit,
               resolve
-            )*/
-            alert('it works', commit, resolve)
+            )
+            //alert('it works', commit, resolve)
           }
         })
         .catch((error) => {
-          //handleError(error, commit, reject)
-          alert('doesnt work', error, commit, reject)
+          handleError(error, commit, reject)
+          // alert('doesnt work', error, commit, reject)
         })
     })
   },

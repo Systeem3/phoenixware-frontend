@@ -38,6 +38,9 @@
       <v-divider class="mt-3" />
 
       <v-data-table
+        :loading="dataTableLoading"
+        :no-data-text="$t('dataTable.NO_DATA')"
+        :no-results-text="$t('dataTable.NO_RESULTS')"
         :headers="headers"
         :items="users"
         :search.sync="search"
@@ -89,9 +92,10 @@
             mdi-delete
           </v-icon>
         </template>
+        <template v-slot:no-data>{{ $t('dataTable.NO_DATA') }}</template>
+        <template v-slot:no-results>{{ $t('dataTable.NO_RESULTS') }}</template>
       </v-data-table>
     </base-material-card>
-
     <ErrorMessage />
     <SuccessMessage />
   </v-container>
@@ -106,6 +110,8 @@ export default {
   data() {
     return {
       //users: [],
+
+      //dataTableLoading: true,
       headers: [
         {
           text: 'Nombre',

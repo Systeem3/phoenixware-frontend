@@ -29,8 +29,23 @@ const mutations = {
   SET_USERS(state, users) {
     state.users = users
   },
+
+  SET_USERS_TOTAL(state, usersTotal) {
+    state.usersTotal = usersTotal
+  },
   SET_USER(state, user) {
     state.user = user
+  },
+  UPDATE_USER(state, payload) {
+    state.users = state.users.map((user) => {
+      if (user.id === payload.id) {
+        return Object.assign({}, user, payload.data)
+      }
+      return user
+    })
+  },
+  updateUser(state, payload) {
+    state.user = payload
   },
   [types.FILL_USER](state, data) {
     state.user.email = data.email
@@ -70,26 +85,40 @@ const mutations = {
 }
 
 const actions = {
-  createUser({ commit }, user) {
-    return new Promise((resolve, reject) => {
-      commit(types.SHOW_LOADING, true, { root: true })
-      UserService.postUser(user)
-        .then((response) => {
-          if (response.status === 200) {
-            commit('ADD_USER', user)
-            buildSuccess(
-              {
-                msg: 'common.SAVED_SUCCESSFULLY',
-              },
-              commit,
-              resolve
-            )
-          }
-        })
-        .catch((error) => {
-          handleError(error, commit, reject)
-        })
-    })
+  createUser({ commit, dispatch }, user) {
+    return UserService.postUser(user)
+      .then(() => {
+        commit('ADD_USER', user)
+        const notification = {
+          //type: 'success',
+          //message: 'Your user has been created!',
+          success() {
+            /* Vue.swal({
+              type: 'success',
+              title: 'Hello',
+              text: 'Hello brave new world!',
+            })*/
+            this.$swal('Oops...', 'Something went wrong!', 'success')
+          },
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+      .catch((error) => {
+        const notification = {
+          //  type: 'error',
+          //message: 'There was a problem creating your user: ' + error.message,
+          success() {
+            /* Vue.swal({
+              type: 'success',
+              title: 'Hello',
+              text: 'Hello brave new world!',
+            })*/
+            this.$swal('Oops...', 'Something went wrong!!!!', 'error')
+          },
+        }
+        dispatch('notification/add', notification, { root: true })
+        throw error
+      })
   },
   fetchUsers({ commit, dispatch }) {
     UserService.getUsers()
@@ -125,6 +154,43 @@ const actions = {
         })
     }
   },
+
+  fetchUser2({ commit, dispatch }) {
+    UserService.getUserAuth()
+      .then((response) => {
+        commit('SET_USER', response.data)
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching event: ' + error.message,
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+  },
+  /*saveUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      const data = {
+        email: payload.email,
+        nombre: payload.name,
+        apellido: payload.lastName,
+        direccion: payload.address,
+        telefono: payload.phone,
+        tipo_usuario: payload.type,
+      }
+      //commit(types.SHOW_LOADING, true)
+      UserService.updateUser(payload._id, data)
+        .then((response) => {
+          if (response.status === 200) {
+            commit(types.FILL_USER, response.data)
+            alert('it works', commit, resolve)
+          }
+        })
+        .catch((error) => {
+          alert('doesnt work', error, commit, reject)
+        })
+    })
+  },*/
   saveUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
       auth
@@ -152,6 +218,26 @@ const actions = {
   addUserData({ commit }, data) {
     commit(types.ADD_USER_DATA, data)
   },
+
+  /*deleteUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      UserService.deleteUser(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            buildSuccess(
+              {
+                msg: 'common.DELETED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },*/
   deleteUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
       auth

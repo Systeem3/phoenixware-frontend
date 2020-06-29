@@ -14,6 +14,7 @@ import error from './modules/error'
 import success from './modules/success'
 
 import projects from './modules/projects'
+import locale from './modules/locale'
 
 //import * as user from '@/store/modules/user.js'
 
@@ -51,6 +52,7 @@ export default new Vuex.Store({
     error,
     success,
     projects,
+    locale,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

@@ -267,7 +267,7 @@ const routes = [
         //beforeEnter: requireAuthenticated,
       },
       {
-        name: 'ProjectList',
+        name: 'ProjectCreate',
         path: '/projects/create',
         component: () => import('@/views/dashboard/pages/project/Wizard'),
         props: true,
@@ -276,7 +276,7 @@ const routes = [
       {
         name: 'Profile',
         path: '/userprofile/edit',
-        component: () => import('@/views/dashboard/pages/user/userprofile'),
+        component: () => import('@/views/dashboard/pages/user/UserProfile'),
       },
     ],
   },

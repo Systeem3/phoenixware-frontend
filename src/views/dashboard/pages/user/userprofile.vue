@@ -1,12 +1,79 @@
 <template>
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
+      <v-col cols="12" md="4">
+        <base-material-card
+          class="v-card-profile"
+          avatar="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
+        >
+          <v-card-text class="text-center">
+            <h6 class="display-1 mb-1 grey--text">
+              {{ getNameById(type) }}
+            </h6>
+
+            <h4 class="display-2 font-weight-light mb-3 black--text">
+              {{ name + ' ' + lastName }}
+            </h4>
+          </v-card-text>
+        </base-material-card>
+
+        <base-material-card class="v-card-profile" color="primary">
+          <v-form @submit.prevent="submit">
+            <ValidationProvider
+              rules="required|password2|minmax:8,16"
+              name="Contraseña"
+              v-slot="{ errors, valid }"
+            >
+              <v-text-field
+                label="Contraseña"
+                outlined
+                counter
+                prepend-icon="mdi-lock"
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show1 ? 'text' : 'password'"
+                @click:append="show1 = !show1"
+                v-model="inputs.password1"
+                :error-messages="errors"
+                :success="valid"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              name="confirm"
+              rules="required|password:@Contraseña"
+              v-slot="{ errors, valid }"
+            >
+              <v-text-field
+                label="Contraseña"
+                outlined
+                counter
+                prepend-icon="mdi-lock"
+                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show2 ? 'text' : 'password'"
+                @click:append="show2 = !show2"
+                v-model="inputs.password2"
+                :error-messages="errors"
+                :success="valid"
+              />
+            </ValidationProvider>
+          </v-form>
+          <div class="text-center mt-1">
+            <v-btn
+              class="mx-auto"
+              color="purple"
+              type="submit"
+              @click="resetPassword(inputs)"
+              @click.stop.prevent="submit"
+              >Cambiar</v-btn
+            >
+          </div>
+        </base-material-card>
+      </v-col>
       <v-col cols="12" md="8">
-        <base-material-card icon="mdi-account-outline">
+        <base-material-card icon="mdi-account-outline" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
-              Empleado
-              <span class="body-1">— Registro de Empleado</span>
+              Perfil
+              <span class="body-1">— Modificar perfil de usuario</span>
             </div>
           </template>
           <ValidationObserver ref="obs">
@@ -16,7 +83,7 @@
                   <v-col cols="12" md="4">
                     <VTextFieldWithValidation
                       label="Correo Electrónico"
-                      color="secondary"
+                      color="purple"
                       prepend-icon="mdi-at"
                       rules="required|email"
                       v-model="email"
@@ -25,7 +92,7 @@
                   <v-col cols="12" md="4">
                     <VTextFieldWithValidation
                       label="Nombre"
-                      color="secondary"
+                      color="purple"
                       prepend-icon="mdi-account"
                       rules="required"
                       class="purple-input"
@@ -35,7 +102,7 @@
                   <v-col cols="12" md="4">
                     <VTextFieldWithValidation
                       label="Apellido"
-                      color="secondary"
+                      color="purple"
                       prepend-icon="mdi-account"
                       rules="required"
                       class="purple-input"
@@ -45,7 +112,7 @@
                   <v-col cols="12">
                     <VTextFieldWithValidation
                       label="Direccion"
-                      color="secondary"
+                      color="purple"
                       prepend-icon="mdi-home"
                       rules="required"
                       class="purple-input"
@@ -55,35 +122,16 @@
                   <v-col cols="12" md="6">
                     <VTextFieldWithValidation
                       label="Telefono"
-                      color="secondary"
+                      color="purple"
                       prepend-icon="mdi-phone"
                       rules="required"
                       class="purple-input"
                       v-model="phone"
                     />
                   </v-col>
-                  <v-col cols="12" md="6">
-                    <VSelectWithValidation
-                      :items="items"
-                      item-text="name"
-                      item-value="id"
-                      label="Tipo de Usuario"
-                      rules="required"
-                      dense
-                      prepend-icon="mdi-account-group"
-                      v-model="type"
-                    />
-                  </v-col>
                   <v-col cols="12" class="text-right">
                     <v-btn
-                      color="success"
-                      class="ml-0"
-                      :to="{ name: 'UserList' }"
-                    >
-                      Atrás
-                    </v-btn>
-                    <v-btn
-                      color="success"
+                      color="purple"
                       class="mr-0"
                       @click.stop.prevent="submit"
                     >
@@ -97,18 +145,29 @@
         </base-material-card>
       </v-col>
     </v-row>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 
 <script>
-import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
-import VSelectWithValidation from '@/components/inputs/VSelectWithValidation'
 import { mapActions } from 'vuex'
+
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default {
   data() {
     return {
+      show1: false,
+      show2: false,
+
+      inputs: {
+        password1: '',
+        password2: '',
+        uid: this.$route.params.uid,
+        token: this.$route.params.token,
+      },
       items: [
         { name: 'Administrador', id: '1' },
         { name: 'Director', id: '2' },
@@ -119,7 +178,7 @@ export default {
   components: {
     ValidationObserver,
     VTextFieldWithValidation,
-    VSelectWithValidation,
+    ValidationProvider,
   },
   computed: {
     email: {
@@ -197,6 +256,8 @@ export default {
   },
   methods: {
     ...mapActions('profile', ['getProfile', 'addUserData', 'saveUser']),
+
+    ...mapActions('password', ['resetPassword', 'clearResetStatus']),
     async submit() {
       await this.saveUser({
         email: this.email,
@@ -209,8 +270,10 @@ export default {
         tipo_usuario: this.type,
       })
     },
+    getNameById(type) {
+      return this.items.find((i) => i.id === type)?.name
+    },
   },
-
   async mounted() {
     await this.getProfile()
   },

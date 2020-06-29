@@ -77,15 +77,15 @@ export default {
       {
         group: '/users',
         icon: 'mdi mdi-account-circle',
-        title: 'Empleados',
+        title: 'employee',
         children: [
           {
-            title: 'Registrar Empleado',
+            title: 'create',
             to: 'create',
             icon: 'mdi mdi-account-plus',
           },
           {
-            title: 'Lista de Empleados',
+            title: 'list',
             to: 'list',
             icon: 'mdi-account-multiple',
           },
@@ -262,7 +262,7 @@ export default {
     profile() {
       return {
         avatar: true,
-        group: '/userprofile/',
+        group: '/userprofile',
         title: this.$t('avatar'),
         //title: this.$t(user.employee.name),
         children: [

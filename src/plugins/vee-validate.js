@@ -3,6 +3,10 @@ import { extend } from 'vee-validate'
 import { email, max, min, required } from 'vee-validate/dist/rules'
 //import * as rules from 'vee-validate/dist/rules'
 
+import { localize } from 'vee-validate'
+import en from '../locales/en'
+//import es from '../locales/es'
+
 //extend('email', email)
 //extend('max', max)
 //extend('min', min)
@@ -53,6 +57,10 @@ extend('password', {
     return value === target
   },
   message: 'Las contraseñas no coinciden',
+})
+
+localize({
+  en,
 })
 
 //Vue.component('validation-provider', ValidationProvider)

@@ -36,34 +36,34 @@ export default {
         {
           lang: 'en',
           flag: 'gb',
-          class: 'btnEN'
+          class: 'btnEN',
         },
         {
           lang: 'es',
           flag: 'es',
-          class: 'btnES'
+          class: 'btnES',
         },
         {
           lang: 'cn',
           flag: 'cn',
-          class: 'btnCN'
-        }
-      ]
+          class: 'btnCN',
+        },
+      ],
     }
   },
   components: {
-    CountryFlag
+    CountryFlag,
   },
   methods: {
     switchLocale(lang) {
       this.$store.dispatch('setLocale', lang)
-    }
+    },
   },
   computed: {
     displayLocale() {
       return this.$i18n.locale
-    }
-  }
+    },
+  },
 }
 </script>
 

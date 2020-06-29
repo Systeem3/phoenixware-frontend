@@ -19,7 +19,8 @@ import './plugins/base'
 import './plugins/chartist'
 import './plugins/vee-validate'
 import vuetify from './plugins/vuetify'
-import i18n from './locales'
+//import i18n from './locales'
+import i18n from '@/plugins/i18n'
 
 import '@/plugins/common'
 import VuetifyConfirm from 'vuetify-confirm'
@@ -48,4 +49,10 @@ new Vue({
   vuetify,
   i18n,
   render: (h) => h(App),
+  created() {
+    store.dispatch('setLocale', store.getters.locale)
+    if (store.getters.isTokenSet) {
+      store.dispatch('autoLogin')
+    }
+  },
 }).$mount('#app')

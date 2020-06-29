@@ -3,7 +3,7 @@ import i18n from '@/plugins/i18n'
 import * as Validator from 'vee-validate'
 
 const getters = {
-  locale: (state) => state.locale
+  locale: (state) => state.locale,
 }
 
 const actions = {
@@ -14,25 +14,25 @@ const actions = {
     Validator.localize(payload)
     window.localStorage.setItem('locale', JSON.stringify(payload))
     commit(types.SET_LOCALE, payload)
-  }
+  },
 }
 
 const mutations = {
   [types.SET_LOCALE](state, value) {
     state.locale = value
-  }
+  },
 }
 
 const state = {
   locale:
     JSON.parse(localStorage.getItem('locale')) ||
     navigator.language.slice(0, 2) ||
-    'en'
+    'en',
 }
 
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 }

@@ -32,6 +32,7 @@
           :to="{ name: 'Dashboard' }"
           @click="login(inputs)"
           @click.stop.prevent="submit"
+          :loading="loading"
           >Ingresar</v-btn
         >
       </div>
@@ -45,6 +46,7 @@
         >
       </div>
     </v-form>
+    <ErrorMessage />
   </ValidationObserver>
 </template>
 
@@ -56,6 +58,8 @@ export default {
   data() {
     return {
       show: false,
+
+      loading: false,
       inputs: {
         password1: '',
         password2: '',

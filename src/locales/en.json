@@ -41,6 +41,11 @@
   "vforms": "Validation Forms",
   "widgets": "Widgets",
   "wizard": "Wizard",
+
+   "employee": {
+     "create": "Registrar Empleado",
+     "list": "Lista de Empleados"
+   },
     "messages": {
       "email": "Se requiere de un email válido",
       "required": "Este campo es requerido",
@@ -82,8 +87,9 @@
       "CREATED": "Created At",
       "UPDATED": "Updated At",
       "GO_BACK": "Go back",
+
     "loading": {
-      "PLEASE_WAIT": "Por..."
+      "PLEASE_WAIT": "Espere por favor..."
     },
     "footer": {
       "MADE_WITH": "Hecho con",

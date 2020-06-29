@@ -211,8 +211,3 @@ export default {
   mounted() {},
 }
 </script>
-
-<style scoped>
-.theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
-  background-image: linear-gradient(69.1deg, #4a148c 3%, #4a148c 100.6%);
-}

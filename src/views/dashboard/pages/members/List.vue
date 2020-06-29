@@ -1,9 +1,9 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'UserCreate' }">
-        <v-icon dark>mdi-plus</v-icon>
-      </v-btn>
+      <!-- <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'UserCreate' }">
+       <v-icon dark>mdi-plus</v-icon>
+      </v-btn>-->
     </div>
     <base-material-card
       color="indigo"
@@ -13,7 +13,7 @@
     >
       <template v-slot:after-heading>
         <div class="display-2 font-weight-light">
-          Lista de Empleados
+          Lista de Miembros
         </div>
 
         <v-btn
@@ -38,9 +38,6 @@
       <v-divider class="mt-3" />
 
       <v-data-table
-        :loading="dataTableLoading"
-        :no-data-text="$t('dataTable.NO_DATA')"
-        :no-results-text="$t('dataTable.NO_RESULTS')"
         :headers="headers"
         :items="users"
         :search.sync="search"
@@ -92,12 +89,8 @@
             mdi-delete
           </v-icon>
         </template>
-        <template v-slot:no-data>{{ $t('dataTable.NO_DATA') }}</template>
-        <template v-slot:no-results>{{ $t('dataTable.NO_RESULTS') }}</template>
       </v-data-table>
     </base-material-card>
-    <ErrorMessage />
-    <SuccessMessage />
   </v-container>
 </template>
 
@@ -106,32 +99,26 @@ import { mapGetters, mapActions } from 'vuex'
 //import { Vue } from 'vue-property-decorator'
 
 export default {
-  name: 'UsersTable',
+  name: 'MembersTable',
   data() {
     return {
       //users: [],
-
-      //dataTableLoading: true,
       headers: [
         {
           text: 'Nombre',
           value: 'empleado.nombre',
         },
         {
-          text: 'Apellido',
-          value: 'empleado.apellido',
-        },
-        {
-          text: 'Dirección',
-          value: 'empleado.direccion',
-        },
-        {
           text: 'Correo Electrónico',
-          value: 'email',
+          value: 'usuario.email',
         },
         {
-          text: 'Teléfono',
-          value: 'empleado.telefono',
+          text: 'Rol',
+          value: 'miembro.rol',
+        },
+        {
+          text: 'Proyecto',
+          value: 'proyecto.nombre',
         },
         {
           sortable: false,
@@ -211,8 +198,3 @@ export default {
   mounted() {},
 }
 </script>
-
-<style scoped>
-.theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
-  background-image: linear-gradient(69.1deg, #4a148c 3%, #4a148c 100.6%);
-}

@@ -278,6 +278,13 @@ const routes = [
         path: '/userprofile/edit',
         component: () => import('@/views/dashboard/pages/user/UserProfile'),
       },
+
+      // Members
+      {
+        name: 'MembersList',
+        path: '/members/list',
+        component: () => import('@/views/dashboard/pages/members/List'),
+      },
     ],
   },
   {

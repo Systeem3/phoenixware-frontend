@@ -48,34 +48,6 @@
         :sort-desc="[false, true]"
         multi-sort
       >
-        <!-- <template v-slot:item.actions="{ item }">
-          <v-btn icon slot="activator">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-          <v-list>
-            <v-list-title
-              small
-              class="mr-2"
-              @click="showItem()"
-              :to="{ name: 'UserShow' }"
-            >
-              <v-list-tile-title>
-                <v-icon small class="mr-2"> mdi-eye </v-icon>
-              </v-list-tile-title>
-            </v-list-title>
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(item)"
-              :to="{ name: 'UserUpdate' }"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon small @click="deleteItem(item)">
-              mdi-delete
-            </v-icon>
-          </v-list>
-        </template>-->
         <template v-slot:item.actions="{ item }">
           <v-icon
             small

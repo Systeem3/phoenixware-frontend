@@ -6,7 +6,7 @@
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Empleado
-              <span class="body-1">— Registro de Empleado</span>
+              <span class="body-1">— Modificar Empleado</span>
             </div>
           </template>
           <ValidationObserver ref="obs">
@@ -76,14 +76,14 @@
                   </v-col>
                   <v-col cols="12" class="text-right">
                     <v-btn
-                      color="success"
+                      color="purple"
                       class="ml-0"
                       :to="{ name: 'UserList' }"
                     >
                       Atrás
                     </v-btn>
                     <v-btn
-                      color="success"
+                      color="purple"
                       class="mr-0"
                       @click.stop.prevent="submit"
                     >

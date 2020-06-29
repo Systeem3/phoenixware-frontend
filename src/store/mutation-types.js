@@ -27,6 +27,12 @@ export const ADD_USER_DATA = 'ADD_USER_DATA'
 export const FILL_PROJECT = 'FILL_PROJECT'
 export const ADD_PROJECT_DATA = 'ADD_PROJECT_DATA'
 
+//meeting
+
+export const FILL_MEETING = 'FILL_MEETING'
+export const ADD_MEETING_DATA = 'ADD_MEETING_DATA'
+
+export const ADDMEETING_DATA = 'ADD_USER_DATA'
 // cities
 export const FILL_ALL_CITIES = 'FILL_ALL_CITIES'
 // Admin - Cities

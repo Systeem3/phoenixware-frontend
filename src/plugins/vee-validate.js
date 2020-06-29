@@ -19,7 +19,7 @@ import en from '../locales/en'
 })*/
 extend('required', {
   ...required,
-  message: 'Campo es requerido.',
+  message: 'Campo requerido.',
 })
 extend('max', {
   ...max,

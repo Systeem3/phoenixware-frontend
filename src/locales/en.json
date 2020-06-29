@@ -1,5 +1,5 @@
 {
-  "avatar": "Usario",
+  "avatar": "Usuario",
   "buttons": "Botones",
   "calendar": "Calendario",
   "charts": "Gráficos",
@@ -219,6 +219,5 @@
       "SAVE": "Save",
       "PROFILE_SAVED_SUCCESSFULLY": "Profile saved successfuly"
     }
+  }
 }
-}
-

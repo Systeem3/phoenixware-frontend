@@ -2,11 +2,11 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="8">
-        <base-material-card icon="mdi-account-outline">
+        <base-material-card icon="mdi-account-outline" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Empleado
-              <span class="body-1">— Registro de Empleado</span>
+              <span class="body-1">— Modificar Empleado</span>
             </div>
           </template>
           <ValidationObserver ref="obs">
@@ -75,20 +75,8 @@
                     />
                   </v-col>
                   <v-col cols="12" class="text-right">
-                    <v-btn
-                      color="success"
-                      class="ml-0"
-                      :to="{ name: 'UserList' }"
-                    >
-                      Atrás
-                    </v-btn>
-                    <v-btn
-                      color="success"
-                      class="mr-0"
-                      @click.stop.prevent="submit"
-                    >
-                      Modificar
-                    </v-btn>
+                    <v-btn color="primary" class="ml-0" :to="{ name: 'UserList' }">Atrás</v-btn>
+                    <v-btn color="primary" class="mr-0" @click.stop.prevent="submit">Modificar</v-btn>
                   </v-col>
                 </v-row>
               </v-container>

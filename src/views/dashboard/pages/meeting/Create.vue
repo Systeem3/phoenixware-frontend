@@ -1,30 +1,21 @@
 <template>
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
-      <v-col cols="12" md="8">
-        <base-material-card icon="mdi-account-outline" color="primary">
+      <v-col cols="12" md="10">
+        <base-material-card icon="mdi-account-multiple" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
-              Empleado
-              <span class="body-1">— Registro de Empleado</span>
+              Reunión
+              <span class="body-1">— Registro de Reunión</span>
             </div>
           </template>
           <ValidationObserver ref="obs">
             <v-form>
               <v-container class="py-0">
                 <v-row>
-                  <v-col cols="12" md="4">
+                  <v-col cols="6" md="6">
                     <VTextFieldWithValidation
-                      label="Correo Electrónico"
-                      color="secondary"
-                      prepend-icon="mdi-at"
-                      v-model="inputs.email"
-                      rules="required|email"
-                    />
-                  </v-col>
-                  <v-col cols="12" md="4">
-                    <VTextFieldWithValidation
-                      label="Nombre"
+                      label="Nombre de la Reunión"
                       color="secondary"
                       prepend-icon="mdi-account"
                       v-model="inputs.nombre"
@@ -32,63 +23,121 @@
                       class="purple-input"
                     />
                   </v-col>
-                  <v-col cols="12" md="4">
+                  <v-col cols="6" md="6">
                     <VTextFieldWithValidation
-                      label="Apellido"
+                      label="Lugar"
                       color="secondary"
-                      prepend-icon="mdi-account"
-                      v-model="inputs.apellido"
+                      prepend-icon="mdi-map-marker-radius"
+                      v-model="inputs.lugar"
                       rules="required"
                       class="purple-input"
                     />
                   </v-col>
-                  <v-col cols="12">
-                    <VTextFieldWithValidation
-                      label="Direccion"
-                      color="secondary"
-                      prepend-icon="mdi-home"
-                      v-model="inputs.direccion"
-                      rules="required"
-                      class="purple-input"
-                    />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <VTextFieldWithValidation
-                      label="Telefono"
-                      color="secondary"
-                      prepend-icon="mdi-phone"
-                      v-model="inputs.telefono"
-                      rules="required"
-                      class="purple-input"
-                    />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <VSelectWithValidation
-                      v-model="inputs.tipo_usuario"
-                      :items="items"
-                      item-text="name"
-                      item-value="id"
-                      label="Tipo de Usuario"
-                      rules="required"
-                      dense
-                      prepend-icon="mdi-account-group"
-                    />
-                  </v-col>
-                  <!--<span>Selected: {{ inputs.tipo_usuario }}</span>-->
+                </v-row>
+                <v-row>
+                  <v-col cols="5" md="6">
+                    <base-material-card color="secondary" icon="mdi-calendar-today">
+                      <template v-slot:after-heading>
+                        <div class="display-1 mt-2 font-weight-light">Fecha de la Reunión</div>
+                      </template>
 
+                      <v-menu
+                        ref="menu3"
+                        v-model="menu3"
+                        :close-on-content-click="false"
+                        :return-value.sync="date"
+                        transition="scale-transition"
+                        min-width="290px"
+                        offset-y
+                      >
+                        <template v-slot:activator="{ on }">
+                          <v-text-field
+                            v-model="inputs.fecha"
+                            color="secondary"
+                            prepend-icon="mdi-calendar-outline"
+                            readonly
+                            v-on="on"
+                          />
+                        </template>
+
+                        <v-date-picker
+                          v-model="inputs.fecha"
+                          color="primary"
+                          landscape
+                          :min="nowDate"
+                          scrollable
+                          rules="required"
+                          @input="menu3 = false"
+                        >
+                          <v-spacer />
+                        </v-date-picker>
+                      </v-menu>
+                    </base-material-card>
+                  </v-col>
+                  <v-col cols="5" md="6">
+                    <base-material-card color="secondary" icon="mdi-clock">
+                      <template v-slot:after-heading>
+                        <div class="display-1 mt-2 font-weight-light">Hora de la Reunión</div>
+                      </template>
+
+                      <v-menu
+                        ref="menu4"
+                        v-model="menu4"
+                        :close-on-content-click="false"
+                        :return-value.sync="time"
+                        transition="scale-transition"
+                        min-width="290px"
+                        offset-y
+                      >
+                        <template v-slot:activator="{ on }">
+                          <v-text-field
+                            v-model="inputs.hora"
+                            color="secondary"
+                            prepend-icon="mdi-clock"
+                            readonly
+                            v-on="on"
+                          />
+                        </template>
+                        <v-time-picker
+                          v-model="inputs.hora"
+                          class="mt-1"
+                          color="primary"
+                          landscape
+                          rules="required"
+                          scrollable
+                          @input="menu4 = false"
+                        ></v-time-picker>
+                      </v-menu>
+                    </base-material-card>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" class="text-right">
+                    <v-row>
+                      <v-textarea
+                        outlined
+                        autoGrow
+                        filled
+                        name="Description"
+                        label="Descripción de la Reunión"
+                      ></v-textarea>
+                    </v-row>
+                  </v-col>
+                </v-row>
+                <v-row>
                   <v-col cols="12" class="text-right">
                     <v-btn
                       color="primary"
                       float="right"
                       margin-left="6px"
-                      :to="{ name: 'UserList' }"
-                    >Usuarios</v-btn>
+                      :to="{ name: 'MeetingList' }"
+                    >Reuniones</v-btn>
                     <v-btn
                       color="primary"
                       float="right"
                       margin-left="6px"
                       @click.stop.prevent="submit"
-                      @click="createUser(inputs)"
+                      @click="createMeeting(inputs)"
                     >Registrar</v-btn>
                   </v-col>
                 </v-row>
@@ -104,12 +153,12 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
-import VSelectWithValidation from '@/components/inputs/VSelectWithValidation'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   data() {
     return {
+      //editar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       show: false,
       show2: false,
       items: [
@@ -118,19 +167,29 @@ export default {
         { name: 'regular', id: '3' },
       ],
       inputs: {
-        email: '',
         nombre: '',
-        apellido: '',
-        direccion: '',
-        telefono: '',
-        tipo_usuario: '',
+        lugar: '',
+        fecha: null,
+        hora: null,
+        descripcion: '',
       },
+      nowDate: new Date().toISOString().slice(0, 10),
+      picker: new Date().toISOString().substr(0, 10),
+      landscape: true,
+      reactive: false,
+      time: '',
+      time2: '',
+      menu2: false,
+      menu3: false,
+      menu4: false,
+      date: '',
+      date2: '',
+      date3: '',
     }
   },
   components: {
     ValidationObserver,
     VTextFieldWithValidation,
-    VSelectWithValidation,
   },
   computed: {
     /*test() {

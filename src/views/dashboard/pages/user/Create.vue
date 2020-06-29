@@ -2,7 +2,7 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="8">
-        <base-material-card icon="mdi-account-outline">
+        <base-material-card icon="mdi-account-outline" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Empleado
@@ -10,7 +10,7 @@
             </div>
           </template>
           <ValidationObserver ref="obs">
-            <v-form>
+            <v-form @submit.prevent="handleSubmit(save)">
               <v-container class="py-0">
                 <v-row>
                   <v-col cols="12" md="4">
@@ -18,8 +18,8 @@
                       label="Correo Electrónico"
                       color="secondary"
                       prepend-icon="mdi-at"
+                      v-model="inputs.email"
                       rules="required|email"
-                      v-model="email"
                     />
                   </v-col>
                   <v-col cols="12" md="4">
@@ -27,9 +27,9 @@
                       label="Nombre"
                       color="secondary"
                       prepend-icon="mdi-account"
+                      v-model="inputs.nombre"
                       rules="required"
                       class="purple-input"
-                      v-model="name"
                     />
                   </v-col>
                   <v-col cols="12" md="4">
@@ -37,9 +37,9 @@
                       label="Apellido"
                       color="secondary"
                       prepend-icon="mdi-account"
+                      v-model="inputs.apellido"
                       rules="required"
                       class="purple-input"
-                      v-model="lastName"
                     />
                   </v-col>
                   <v-col cols="12">
@@ -47,9 +47,9 @@
                       label="Direccion"
                       color="secondary"
                       prepend-icon="mdi-home"
+                      v-model="inputs.direccion"
                       rules="required"
                       class="purple-input"
-                      v-model="address"
                     />
                   </v-col>
                   <v-col cols="12" md="6">
@@ -57,13 +57,14 @@
                       label="Telefono"
                       color="secondary"
                       prepend-icon="mdi-phone"
+                      v-model="inputs.telefono"
                       rules="required"
                       class="purple-input"
-                      v-model="phone"
                     />
                   </v-col>
                   <v-col cols="12" md="6">
                     <VSelectWithValidation
+                      v-model="inputs.tipo_usuario"
                       :items="items"
                       item-text="name"
                       item-value="id"
@@ -71,23 +72,32 @@
                       rules="required"
                       dense
                       prepend-icon="mdi-account-group"
-                      v-model="type"
                     />
                   </v-col>
                   <v-col cols="12" class="text-right">
-                    <v-btn
-                      color="success"
+                    <!-- <v-btn
+                      color="purple"
                       class="ml-0"
+                             color="primary"
+                      float="right"
+                      margin-left="6px"
                       :to="{ name: 'UserList' }"
                     >
-                      Atrás
-                    </v-btn>
+                      {{ registrationCompleted }}
+                    </v-btn>-->
+                    <!--  <SubmitButton
+                      :buttonText="$t('myProfile.SAVE')"
+                      customClass="btnSave"
+                    />-->
                     <v-btn
-                      color="success"
+                      color="primary"
+                      float="right"
+                      margin-left="6px"
                       class="mr-0"
-                      @click.stop.prevent="submit"
+                      @click="createUser(inputs)"
+                      :disabled="disabledButton"
                     >
-                      Modificar
+                      Registrar
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -97,6 +107,8 @@
         </base-material-card>
       </v-col>
     </v-row>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 
@@ -109,11 +121,21 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      show: false,
+      show2: false,
       items: [
-        { name: 'Administrador', id: '1' },
-        { name: 'Director', id: '2' },
-        { name: 'Regular', id: '3' },
+        { name: 'administrador', id: '1' },
+        { name: 'director', id: '2' },
+        { name: 'regular', id: '3' },
       ],
+      inputs: {
+        email: '',
+        nombre: '',
+        apellido: '',
+        direccion: '',
+        telefono: '',
+        tipo_usuario: '',
+      },
     }
   },
   components: {
@@ -122,112 +144,15 @@ export default {
     VSelectWithValidation,
   },
   computed: {
-    email: {
-      get() {
-        return this.$store.state.users.user.email
-      },
-      set(value) {
-        const data = {
-          key: 'email',
-          value,
-        }
-        this.addUserData(data)
-      },
+    disabledButton() {
+      return this.$store.state.loading.showLoading
     },
-    name: {
-      get() {
-        return this.$store.state.users.user.empleado.nombre
-      },
-      set(value) {
-        const data = {
-          key: 'name',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    lastName: {
-      get() {
-        return this.$store.state.users.user.empleado.apellido
-      },
-      set(value) {
-        const data = {
-          key: 'lastName',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    address: {
-      get() {
-        return this.$store.state.users.user.empleado.direccion
-      },
-      set(value) {
-        const data = {
-          key: 'address',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    phone: {
-      get() {
-        return this.$store.state.users.user.empleado.telefono
-      },
-      set(value) {
-        const data = {
-          key: 'phone',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    type: {
-      get() {
-        return this.$store.state.users.user.tipo_usuario
-      },
-      set(value) {
-        const data = {
-          key: 'type',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    getTypeId(tipoUsuario) {
-      let typeId = null
-      this.items.forEach((item) => {
-        if (item.name === tipoUsuario) typeId = item.id
-      })
-
-      if (typeId === null) {
-        console.warn('Tipo usuario not found with tipoUsuario: ', tipoUsuario)
-      }
-
-      return typeId
-    },
-    //...mapState('users', ['SHOW_LOADING', 'SUCCESS', 'ERROR']),
   },
   methods: {
-    ...mapActions('users', ['fetchUser', 'addUserData', 'saveUser']),
     async submit() {
-      await this.saveUser({
-        id: this.id,
-        email: this.email,
-        empleado: {
-          nombre: this.name,
-          apellido: this.lastName,
-          direccion: this.address,
-          telefono: this.phone,
-        },
-        tipo_usuario: this.type,
-      })
+      await this.$refs.obs.validate()
     },
-    //  ...mapMutations('users', ['SHOW_LOADING', 'ERROR']),
-  },
-  props: ['id'],
-  async mounted() {
-    await this.fetchUser(this.id)
+    ...mapActions('users', ['createUser']),
   },
 }
 </script>

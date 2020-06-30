@@ -239,18 +239,18 @@ const routes = [
       // Meeting
       {
         name: 'MeetingList',
-        path: '/meetings/:id',
+        path: '/meetings/:id_project',
         component: () => import('@/views/dashboard/pages/meeting/List'),
         props: true,
       },
       {
         name: 'MeetingCreate',
-        path: '/meetings/create/:id',
+        path: '/meetings/create/:id_project',
         component: () => import('@/views/dashboard/pages/meeting/Create'),
       },
       {
         name: 'MeetingUpdate',
-        path: '/meetings/edit/:id',
+        path: '/meetings/edit/:id/:id_project',
         component: () => import('@/views/dashboard/pages/meeting/Update'),
         props: true,
       },

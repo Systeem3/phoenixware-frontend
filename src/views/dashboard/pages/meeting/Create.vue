@@ -173,7 +173,7 @@ export default {
         hora: null,
         descripcion: '',
         estado : 'A',
-        projectId: this.$route.params.id
+        projectId: this.$route.params.id_project
       },
       nowDate: new Date().toISOString().slice(0, 10),
       picker: new Date().toISOString().substr(0, 10),

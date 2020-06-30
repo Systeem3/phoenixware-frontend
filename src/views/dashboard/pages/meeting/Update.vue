@@ -45,7 +45,7 @@
                         ref="menu3"
                         v-model="menu3"
                         :close-on-content-click="false"
-                        :return-value.sync="date"
+                        :return-value.sync="time3"
                         transition="scale-transition"
                         min-width="290px"
                         offset-y
@@ -84,7 +84,7 @@
                         ref="menu4"
                         v-model="menu4"
                         :close-on-content-click="false"
-                        :return-value.sync="time"
+                        :return-value.sync="time2"
                         transition="scale-transition"
                         min-width="290px"
                         offset-y
@@ -151,6 +151,7 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+
       items: [
         { name: 'Administrador', id: '1' },
         { name: 'Director', id: '2' },
@@ -161,6 +162,7 @@ export default {
       landscape: true,
       reactive: false,
       time2: '',
+      time3:'',
       menu2: false,
       menu3: false,
       menu4: false,

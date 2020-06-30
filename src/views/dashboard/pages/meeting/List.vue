@@ -85,12 +85,12 @@ export default {
       loader: true,
 
       search: undefined,
-      id_project : this.$route.params.id
+      id_project : this.$route.params.id_project
     }
   },
 
   created() {
-    this.fetchMeetings(this.$route.params.id)
+    this.fetchMeetings(this.$route.params.id_project)
     //console.log(this.$route.params.id)
     //this.$store.dispatch('meetings/fetchMeetings')
   },
@@ -100,7 +100,7 @@ export default {
 
   methods: {
     async editItem(item) {
-      this.$router.push(`/meetings/edit/${item.id}/`)
+      this.$router.push(`/meetings/edit/${item.id}/${this.$route.params.id_project}`)
     },
     ...mapActions('meetings', ['deleteMeeting', 'fetchMeetings']),
     success() {

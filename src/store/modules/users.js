@@ -113,6 +113,7 @@ const actions = {
   },*/
   createUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
       UserService.postUser(payload)
         .then((response) => {
           if (response.status === 201) {

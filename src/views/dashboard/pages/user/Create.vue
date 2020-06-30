@@ -95,7 +95,7 @@
                       float="right"
                       margin-left="6px"
                       class="mr-0"
-                      @click="createUser()"
+                      @click="submit()"
                     >
                       Registrar
                     </v-btn>

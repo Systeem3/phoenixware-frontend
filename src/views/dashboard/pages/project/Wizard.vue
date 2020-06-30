@@ -7,15 +7,16 @@
             v-model="tab"
             :available-steps="availableSteps"
             :items="tabs"
+            color="secondary"
             class="mx-auto"
             @click:next="next(valid)"
             @click:prev="tab--"
           >
             <v-tab-item class="pb-12">
               <form>
-                <div class="text-center display-1 font-weight-light mb-6">
-                  ¡Empecemos con información básica!
-                </div>
+                <div
+                  class="text-center display-1 font-weight-light mb-6"
+                >¡Empecemos con información básica!</div>
 
                 <v-container class="py-0">
                   <v-row>
@@ -57,7 +58,7 @@
                         color="secondary"
                         item-color="secondary"
                         label="Metodología"
-                        :items="type"
+                        :items="type2"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -75,11 +76,7 @@
                       </v-select>
                     </v-col>
 
-                    <v-row
-                      class="mx-auto"
-                      justify="space-around"
-                      style="max-width: 500px;"
-                    >
+                    <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
                       <v-col cols="12" md="4">
                         <v-menu
                           ref="menu"
@@ -101,28 +98,11 @@
                             />
                           </template>
 
-                          <v-date-picker
-                            v-model="date"
-                            color="secondary"
-                            landscape
-                            scrollable
-                          >
+                          <v-date-picker v-model="date" color="secondary" landscape scrollable>
                             <v-spacer />
-                            <v-btn
-                              color="secondary"
-                              large
-                              @click="menu = false"
-                            >
-                              Cancel
-                            </v-btn>
+                            <v-btn color="secondary" large @click="menu = false">Cancelar</v-btn>
 
-                            <v-btn
-                              color="secondary"
-                              large
-                              @click="$refs.menu.save(date)"
-                            >
-                              OK
-                            </v-btn>
+                            <v-btn color="secondary" large @click="$refs.menu.save(date)">OK</v-btn>
                           </v-date-picker>
                         </v-menu>
                       </v-col>
@@ -157,13 +137,7 @@
                           >
                             <v-spacer />
 
-                            <v-btn
-                              color="secondary"
-                              large
-                              @click="menu3 = false"
-                            >
-                              Cancel
-                            </v-btn>
+                            <v-btn color="secondary" large @click="menu3 = false">Cancelar</v-btn>
                           </v-date-picker>
                         </v-menu>
                       </v-col>
@@ -185,19 +159,13 @@
                 <v-responsive class="mx-auto" max-width="500">
                   <div
                     class="text-center display-1 grey--text font-weight-light mb-6"
-                  >
-                    Determinar Metodología
-                  </div>
+                  >Determinar Metodología</div>
 
                   <ValidationObserver rules="required" name="type">
                     <input :value="stringAccount" type="hidden" />
                   </ValidationObserver>
 
-                  <v-row
-                    class="mx-auto"
-                    justify="space-around"
-                    style="max-width: 500px;"
-                  >
+                  <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
                     <v-col cols="12">
                       <v-select
                         color="secondary"
@@ -308,22 +276,12 @@
             <v-tab-item class="pb-12">
               <div
                 class="text-center display-1 grey--text font-weight-light mb-6"
-              >
-                Are you living in a nice area?
-              </div>
+              >Are you living in a nice area?</div>
 
               <form>
-                <v-row
-                  class="mx-auto"
-                  justify="space-around"
-                  style="max-width: 500px;"
-                >
+                <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
                   <v-col cols="12" md="8">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="address"
-                    >
+                    <ValidationObserver v-slot="{ errors }" rules="required" name="address">
                       <v-text-field
                         v-model="address"
                         :error-messages="errors"
@@ -335,11 +293,7 @@
                   </v-col>
 
                   <v-col cols="12" md="4">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="street"
-                    >
+                    <ValidationObserver v-slot="{ errors }" rules="required" name="street">
                       <v-text-field
                         v-model="street"
                         :error-messages="errors"
@@ -351,11 +305,7 @@
                   </v-col>
 
                   <v-col cols="12" md="6">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="city"
-                    >
+                    <ValidationObserver v-slot="{ errors }" rules="required" name="city">
                       <v-text-field
                         v-model="city"
                         :error-messages="errors"
@@ -367,11 +317,7 @@
                   </v-col>
 
                   <v-col cols="12" md="6">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="state"
-                    >
+                    <ValidationObserver v-slot="{ errors }" rules="required" name="state">
                       <v-autocomplete
                         v-model="state"
                         :autocomplete="Date.now()"
@@ -503,8 +449,9 @@ export default {
       ],
       street: '',
       tab: 0,
-      tabs: ['About', 'Account', 'Address'],
-      type: ['Producto', 'Servicio'],
+      tabs: ['Info', 'Metodología', 'Otros'],
+      type: ['Productos', 'Servicios'],
+      type2: ['Ágil', 'Tradicional', 'Híbrida'],
       date: '',
       date2: '',
       date3: '',

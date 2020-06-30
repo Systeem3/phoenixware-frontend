@@ -11,34 +11,14 @@
           : $emit('input', !value)
       "
     >
-      <v-icon v-if="value">
-        mdi-view-quilt
-      </v-icon>
+      <v-icon v-if="value">mdi-view-quilt</v-icon>
 
-      <v-icon v-else>
-        mdi-dots-vertical
-      </v-icon>
+      <v-icon v-else>mdi-dots-vertical</v-icon>
     </v-btn>
 
-    <v-toolbar-title
-      class="hidden-sm-and-down font-weight-light"
-      v-text="$route.name"
-    />
+    <v-toolbar-title class="hidden-sm-and-down font-weight-light" v-text="$route.name" />
 
     <v-spacer />
-
-    <v-text-field
-      :label="$t('search')"
-      color="secondary"
-      hide-details
-      style="max-width: 165px;"
-    >
-      <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:append-outer>
-        <v-btn class="mt-n2" elevation="1" fab small>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-      </template>
-    </v-text-field>
 
     <div class="mx-3" />
 
@@ -46,13 +26,7 @@
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <v-menu
-      bottom
-      left
-      offset-y
-      origin="top right"
-      transition="scale-transition"
-    >
+    <v-menu bottom left offset-y origin="top right" transition="scale-transition">
       <template v-slot:activator="{ attrs, on }">
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-badge color="red" overlap bordered>
@@ -74,14 +48,7 @@
       </v-list>
     </v-menu>
 
-    <v-menu
-      bottom
-      left
-      min-width="200"
-      offset-y
-      origin="top right"
-      transition="scale-transition"
-    >
+    <v-menu bottom left min-width="200" offset-y origin="top right" transition="scale-transition">
       <template v-slot:activator="{ attrs, on }">
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-icon>mdi-account</v-icon>
@@ -151,17 +118,17 @@ export default {
 
   data: () => ({
     notifications: [
-      'Mike John Responded to your email',
-      'You have 5 new tasks',
-      "You're now friends with Andrew",
+      'Tienes una reunión mañana',
+      'No has actualizado tu actividad',
+      'Karen quiere enviarte un mensaje',
       'Another Notification',
       'Another one',
     ],
     profile: [
-      { title: 'Profile' },
-      { title: 'Settings' },
+      { title: 'Perfil' },
+      { title: 'Opciones' },
       { divider: true },
-      { title: 'Log out' },
+      { title: 'Cerrar Sesión' },
     ],
   }),
 

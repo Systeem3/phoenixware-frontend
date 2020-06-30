@@ -31,7 +31,7 @@
       <base-item-group :item="profile" />
     </v-list>
 
-    <v-divider class="mb-2" />
+    <v-divider />
 
     <v-list expand nav>
       <!-- Style cascading bug  -->
@@ -39,7 +39,7 @@
       <div />
 
       <template v-for="(item, i) in computedItems">
-        <base-item-group v-if="item.children" :key="`group-${i}`" :item="item">
+        <base-item-group v-if="item.children" :key="`group-${i}`" :item="item" :icon="icon">
           <!--  -->
         </base-item-group>
 
@@ -70,190 +70,72 @@ export default {
   data: () => ({
     items: [
       {
-        icon: 'mdi-view-dashboard',
+        icon: 'mdi-view-dashboard', //inicio
         title: 'dashboard',
         to: '/',
       },
       {
-        group: '/users',
-        icon: 'mdi mdi-account-circle',
-        title: 'employee',
+        group: '/projects', //proyectos
+        icon: 'mdi mdi-rocket',
+        title: 'projects',
         children: [
           {
-            title: 'create',
+            title: 'pr-create',
             to: 'create',
             icon: 'mdi mdi-account-plus',
           },
           {
-            title: 'list',
+            title: 'pr-list',
             to: 'list',
+            icon: 'mdi-account-multiple',
+          },
+        ],
+      },
+      {
+        group: '/meetings', //reuniones
+        icon: 'mdi mdi-account-multiple',
+        title: 'meetings',
+        children: [
+          {
+            title: 'mee-create',
+            to: 'create',
+            icon: 'mdi mdi-account-plus',
+          },
+          {
+            title: 'mee-list',
+            to: '',
             icon: 'mdi-account-multiple',
           },
         ],
       },
       {
         group: '/members',
-        icon: 'mdi mdi-account-circle',
-        title: 'Miembros',
+        icon: 'mdi mdi-google-circles-communities',
+        title: 'team',
         children: [
           {
-            title: 'Lista de Miembros',
+            title: 'te-list',
             to: 'list',
             icon: 'mdi-account-multiple',
           },
         ],
       },
       {
-        group: '/pages',
-        icon: 'mdi-image',
-        title: 'pages',
+        group: '/users', //
+        icon: 'mdi mdi-folder-account',
+        title: 'employee',
         children: [
           {
-            title: 'pricing',
-            to: 'pricing',
+            title: 'e-create',
+            to: 'create',
+            icon: 'mdi mdi-account-plus',
           },
           {
-            title: 'rtl',
-            to: 'rtl',
-          },
-          {
-            title: 'timeline',
-            to: 'timeline',
-          },
-          {
-            title: 'login',
-            to: 'login',
-          },
-          {
-            title: 'register',
-            to: 'pricing',
-          },
-          {
-            title: 'lock',
-            to: 'lock',
-          },
-          {
-            title: 'user',
-            to: 'user',
-          },
-          {
-            title: 'error',
-            to: '404',
+            title: 'e-list',
+            to: 'list',
+            icon: 'mdi-account-multiple',
           },
         ],
-      },
-      {
-        group: '/components',
-        icon: 'mdi-view-comfy',
-        title: 'components',
-        children: [
-          {
-            title: 'multi',
-            group: '',
-            children: [
-              {
-                title: 'example',
-                href: '#',
-              },
-            ],
-          },
-          {
-            title: 'buttons',
-            to: 'buttons',
-          },
-          {
-            title: 'grid',
-            to: 'grid-system',
-          },
-          {
-            title: 'tabs',
-            to: 'tabs',
-          },
-          {
-            title: 'notifications',
-            to: 'notifications',
-          },
-          {
-            title: 'icons',
-            to: 'icons',
-          },
-          {
-            title: 'typography',
-            to: 'typography',
-          },
-        ],
-      },
-      {
-        group: '/forms',
-        icon: 'mdi-clipboard-outline',
-        title: 'forms',
-        children: [
-          {
-            title: 'rforms',
-            to: 'regular',
-          },
-          {
-            title: 'eforms',
-            to: 'extended',
-          },
-          {
-            title: 'vforms',
-            to: 'validation',
-          },
-          {
-            title: 'wizard',
-            to: 'wizard',
-          },
-        ],
-      },
-      {
-        group: '/tables',
-        icon: 'mdi-grid',
-        title: 'tables',
-        children: [
-          {
-            title: 'rtables',
-            to: 'regular-tables',
-          },
-          {
-            title: 'etables',
-            to: 'extended-tables',
-          },
-          {
-            title: 'dtables',
-            to: 'data-tables',
-          },
-        ],
-      },
-      {
-        group: '/maps',
-        icon: 'mdi-map-marker',
-        title: 'maps',
-        children: [
-          {
-            title: 'google',
-            to: 'google-maps',
-          },
-          {
-            title: 'fullscreen',
-            to: 'full-screen-map',
-          },
-        ],
-      },
-      {
-        icon: 'mdi-widgets',
-        title: 'widgets',
-        to: '/widgets',
-      },
-      {
-        icon: 'mdi-chart-timeline-variant',
-        title: 'charts',
-        to: '/charts',
-      },
-      {
-        icon: 'mdi-calendar-range',
-        title: 'calendar',
-        to: '/calendar',
       },
     ],
   }),

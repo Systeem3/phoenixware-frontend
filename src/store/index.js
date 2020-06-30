@@ -27,9 +27,10 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   state: {
     barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
-    barImage:
-      'https://demos.creative-tim.com/material-dashboard-pro/assets/img/sidebar-1.jpg',
+    barImage: 'https://www.eoi.es/blogs/imsd/files/2017/03/coworking-1.jpg',
     drawer: null,
+    //otras imagenes:
+    //https://www.eoi.es/blogs/imsd/files/2017/03/coworking-1.jpg
   },
   mutations: {
     SET_BAR_IMAGE(state, payload) {

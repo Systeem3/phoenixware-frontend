@@ -1,31 +1,27 @@
 <template>
   <v-card class="v-card--wizard" elevation="12" max-width="700">
-    <v-card-title class="justify-center display-2 font-weight-light pt-5">
-      Nuevo Proyecto
-    </v-card-title>
+    <v-card-title class="justify-center display-2 font-weight-light pt-5">Nuevo Proyecto</v-card-title>
 
-    <div class="text-center display-1 grey--text font-weight-light mb-6">
-      Te guiaremos para crear un proyecto que se ajuste a tus necesidades.
-    </div>
+    <div
+      class="text-center display-1 grey--text font-weight-light mb-6"
+    >Te guiaremos para crear un proyecto que se ajuste a tus necesidades.</div>
 
     <v-tabs
       ref="tabs"
       v-model="internalValue"
-      background-color="green lighten-5"
+      background-color="pink lighten-4"
       color="white"
       grow
       slider-size="50"
     >
-      <v-tabs-slider class="mt-1" color="success" />
+      <v-tabs-slider class="mt-1" color="secondary" />
 
       <v-tab
         v-for="(item, i) in items"
         :key="i"
         :ripple="false"
         :disabled="!availableSteps.includes(i)"
-      >
-        {{ item }}
-      </v-tab>
+      >{{ item }}</v-tab>
     </v-tabs>
 
     <div class="my-6" />
@@ -43,20 +39,16 @@
         color="grey darken-2"
         min-width="125"
         @click="$emit('click:prev')"
-      >
-        Previous
-      </v-btn>
+      >Anterior</v-btn>
 
       <v-spacer />
 
       <v-btn
         :disabled="availableSteps.includes(internalValue + 1)"
-        color="success"
+        color="primary"
         min-width="100"
         @click="$emit('click:next')"
-      >
-        {{ internalValue === items.length - 1 ? 'Finish' : 'Next' }}
-      </v-btn>
+      >{{ internalValue === items.length - 1 ? 'Listo' : 'Siguiente' }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

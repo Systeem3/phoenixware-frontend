@@ -25,7 +25,7 @@
             <v-icon size="18">
               mdi-heart
             </v-icon>
-            by <a href="https://www.creative-tim.com">Syteem</a> for a better
+            by <a href="https://github.com/Systeem3/">Syteem</a> for a better
             web.
           </div>
         </v-col>
@@ -39,24 +39,7 @@ export default {
   name: 'DashboardCoreFooter',
 
   data: () => ({
-    links: [
-      {
-        href: '#',
-        text: 'Creative Tim',
-      },
-      {
-        href: '#',
-        text: 'About Us',
-      },
-      {
-        href: '#',
-        text: 'Blog',
-      },
-      {
-        href: '#',
-        text: 'Licenses',
-      },
-    ],
+    links: [],
   }),
 }
 </script>

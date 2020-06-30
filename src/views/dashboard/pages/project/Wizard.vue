@@ -14,9 +14,9 @@
           >
             <v-tab-item class="pb-12">
               <form>
-                <div
-                  class="text-center display-1 font-weight-light mb-6"
-                >¡Empecemos con información básica!</div>
+                <div class="text-center display-1 font-weight-light mb-6">
+                  ¡Empecemos con información básica!
+                </div>
 
                 <v-container class="py-0">
                   <v-row>
@@ -25,7 +25,7 @@
                         label="Nombre del Proyecto"
                         color="secondary"
                         prepend-icon="mdi-at"
-                        v-model="inputs.email"
+                        v-model="inputs.nombre"
                         rules="required"
                         validate-on-blur
                       />
@@ -37,6 +37,9 @@
                         item-color="secondary"
                         label="Tipo de Proyecto"
                         :items="type"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs.tipo"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -47,7 +50,7 @@
                             v-on="on"
                           >
                             <v-list-item-content>
-                              <v-list-item-title v-text="item" />
+                              <v-list-item-title v-text="item.name" />
                             </v-list-item-content>
                           </v-list-item>
                         </template>
@@ -59,6 +62,9 @@
                         item-color="secondary"
                         label="Metodología"
                         :items="type2"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs.metodologia"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -69,14 +75,18 @@
                             v-on="on"
                           >
                             <v-list-item-content>
-                              <v-list-item-title v-text="item" />
+                              <v-list-item-title v-text="item.name" />
                             </v-list-item-content>
                           </v-list-item>
                         </template>
                       </v-select>
                     </v-col>
 
-                    <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
+                    <v-row
+                      class="mx-auto"
+                      justify="space-around"
+                      style="max-width: 500px;"
+                    >
                       <v-col cols="12" md="4">
                         <v-menu
                           ref="menu"
@@ -89,7 +99,7 @@
                         >
                           <template v-slot:activator="{ on }">
                             <v-text-field
-                              v-model="date"
+                              v-model="inputs.fecha_inicio"
                               color="secondary"
                               label="Fecha de Inicio"
                               prepend-icon="mdi-calendar-outline"
@@ -98,18 +108,24 @@
                             />
                           </template>
 
-                          <v-date-picker v-model="date" color="secondary" landscape scrollable>
+                          <v-date-picker
+                            v-model="inputs.fecha_inicio"
+                            color="secondary"
+                            landscape
+                            scrollable
+                            @input="menu = false"
+                          >
                             <v-spacer />
-                            <v-btn color="secondary" large @click="menu = false">Cancelar</v-btn>
-
-                            <v-btn color="secondary" large @click="$refs.menu.save(date)">OK</v-btn>
+                            <v-btn color="secondary" large @click="menu = false"
+                              >Cancelar</v-btn
+                            >
                           </v-date-picker>
                         </v-menu>
                       </v-col>
 
                       <v-col cols="12" md="4">
                         <v-menu
-                          ref="menu2"
+                          ref="menu3"
                           v-model="menu3"
                           :close-on-content-click="false"
                           :return-value.sync="date"
@@ -119,7 +135,7 @@
                         >
                           <template v-slot:activator="{ on }">
                             <v-text-field
-                              v-model="date3"
+                              v-model="inputs.fecha_finalizacion"
                               color="secondary"
                               prepend-icon="mdi-calendar-outline"
                               readonly
@@ -129,7 +145,7 @@
                           </template>
 
                           <v-date-picker
-                            v-model="date3"
+                            v-model="inputs.fecha_finalizacion"
                             color="secondary"
                             landscape
                             scrollable
@@ -137,7 +153,12 @@
                           >
                             <v-spacer />
 
-                            <v-btn color="secondary" large @click="menu3 = false">Cancelar</v-btn>
+                            <v-btn
+                              color="secondary"
+                              large
+                              @click="menu3 = false"
+                              >Cancelar</v-btn
+                            >
                           </v-date-picker>
                         </v-menu>
                       </v-col>
@@ -147,6 +168,7 @@
                         name="input-7-1"
                         label="Descripción"
                         hint="¿En qué consiste el proyecto?"
+                        v-model="inputs.descripcion"
                       />
                     </v-col>
                   </v-row>
@@ -159,19 +181,28 @@
                 <v-responsive class="mx-auto" max-width="500">
                   <div
                     class="text-center display-1 grey--text font-weight-light mb-6"
-                  >Determinar Metodología</div>
+                  >
+                    Determinar Metodología
+                  </div>
 
                   <ValidationObserver rules="required" name="type">
                     <input :value="stringAccount" type="hidden" />
                   </ValidationObserver>
 
-                  <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
+                  <v-row
+                    class="mx-auto"
+                    justify="space-around"
+                    style="max-width: 500px;"
+                  >
                     <v-col cols="12">
                       <v-select
                         color="secondary"
                         item-color="secondary"
                         label="Tamaño"
-                        :items="type"
+                        :items="tamaño"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs2.tamaño"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -182,7 +213,7 @@
                             v-on="on"
                           >
                             <v-list-item-content>
-                              <v-list-item-title v-text="item" />
+                              <v-list-item-title v-text="item.name" />
                             </v-list-item-content>
                           </v-list-item>
                         </template>
@@ -191,7 +222,10 @@
                         color="secondary"
                         item-color="secondary"
                         label="Criticidad"
-                        :items="type"
+                        :items="criticidad"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs2.criticidad"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -202,7 +236,7 @@
                             v-on="on"
                           >
                             <v-list-item-content>
-                              <v-list-item-title v-text="item" />
+                              <v-list-item-title v-text="item.name" />
                             </v-list-item-content>
                           </v-list-item>
                         </template>
@@ -211,7 +245,10 @@
                         color="secondary"
                         item-color="secondary"
                         label="Dinamismo"
-                        :items="type"
+                        :items="dinamismo"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs2.dinamismo"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -222,7 +259,7 @@
                             v-on="on"
                           >
                             <v-list-item-content>
-                              <v-list-item-title v-text="item" />
+                              <v-list-item-title v-text="item.name" />
                             </v-list-item-content>
                           </v-list-item>
                         </template>
@@ -231,7 +268,10 @@
                         color="secondary"
                         item-color="secondary"
                         label="Personal"
-                        :items="type"
+                        :items="personal"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs2.personal"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -242,7 +282,7 @@
                             v-on="on"
                           >
                             <v-list-item-content>
-                              <v-list-item-title v-text="item" />
+                              <v-list-item-title v-text="item.name" />
                             </v-list-item-content>
                           </v-list-item>
                         </template>
@@ -251,7 +291,10 @@
                         color="secondary"
                         item-color="secondary"
                         label="Cultura"
-                        :items="type"
+                        :items="cultura"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs2.cultura"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -262,7 +305,7 @@
                             v-on="on"
                           >
                             <v-list-item-content>
-                              <v-list-item-title v-text="item" />
+                              <v-list-item-title v-text="item.name" />
                             </v-list-item-content>
                           </v-list-item>
                         </template>
@@ -276,12 +319,22 @@
             <v-tab-item class="pb-12">
               <div
                 class="text-center display-1 grey--text font-weight-light mb-6"
-              >Are you living in a nice area?</div>
+              >
+                Are you living in a nice area?
+              </div>
 
               <form>
-                <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
+                <v-row
+                  class="mx-auto"
+                  justify="space-around"
+                  style="max-width: 500px;"
+                >
                   <v-col cols="12" md="8">
-                    <ValidationObserver v-slot="{ errors }" rules="required" name="address">
+                    <ValidationObserver
+                      v-slot="{ errors }"
+                      rules="required"
+                      name="address"
+                    >
                       <v-text-field
                         v-model="address"
                         :error-messages="errors"
@@ -293,7 +346,11 @@
                   </v-col>
 
                   <v-col cols="12" md="4">
-                    <ValidationObserver v-slot="{ errors }" rules="required" name="street">
+                    <ValidationObserver
+                      v-slot="{ errors }"
+                      rules="required"
+                      name="street"
+                    >
                       <v-text-field
                         v-model="street"
                         :error-messages="errors"
@@ -305,7 +362,11 @@
                   </v-col>
 
                   <v-col cols="12" md="6">
-                    <ValidationObserver v-slot="{ errors }" rules="required" name="city">
+                    <ValidationObserver
+                      v-slot="{ errors }"
+                      rules="required"
+                      name="city"
+                    >
                       <v-text-field
                         v-model="city"
                         :error-messages="errors"
@@ -317,7 +378,11 @@
                   </v-col>
 
                   <v-col cols="12" md="6">
-                    <ValidationObserver v-slot="{ errors }" rules="required" name="state">
+                    <ValidationObserver
+                      v-slot="{ errors }"
+                      rules="required"
+                      name="state"
+                    >
                       <v-autocomplete
                         v-model="state"
                         :autocomplete="Date.now()"
@@ -357,12 +422,19 @@ export default {
         { name: 'regular', id: '3' },
       ],
       inputs: {
-        email: '',
         nombre: '',
-        apellido: '',
-        direccion: '',
-        telefono: '',
-        tipo_usuario: '',
+        descripcion: '',
+        fecha_inicio: '',
+        fecha_finalizacion: '',
+        tipo: '',
+        metodologia: '',
+      },
+      inputs2: {
+        tamaño: '',
+        criticidad: '',
+        dinamismo: '',
+        personal: '',
+        cultura: '',
       },
       account: [],
       accounts: [
@@ -386,72 +458,43 @@ export default {
       image: null,
       last: '',
       state: '',
-      states: [
-        'Alabama',
-        'Alaska',
-        'American Samoa',
-        'Arizona',
-        'Arkansas',
-        'California',
-        'Colorado',
-        'Connecticut',
-        'Delaware',
-        'District of Columbia',
-        'Federated States of Micronesia',
-        'Florida',
-        'Georgia',
-        'Guam',
-        'Hawaii',
-        'Idaho',
-        'Illinois',
-        'Indiana',
-        'Iowa',
-        'Kansas',
-        'Kentucky',
-        'Louisiana',
-        'Maine',
-        'Marshall Islands',
-        'Maryland',
-        'Massachusetts',
-        'Michigan',
-        'Minnesota',
-        'Mississippi',
-        'Missouri',
-        'Montana',
-        'Nebraska',
-        'Nevada',
-        'New Hampshire',
-        'New Jersey',
-        'New Mexico',
-        'New York',
-        'North Carolina',
-        'North Dakota',
-        'Northern Mariana Islands',
-        'Ohio',
-        'Oklahoma',
-        'Oregon',
-        'Palau',
-        'Pennsylvania',
-        'Puerto Rico',
-        'Rhode Island',
-        'South Carolina',
-        'South Dakota',
-        'Tennessee',
-        'Texas',
-        'Utah',
-        'Vermont',
-        'Virgin Island',
-        'Virginia',
-        'Washington',
-        'West Virginia',
-        'Wisconsin',
-        'Wyoming',
+      tamaño:[
+        { name: 'administrador', id: '1' },
+        { name: 'director', id: '2' },
+        { name: 'regular', id: '3' },
+      ],
+      criticidad:[
+        { name: 'administrador', id: '1' },
+        { name: 'director', id: '2' },
+        { name: 'regular', id: '3' },
+      ],
+      dinamismo:[
+        { name: 'administrador', id: '1' },
+        { name: 'director', id: '2' },
+        { name: 'regular', id: '3' },
+      ],
+      personal:[
+        { name: 'administrador', id: '1' },
+        { name: 'director', id: '2' },
+        { name: 'regular', id: '3' },
+      ],
+      cultura:[
+        { name: 'administrador', id: '1' },
+        { name: 'director', id: '2' },
+        { name: 'regular', id: '3' },
       ],
       street: '',
       tab: 0,
       tabs: ['Info', 'Metodología', 'Otros'],
-      type: ['Productos', 'Servicios'],
-      type2: ['Ágil', 'Tradicional', 'Híbrida'],
+      type: [
+        { name: 'Producto', id: 'P' },
+        { name: 'Servicio', id: 'S' },
+      ],
+      type2: [
+        { name: 'Agil', id: '1' },
+        { name: 'Hibrida', id: '2' },
+        { name: 'Tradicional', id: '3' },
+      ],
       date: '',
       date2: '',
       date3: '',
@@ -506,9 +549,25 @@ export default {
     availableSteps() {
       const steps = [0]
 
-      if (this.first && this.last && this.email) steps.push(1)
+      if (
+        this.inputs.nombre &&
+        this.inputs.tipo &&
+        this.inputs.metodologia &&
+        this.inputs.fecha_inicio &&
+        this.inputs.fecha_finalizacion &&
+        this.inputs.descripcion
+      )
+        steps.push(1)
 
-      if (this.stringAccount && steps.includes(1)) steps.push(2)
+      if (
+        this.inputs2.tamaño &&
+        this.inputs2.criticidad &&
+        this.inputs2.cultura &&
+        this.inputs2.dinamismo &&
+        this.inputs2.personal &&
+        steps.includes(1)
+      )
+        steps.push(2)
 
       if (
         this.address &&
@@ -526,7 +585,6 @@ export default {
   methods: {
     next(valid) {
       if (!valid) return
-
       if (this.tab === this.tabs.length - 1) {
         alert('Form finished')
       } else {

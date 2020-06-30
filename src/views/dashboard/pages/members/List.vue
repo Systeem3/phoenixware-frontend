@@ -39,7 +39,7 @@
 
       <v-data-table
         :headers="headers"
-        :items="users"
+        :items="members"
         :search.sync="search"
         :sort-by="['name', 'office']"
         :sort-desc="[false, true]"
@@ -106,15 +106,15 @@ export default {
       headers: [
         {
           text: 'Nombre',
-          value: 'empleado.nombre',
+          value: 'usuario.nombre',
         },
         {
           text: 'Correo Electrónico',
-          value: 'usuario.email',
+          value: 'usuario.correo',
         },
         {
           text: 'Rol',
-          value: 'miembro.rol',
+          value: 'rol',
         },
         {
           text: 'Proyecto',
@@ -133,10 +133,10 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('users/fetchUsers')
+    this.fetchMembers(this.$route.params.id_project)
   },
   computed: {
-    ...mapGetters('users', ['users']),
+    ...mapGetters('members', ['members']),
   },
 
   methods: {
@@ -144,7 +144,7 @@ export default {
       // this.$store.dispatch('UserUpdate')
       this.$router.push(`/users/edit/${item.id}/`)
     },
-    ...mapActions('users', ['deleteUser']),
+    ...mapActions('members', ['deleteMember', 'fetchMembers']),
     success() {
       /* Vue.swal({
         type: 'success',
@@ -171,18 +171,7 @@ export default {
           console.log(item.id)
           //  this.dataTableLoading = true
           //await this.deleteUser(item.id, {})
-          await this.deleteUser({
-            id: item.id,
-            is_active: false,
-            email: this.email,
-            empleado: {
-              nombre: this.name,
-              apellido: this.lastName,
-              direccion: this.address,
-              telefono: this.phone,
-            },
-            tipo_usuario: this.type,
-          })
+          await this.deleteMember(item.id)
           /* await this
             .fetchUsers
             // buildPayloadPagination(this.pagination, this.buildSearch())

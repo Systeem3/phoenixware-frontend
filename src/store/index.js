@@ -13,7 +13,7 @@ import profile from './modules/profile'
 import loading from './modules/loading'
 import error from './modules/error'
 import success from './modules/success'
-
+import members from "./modules/members";
 import projects from './modules/projects'
 import locale from './modules/locale'
 
@@ -55,6 +55,7 @@ export default new Vuex.Store({
     projects,
     locale,
     meetings,
+    members
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

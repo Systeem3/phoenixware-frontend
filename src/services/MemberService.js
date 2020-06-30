@@ -1,7 +1,7 @@
 import api from '@/services/api'
 export default {
-  getUsers() {
-    return api.get('/auth/list-users/')
+  getMembers(id) {
+    return api.get(`/projects/${id}/listar_miembros`)
   },
   getUser(id) {
     return api.get('/auth/update-user/' + id)
@@ -15,4 +15,8 @@ export default {
   postUser(user) {
     return api.post('/auth/registration/', user)
   },
+  deleteMember(id){
+    return api.delete(`miembro/${id}/delete/`)
+  }
+
 }

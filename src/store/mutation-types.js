@@ -32,6 +32,12 @@ export const ADD_PROJECT_DATA = 'ADD_PROJECT_DATA'
 export const FILL_MEETING = 'FILL_MEETING'
 export const ADD_MEETING_DATA = 'ADD_MEETING_DATA'
 
+
+//membres
+export const FILL_MEMBER = 'FILL_MEETING'
+export const ADD_MEMBER_DATA = 'ADD_MEETING_DATA'
+
+
 export const ADDMEETING_DATA = 'ADD_USER_DATA'
 // cities
 export const FILL_ALL_CITIES = 'FILL_ALL_CITIES'

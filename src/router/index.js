@@ -286,7 +286,7 @@ const routes = [
       // Members
       {
         name: 'MembersList',
-        path: '/members/list',
+        path: '/members/list/:id_project',
         component: () => import('@/views/dashboard/pages/members/List'),
       },
     ],

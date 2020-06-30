@@ -80,9 +80,12 @@ export const handleError = (error, commit, reject) => {
   // Resets errors in store
   commit(types.SHOW_LOADING, false, { root: true })
   commit(types.ERROR, null, { root: true })
-
+  // console.log(error)
+  console.dir(error)
   // Checks if unauthorized
   if (error.response.status === 401) {
+    // console.log(error)
+    console.dir(error)
     store.dispatch('userLogout')
   } else {
     // Any other error

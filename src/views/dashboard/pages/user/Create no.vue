@@ -9,8 +9,8 @@
               <span class="body-1">— Registro de Empleado</span>
             </div>
           </template>
-          <ValidationObserver>
-            <v-form @submit.prevent="submit">
+          <ValidationObserver ref="obs">
+            <v-form @submit.prevent="handleSubmit()">
               <v-container class="py-0">
                 <v-row>
                   <v-col cols="12" md="4">
@@ -18,7 +18,7 @@
                       label="Correo Electrónico"
                       color="secondary"
                       prepend-icon="mdi-at"
-                      v-model="email"
+                      v-model="inputs.email"
                       rules="required|email"
                     />
                   </v-col>
@@ -27,7 +27,7 @@
                       label="Nombre"
                       color="secondary"
                       prepend-icon="mdi-account"
-                      v-model="nombre"
+                      v-model="inputs.nombre"
                       rules="required"
                       class="purple-input"
                     />
@@ -37,7 +37,7 @@
                       label="Apellido"
                       color="secondary"
                       prepend-icon="mdi-account"
-                      v-model="apellido"
+                      v-model="inputs.apellido"
                       rules="required"
                       class="purple-input"
                     />
@@ -47,7 +47,7 @@
                       label="Direccion"
                       color="secondary"
                       prepend-icon="mdi-home"
-                      v-model="direccion"
+                      v-model="inputs.direccion"
                       rules="required"
                       class="purple-input"
                     />
@@ -57,14 +57,14 @@
                       label="Telefono"
                       color="secondary"
                       prepend-icon="mdi-phone"
-                      v-model="telefono"
+                      v-model="inputs.telefono"
                       rules="required"
                       class="purple-input"
                     />
                   </v-col>
                   <v-col cols="12" md="6">
                     <VSelectWithValidation
-                      v-model="tipo_usuario"
+                      v-model="inputs.tipo_usuario"
                       :items="items"
                       item-text="name"
                       item-value="id"
@@ -85,17 +85,17 @@
                     >
                       {{ registrationCompleted }}
                     </v-btn>-->
-                    <!-- <SubmitButton
+                    <!--  <SubmitButton
                       :buttonText="$t('myProfile.SAVE')"
                       customClass="btnSave"
-                      @click="createUser()"
                     />-->
                     <v-btn
                       color="primary"
                       float="right"
                       margin-left="6px"
                       class="mr-0"
-                      @click="submit()"
+                      @click="createUser(inputs)"
+                      :disabled="disabledButton"
                     >
                       Registrar
                     </v-btn>
@@ -121,17 +121,19 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      email: '',
-      nombre: '',
-      apellido: '',
-      direccion: '',
-      telefono: '',
-      tipo_usuario: '',
       items: [
         { name: 'administrador', id: '1' },
         { name: 'director', id: '2' },
         { name: 'regular', id: '3' },
       ],
+      inputs: {
+        email: '',
+        nombre: '',
+        apellido: '',
+        direccion: '',
+        telefono: '',
+        tipo_usuario: '',
+      },
     }
   },
   components: {
@@ -139,20 +141,16 @@ export default {
     VTextFieldWithValidation,
     VSelectWithValidation,
   },
-  computed: {},
-  methods: {
-    ...mapActions('users', ['createUser']),
-    async submit() {
-      await this.createUser({
-        email: this.email,
-        nombre: this.nombre,
-        apellido: this.apellido,
-        direccion: this.direccion,
-        telefono: this.telefono,
-        tipo_usuario: this.tipo_usuario,
-      })
-      // await this.$refs.obs.validate()
+  computed: {
+    disabledButton() {
+      return this.$store.state.loading.showLoading
     },
+  },
+  methods: {
+    async submit() {
+      await this.$refs.obs.validate()
+    },
+    ...mapActions('users', ['createUser']),
   },
 }
 </script>

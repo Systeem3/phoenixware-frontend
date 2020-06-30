@@ -223,7 +223,6 @@ export default {
         tipo_usuario: this.type,
       })
     },
-    //  ...mapMutations('users', ['SHOW_LOADING', 'ERROR']),
   },
   props: ['id'],
   async mounted() {

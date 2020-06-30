@@ -13,8 +13,16 @@ export default {
   getUserAuth() {
     return api.get('/auth/user/')
   },
-  postUser(user) {
+  /* postUser(user) {
     return api.post('/auth/registration/', user)
+  },*/
+  /*async postUser(user) {
+    const res = await api.post('/auth/registration/', user)
+    console.log(res)
+    return res
+  },*/
+  postUser(payload) {
+    return api.post('/auth/registration/', payload)
   },
   /* deleteUser(id) {
     return api.put(`/auth/update-user/${id}/`)

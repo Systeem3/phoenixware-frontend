@@ -70,13 +70,53 @@ const mutations = {
 }
 
 const actions = {
-  createUser({ commit }, user) {
+  /*createUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      commit(types.SHOW_LOADING, true, { root: true })
+      UserService.postUser(payload)
+        .then((response) => {
+          if (response.status === 201) {
+            buildSuccess(
+              {
+                msg: 'common.SAVED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },*/
+
+  /*createUser({ commit }, user) {
+    return new Promise((resolve, reject) => {
       UserService.postUser(user)
         .then((response) => {
-          if (response.status === 200) {
+          console.log(response)
+          if (response.status === 201) {
             commit('ADD_USER', user)
+            buildSuccess(
+              {
+                msg: 'common.SAVED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },*/
+  createUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      UserService.postUser(payload)
+        .then((response) => {
+          if (response.status === 201) {
             buildSuccess(
               {
                 msg: 'common.SAVED_SUCCESSFULLY',
@@ -132,8 +172,6 @@ const actions = {
         .then((response) => {
           if (response.status === 200) {
             commit(types.FILL_USER, response.data)
-            //commit('users/SHOW_LOADING')
-            //  commit(types.SHOW_LOADING, true)
             buildSuccess(
               {
                 msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',

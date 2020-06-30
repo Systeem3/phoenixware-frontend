@@ -247,6 +247,7 @@ export default {
         fecha: this.date,
         hora: this.time,
         descripcion: this.description,
+        id: this.id
       })
     },
     //  ...mapMutations('users', ['SHOW_LOADING', 'ERROR']),

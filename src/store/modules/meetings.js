@@ -140,7 +140,7 @@ const actions = {
 
   saveMeeting({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      auth
+      MeetingService
         .updateMeeting(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {

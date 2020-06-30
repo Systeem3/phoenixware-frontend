@@ -5,10 +5,10 @@ export default {
     return api.get(`/projects/${id}/listar_reuniones`)
   },
   getMeeting(id) {
-    return api.get('/auth/update-meeting/' + id)
+    return api.get(`/reunion/${id}/`)
   },
   updateMeeting(id, payload) {
-    return api.patch(`/api/auth/update-meeting/${id}`, payload)
+    return api.patch(`/reunion/${id}/`, payload)
   },
   deleteMeeting(id, payload) {
     return api.patch(`/api/auth/update-meeting/${id}/`, payload)
@@ -16,7 +16,7 @@ export default {
   getMeetingAuth() {
     return api.get('/auth/meeting/')
   },
-  postMeeting(meeting) {
-    return api.post('/auth/registration/', meeting)
+  postMeeting(meeting,id) {
+    return api.post(`/projects/${id}/crear_reunion/`, meeting)
   },
 }

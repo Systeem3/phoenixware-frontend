@@ -16,9 +16,14 @@ const state = {
 
 const mutations = {
   ADD_MEETING(state, meeting) {
-    state.meeting.push(meeting)
+    state.meetings.push(meeting)
+  },
+  SET_MEETINGS(state, meetings) {
+    //state.meetings.push(meetings)
+    state.meetings = meetings
   },
   SET_MEETING(state, meeting) {
+    //state.meetings.push(meetings)
     state.meeting = meeting
   },
   UPDATE_MEETING(state, payload) {
@@ -64,7 +69,8 @@ const mutations = {
 
 const actions = {
   createMeeting({ commit, dispatch }, meeting) {
-    return MeetingService.postMeeting(meeting)
+    console.log(meeting.projectId)
+    return MeetingService.postMeeting(meeting, meeting.projectId)
       .then(() => {
         commit('ADD_MEETING', meeting)
         const notification = {
@@ -98,13 +104,13 @@ const actions = {
         throw error
       })
   },
-  fetchMeetings({ commit, dispatch }) {
-    MeetingService.getMeetings()
+  fetchMeetings({ commit, dispatch }, id) {
+    MeetingService.getMeetings(id)
       .then((response) => {
         commit('SET_MEETINGS', response.data)
       })
       .catch((error) => {
-        console.log(this.meetings)
+        console.log(this.meeting)
         const notification = {
           type: 'error',
           message: 'There was a problem fetching meetings: ' + error.message,
@@ -113,12 +119,13 @@ const actions = {
       })
   },
   fetchMeeting({ commit, getters, dispatch }, id) {
-    var meeting = getters.getUserById(id)
+    const meeting = getters.getMeetingById(id);
     if (meeting) {
       commit('SET_MEETING', meeting)
     } else {
       MeetingService.getMeeting(id)
         .then((response) => {
+          console.log(response.data)
           commit('SET_MEETING', response.data)
         })
         .catch((error) => {

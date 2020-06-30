@@ -239,13 +239,13 @@ const routes = [
       // Meeting
       {
         name: 'MeetingList',
-        path: '/meetings/',
+        path: '/meetings/:id',
         component: () => import('@/views/dashboard/pages/meeting/List'),
         props: true,
       },
       {
         name: 'MeetingCreate',
-        path: '/meetings/create',
+        path: '/meetings/create/:id',
         component: () => import('@/views/dashboard/pages/meeting/Create'),
       },
       {

@@ -153,7 +153,7 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -172,6 +172,8 @@ export default {
         fecha: null,
         hora: null,
         descripcion: '',
+        estado : 'A',
+        projectId: this.$route.params.id
       },
       nowDate: new Date().toISOString().slice(0, 10),
       picker: new Date().toISOString().substr(0, 10),
@@ -191,15 +193,14 @@ export default {
     ValidationObserver,
     VTextFieldWithValidation,
   },
+  created() {
+    this.projectId = this.$route.params.id
+  },
   computed: {
     /*test() {
       return this.$store.state.registrationCompleted
     },*/
-    ...mapState('signup', [
-      'registrationCompleted',
-      'registrationError',
-      'registrationLoading',
-    ]),
+    //...mapState('meetings', ['createMeeting']),
   },
   methods: {
     submit() {
@@ -272,7 +273,7 @@ export default {
         
       })*/
     },
-    ...mapActions('users', ['createUser']),
+    ...mapActions('meetings', ['createMeeting']),
     beforeRouteLeave(to, from, next) {
       //this.clearRegistrationStatus()
       // this.goBack()

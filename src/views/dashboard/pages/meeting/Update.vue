@@ -43,7 +43,7 @@
 
                       <v-menu
                         ref="menu3"
-                        v-model="date"
+                        v-model="menu3"
                         :close-on-content-click="false"
                         :return-value.sync="date"
                         transition="scale-transition"
@@ -99,7 +99,7 @@
                           />
                         </template>
                         <v-time-picker
-                          v-model="time2"
+                          v-model="time"
                           class="mt-1"
                           color="pink darken-1"
                           landscape
@@ -115,6 +115,7 @@
                   <v-col cols="12" class="text-right">
                     <v-row>
                       <v-textarea
+                        v-model="description"
                         outlined
                         autoGrow
                         filled
@@ -155,6 +156,16 @@ export default {
         { name: 'Director', id: '2' },
         { name: 'Regular', id: '3' },
       ],
+      nowDate: new Date().toISOString().slice(0, 10),
+      picker: new Date().toISOString().substr(0, 10),
+      landscape: true,
+      reactive: false,
+      time2: '',
+      menu2: false,
+      menu3: false,
+      menu4: false,
+      date2: '',
+      date3: '',
     }
   },
   components: {
@@ -164,62 +175,62 @@ export default {
   computed: {
     name: {
       get() {
-        return this.$store.state.meetings.meeting.name
+        return this.$store.state.meetings.meeting.nombre
       },
       set(value) {
         const data = {
           key: 'name',
           value,
         }
-        this.addUserData(data)
+        this.addMeetingData(data)
       },
     },
     location: {
       get() {
-        return this.$store.state.meetings.meeting.location
+        return this.$store.state.meetings.meeting.lugar
       },
       set(value) {
         const data = {
-          key: 'location',
+          key: 'place',
           value,
         }
-        this.addUserData(data)
+        this.addMeetingData(data)
       },
     },
     date: {
       get() {
-        return this.$store.state.meetings.meeting.date
+        return this.$store.state.meetings.meeting.fecha
       },
       set(value) {
         const data = {
           key: 'date',
           value,
         }
-        this.addUserData(data)
+        this.addMeetingData(data)
       },
     },
     time: {
       get() {
-        return this.$store.state.meetings.meeting.time
+        return this.$store.state.meetings.meeting.hora
       },
       set(value) {
         const data = {
           key: 'time',
           value,
         }
-        this.addUserData(data)
+        this.addMeetingData(data)
       },
     },
     description: {
       get() {
-        return this.$store.state.meetings.meeting.description
+        return this.$store.state.meetings.meeting.descripcion
       },
       set(value) {
         const data = {
           key: 'description',
           value,
         }
-        this.addUserData(data)
+        this.addMeetingData(data)
       },
     },
   },
@@ -230,12 +241,12 @@ export default {
       'saveMeeting',
     ]),
     async submit() {
-      await this.saveUser({
-        name: this.name,
-        location: this.location,
-        date: this.fecha,
-        time: this.hora,
-        description: this.description,
+      await this.saveMeeting({
+        nombre: this.name,
+        lugar: this.location,
+        fecha: this.date,
+        hora: this.time,
+        descripcion: this.description,
       })
     },
     //  ...mapMutations('users', ['SHOW_LOADING', 'ERROR']),

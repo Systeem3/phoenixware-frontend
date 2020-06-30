@@ -1,7 +1,7 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'MeetingCreate' }">
+      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'MeetingCreate', params: { id_project } }">
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
@@ -58,19 +58,23 @@ export default {
       headers: [
         {
           text: 'Nombre',
-          value: 'meeting.nombre',
+          value: 'nombre',
         },
         {
           text: 'Descripción',
-          value: 'meeting.descripcion',
+          value: 'descripcion',
         },
         {
           text: 'Fecha',
-          value: 'meeting.direccion',
+          value: 'fecha',
+        },
+        {
+          text: 'Hora',
+          value: 'hora',
         },
         {
           text: 'Lugar',
-          value: 'meeting.lugar',
+          value: 'lugar',
         },
         {
           sortable: false,
@@ -81,11 +85,14 @@ export default {
       loader: true,
 
       search: undefined,
+      id_project : this.$route.params.id
     }
   },
 
   created() {
-    this.$store.dispatch('meetings/fetchMeetings')
+    this.fetchMeetings(this.$route.params.id)
+    //console.log(this.$route.params.id)
+    //this.$store.dispatch('meetings/fetchMeetings')
   },
   computed: {
     ...mapGetters('meetings', ['meetings']),
@@ -95,7 +102,7 @@ export default {
     async editItem(item) {
       this.$router.push(`/meetings/edit/${item.id}/`)
     },
-    ...mapActions('meetings', ['deleteMeeting']),
+    ...mapActions('meetings', ['deleteMeeting', 'fetchMeetings']),
     success() {
       /* Vue.swal({
         type: 'success',
@@ -134,6 +141,8 @@ export default {
       }
     },
   },
-  mounted() {},
+  mounted() {
+
+  },
 }
 </script>

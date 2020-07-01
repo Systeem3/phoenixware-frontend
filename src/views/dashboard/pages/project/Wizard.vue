@@ -9,7 +9,7 @@
             :items="tabs"
             color="secondary"
             class="mx-auto"
-            @click:next="next(valid)"
+            @click:next="next()"
             @click:prev="tab--"
           >
             <v-tab-item class="pb-12">
@@ -57,31 +57,27 @@
                       </v-select>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <v-select
+                      <VTextFieldWithValidation
+                        label="Presupuesto"
                         color="secondary"
-                        item-color="secondary"
-                        label="Metodología"
-                        :items="type2"
-                        item-text="name"
-                        item-value="id"
-                        v-model="inputs.metodologia"
-                      >
-                        <template v-slot:item="{ attrs, item, on }">
-                          <v-list-item
-                            v-bind="attrs"
-                            active-class="secondary elevation-4 white--text"
-                            class="mx-3 mb-3 v-sheet"
-                            elevation="0"
-                            v-on="on"
-                          >
-                            <v-list-item-content>
-                              <v-list-item-title v-text="item.name" />
-                            </v-list-item-content>
-                          </v-list-item>
-                        </template>
-                      </v-select>
+                        prepend-icon="mdi-at"
+                        v-model="inputs.presupuesto"
+                        type="number"
+                        validate-on-blur
+                        min="0"
+                      />
                     </v-col>
-
+                    <v-col cols="12" md="4">
+                      <VTextFieldWithValidation
+                        label="Costo"
+                        color="secondary"
+                        prepend-icon="mdi-at"
+                        v-model="inputs.costo"
+                        type="number"
+                        validate-on-blur
+                        min="0"
+                      />
+                    </v-col>
                     <v-row
                       class="mx-auto"
                       justify="space-around"
@@ -171,6 +167,14 @@
                         v-model="inputs.descripcion"
                       />
                     </v-col>
+                    <v-col cols="12">
+                      <v-textarea
+                        name="input-7-1"
+                        label="Alcance"
+                        hint="Alcance del proyecto"
+                        v-model="inputs.alcance"
+                      />
+                    </v-col>
                   </v-row>
                 </v-container>
               </form>
@@ -199,10 +203,10 @@
                         color="secondary"
                         item-color="secondary"
                         label="Tamaño"
-                        :items="tamaño"
+                        :items="tamano"
                         item-text="name"
                         item-value="id"
-                        v-model="inputs2.tamaño"
+                        v-model="inputs2.tamano"
                       >
                         <template v-slot:item="{ attrs, item, on }">
                           <v-list-item
@@ -317,84 +321,54 @@
             </v-tab-item>
 
             <v-tab-item class="pb-12">
-              <div
-                class="text-center display-1 grey--text font-weight-light mb-6"
-              >
-                Are you living in a nice area?
-              </div>
-
               <form>
-                <v-row
-                  class="mx-auto"
-                  justify="space-around"
-                  style="max-width: 500px;"
-                >
-                  <v-col cols="12" md="8">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="address"
-                    >
-                      <v-text-field
-                        v-model="address"
-                        :error-messages="errors"
-                        color="secondary"
-                        label="Street Name*"
-                        validate-on-blur
-                      />
-                    </ValidationObserver>
-                  </v-col>
+                <v-responsive class="mx-auto" max-width="500">
+                  <div
+                    class="text-center display-1 grey--text font-weight-light mb-6"
+                  >
+                    Resultado y escoger metodologia
+                  </div>
+                  <div
+                    class="text-center display-1 grey--text font-weight-light mb-6"
+                  >
+                    Resultado:{{ resultado }}
+                  </div>
 
-                  <v-col cols="12" md="4">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="street"
-                    >
-                      <v-text-field
-                        v-model="street"
-                        :error-messages="errors"
+                  <ValidationObserver rules="required" name="type">
+                    <input :value="stringAccount" type="hidden" />
+                  </ValidationObserver>
+                  <v-row
+                    class="mx-auto"
+                    justify="space-around"
+                    style="max-width: 500px;"
+                  >
+                    <v-col cols="12">
+                      <v-select
                         color="secondary"
-                        label="Street Number*"
-                        validate-on-blur
-                      />
-                    </ValidationObserver>
-                  </v-col>
-
-                  <v-col cols="12" md="6">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="city"
-                    >
-                      <v-text-field
-                        v-model="city"
-                        :error-messages="errors"
-                        color="secondary"
-                        label="City*"
-                        validate-on-blur
-                      />
-                    </ValidationObserver>
-                  </v-col>
-
-                  <v-col cols="12" md="6">
-                    <ValidationObserver
-                      v-slot="{ errors }"
-                      rules="required"
-                      name="state"
-                    >
-                      <v-autocomplete
-                        v-model="state"
-                        :autocomplete="Date.now()"
-                        :error-messages="errors"
-                        :items="states"
-                        color="secondary"
-                        label="State*"
-                        validate-on-blur
-                      />
-                    </ValidationObserver>
-                  </v-col>
-                </v-row>
+                        item-color="secondary"
+                        label="Metodologia"
+                        :items="type2"
+                        item-text="name"
+                        item-value="id"
+                        v-model="inputs.metodologia"
+                      >
+                        <template v-slot:item="{ attrs, item, on }">
+                          <v-list-item
+                            v-bind="attrs"
+                            active-class="secondary elevation-4 white--text"
+                            class="mx-3 mb-3 v-sheet"
+                            elevation="0"
+                            v-on="on"
+                          >
+                            <v-list-item-content>
+                              <v-list-item-title v-text="item.name" />
+                            </v-list-item-content>
+                          </v-list-item>
+                        </template>
+                      </v-select>
+                    </v-col>
+                  </v-row>
+                </v-responsive>
               </form>
             </v-tab-item>
           </base-material-wizard>
@@ -407,6 +381,7 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
+import {mapActions} from "vuex";
 //import VSelectWithValidation from '@/components/inputs/VSelectWithValidation'
 
 export default {
@@ -414,6 +389,7 @@ export default {
 
   data() {
     return {
+      resultado: '',
       show: false,
       show2: false,
       items: [
@@ -428,9 +404,13 @@ export default {
         fecha_finalizacion: '',
         tipo: '',
         metodologia: '',
+        alcance:'',
+        costo:null,
+        presupuesto:null,
+        estado:'A',
       },
       inputs2: {
-        tamaño: '',
+        tamano: '',
         criticidad: '',
         dinamismo: '',
         personal: '',
@@ -458,34 +438,59 @@ export default {
       image: null,
       last: '',
       state: '',
-      tamaño:[
-        { name: 'administrador', id: '1' },
-        { name: 'director', id: '2' },
-        { name: 'regular', id: '3' },
+      tamano: [
+        { name: 'Entre 1 y 5', id: '1' },
+        { name: 'Entre 6 y 10', id: '2' },
+        { name: 'Entre 10 y 25', id: '3' },
+        { name: 'Entre 25 y 45', id: '4' },
+        { name: 'Más de 45', id: '5' },
       ],
-      criticidad:[
-        { name: 'administrador', id: '1' },
-        { name: 'director', id: '2' },
-        { name: 'regular', id: '3' },
+      criticidad: [
+        { name: 'Nula', id: '1' },
+        { name: 'Baja', id: '2' },
+        { name: 'Media', id: '3' },
+        { name: 'Alta', id: '4' },
+        { name: 'Muy alta', id: '5' },
       ],
-      dinamismo:[
-        { name: 'administrador', id: '1' },
-        { name: 'director', id: '2' },
-        { name: 'regular', id: '3' },
+      dinamismo: [
+        { name: 'Cambios demasiado constantes', id: '1' },
+        { name: 'Muchos cambios', id: '2' },
+        { name: 'Algunos cambios', id: '3' },
+        { name: 'Pocos cambios', id: '4' },
+        { name: 'Casi ningún cambio', id: '5' },
       ],
-      personal:[
-        { name: 'administrador', id: '1' },
-        { name: 'director', id: '2' },
-        { name: 'regular', id: '3' },
+      personal: [
+        {
+          name: 'Todo el personal tiene altos niveles de experiencia',
+          id: '1',
+        },
+        {
+          name:
+            'La mayor parte de empleados tiene altos niveles de experiencia',
+          id: '2',
+        },
+        { name: 'Algunos tienen un alto nivel de experiencia', id: '3' },
+        { name: 'Pocos tienen un alto nivel de experiencia', id: '4' },
+        { name: 'Muy pocos tienen alto nivel de experiencia', id: '5' },
       ],
-      cultura:[
-        { name: 'administrador', id: '1' },
-        { name: 'director', id: '2' },
-        { name: 'regular', id: '3' },
+      cultura: [
+        { name: 'Cultura autónoma', id: '1' },
+        { name: 'Cultura parcialmente autónoma', id: '2' },
+        {
+          name:
+            'Cultura parcialmente jerarquizada, pero con bastante autonomía en los niveles de jerarquización',
+          id: '3',
+        },
+        { name: 'Cultura parcialmente jerarquizada', id: '4' },
+        {
+          name:
+            'Cultura completamente jerarquizada y roles estrictamente delimitados',
+          id: '5',
+        },
       ],
       street: '',
       tab: 0,
-      tabs: ['Info', 'Metodología', 'Otros'],
+      tabs: ['Info', 'Metodología', 'Resultado'],
       type: [
         { name: 'Producto', id: 'P' },
         { name: 'Servicio', id: 'S' },
@@ -498,22 +503,7 @@ export default {
       date: '',
       date2: '',
       date3: '',
-      dropdown: [
-        {
-          id: 1,
-          text: 'Action',
-        },
-        {
-          id: 2,
-          text: 'Another Action',
-        },
-        {
-          id: 3,
-          text: 'A Third Action',
-        },
-      ],
       files: [],
-      items2: ['Amsterdam', 'Washington', 'Sydney', 'Beijing'],
       menu: false,
       menu2: false,
       menu3: false,
@@ -522,15 +512,6 @@ export default {
       slider: 40,
       slider2: [30, 70],
       range: [-20, 70],
-      movies: [
-        'Fight Club',
-        'Godfather',
-        'Godfather II',
-        'Godfather III',
-        'Goodfellas',
-        'Pulp Fiction',
-        'Scarface',
-      ],
     }
   },
   components: {
@@ -552,7 +533,6 @@ export default {
       if (
         this.inputs.nombre &&
         this.inputs.tipo &&
-        this.inputs.metodologia &&
         this.inputs.fecha_inicio &&
         this.inputs.fecha_finalizacion &&
         this.inputs.descripcion
@@ -560,7 +540,7 @@ export default {
         steps.push(1)
 
       if (
-        this.inputs2.tamaño &&
+        this.inputs2.tamano &&
         this.inputs2.criticidad &&
         this.inputs2.cultura &&
         this.inputs2.dinamismo &&
@@ -577,18 +557,197 @@ export default {
         steps.includes(2)
       )
         steps.push(3)
-
       return steps
     },
   },
 
   methods: {
-    next(valid) {
-      if (!valid) return
+    ...mapActions('projects', ['createProject']),
+    next() {
+      //if (!valid) return
+      const step = this.availableSteps
       if (this.tab === this.tabs.length - 1) {
+        if(this.inputs.metodologia){
+          this.createProject(this.inputs)
+        }
         alert('Form finished')
       } else {
-        this.tab++
+        if (this.tab === this.tabs.length - 2) {
+          //this.resultado = 'funciona'
+          let tamano = this.inputs2.tamano
+          let criticidad = this.inputs2.criticidad
+          let dinamismo = this.inputs2.dinamismo
+          let personal = this.inputs2.personal
+          let cultura = this.inputs2.cultura
+          let hibrido = 0
+          let tradicional = 0
+          let agil = 0
+          console.log(tamano)
+          console.log(criticidad)
+          console.log(dinamismo)
+          console.log(personal)
+          console.log(cultura)
+          switch (tamano) {
+            case '1':
+              agil++
+              break
+            case '2':
+              agil++
+              break
+            case '3':
+              hibrido++
+              break
+            case '4':
+              tradicional++
+              break
+            case '5':
+              tradicional++
+              break
+          }
+          switch (criticidad) {
+            case '1':
+              agil++
+              break
+            case '2':
+              agil++
+              break
+            case '3':
+              hibrido++
+              break
+            case '4':
+              tradicional++
+              break
+            case '5':
+              tradicional++
+              break
+          }
+          switch (dinamismo) {
+            case '1':
+              agil++
+              break
+            case '2':
+              agil++
+              break
+            case '3':
+              hibrido++
+              break
+            case '4':
+              tradicional++
+              break
+            case '5':
+              tradicional++
+              break
+          }
+          switch (personal) {
+            case '1':
+              agil++
+              break
+            case '2':
+              agil++
+              break
+            case '3':
+              hibrido++
+              break
+            case '4':
+              tradicional++
+              break
+            case '5':
+              tradicional++
+              break
+          }
+          switch (cultura) {
+            case '1':
+              agil++
+              break
+            case '2':
+              agil++
+              break
+            case '3':
+              hibrido++
+              break
+            case '4':
+              tradicional++
+              break
+            case '5':
+              tradicional++
+              break
+          }
+          console.log(hibrido)
+          console.log(tradicional)
+          console.log(agil)
+          if (tradicional >= 3) {
+            if (criticidad === '1' && tamano === '1') {
+              this.resultado = 'Hibrida'
+            } else {
+              this.resultado = 'Tradicional'
+            }
+          }
+          if (agil >= 3) {
+            if (
+              (criticidad === '4' || criticidad === '5') &&
+              (tamano === '3' || tamano === '4' || tamano === '5')
+            ) {
+              this.resultado = 'Hibrida'
+            } else {
+              this.resultado = 'Agil'
+            }
+          }
+          if (hibrido >= 3) {
+            if (criticidad === '5' && tamano === '5') {
+              this.resultado = 'Tradicional'
+            } else {
+              this.resultado = 'Hibrida'
+            }
+          }
+          if (tradicional === 2 && agil === 2) {
+            if (
+              criticidad === '5' &&
+              (tamano === '3' || tamano === '4' || tamano === '5')
+            ) {
+              this.resultado = 'Tradicional'
+            } else {
+              if (
+                (criticidad === '1' || criticidad === '2') &&
+                tamano === '1'
+              ) {
+                this.resultado = 'Agil'
+              } else {
+                this.resultado = 'Hibrida'
+              }
+            }
+          }
+          if (tradicional === 2 && hibrido === 2) {
+            if (
+              (criticidad === '4' || criticidad === '5') &&
+              (tamano === '3' || tamano === '4' || tamano === '5')
+            ) {
+              this.resultado = 'Tradicional'
+            } else {
+              this.resultado = 'Hibrida'
+            }
+          }
+          if (hibrido === 2 && agil === 2) {
+            if (
+              (criticidad === '4' || criticidad === '5') &&
+              (tamano === '3' || tamano === '4' || tamano === '5')
+            ) {
+              this.resultado = 'Hibrida'
+            } else {
+              if (
+                (criticidad === '1' || criticidad === '2') &&
+                (tamano === '1' || tamano === '2')
+              ) {
+                this.resultado = 'Agil'
+              } else {
+                this.resultado = 'Hibrida'
+              }
+            }
+          }
+
+          this.tab = step.length - 1
+        } else {
+          this.tab = step.length - 1
+        }
       }
     },
     onChange(val) {

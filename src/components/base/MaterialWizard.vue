@@ -50,6 +50,7 @@
       <v-btn color="primary" min-width="100" @click="$emit('click:next')">{{
         internalValue === items.length - 1 ? 'Listo' : 'Siguiente'
       }}</v-btn>
+
     </v-card-actions>
   </v-card>
 </template>

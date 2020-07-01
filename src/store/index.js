@@ -13,7 +13,7 @@ import profile from './modules/profile'
 import loading from './modules/loading'
 import error from './modules/error'
 import success from './modules/success'
-import members from "./modules/members";
+import members from './modules/members'
 import projects from './modules/projects'
 import locale from './modules/locale'
 
@@ -23,6 +23,9 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 //const debug = true
+
+import persistedState from 'vuex-persistedstate'
+import board from './modules/board'
 
 export default new Vuex.Store({
   state: {
@@ -56,8 +59,10 @@ export default new Vuex.Store({
     projects,
     locale,
     meetings,
-    members
+    members,
+    board,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],
+  [persistedState()]: [],
 })

@@ -36,9 +36,14 @@
                 </v-row>
                 <v-row>
                   <v-col cols="5" md="6">
-                    <base-material-card color="purple darken-1" icon="mdi-calendar-today">
+                    <base-material-card
+                      color="purple darken-1"
+                      icon="mdi-calendar-today"
+                    >
                       <template v-slot:after-heading>
-                        <div class="display-1 mt-2 font-weight-light">Fecha de la Reunión</div>
+                        <div class="display-1 mt-2 font-weight-light">
+                          Fecha de la Reunión
+                        </div>
                       </template>
 
                       <v-menu
@@ -75,9 +80,14 @@
                     </base-material-card>
                   </v-col>
                   <v-col cols="5" md="6">
-                    <base-material-card color="purple darken-1" icon="mdi-clock">
+                    <base-material-card
+                      color="purple darken-1"
+                      icon="mdi-clock"
+                    >
                       <template v-slot:after-heading>
-                        <div class="display-1 mt-2 font-weight-light">Hora de la Reunión</div>
+                        <div class="display-1 mt-2 font-weight-light">
+                          Hora de la Reunión
+                        </div>
                       </template>
 
                       <v-menu
@@ -125,12 +135,18 @@
                       ></v-textarea>
                     </v-row>
                     <v-col cols="12" class="text-right">
-                      <v-btn color="pink darken-1" class="ml-0" :to="{ name: 'MeetingList' }">Atrás</v-btn>
+                      <v-btn
+                        color="pink darken-1"
+                        class="ml-0"
+                        :to="{ name: 'MeetingList' }"
+                        >Atrás</v-btn
+                      >
                       <v-btn
                         color="pink darken-1"
                         class="mr-0"
                         @click.stop.prevent="submit"
-                      >Modificar</v-btn>
+                        >Modificar</v-btn
+                      >
                     </v-col>
                   </v-col>
                 </v-row>
@@ -151,7 +167,6 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-
       items: [
         { name: 'Administrador', id: '1' },
         { name: 'Director', id: '2' },
@@ -162,7 +177,7 @@ export default {
       landscape: true,
       reactive: false,
       time2: '',
-      time3:'',
+      time3: '',
       menu2: false,
       menu3: false,
       menu4: false,
@@ -249,7 +264,7 @@ export default {
         fecha: this.date,
         hora: this.time,
         descripcion: this.description,
-        id: this.id
+        id: this.id,
       })
     },
     //  ...mapMutations('users', ['SHOW_LOADING', 'ERROR']),

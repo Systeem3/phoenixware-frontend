@@ -32,11 +32,20 @@
               />
             </template>
 
-            <v-date-picker v-model="date" color="secondary" landscape scrollable>
+            <v-date-picker
+              v-model="date"
+              color="secondary"
+              landscape
+              scrollable
+            >
               <v-spacer />
-              <v-btn color="secondary" large @click="menu = false">Cancel</v-btn>
+              <v-btn color="secondary" large @click="menu = false"
+                >Cancel</v-btn
+              >
 
-              <v-btn color="secondary" large @click="$refs.menu.save(date)">OK</v-btn>
+              <v-btn color="secondary" large @click="$refs.menu.save(date)"
+                >OK</v-btn
+              >
             </v-date-picker>
           </v-menu>
         </base-material-card>
@@ -71,9 +80,16 @@
               />
             </template>
 
-            <v-date-picker v-model="date" color="secondary" landscape scrollable>
+            <v-date-picker
+              v-model="date"
+              color="secondary"
+              landscape
+              scrollable
+            >
               <v-spacer />
-              <v-btn color="secondary" large @click="menu2 = false">Cancel</v-btn>
+              <v-btn color="secondary" large @click="menu2 = false"
+                >Cancel</v-btn
+              >
             </v-date-picker>
           </v-menu>
         </base-material-card>
@@ -116,7 +132,9 @@
             >
               <v-spacer />
 
-              <v-btn color="secondary" large @click="menu3 = false">Cancel</v-btn>
+              <v-btn color="secondary" large @click="menu3 = false"
+                >Cancel</v-btn
+              >
             </v-date-picker>
           </v-menu>
         </base-material-card>
@@ -146,7 +164,8 @@
                     small
                     @click="select"
                     @click:close="remove(item)"
-                  >{{ item }}</v-chip>
+                    >{{ item }}</v-chip
+                  >
                 </template>
               </v-combobox>
 
@@ -162,7 +181,12 @@
 
               <div class="my-6" />
 
-              <v-progress-linear :value="40" color="warning" buffer-value="0" stream />
+              <v-progress-linear
+                :value="40"
+                color="warning"
+                buffer-value="0"
+                stream
+              />
 
               <div class="my-6" />
 
@@ -180,12 +204,20 @@
                 :display-size="1000"
               >
                 <template v-slot:selection="{ index, text }">
-                  <v-chip v-if="index < 2" color="deep-purple accent-4" dark label small>{{ text }}</v-chip>
+                  <v-chip
+                    v-if="index < 2"
+                    color="deep-purple accent-4"
+                    dark
+                    label
+                    small
+                    >{{ text }}</v-chip
+                  >
 
                   <span
                     v-else-if="index === 2"
                     class="overline grey--text text--darken-3 mx-2"
-                  >+{{ files.length - 2 }} File(s)</span>
+                    >+{{ files.length - 2 }} File(s)</span
+                  >
                 </template>
               </v-file-input>
             </v-col>
@@ -193,7 +225,12 @@
             <v-col cols="12" md="6">
               <base-subheading>Customizable Select</base-subheading>
 
-              <v-select color="secondary" item-color="secondary" label="Movie" :items="movies">
+              <v-select
+                color="secondary"
+                item-color="secondary"
+                label="Movie"
+                :items="movies"
+              >
                 <template v-slot:item="{ attrs, item, on }">
                   <v-list-item
                     v-bind="attrs"
@@ -247,7 +284,8 @@
                     :items="dropdown"
                     color="success"
                     default
-                  >MultiLevel Dropdown</base-material-dropdown>
+                    >MultiLevel Dropdown</base-material-dropdown
+                  >
                 </v-col>
 
                 <v-col cols="auto">
@@ -255,7 +293,8 @@
                     :items="dropdown"
                     color="success"
                     origin="top right"
-                  >Dropdown</base-material-dropdown>
+                    >Dropdown</base-material-dropdown
+                  >
                 </v-col>
 
                 <v-col cols="auto">
@@ -264,15 +303,25 @@
                     color="success"
                     origin="bottom right"
                     top
-                  >Dropup</base-material-dropdown>
+                    >Dropup</base-material-dropdown
+                  >
                 </v-col>
               </v-row>
 
               <base-subheading>Sliders</base-subheading>
 
-              <v-slider v-model="slider" :max="max" :min="min" color="secondary" />
+              <v-slider
+                v-model="slider"
+                :max="max"
+                :min="min"
+                color="secondary"
+              />
 
-              <v-range-slider v-model="slider2" color="info" track-color="info lighten-4" />
+              <v-range-slider
+                v-model="slider2"
+                color="info"
+                track-color="info lighten-4"
+              />
             </v-col>
           </v-row>
         </v-card>

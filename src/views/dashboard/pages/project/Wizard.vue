@@ -189,9 +189,9 @@
                     Determinar Metodología
                   </div>
 
-                  <ValidationObserver rules="required" name="type">
+                  <validation-provider rules="required" name="type">
                     <input :value="stringAccount" type="hidden" />
-                  </ValidationObserver>
+                  </validation-provider>
 
                   <v-row
                     class="mx-auto"
@@ -438,6 +438,7 @@ export default {
       image: null,
       last: '',
       state: '',
+
       tamano: [
         { name: 'Entre 1 y 5', id: '1' },
         { name: 'Entre 6 y 10', id: '2' },

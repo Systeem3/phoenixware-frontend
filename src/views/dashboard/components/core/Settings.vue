@@ -48,7 +48,12 @@
           <strong class="mb-3 d-inline-block">FONDO DE LA BARRA LATERAL</strong>
 
           <v-item-group v-model="scrim">
-            <v-item v-for="scrim in scrims" :key="scrim" :value="scrim" class="mx-1">
+            <v-item
+              v-for="scrim in scrims"
+              :key="scrim"
+              :value="scrim"
+              class="mx-1"
+            >
               <template v-slot="{ active, toggle }">
                 <v-avatar
                   :class="active && 'v-settings__item--active'"
@@ -86,7 +91,12 @@
             <v-spacer />
 
             <v-col cols="auto">
-              <v-switch v-model="internalValue" class="ma-0 pa-0" color="secondary" hide-details />
+              <v-switch
+                v-model="internalValue"
+                class="ma-0 pa-0"
+                color="secondary"
+                hide-details
+              />
             </v-col>
           </v-row>
 
@@ -98,16 +108,31 @@
             <v-spacer />
 
             <v-col cols="auto">
-              <v-switch v-model="showImg" class="ma-0 pa-0" color="secondary" hide-details />
+              <v-switch
+                v-model="showImg"
+                class="ma-0 pa-0"
+                color="secondary"
+                hide-details
+              />
             </v-col>
           </v-row>
 
           <v-divider class="my-4 secondary" />
 
-          <strong class="mb-3 d-inline-block">FONDOS DE LA BARRA LATERAL</strong>
+          <strong class="mb-3 d-inline-block"
+            >FONDOS DE LA BARRA LATERAL</strong
+          >
 
-          <v-item-group v-model="image" class="d-flex justify-space-between mb-3">
-            <v-item v-for="image in images" :key="image" :value="image" class="mx-1">
+          <v-item-group
+            v-model="image"
+            class="d-flex justify-space-between mb-3"
+          >
+            <v-item
+              v-for="image in images"
+              :key="image"
+              :value="image"
+              class="mx-1"
+            >
               <template v-slot="{ active, toggle }">
                 <v-sheet
                   :class="active && 'v-settings__item--active'"
@@ -128,7 +153,8 @@
             default
             rel="noopener"
             target="_blank"
-          >IR A OPCIONES</v-btn>
+            >IR A OPCIONES</v-btn
+          >
         </v-card-text>
       </v-card>
     </v-menu>

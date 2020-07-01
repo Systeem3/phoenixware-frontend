@@ -36,9 +36,14 @@
                 </v-row>
                 <v-row>
                   <v-col cols="5" md="6">
-                    <base-material-card color="secondary" icon="mdi-calendar-today">
+                    <base-material-card
+                      color="secondary"
+                      icon="mdi-calendar-today"
+                    >
                       <template v-slot:after-heading>
-                        <div class="display-1 mt-2 font-weight-light">Fecha de la Reunión</div>
+                        <div class="display-1 mt-2 font-weight-light">
+                          Fecha de la Reunión
+                        </div>
                       </template>
 
                       <v-menu
@@ -77,7 +82,9 @@
                   <v-col cols="5" md="6">
                     <base-material-card color="secondary" icon="mdi-clock">
                       <template v-slot:after-heading>
-                        <div class="display-1 mt-2 font-weight-light">Hora de la Reunión</div>
+                        <div class="display-1 mt-2 font-weight-light">
+                          Hora de la Reunión
+                        </div>
                       </template>
 
                       <v-menu
@@ -131,14 +138,16 @@
                       float="right"
                       margin-left="6px"
                       :to="{ name: 'MeetingList' }"
-                    >Reuniones</v-btn>
+                      >Reuniones</v-btn
+                    >
                     <v-btn
                       color="primary"
                       float="right"
                       margin-left="6px"
                       @click.stop.prevent="submit"
                       @click="createMeeting(inputs)"
-                    >Registrar</v-btn>
+                      >Registrar</v-btn
+                    >
                   </v-col>
                 </v-row>
               </v-container>
@@ -158,7 +167,6 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      //editar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       show: false,
       show2: false,
       items: [
@@ -172,8 +180,8 @@ export default {
         fecha: null,
         hora: null,
         descripcion: '',
-        estado : 'A',
-        projectId: this.$route.params.id_project
+        estado: 'A',
+        projectId: this.$route.params.id_project,
       },
       nowDate: new Date().toISOString().slice(0, 10),
       picker: new Date().toISOString().substr(0, 10),

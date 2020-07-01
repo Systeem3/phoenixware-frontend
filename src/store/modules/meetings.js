@@ -119,7 +119,7 @@ const actions = {
       })
   },
   fetchMeeting({ commit, getters, dispatch }, id) {
-    const meeting = getters.getMeetingById(id);
+    const meeting = getters.getMeetingById(id)
     if (meeting) {
       commit('SET_MEETING', meeting)
     } else {
@@ -140,8 +140,7 @@ const actions = {
 
   saveMeeting({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      MeetingService
-        .updateMeeting(payload.id, payload)
+      MeetingService.updateMeeting(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
             commit(types.FILL_MEETING, response.data)

@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "..\\..\\vue-skeleton-mvp-master\\vue-skeleton-mvp-master"
+		},
+		{
+			"path": "..\\..\\vue-trello-clone-master\\vue-trello-clone-master"
 		}
 	],
 	"settings": {

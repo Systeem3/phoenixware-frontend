@@ -9,8 +9,8 @@
               <span class="body-1">— Registro de Empleado</span>
             </div>
           </template>
-          <ValidationObserver>
-            <v-form @submit.prevent="submit">
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
+            <v-form @submit.prevent="submit()">
               <v-container class="py-0">
                 <v-row>
                   <v-col cols="12" md="4">
@@ -75,27 +75,22 @@
                     />
                   </v-col>
                   <v-col cols="12" class="text-right">
-                    <!-- <v-btn
+                    <v-btn
                       color="purple"
                       class="ml-0"
-                             color="primary"
                       float="right"
                       margin-left="6px"
                       :to="{ name: 'UserList' }"
                     >
-                      {{ registrationCompleted }}
-                    </v-btn>-->
-                    <!-- <SubmitButton
-                      :buttonText="$t('myProfile.SAVE')"
-                      customClass="btnSave"
-                      @click="createUser()"
-                    />-->
+                      Atrás
+                    </v-btn>
                     <v-btn
                       color="primary"
                       float="right"
                       margin-left="6px"
                       class="mr-0"
-                      @click="submit()"
+                      @click="submit"
+                      :disabled="invalid"
                     >
                       Registrar
                     </v-btn>
@@ -143,6 +138,7 @@ export default {
   methods: {
     ...mapActions('users', ['createUser']),
     async submit() {
+      // this.$refs.obs.validate()
       await this.createUser({
         email: this.email,
         nombre: this.nombre,
@@ -151,7 +147,6 @@ export default {
         telefono: this.telefono,
         tipo_usuario: this.tipo_usuario,
       })
-      // await this.$refs.obs.validate()
     },
   },
 }

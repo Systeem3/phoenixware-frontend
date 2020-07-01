@@ -39,7 +39,12 @@
       <div />
 
       <template v-for="(item, i) in computedItems">
-        <base-item-group v-if="item.children" :key="`group-${i}`" :item="item" :icon="icon">
+        <base-item-group
+          v-if="item.children"
+          :key="`group-${i}`"
+          :item="item"
+          :icon="icon"
+        >
           <!--  -->
         </base-item-group>
 

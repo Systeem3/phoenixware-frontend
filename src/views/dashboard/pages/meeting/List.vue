@@ -1,15 +1,31 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'MeetingCreate', params: { id_project } }">
+      <v-btn
+        class="mx-2"
+        fab
+        dark
+        color="primary"
+        :to="{ name: 'MeetingCreate', params: { id_project } }"
+      >
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
-    <base-material-card color="secondary" icon="mdi-vuetify" inline class="px-5 py-3">
+    <base-material-card
+      color="secondary"
+      icon="mdi-vuetify"
+      inline
+      class="px-5 py-3"
+    >
       <template v-slot:after-heading>
         <div class="display-2 font-weight-light">Lista de Reuniones</div>
 
-        <v-btn @click="success" class="btn btn-outline-primary col s12 m3" type="button">success</v-btn>
+        <v-btn
+          @click="success"
+          class="btn btn-outline-primary col s12 m3"
+          type="button"
+          >success</v-btn
+        >
       </template>
 
       <v-text-field
@@ -33,13 +49,20 @@
         multi-sort
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="showItem(item)" :to="{ name: 'MeetingShow' }">mdi-eye</v-icon>
+          <v-icon
+            small
+            class="mr-2"
+            @click="showItem(item)"
+            :to="{ name: 'MeetingShow' }"
+            >mdi-eye</v-icon
+          >
           <v-icon
             small
             class="mr-2"
             @click="editItem(item)"
             :to="{ name: 'MeetingUpdate' }"
-          >mdi-pencil</v-icon>
+            >mdi-pencil</v-icon
+          >
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
       </v-data-table>
@@ -85,7 +108,7 @@ export default {
       loader: true,
 
       search: undefined,
-      id_project : this.$route.params.id_project
+      id_project: this.$route.params.id_project,
     }
   },
 
@@ -100,7 +123,9 @@ export default {
 
   methods: {
     async editItem(item) {
-      this.$router.push(`/meetings/edit/${item.id}/${this.$route.params.id_project}`)
+      this.$router.push(
+        `/meetings/edit/${item.id}/${this.$route.params.id_project}`
+      )
     },
     ...mapActions('meetings', ['deleteMeeting', 'fetchMeetings']),
     success() {
@@ -141,8 +166,6 @@ export default {
       }
     },
   },
-  mounted() {
-
-  },
+  mounted() {},
 }
 </script>

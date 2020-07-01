@@ -28,7 +28,6 @@ const state = {
   },
 }
 
-
 const mutations = {
   ADD_MEMBER(state, member) {
     state.members.push(member)
@@ -82,7 +81,6 @@ const mutations = {
   },
 }
 
-
 const actions = {
   /*createMeeting({ commit, dispatch }, meeting) {
     console.log(meeting.projectId)
@@ -122,17 +120,17 @@ const actions = {
   },*/
   fetchMembers({ commit, dispatch }, id) {
     MemberService.getMembers(id)
-        .then((response) => {
-          commit('SET_MEEMBERS', response.data)
-        })
-        .catch((error) => {
-          console.log(this.member)
-          const notification = {
-            type: 'error',
-            message: 'There was a problem fetching meetings: ' + error.message,
-          }
-          dispatch('notification/add', notification, { root: true })
-        })
+      .then((response) => {
+        commit('SET_MEEMBERS', response.data)
+      })
+      .catch((error) => {
+        console.log(this.member)
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching meetings: ' + error.message,
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
   },
   /*fetchMeeting({ commit, getters, dispatch }, id) {
     const meeting = getters.getMeetingById(id);
@@ -156,48 +154,46 @@ const actions = {
 
   saveMember({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      MemberService
-          .updateMeeting(payload.id, payload)
-          .then((response) => {
-            if (response.status === 200) {
-              commit(types.FILL_MEMBER, response.data)
-              buildSuccess(
-                  {
-                    msg: 'The meeting was updated',
-                  },
-                  commit,
-                  resolve
-              )
-            }
-          })
-          .catch((error) => {
-            handleError(error, commit, reject)
-          })
+      MemberService.updateMeeting(payload.id, payload)
+        .then((response) => {
+          if (response.status === 200) {
+            commit(types.FILL_MEMBER, response.data)
+            buildSuccess(
+              {
+                msg: 'The meeting was updated',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
     })
   },
 
-  addMeetingData({ commit }, data) {
+  /*  addMeetingData({ commit }, data) {
     commit(types.ADD_MEEMBER_DATA, data)
-  },
+  },*/
 
   deleteMember({ commit }, id) {
     return new Promise((resolve, reject) => {
-      MemberService
-          .deleteMember(id)
-          .then((response) => {
-            if (response.status === 200) {
-              buildSuccess(
-                  {
-                    msg: 'The meeting was deleted',
-                  },
-                  commit,
-                  resolve
-              )
-            }
-          })
-          .catch((error) => {
-            handleError(error, commit, reject)
-          })
+      MemberService.deleteMember(id)
+        .then((response) => {
+          if (response.status === 200) {
+            buildSuccess(
+              {
+                msg: 'The meeting was deleted',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
     })
   },
 }

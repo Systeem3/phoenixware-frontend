@@ -131,7 +131,23 @@ const actions = {
         })
     })
   },
-  fetchUsers({ commit, dispatch }) {
+  fetchUsers({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      UserService.getUsers(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            //commit(types.USERS, response.data.docs)
+            // commit(types.TOTAL_USERS, response.data.totalDocs)
+            commit('SET_USERS', response.data)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  /*fetchUsers({ commit, dispatch }) {
     UserService.getUsers()
       .then((response) => {
         // commit('SET_USERS_TOTAL', parseInt(response.headers['x-total-count']))
@@ -146,7 +162,7 @@ const actions = {
         }
         dispatch('notification/add', notification, { root: true })
       })
-  },
+  },*/
   fetchUser({ commit, getters, dispatch }, id) {
     var user = getters.getUserById(id)
     if (user) {

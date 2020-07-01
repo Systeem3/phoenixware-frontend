@@ -289,6 +289,12 @@ const routes = [
         path: '/members/list/:id_project',
         component: () => import('@/views/dashboard/pages/members/List'),
       },
+      // Kanban
+      {
+        name: 'KanbanTest',
+        path: '/kanban/test',
+        component: () => import('@/views/dashboard/kanban/Kanban'),
+      },
     ],
   },
   {

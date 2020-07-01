@@ -16,7 +16,7 @@ export default {
   getMeetingAuth() {
     return api.get('/auth/meeting/')
   },
-  postMeeting(meeting,id) {
+  postMeeting(meeting, id) {
     return api.post(`/projects/${id}/crear_reunion/`, meeting)
   },
 }

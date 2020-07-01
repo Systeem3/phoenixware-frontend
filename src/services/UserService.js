@@ -1,9 +1,14 @@
 import api from '@/services/api'
 
 export default {
-  getUsers() {
-    return api.get('/auth/list-users/')
+  getUsers(params) {
+    return api.get('/auth/list-users/', {
+      params,
+    })
   },
+  /* getUsers() {
+    return api.get('/auth/list-users/')
+  },*/
   getUser(id) {
     return api.get('/auth/update-user/' + id)
   },

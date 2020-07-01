@@ -47,6 +47,8 @@ const mutations = {
     state.project.fecha_inicio = data.fecha_inicio
     state.project.fecha_finalizacion = data.fecha_finalizacion
     state.project.metodologia = data.metodologia
+    state.project.costo = data.costo
+    state.project.presupuesto = data.presupuesto
   },
   [types.CHANGE_STATE](state) {
     state.project.is_active = false
@@ -62,14 +64,26 @@ const mutations = {
       case 'description':
         state.project.descripcion = data.value
         break
-      case 'date-created':
+      case 'dateCreated':
         state.project.fecha_inicio = data.value
         break
-      case 'date-finished':
+      case 'dateFinished':
         state.project.fecha_finalizacion = data.value
         break
       case 'methodology':
         state.project.metodologia = data.value
+        break
+      case 'presupuesto':
+        state.project.presupuesto = data.value
+        break
+      case 'costo':
+        state.project.costo = data.value
+        break
+      case 'alcance':
+        state.project.alcance = data.value
+        break
+      case 'state':
+        state.project.estado = data.value
         break
       default:
         break
@@ -198,7 +212,7 @@ const actions = {
   },
 }
 const getters = {
-  getprojectById: (state) => (id) => {
+  getProjectById: (state) => (id) => {
     return state.projects.find((project) => project.id === id)
   },
   projects: (state) => {

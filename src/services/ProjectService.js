@@ -5,7 +5,7 @@ export default {
     return api.get('/projects/')
   },
   getProject(id) {
-    return api.get('/projects/' + id)
+    return api.get(`/projects/${id}/`)
   },
   postProject(project) {
     return api.post('/projects/', project)

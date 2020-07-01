@@ -270,6 +270,13 @@ const routes = [
         //beforeEnter: requireAuthenticated,
       },
       {
+        name: 'ProjectUpdate',
+        path: 'projects/edit/:id_project',
+        component: () => import('@/views/dashboard/pages/project/Update'),
+        props: true,
+        //beforeEnter: requireAuthenticated,
+      },
+      {
         name: 'ProjectCreate',
         path: '/projects/create',
         component: () => import('@/views/dashboard/pages/project/Wizard'),

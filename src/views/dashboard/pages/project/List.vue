@@ -114,9 +114,9 @@ export default {
   methods: {
     async editItem(item) {
       // this.$store.dispatch('UserUpdate')
-      this.$router.push(`/projects/edit/${item.id}/`)
+      this.$router.push(`/projects/edit/${item.id}`)
     },
-    ...mapActions('projects', ['deleteProjects']),
+    ...mapActions('projects', ['deleteProject']),
     success() {
       /* Vue.swal({
         type: 'success',
@@ -125,7 +125,7 @@ export default {
       })*/
       this.$swal('Oops...', 'Something went wrong!', 'success')
     },
-    props: ['id'],
+    props: ['id_project'],
     async deleteItem(item) {
       try {
         const response = await this.$confirm(
@@ -143,17 +143,9 @@ export default {
           console.log(item.id)
           //  this.dataTableLoading = true
           //await this.deleteUser(item.id, {})
-          await this.deleteUser({
+          await this.deleteProject({
             id: item.id,
-            is_active: false,
-            email: this.email,
-            empleado: {
-              nombre: this.name,
-              apellido: this.lastName,
-              direccion: this.address,
-              telefono: this.phone,
-            },
-            tipo_usuario: this.type,
+            estado: 'C',
           })
           /* await this
             .fetchUsers
@@ -161,7 +153,6 @@ export default {
             ()
           this.dataTableLoading = false*/
         }
-        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         this.dataTableLoading = false
       }

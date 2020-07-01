@@ -5,15 +5,29 @@ import { buildSuccess, handleError } from '@/utils/utils.js'
 const state = {
   projects: [],
   project: {
-    // id: '',
     nombre: '',
-    tipo: '',
     descripcion: '',
     fecha_inicio: '',
     fecha_finalizacion: '',
-    //estado: '',
+    tipo: '',
     metodologia: '',
+    alcance: '',
+    costo: null,
+    presupuesto: null,
+    estado: '',
   },
+  /*project2: {
+    nombre: '',
+    descripcion: '',
+    fecha_inicio: '',
+    fecha_finalizacion: '',
+    tipo: '',
+    metodologia: '',
+    alcance: '',
+    costo: null,
+    presupuesto: null,
+    estado: '',
+  },*/
 }
 
 const mutations = {

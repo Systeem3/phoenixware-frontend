@@ -295,6 +295,23 @@ const routes = [
         path: '/kanban/test',
         component: () => import('@/views/dashboard/kanban/Kanban'),
       },
+
+      {
+        path: '/boards/:id',
+        name: 'board',
+        component: () => import('@/views/ViewBoard'),
+
+        children: [
+          {
+            path: 'card/add',
+            component: () => import('@/views/AddCard'),
+          },
+          {
+            path: 'card/:card',
+            component: () => import('@/views/ViewCard'),
+          },
+        ],
+      },
     ],
   },
   {

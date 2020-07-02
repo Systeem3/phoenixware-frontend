@@ -14,9 +14,25 @@
           >
             <v-tab-item class="pb-12">
               <form>
-                <div class="text-center display-1 font-weight-light mb-6">
-                  ¡Empecemos con información básica!
-                </div>
+                <v-row justify="center">
+                  <div
+                    class="text-center display-1 font-weight-light mb-6"
+                  >¡Empecemos con información básica!</div>
+                  <v-tooltip right>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon
+                        color="primary"
+                        dark
+                        v-bind="attrs"
+                        v-on="on"
+                      >mdi mdi-information-outline</v-icon>
+                    </template>
+                    <span>
+                      Una vez creado el proyecto podrás estimar sus costos y
+                      tiempos detalladamente desde su vista de Inicio.
+                    </span>
+                  </v-tooltip>
+                </v-row>
 
                 <v-container class="py-0">
                   <v-row>
@@ -58,9 +74,9 @@
                     </v-col>
                     <v-col cols="12" md="4">
                       <VTextFieldWithValidation
-                        label="Presupuesto"
+                        label="Presupuesto Asignado"
                         color="secondary"
-                        prepend-icon="mdi-at"
+                        prepend-icon="mdi mdi-chart-line"
                         v-model="inputs.presupuesto"
                         type="number"
                         validate-on-blur
@@ -69,20 +85,16 @@
                     </v-col>
                     <v-col cols="12" md="4">
                       <VTextFieldWithValidation
-                        label="Costo"
+                        label="Costo del Proyecto"
                         color="secondary"
-                        prepend-icon="mdi-at"
+                        prepend-icon="mdi mdi-currency-usd"
                         v-model="inputs.costo"
                         type="number"
                         validate-on-blur
                         min="0"
                       />
                     </v-col>
-                    <v-row
-                      class="mx-auto"
-                      justify="space-around"
-                      style="max-width: 500px;"
-                    >
+                    <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
                       <v-col cols="12" md="4">
                         <v-menu
                           ref="menu"
@@ -108,13 +120,12 @@
                             v-model="inputs.fecha_inicio"
                             color="secondary"
                             landscape
+                            :min="nowDate"
                             scrollable
                             @input="menu = false"
                           >
                             <v-spacer />
-                            <v-btn color="secondary" large @click="menu = false"
-                              >Cancelar</v-btn
-                            >
+                            <v-btn color="secondary" large @click="menu = false">Cancelar</v-btn>
                           </v-date-picker>
                         </v-menu>
                       </v-col>
@@ -145,16 +156,12 @@
                             color="secondary"
                             landscape
                             scrollable
+                            :min="inputs.fecha_inicio"
                             @input="menu3 = false"
                           >
                             <v-spacer />
 
-                            <v-btn
-                              color="secondary"
-                              large
-                              @click="menu3 = false"
-                              >Cancelar</v-btn
-                            >
+                            <v-btn color="secondary" large @click="menu3 = false">Cancelar</v-btn>
                           </v-date-picker>
                         </v-menu>
                       </v-col>
@@ -167,14 +174,6 @@
                         v-model="inputs.descripcion"
                       />
                     </v-col>
-                    <v-col cols="12">
-                      <v-textarea
-                        name="input-7-1"
-                        label="Alcance"
-                        hint="Alcance del proyecto"
-                        v-model="inputs.alcance"
-                      />
-                    </v-col>
                   </v-row>
                 </v-container>
               </form>
@@ -184,21 +183,16 @@
               <form>
                 <v-responsive class="mx-auto" max-width="500">
                   <div
-                    class="text-center display-1 grey--text font-weight-light mb-6"
-                  >
-                    Determinar Metodología
-                  </div>
+                    class="text-center display-1 font-weight-light mb-6"
+                  >¡Perfecto! Ahora solo necesitamos que respondas:</div>
 
                   <validation-provider rules="required" name="type">
                     <input :value="stringAccount" type="hidden" />
                   </validation-provider>
 
-                  <v-row
-                    class="mx-auto"
-                    justify="space-around"
-                    style="max-width: 500px;"
-                  >
+                  <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
                     <v-col cols="12">
+                      <div class="text-left">¿Cuántas personas formarán parte del proyecto?</div>
                       <v-select
                         color="secondary"
                         item-color="secondary"
@@ -222,6 +216,10 @@
                           </v-list-item>
                         </template>
                       </v-select>
+                      <div class="text-left">
+                        ¿Cuál sería el impacto ante una falla o defecto en el
+                        proyecto?
+                      </div>
                       <v-select
                         color="secondary"
                         item-color="secondary"
@@ -245,6 +243,10 @@
                           </v-list-item>
                         </template>
                       </v-select>
+                      <div class="text-left">
+                        ¿Cómo crees que serán los cambios en los requerimientos
+                        del proyecto en su desarrollo?
+                      </div>
                       <v-select
                         color="secondary"
                         item-color="secondary"
@@ -268,6 +270,10 @@
                           </v-list-item>
                         </template>
                       </v-select>
+                      <div class="text-left">
+                        ¿Cómo es la experiencia del personal ante los
+                        requerimientos?
+                      </div>
                       <v-select
                         color="secondary"
                         item-color="secondary"
@@ -291,6 +297,10 @@
                           </v-list-item>
                         </template>
                       </v-select>
+                      <div class="text-left">
+                        ¿Cómo definirías la cultura de la organización
+                        actualmente?
+                      </div>
                       <v-select
                         color="secondary"
                         item-color="secondary"
@@ -323,26 +333,25 @@
             <v-tab-item class="pb-12">
               <form>
                 <v-responsive class="mx-auto" max-width="500">
-                  <div
-                    class="text-center display-1 grey--text font-weight-light mb-6"
-                  >
-                    Resultado y escoger metodologia
+                  <div class="text-center display-1 grey--text font-weight-light mb-6">
+                    En base a los criterios de Tamaño, Criticidad, Dinamismo,
+                    Personal y Cultura, te recomendamos elegir la :
                   </div>
-                  <div
-                    class="text-center display-1 grey--text font-weight-light mb-6"
-                  >
-                    Resultado:{{ resultado }}
-                  </div>
-
+                  <v-row class="mx-auto" justify="center" align="center">
+                    <v-card dark color="primary">
+                      <v-card-title class="mx-auto" v-text="' Metodología ' + resultado + ''"></v-card-title>
+                    </v-card>
+                  </v-row>
                   <ValidationObserver rules="required" name="type">
                     <input :value="stringAccount" type="hidden" />
                   </ValidationObserver>
-                  <v-row
-                    class="mx-auto"
-                    justify="space-around"
-                    style="max-width: 500px;"
-                  >
+                  <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
                     <v-col cols="12">
+                      <div
+                        class="text-center display-1 grey--text font-weight-light mb-3"
+                      >(Puedes cambiar la metodología si no estás de acuerdo)</div>
+                      <div class="text-center">Selecciona la Metodología del Proyecto:</div>
+
                       <v-select
                         color="secondary"
                         item-color="secondary"
@@ -381,7 +390,7 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
-import {mapActions} from "vuex";
+import { mapActions } from 'vuex'
 //import VSelectWithValidation from '@/components/inputs/VSelectWithValidation'
 
 export default {
@@ -404,10 +413,10 @@ export default {
         fecha_finalizacion: '',
         tipo: '',
         metodologia: '',
-        alcance:'',
-        costo:null,
-        presupuesto:null,
-        estado:'A',
+
+        costo: null,
+        presupuesto: null,
+        estado: 'A',
       },
       inputs2: {
         tamano: '',
@@ -447,11 +456,11 @@ export default {
         { name: 'Más de 45', id: '5' },
       ],
       criticidad: [
-        { name: 'Nula', id: '1' },
-        { name: 'Baja', id: '2' },
-        { name: 'Media', id: '3' },
-        { name: 'Alta', id: '4' },
-        { name: 'Muy alta', id: '5' },
+        { name: 'Nulo', id: '1' },
+        { name: 'Bajo', id: '2' },
+        { name: 'Medio', id: '3' },
+        { name: 'Alto', id: '4' },
+        { name: 'Muy alto', id: '5' },
       ],
       dinamismo: [
         { name: 'Cambios demasiado constantes', id: '1' },
@@ -497,10 +506,11 @@ export default {
         { name: 'Servicio', id: 'S' },
       ],
       type2: [
-        { name: 'Agil', id: '1' },
-        { name: 'Hibrida', id: '2' },
+        { name: 'Ágil', id: '1' },
+        { name: 'Híbrida', id: '2' },
         { name: 'Tradicional', id: '3' },
       ],
+      nowDate: new Date().toISOString().slice(0, 10),
       date: '',
       date2: '',
       date3: '',
@@ -568,10 +578,12 @@ export default {
       //if (!valid) return
       const step = this.availableSteps
       if (this.tab === this.tabs.length - 1) {
-        if(this.inputs.metodologia){
+        if (this.inputs.metodologia) {
           this.createProject(this.inputs)
         }
-        alert('Form finished')
+        alert(
+          'Tu Proyecto fue creado y se instanciaron en el varios procesos de desarrollo, pulsa aceptar para ir a la ventana inicial del Proyecto para verificarlos'
+        )
       } else {
         if (this.tab === this.tabs.length - 2) {
           //this.resultado = 'funciona'
@@ -582,7 +594,7 @@ export default {
           let cultura = this.inputs2.cultura
           let hibrido = 0
           let tradicional = 0
-          let agil = 0
+          let Ágil = 0
           console.log(tamano)
           console.log(criticidad)
           console.log(dinamismo)
@@ -590,10 +602,10 @@ export default {
           console.log(cultura)
           switch (tamano) {
             case '1':
-              agil++
+              Ágil++
               break
             case '2':
-              agil++
+              Ágil++
               break
             case '3':
               hibrido++
@@ -607,10 +619,10 @@ export default {
           }
           switch (criticidad) {
             case '1':
-              agil++
+              Ágil++
               break
             case '2':
-              agil++
+              Ágil++
               break
             case '3':
               hibrido++
@@ -624,10 +636,10 @@ export default {
           }
           switch (dinamismo) {
             case '1':
-              agil++
+              Ágil++
               break
             case '2':
-              agil++
+              Ágil++
               break
             case '3':
               hibrido++
@@ -641,10 +653,10 @@ export default {
           }
           switch (personal) {
             case '1':
-              agil++
+              Ágil++
               break
             case '2':
-              agil++
+              Ágil++
               break
             case '3':
               hibrido++
@@ -658,10 +670,10 @@ export default {
           }
           switch (cultura) {
             case '1':
-              agil++
+              Ágil++
               break
             case '2':
-              agil++
+              Ágil++
               break
             case '3':
               hibrido++
@@ -675,32 +687,32 @@ export default {
           }
           console.log(hibrido)
           console.log(tradicional)
-          console.log(agil)
+          console.log(Ágil)
           if (tradicional >= 3) {
             if (criticidad === '1' && tamano === '1') {
-              this.resultado = 'Hibrida'
+              this.resultado = 'Híbrida'
             } else {
               this.resultado = 'Tradicional'
             }
           }
-          if (agil >= 3) {
+          if (Ágil >= 3) {
             if (
               (criticidad === '4' || criticidad === '5') &&
               (tamano === '3' || tamano === '4' || tamano === '5')
             ) {
-              this.resultado = 'Hibrida'
+              this.resultado = 'Híbrida'
             } else {
-              this.resultado = 'Agil'
+              this.resultado = 'Ágil'
             }
           }
           if (hibrido >= 3) {
             if (criticidad === '5' && tamano === '5') {
               this.resultado = 'Tradicional'
             } else {
-              this.resultado = 'Hibrida'
+              this.resultado = 'Híbrida'
             }
           }
-          if (tradicional === 2 && agil === 2) {
+          if (tradicional === 2 && Ágil === 2) {
             if (
               criticidad === '5' &&
               (tamano === '3' || tamano === '4' || tamano === '5')
@@ -711,9 +723,9 @@ export default {
                 (criticidad === '1' || criticidad === '2') &&
                 tamano === '1'
               ) {
-                this.resultado = 'Agil'
+                this.resultado = 'Ágil'
               } else {
-                this.resultado = 'Hibrida'
+                this.resultado = 'Híbrida'
               }
             }
           }
@@ -724,23 +736,23 @@ export default {
             ) {
               this.resultado = 'Tradicional'
             } else {
-              this.resultado = 'Hibrida'
+              this.resultado = 'Híbrida'
             }
           }
-          if (hibrido === 2 && agil === 2) {
+          if (hibrido === 2 && Ágil === 2) {
             if (
               (criticidad === '4' || criticidad === '5') &&
               (tamano === '3' || tamano === '4' || tamano === '5')
             ) {
-              this.resultado = 'Hibrida'
+              this.resultado = 'Híbrida'
             } else {
               if (
                 (criticidad === '1' || criticidad === '2') &&
                 (tamano === '1' || tamano === '2')
               ) {
-                this.resultado = 'Agil'
+                this.resultado = 'Ágil'
               } else {
-                this.resultado = 'Hibrida'
+                this.resultado = 'Híbrida'
               }
             }
           }

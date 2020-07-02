@@ -32,7 +32,7 @@ const mutations = {
   ADD_MEMBER(state, member) {
     state.members.push(member)
   },
-  SET_MEEMBERS(state, member) {
+  SET_MEMBERS(state, member) {
     //state.meetings.push(meetings)
     state.members = member
   },
@@ -121,7 +121,7 @@ const actions = {
   fetchMembers({ commit, dispatch }, id) {
     MemberService.getMembers(id)
       .then((response) => {
-        commit('SET_MEEMBERS', response.data)
+        commit('SET_MEMBERS', response.data)
       })
       .catch((error) => {
         console.log(this.member)
@@ -173,9 +173,11 @@ const actions = {
     })
   },
 
-  /*  addMeetingData({ commit }, data) {
-    commit(types.ADD_MEEMBER_DATA, data)
-  },*/
+
+  addMeetingData({ commit }, data) {
+    commit(types.ADD_MEMBER_DATA, data)
+  },
+
 
   deleteMember({ commit }, id) {
     return new Promise((resolve, reject) => {

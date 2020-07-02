@@ -296,13 +296,13 @@ const routes = [
         path: '/members/list/:id_project',
         component: () => import('@/views/dashboard/pages/members/List'),
       },
+
       // Kanban
       {
         name: 'KanbanTest',
         path: '/kanban/test',
         component: () => import('@/views/dashboard/kanban/Kanban'),
       },
-
       {
         path: '/boards/:id',
         name: 'board',
@@ -318,6 +318,19 @@ const routes = [
             component: () => import('@/views/ViewCard'),
           },
         ],
+      },
+      //Time  and Costs (Calculadoras)
+      {
+        name: 'Time',
+        path: 'projects/time',
+        component: () =>
+          import('@/views/dashboard/pages/project/planning/time'),
+      },
+      {
+        name: 'Costs',
+        path: 'projects/costs',
+        component: () =>
+          import('@/views/dashboard/pages/project/planning/costs'),
       },
     ],
   },

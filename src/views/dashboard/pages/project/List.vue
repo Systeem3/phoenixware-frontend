@@ -54,8 +54,7 @@
           >
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
-      </v-data-table
-              >
+      </v-data-table>
     </base-material-card>
     <ErrorMessage />
     <SuccessMessage />
@@ -120,7 +119,6 @@ export default {
   },
   computed: {
     ...mapGetters('projects', ['projects']),
-
   },
   watch: {
     pagination: {
@@ -167,7 +165,7 @@ export default {
       // this.$store.dispatch('UserUpdate')
       this.$router.push(`/projects/edit/${item.id}`)
     },
-    ...mapActions('projects', ['deleteProject','fetchProjects']),
+    ...mapActions('projects', ['deleteProject', 'fetchProjects']),
     success() {
       /* Vue.swal({
         type: 'success',

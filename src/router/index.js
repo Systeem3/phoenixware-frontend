@@ -93,11 +93,29 @@ const routes = [
 
     beforeEnter: requireAuthenticated,
     children: [
-      // Dashboard
+      // Dashboard - Level 1 - Projects
       {
         name: 'Dashboard',
         path: '',
         component: () => import('@/views/dashboard/Dashboard'),
+      },
+      // Level 2 - Stages
+      {
+        name: 'Stages',
+        path: 'stages',
+        component: () => import('@/views/dashboard/boards/Stages'),
+      },
+      // Level 3 - Processes
+      {
+        name: 'Processes',
+        path: 'processes/:id_project',
+        component: () => import('@/views/dashboard/boards/Processes'),
+      },
+      // Level 4 - Kanban
+      {
+        name: 'Board',
+        path: 'board',
+        component: () => import('@/views/dashboard/boards/Kanban/Board'),
       },
       // Pages
       {

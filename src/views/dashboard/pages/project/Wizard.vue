@@ -15,17 +15,14 @@
             <v-tab-item class="pb-12">
               <form>
                 <v-row justify="center">
-                  <div
-                    class="text-center display-1 font-weight-light mb-6"
-                  >¡Empecemos con información básica!</div>
+                  <div class="text-center display-1 font-weight-light mb-6">
+                    ¡Empecemos con información básica!
+                  </div>
                   <v-tooltip right>
                     <template v-slot:activator="{ on, attrs }">
-                      <v-icon
-                        color="primary"
-                        dark
-                        v-bind="attrs"
-                        v-on="on"
-                      >mdi mdi-information-outline</v-icon>
+                      <v-icon color="primary" dark v-bind="attrs" v-on="on"
+                        >mdi mdi-information-outline</v-icon
+                      >
                     </template>
                     <span>
                       Una vez creado el proyecto podrás estimar sus costos y
@@ -94,7 +91,11 @@
                         min="0"
                       />
                     </v-col>
-                    <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
+                    <v-row
+                      class="mx-auto"
+                      justify="space-around"
+                      style="max-width: 500px;"
+                    >
                       <v-col cols="12" md="4">
                         <v-menu
                           ref="menu"
@@ -125,7 +126,9 @@
                             @input="menu = false"
                           >
                             <v-spacer />
-                            <v-btn color="secondary" large @click="menu = false">Cancelar</v-btn>
+                            <v-btn color="secondary" large @click="menu = false"
+                              >Cancelar</v-btn
+                            >
                           </v-date-picker>
                         </v-menu>
                       </v-col>
@@ -161,7 +164,12 @@
                           >
                             <v-spacer />
 
-                            <v-btn color="secondary" large @click="menu3 = false">Cancelar</v-btn>
+                            <v-btn
+                              color="secondary"
+                              large
+                              @click="menu3 = false"
+                              >Cancelar</v-btn
+                            >
                           </v-date-picker>
                         </v-menu>
                       </v-col>
@@ -182,17 +190,23 @@
             <v-tab-item class="pb-12">
               <form>
                 <v-responsive class="mx-auto" max-width="500">
-                  <div
-                    class="text-center display-1 font-weight-light mb-6"
-                  >¡Perfecto! Ahora solo necesitamos que respondas:</div>
+                  <div class="text-center display-1 font-weight-light mb-6">
+                    ¡Perfecto! Ahora solo necesitamos que respondas:
+                  </div>
 
                   <validation-provider rules="required" name="type">
                     <input :value="stringAccount" type="hidden" />
                   </validation-provider>
 
-                  <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
+                  <v-row
+                    class="mx-auto"
+                    justify="space-around"
+                    style="max-width: 500px;"
+                  >
                     <v-col cols="12">
-                      <div class="text-left">¿Cuántas personas formarán parte del proyecto?</div>
+                      <div class="text-left">
+                        ¿Cuántas personas formarán parte del proyecto?
+                      </div>
                       <v-select
                         color="secondary"
                         item-color="secondary"
@@ -333,24 +347,37 @@
             <v-tab-item class="pb-12">
               <form>
                 <v-responsive class="mx-auto" max-width="500">
-                  <div class="text-center display-1 grey--text font-weight-light mb-6">
+                  <div
+                    class="text-center display-1 grey--text font-weight-light mb-6"
+                  >
                     En base a los criterios de Tamaño, Criticidad, Dinamismo,
                     Personal y Cultura, te recomendamos elegir la :
                   </div>
                   <v-row class="mx-auto" justify="center" align="center">
                     <v-card dark color="primary">
-                      <v-card-title class="mx-auto" v-text="' Metodología ' + resultado + ''"></v-card-title>
+                      <v-card-title
+                        class="mx-auto"
+                        v-text="' Metodología ' + resultado + ''"
+                      ></v-card-title>
                     </v-card>
                   </v-row>
                   <ValidationObserver rules="required" name="type">
                     <input :value="stringAccount" type="hidden" />
                   </ValidationObserver>
-                  <v-row class="mx-auto" justify="space-around" style="max-width: 500px;">
+                  <v-row
+                    class="mx-auto"
+                    justify="space-around"
+                    style="max-width: 500px;"
+                  >
                     <v-col cols="12">
                       <div
                         class="text-center display-1 grey--text font-weight-light mb-3"
-                      >(Puedes cambiar la metodología si no estás de acuerdo)</div>
-                      <div class="text-center">Selecciona la Metodología del Proyecto:</div>
+                      >
+                        (Puedes cambiar la metodología si no estás de acuerdo)
+                      </div>
+                      <div class="text-center">
+                        Selecciona la Metodología del Proyecto:
+                      </div>
 
                       <v-select
                         color="secondary"

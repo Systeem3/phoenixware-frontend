@@ -173,11 +173,9 @@ const actions = {
     })
   },
 
-
   addMeetingData({ commit }, data) {
     commit(types.ADD_MEMBER_DATA, data)
   },
-
 
   deleteMember({ commit }, id) {
     return new Promise((resolve, reject) => {

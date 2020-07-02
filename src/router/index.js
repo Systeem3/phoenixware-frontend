@@ -289,29 +289,41 @@ const routes = [
         path: '/members/list/:id_project',
         component: () => import('@/views/dashboard/pages/members/List'),
       },
-      // Kanban
-      {
-        name: 'KanbanTest',
-        path: '/kanban/test',
-        component: () => import('@/views/dashboard/kanban/Kanban'),
-      },
 
       {
-        path: '/boards/:id',
-        name: 'board',
-        component: () => import('@/views/ViewBoard'),
-
+        path: '/level1',
+        component: () => import('@/views/dashboard/board/Level1'),
         children: [
           {
-            path: 'card/add',
-            component: () => import('@/views/AddCard'),
+            name: 'level2',
+            path: 'level2',
+            component: () => import('@/views/dashboard/board/Level2'),
           },
           {
-            path: 'card/:card',
-            component: () => import('@/views/ViewCard'),
+            name: 'kanban',
+            path: 'kanban',
+            component: () => import('@/views/dashboard/board/Test'),
           },
         ],
       },
+
+      /* {
+        path: '/test1',
+        component: () => import('@/views/dashboard/board/Level1'),
+        children: [
+          {
+            path: '/test2',
+            component: () => import('@/views/dashboard/board/Level2'),
+            children: [
+              {
+                path: 'Kanban',
+                name: 'kanban',
+                component: () => import('@/views/dashboard/board/Test'),
+              },
+            ],
+          },
+        ],
+      },*/
     ],
   },
   {

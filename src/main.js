@@ -31,16 +31,6 @@ import './plugins/vue-world-map'
 // main.js
 import VueSweetalert2 from 'vue-sweetalert2'
 
-//import 'bulma'
-import 'bulma/css/bulma.css'
-
-//import store from './state'
-import './res/assets/styles/index.scss'
-import './core/ui'
-
-// plugins
-//Vue.use(VeeValidate)
-
 // If you don't need the styles, do not connect
 import 'sweetalert2/dist/sweetalert2.min.css'
 const options = {
@@ -52,16 +42,6 @@ Vue.use(VueSweetalert2, options)
 Vue.use(VuetifyConfirm, { vuetify })
 
 Vue.config.productionTip = false
-
-Vue.directive('focus', {
-  inserted: function (el) {
-    el.focus()
-  },
-})
-
-import CInput from '@/components/global/CelloInput.vue'
-
-Vue.component('CInput', CInput)
 
 new Vue({
   router,

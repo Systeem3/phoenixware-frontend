@@ -91,13 +91,11 @@ export default {
     return {
       dataTableLoading: false,
       pagination: {},
-
+      // keyRender: 0,
       headers: [
         {
           text: 'Nombre',
           value: 'empleado.nombre',
-
-          sortable: true,
         },
         {
           text: 'Apellido',
@@ -217,11 +215,14 @@ export default {
             },
             tipo_usuario: this.type,
           })
-          this.dataTableLoading = false
-          await this.fetchUsers(
+          // this.dataTableLoading = true
+          /*  await this.fetchUsers(
             buildPayloadPagination(this.pagination, this.buildSearch())
-          )
+          )*/
+          await this.$store.dispatch('users/fetchUsers')
           this.dataTableLoading = false
+
+          //this.keyRender += 1
         }
         // eslint-disable-next-line no-unused-vars
       } catch (error) {

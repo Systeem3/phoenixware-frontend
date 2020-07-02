@@ -4,36 +4,8 @@
       <v-col cols="12">
         <base-material-card
           icon="mdi-earth"
-          title="Global Sales by Top Locations"
+          title="Phoenix Ware - Gestor de Proyectos"
         >
-          <v-row>
-            <v-col cols="12" md="6" class="mt-10">
-              <v-simple-table class="ml-2">
-                <tbody>
-                  <tr v-for="(sale, i) in sales" :key="i">
-                    <td>
-                      <v-img :src="sale.flag" width="18" />
-                    </td>
-                    <td v-text="sale.country" />
-                    <td v-text="sale.salesInM" />
-                    <td
-                      v-text="
-                        ((sale.salesInM / totalSales) * 100).toFixed(2) + '%'
-                      "
-                    />
-                  </tr>
-                </tbody>
-              </v-simple-table>
-            </v-col>
-
-            <v-col cols="12" md="6">
-              <v-world-map
-                :country-data="countryData"
-                high-color="#838383"
-                low-color="#BBBBBB"
-              />
-            </v-col>
-          </v-row>
         </base-material-card>
       </v-col>
 
@@ -105,7 +77,7 @@
             <v-tooltip bottom>
               <template v-slot:activator="{ attrs, on }">
                 <v-btn v-bind="attrs" light icon v-on="on">
-                  <v-icon>mdi-pencil</v-icon>
+                  <v-icon :to="{ name: 'level2' }">mdi-pencil</v-icon>
                 </v-btn>
               </template>
 

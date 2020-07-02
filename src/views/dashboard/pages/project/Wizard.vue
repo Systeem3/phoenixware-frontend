@@ -580,7 +580,9 @@ export default {
         if (this.inputs.metodologia) {
           this.createProject(this.inputs)
         }
-        alert('Form finished')
+        alert(
+          'Tu Proyecto fue creado y se instanciaron en el varios procesos de desarrollo, pulsa aceptar para ir a la ventana inicial del Proyecto para verificarlos'
+        )
       } else {
         if (this.tab === this.tabs.length - 2) {
           //this.resultado = 'funciona'

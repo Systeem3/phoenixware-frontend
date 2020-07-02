@@ -289,6 +289,19 @@ const routes = [
         path: '/members/list/:id_project',
         component: () => import('@/views/dashboard/pages/members/List'),
       },
+      //Time  and Costs (Calculadoras)
+      {
+        name: 'Time',
+        path: 'projects/time',
+        component: () =>
+          import('@/views/dashboard/pages/project/planning/Time'),
+      },
+      {
+        name: 'Costs',
+        path: 'projects/costs',
+        component: () =>
+          import('@/views/dashboard/pages/project/planning/Costs'),
+      },
     ],
   },
   {

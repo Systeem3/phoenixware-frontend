@@ -7,17 +7,13 @@
           avatar="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
         >
           <v-card-text class="text-center">
-            <h6 class="display-1 mb-1 grey--text">
-              {{ getNameById(type) }}
-            </h6>
+            <h6 class="display-1 mb-1 grey--text">{{ getNameById(type) }}</h6>
 
-            <h4 class="display-2 font-weight-light mb-3 black--text">
-              {{ name + ' ' + lastName }}
-            </h4>
+            <h4 class="display-2 font-weight-light mb-3 black--text">{{ name + ' ' + lastName }}</h4>
           </v-card-text>
         </base-material-card>
 
-        <base-material-card class="v-card-profile" color="primary">
+        <base-material-card class="v-card-profile" color="primary" title="Cambiar la Contraseña">
           <v-form @submit.prevent="submit">
             <ValidationProvider
               rules="required|password2|minmax:8,16"
@@ -63,8 +59,7 @@
               type="submit"
               @click="resetPassword(inputs)"
               @click.stop.prevent="submit"
-              >Cambiar</v-btn
-            >
+            >Cambiar</v-btn>
           </div>
         </base-material-card>
       </v-col>
@@ -130,13 +125,7 @@
                     />
                   </v-col>
                   <v-col cols="12" class="text-right">
-                    <v-btn
-                      color="purple"
-                      class="mr-0"
-                      @click.stop.prevent="submit"
-                    >
-                      Modificar
-                    </v-btn>
+                    <v-btn color="purple" class="mr-0" @click.stop.prevent="submit">Modificar</v-btn>
                   </v-col>
                 </v-row>
               </v-container>

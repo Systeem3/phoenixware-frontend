@@ -324,13 +324,13 @@ const routes = [
         name: 'Time',
         path: 'projects/time',
         component: () =>
-          import('@/views/dashboard/pages/project/planning/time'),
+          import('@/views/dashboard/pages/project/planning/Time'),
       },
       {
         name: 'Costs',
         path: 'projects/costs',
         component: () =>
-          import('@/views/dashboard/pages/project/planning/costs'),
+          import('@/views/dashboard/pages/project/planning/Costs'),
       },
     ],
   },

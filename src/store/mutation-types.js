@@ -37,6 +37,10 @@ export const ADD_MEETING_DATA = 'ADD_MEETING_DATA'
 export const FILL_MEMBER = 'FILL_MEMBER'
 export const ADD_MEMBER_DATA = 'ADD_MEMBER_DATA'
 
+// process
+export const FILL_PROCESS = 'FILL_PROCESS'
+export const ADD_PROCESS_DATA = 'ADD_PROCESS_DATA'
+
 // cities
 export const FILL_ALL_CITIES = 'FILL_ALL_CITIES'
 // Admin - Cities

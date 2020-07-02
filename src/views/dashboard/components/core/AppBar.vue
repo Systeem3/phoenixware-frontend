@@ -16,7 +16,10 @@
       <v-icon v-else>mdi-dots-vertical</v-icon>
     </v-btn>
 
-    <v-toolbar-title class="hidden-sm-and-down font-weight-light" v-text="$route.name" />
+    <v-toolbar-title
+      class="hidden-sm-and-down font-weight-light"
+      v-text="$route.name"
+    />
 
     <v-spacer />
 
@@ -26,12 +29,18 @@
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <v-menu bottom left offset-y origin="top right" transition="scale-transition">
+    <v-menu
+      bottom
+      left
+      offset-y
+      origin="top right"
+      transition="scale-transition"
+    >
       <template v-slot:activator="{ attrs, on }">
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-badge color="red" overlap bordered>
             <template v-slot:badge>
-              <span>{{notifications.unread_count}}</span>
+              <span>{{ notifications.unread_count }}</span>
             </template>
 
             <v-icon>mdi-bell</v-icon>
@@ -52,7 +61,14 @@
       </v-list>
     </v-menu>
 
-    <v-menu bottom left min-width="200" offset-y origin="top right" transition="scale-transition">
+    <v-menu
+      bottom
+      left
+      min-width="200"
+      offset-y
+      origin="top right"
+      transition="scale-transition"
+    >
       <template v-slot:activator="{ attrs, on }">
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-icon>mdi-account</v-icon>
@@ -78,7 +94,7 @@
 import { VHover, VListItem } from 'vuetify/lib'
 
 // Utilities
-import {mapState, mapMutations, mapGetters} from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'DashboardCoreAppBar',
@@ -146,9 +162,9 @@ export default {
         .dispatch('auth/logout', { username, password })
         .then(() => this.$router.push('/login/identifier'))
     },
-    read(id){
+    read(id) {
       console.log(id)
-    }
+    },
   },
 }
 </script>

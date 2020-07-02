@@ -127,7 +127,7 @@ const actions = {
         throw error
       })
   },
-  fetchProjects({ commit },payload) {
+  fetchProjects({ commit }, payload) {
     return new Promise((resolve, reject) => {
       ProjectService.getProjects(payload)
         .then((response) => {

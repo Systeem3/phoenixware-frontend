@@ -1,8 +1,12 @@
 <template>
   <v-container id="validation-forms" fluid tag="section">
     <section class="mb-12 text-center">
-      <h1 class="font-weight-light mb-2 headline">Estimación de Tiempos del Proyecto</h1>
-      <span class="font-weight-light subtitle-1">Con uso del Método de Estimación por Casos de Usos</span>
+      <h1 class="font-weight-light mb-2 headline">
+        Estimación de Tiempos del Proyecto
+      </h1>
+      <span class="font-weight-light subtitle-1"
+        >Con uso del Método de Estimación por Casos de Usos</span
+      >
     </section>
     <v-row>
       <v-col cols="12" md="6">
@@ -13,7 +17,7 @@
           class="py-3 px-5"
         >
           <v-form>
-            <v-row cols="12">
+            <v-row cols="4">
               <VTextFieldWithValidation
                 label="Cantidad de Actores Simples"
                 color="secondary"
@@ -21,7 +25,7 @@
                 type="number"
                 validate-on-blur
                 min="0"
-                class="ml-3"
+                class="ml-2"
               />
               <v-tooltip right cols="2">
                 <template v-slot:activator="{ on, attrs }">
@@ -31,7 +35,8 @@
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
-                  >mdi mdi-memory</v-icon>
+                    >mdi mdi-memory</v-icon
+                  >
                 </template>
                 <span>
                   Otros sistemas que interactúan con el sistema a desarrollar
@@ -39,7 +44,7 @@
                 </span>
               </v-tooltip>
             </v-row>
-            <v-row cols="12">
+            <v-row cols="4">
               <VTextFieldWithValidation
                 label="Cantidad de Actores Medios"
                 color="secondary"
@@ -57,7 +62,8 @@
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
-                  >mdi mdi-console</v-icon>
+                    >mdi mdi-console</v-icon
+                  >
                 </template>
                 <span>
                   Otro sistema interactuando a través de un protocolo (ej.
@@ -66,7 +72,7 @@
                 </span>
               </v-tooltip>
             </v-row>
-            <v-row cols="12">
+            <v-row cols="4">
               <VTextFieldWithValidation
                 label="Cantidad de Actores Complejos"
                 color="secondary"
@@ -84,7 +90,8 @@
                     v-bind="attrs"
                     v-on="on"
                     class="ml-2"
-                  >mdi-monitor-multiple</v-icon>
+                    >mdi-monitor-multiple</v-icon
+                  >
                 </template>
                 <span>
                   Una persona que interactúa con el sistema mediante una
@@ -127,13 +134,28 @@
       <v-col cols="12">
         <validation-observer v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(validateForm)">
-            <base-material-card color="success" inline title="Type Validation" class="px-5 py-3">
+            <base-material-card
+              color="success"
+              inline
+              title="Type Validation"
+              class="px-5 py-3"
+            >
               <v-row align="center" dense>
-                <v-col class="text-right body-1 grey--text" cols="2">Required Text</v-col>
+                <v-col class="text-right body-1 grey--text" cols="2"
+                  >Required Text</v-col
+                >
 
                 <v-col cols="8">
-                  <validation-provider v-slot="{ errors }" rules="required" name="email">
-                    <v-text-field v-model="required" :error-messages="errors" color="secondary" />
+                  <validation-provider
+                    v-slot="{ errors }"
+                    rules="required"
+                    name="email"
+                  >
+                    <v-text-field
+                      v-model="required"
+                      :error-messages="errors"
+                      color="secondary"
+                    />
                   </validation-provider>
                 </v-col>
 
@@ -143,10 +165,16 @@
               </v-row>
 
               <v-row align="center" dense>
-                <v-col class="text-right body-1 grey--text" cols="2">Email</v-col>
+                <v-col class="text-right body-1 grey--text" cols="2"
+                  >Email</v-col
+                >
 
                 <v-col cols="8">
-                  <validation-provider v-slot="{ errors }" name="email" rules="required|email">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="email"
+                    rules="required|email"
+                  >
                     <v-text-field
                       v-model="email"
                       :error-messages="errors"
@@ -162,10 +190,16 @@
               </v-row>
 
               <v-row align="center" dense>
-                <v-col class="text-right body-1 grey--text" cols="2">Number</v-col>
+                <v-col class="text-right body-1 grey--text" cols="2"
+                  >Number</v-col
+                >
 
                 <v-col cols="8">
-                  <validation-provider v-slot="{ errors }" name="number" rules="required|numeric">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="number"
+                    rules="required|numeric"
+                  >
                     <v-text-field
                       v-model="number"
                       :error-messages="errors"
@@ -184,7 +218,11 @@
                 <v-col class="text-right body-1 grey--text" cols="2">Url</v-col>
 
                 <v-col cols="8">
-                  <validation-provider v-slot="{ errors }" rules="required" name="url">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    rules="required"
+                    name="url"
+                  >
                     <v-text-field
                       v-model="url"
                       color="secondary"
@@ -200,7 +238,9 @@
               </v-row>
 
               <div class="pa-3 text-center">
-                <v-btn color="success" default type="submit">Validate Inputs</v-btn>
+                <v-btn color="success" default type="submit"
+                  >Validate Inputs</v-btn
+                >
               </div>
             </base-material-card>
           </form>
@@ -212,11 +252,21 @@
           <form @submit.prevent="handleSubmit(validateForm)">
             <base-material-card color="success" inline title="Range Validation">
               <v-row align="center" dense>
-                <v-col class="text-right body-1 grey--text" cols="2">Min Length</v-col>
+                <v-col class="text-right body-1 grey--text" cols="2"
+                  >Min Length</v-col
+                >
 
                 <v-col cols="8">
-                  <validation-provider v-slot="{ errors }" name="min length" rules="required|min:5">
-                    <v-text-field v-model="min" :error-messages="errors" color="secondary" />
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="min length"
+                    rules="required|min:5"
+                  >
+                    <v-text-field
+                      v-model="min"
+                      :error-messages="errors"
+                      color="secondary"
+                    />
                   </validation-provider>
                 </v-col>
 
@@ -226,11 +276,21 @@
               </v-row>
 
               <v-row align="center" dense>
-                <v-col class="text-right body-1 grey--text" cols="2">Max Length</v-col>
+                <v-col class="text-right body-1 grey--text" cols="2"
+                  >Max Length</v-col
+                >
 
                 <v-col cols="8">
-                  <validation-provider v-slot="{ errors }" rules="required|max:5" name="max length">
-                    <v-text-field v-model="max" :error-messages="errors" color="secondary" />
+                  <validation-provider
+                    v-slot="{ errors }"
+                    rules="required|max:5"
+                    name="max length"
+                  >
+                    <v-text-field
+                      v-model="max"
+                      :error-messages="errors"
+                      color="secondary"
+                    />
                   </validation-provider>
                 </v-col>
 
@@ -240,7 +300,9 @@
               </v-row>
 
               <div class="pa-3 text-center">
-                <v-btn color="success" default type="submit">Validate Inputs</v-btn>
+                <v-btn color="success" default type="submit"
+                  >Validate Inputs</v-btn
+                >
               </div>
             </base-material-card>
           </form>

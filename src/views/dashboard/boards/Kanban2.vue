@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12">
         <div class="font-weight-light mt-1" style="font-size: 25px;">
-          Estos son tus proyectos - ¿Qué harás hoy?
+          Kanban del Proyecto - ¿Qué harás hoy?
         </div>
       </v-col>
 

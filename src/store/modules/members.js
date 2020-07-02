@@ -183,10 +183,10 @@ const actions = {
     return new Promise((resolve, reject) => {
       MemberService.deleteMember(id)
         .then((response) => {
-          if (response.status === 200) {
+          if (response.status === 204) {
             buildSuccess(
               {
-                msg: 'The meeting was deleted',
+                msg: 'The member was deleted',
               },
               commit,
               resolve

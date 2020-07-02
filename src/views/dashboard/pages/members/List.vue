@@ -1,9 +1,9 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <!-- <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'UserCreate' }">
+      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'MemberCreate' }">
        <v-icon dark>mdi-plus</v-icon>
-      </v-btn>-->
+      </v-btn>
     </div>
     <base-material-card
       color="indigo"
@@ -44,6 +44,7 @@
         :sort-by="['name', 'office']"
         :sort-desc="[false, true]"
         multi-sort
+        :loading="dataTableLoading"
       >
         <!-- <template v-slot:item.actions="{ item }">
           <v-btn icon slot="activator">
@@ -91,6 +92,8 @@
         </template>
       </v-data-table>
     </base-material-card>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 
@@ -103,6 +106,7 @@ export default {
   data() {
     return {
       //users: [],
+      dataTableLoading:false,
       headers: [
         {
           text: 'Nombre',
@@ -129,11 +133,14 @@ export default {
       loader: true,
 
       search: undefined,
+      idProject:null,
     }
   },
 
   created() {
     this.fetchMembers(this.$route.params.id_project)
+    this.idProject=this.$route.params.id_project
+    console.log(this.idProject)
   },
   computed: {
     ...mapGetters('members', ['members']),
@@ -168,15 +175,11 @@ export default {
           }
         )
         if (response) {
-          console.log(item.id)
-          //  this.dataTableLoading = true
-          //await this.deleteUser(item.id, {})
+          this.dataTableLoading = true
           await this.deleteMember(item.id)
-          /* await this
-            .fetchUsers
-            // buildPayloadPagination(this.pagination, this.buildSearch())
-            ()
-          this.dataTableLoading = false*/
+          console.log(this.idProject)
+          await this.fetchMembers(this.idProject)
+          this.dataTableLoading = false
         }
         // eslint-disable-next-line no-unused-vars
       } catch (error) {

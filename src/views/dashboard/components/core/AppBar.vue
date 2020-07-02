@@ -31,7 +31,7 @@
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-badge color="red" overlap bordered>
             <template v-slot:badge>
-              <span>5</span>
+              <span>{{notifications.unread_count}}</span>
             </template>
 
             <v-icon>mdi-bell</v-icon>
@@ -41,8 +41,12 @@
 
       <v-list :tile="false" nav>
         <div>
-          <app-bar-item v-for="(n, i) in notifications" :key="`item-${i}`">
-            <v-list-item-title v-text="n" />
+          <app-bar-item
+            v-for="n in notifications.unread_list"
+            :key="n.id"
+            to="nnn"
+          >
+            <v-list-item-title v-text="n.verb" />
           </app-bar-item>
         </div>
       </v-list>
@@ -74,7 +78,7 @@
 import { VHover, VListItem } from 'vuetify/lib'
 
 // Utilities
-import { mapState, mapMutations } from 'vuex'
+import {mapState, mapMutations, mapGetters} from 'vuex'
 
 export default {
   name: 'DashboardCoreAppBar',
@@ -117,13 +121,6 @@ export default {
   },
 
   data: () => ({
-    notifications: [
-      'Tienes una reunión mañana',
-      'No has actualizado tu actividad',
-      'Karen quiere enviarte un mensaje',
-      'Another Notification',
-      'Another one',
-    ],
     profile: [
       { title: 'Perfil' },
       { title: 'Opciones' },
@@ -131,20 +128,27 @@ export default {
       { title: 'Cerrar Sesión' },
     ],
   }),
-
+  created() {
+    this.$store.dispatch('notifications/fetchNotifications')
+  },
   computed: {
     ...mapState(['drawer']),
+    ...mapGetters('notifications', ['notifications']),
   },
 
   methods: {
     ...mapMutations({
       setDrawer: 'SET_DRAWER',
     }),
+    /*...mapActions('notifications'['']),*/
     logout({ username, password }) {
       this.$store
         .dispatch('auth/logout', { username, password })
         .then(() => this.$router.push('/login/identifier'))
     },
+    read(id){
+      console.log(id)
+    }
   },
 }
 </script>

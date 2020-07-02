@@ -50,7 +50,7 @@ const mutations = {
     state.project.costo = data.costo
     state.project.presupuesto = data.presupuesto
   },
-  [types.CHANGE_STATE](state) {
+  [types.CHANGE_STATE_PROJECT](state) {
     state.project.is_active = false
   },
   [types.ADD_PROJECT_DATA](state, data) {
@@ -127,21 +127,21 @@ const actions = {
         throw error
       })
   },
-  fetchProjects({ commit, dispatch }) {
-    ProjectService.getProjects()
-      .then((response) => {
-        // commit('SET_projects_TOTAL', parseInt(response.headers['x-total-count']))
-        commit('SET_PROJECTS', response.data)
-        //  console.log(this.projects)
-      })
-      .catch((error) => {
-        console.log(this.projects)
-        const notification = {
-          type: 'error',
-          message: 'There was a problem fetching projects: ' + error.message,
-        }
-        dispatch('notification/add', notification, { root: true })
-      })
+  fetchProjects({ commit },payload) {
+    return new Promise((resolve, reject) => {
+      ProjectService.getProjects(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            //commit(types.USERS, response.data.docs)
+            // commit(types.TOTAL_USERS, response.data.totalDocs)
+            commit('SET_PROJECTS', response.data)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
   },
   fetchProject({ commit, getters, dispatch }, id) {
     var project = getters.getProjectById(id)
@@ -193,7 +193,7 @@ const actions = {
       ProjectService.deleteProject(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
-            commit(types.CHANGE_STATE, response.data)
+            commit(types.CHANGE_STATE_PROJECT, response.data)
             buildSuccess(
               {
                 msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',

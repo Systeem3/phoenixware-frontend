@@ -136,7 +136,7 @@ export default {
       observer.observe(element);
     },
 
-    selectThisList(click, mode) {
+    selectThisList(click) {
       const option = this.options.clickToSelectList;
 
       if (option === "none" || !(click === option)) return;

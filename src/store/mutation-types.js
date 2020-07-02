@@ -26,6 +26,7 @@ export const ADD_USER_DATA = 'ADD_USER_DATA'
 // project
 export const FILL_PROJECT = 'FILL_PROJECT'
 export const ADD_PROJECT_DATA = 'ADD_PROJECT_DATA'
+export const CHANGE_STATE_PROJECT = 'CHANGE_STATE_PROJECT'
 
 //meeting
 

@@ -35,6 +35,7 @@
       <v-divider class="mt-3" />
 
       <v-data-table
+        :loading="dataTableLoading"
         :headers="headers"
         :items="projects"
         :search.sync="search"
@@ -53,20 +54,26 @@
           >
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
-      </v-data-table>
+      </v-data-table
+              >
     </base-material-card>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 //import { Vue } from 'vue-property-decorator'
+import { buildPayloadPagination } from '@/utils/utils.js'
 
 export default {
   name: 'UsersTable',
   data() {
     return {
       //users: [],
+      dataTableLoading: false,
+      pagination: {},
       headers: [
         {
           text: 'Nombre',
@@ -93,6 +100,10 @@ export default {
           value: 'metodologia',
         },
         {
+          text: 'Tiempo',
+          value: 'tiempo',
+        },
+        {
           sortable: false,
           text: 'Actions',
           value: 'actions',
@@ -100,7 +111,7 @@ export default {
       ],
       loader: true,
 
-      search: undefined,
+      search: '',
     }
   },
 
@@ -109,14 +120,54 @@ export default {
   },
   computed: {
     ...mapGetters('projects', ['projects']),
-  },
 
+  },
+  watch: {
+    pagination: {
+      async handler() {
+        try {
+          this.dataTableLoading = true
+          await this.fetchProjects(
+            buildPayloadPagination(this.pagination, this.buildSearch())
+          )
+          this.dataTableLoading = false
+          // eslint-disable-next-line no-unused-vars
+        } catch (error) {
+          this.dataTableLoading = false
+        }
+      },
+      deep: true,
+    },
+    search() {
+      clearTimeout(this.delayTimer)
+      this.delayTimer = setTimeout(() => {
+        this.doSearch()
+      }, 400)
+    },
+  },
   methods: {
+    async doSearch() {
+      try {
+        this.dataTableLoading = true
+        await this.getUsers(
+          buildPayloadPagination(this.pagination, this.buildSearch())
+        )
+        this.dataTableLoading = false
+        // eslint-disable-next-line no-unused-vars
+      } catch (error) {
+        this.dataTableLoading = false
+      }
+    },
+    buildSearch() {
+      return this.search
+        ? { query: this.search, fields: this.fieldsToSearch.join(',') }
+        : {}
+    },
     async editItem(item) {
       // this.$store.dispatch('UserUpdate')
       this.$router.push(`/projects/edit/${item.id}`)
     },
-    ...mapActions('projects', ['deleteProject']),
+    ...mapActions('projects', ['deleteProject','fetchProjects']),
     success() {
       /* Vue.swal({
         type: 'success',
@@ -140,18 +191,13 @@ export default {
           }
         )
         if (response) {
-          console.log(item.id)
-          //  this.dataTableLoading = true
-          //await this.deleteUser(item.id, {})
+          this.dataTableLoading = true
           await this.deleteProject({
             id: item.id,
             estado: 'C',
           })
-          /* await this
-            .fetchUsers
-            // buildPayloadPagination(this.pagination, this.buildSearch())
-            ()
-          this.dataTableLoading = false*/
+          await this.fetchProjects()
+          this.dataTableLoading = false
         }
       } catch (error) {
         this.dataTableLoading = false

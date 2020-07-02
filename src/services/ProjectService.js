@@ -1,8 +1,10 @@
 import api from '@/services/api'
 
 export default {
-  getProjects() {
-    return api.get('/projects/')
+  getProjects(params) {
+    return api.get('/projects/',{
+      params,
+    })
   },
   getProject(id) {
     return api.get(`/projects/${id}/`)

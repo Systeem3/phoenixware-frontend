@@ -9,8 +9,7 @@ export default {
   postUser(user) {
     return api.post('/auth/registration/', user)
   },
-  deleteMember(id){
+  deleteMember(id) {
     return api.delete(`miembro/${id}/delete/`)
-  }
-
+  },
 }

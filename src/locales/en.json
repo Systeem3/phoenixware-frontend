@@ -83,11 +83,12 @@
     "ERROR_WITH_FILTER": "Error with filter",
     "CITY_ALREADY_EXISTS": "City already exists"
   },
+  
   "common": {
     "DELETE": "Eliminar",
     "CANCEL": "Cancelar",
     "WARNING": "Advertencia",
-    "DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM": "Seguro quieres eliminar es?",
+    "DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM": "Seguro quieres eliminar esto?",
     "CLOSE": "Cerrar",
     "SAVED_SUCCESSFULLY": "Saved successfully",
     "DELETED_SUCCESSFULLY": "Deleted successfully",
@@ -95,6 +96,14 @@
     "UPDATED": "Updated At",
     "GO_BACK": "Go back",
 
+    "employee": {
+    "CREATE": "¿Desea crear este empleado?",
+    "EDIT": "¿Desea modificar este empleado?",
+    "DELETE": "¿Desea eliminar este empleado?",
+    "CREATED_SUCCESSFULLY": "Empleado se ha creado con éxito",
+    "DELETED_SUCCESSFULLY": "Empleado se ha eliminado con éxito"
+    },
+    
     "loading": {
       "PLEASE_WAIT": "Espere por favor..."
     },
@@ -224,7 +233,7 @@
       "NO_RESULTS_FOUND": "No results found",
       "COUNTRY": "Country",
       "SAVE": "Save",
-      "PROFILE_SAVED_SUCCESSFULLY": "Profile saved successfuly"
+      "PROFILE_SAVED_SUCCESSFULLY": "Perfil se ha guardado con éxito"
     }
   }
 }

@@ -1,16 +1,11 @@
 import UserService from '@/services/UserService.js'
-//import { buildSuccess, handleError } from '@/utils/utils.js'
 import * as types from '@/store/mutation-types'
-import auth from '../../api/auth'
 import { buildSuccess, handleError } from '@/utils/utils.js'
-
-//import { SHOW_LOADING, SUCCESS, ERROR } from '../mutation-types'
 
 const state = {
   users: [],
   usersTotal: 0,
   user: {
-    //id: '',
     email: '',
     empleado: {
       nombre: '',
@@ -75,47 +70,6 @@ const mutations = {
 }
 
 const actions = {
-  /*createUser({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      UserService.postUser(payload)
-        .then((response) => {
-          if (response.status === 201) {
-            buildSuccess(
-              {
-                msg: 'common.SAVED_SUCCESSFULLY',
-              },
-              commit,
-              resolve
-            )
-          }
-        })
-        .catch((error) => {
-          handleError(error, commit, reject)
-        })
-    })
-  },*/
-
-  /*createUser({ commit }, user) {
-    return new Promise((resolve, reject) => {
-      UserService.postUser(user)
-        .then((response) => {
-          console.log(response)
-          if (response.status === 201) {
-            commit('ADD_USER', user)
-            buildSuccess(
-              {
-                msg: 'common.SAVED_SUCCESSFULLY',
-              },
-              commit,
-              resolve
-            )
-          }
-        })
-        .catch((error) => {
-          handleError(error, commit, reject)
-        })
-    })
-  },*/
   createUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
       commit(types.SHOW_LOADING, true, { root: true })
@@ -124,7 +78,7 @@ const actions = {
           if (response.status === 201) {
             buildSuccess(
               {
-                msg: 'common.SAVED_SUCCESSFULLY',
+                msg: 'employee.SAVED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -200,34 +154,36 @@ const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },*/
-  fetchUser({ commit, getters, dispatch }, id) {
-    var user = getters.getUserById(id)
-    if (user) {
-      commit('SET_USER', user)
-    } else {
-      UserService.getUser(id)
-        .then((response) => {
-          commit('SET_USER', response.data)
-        })
-        .catch((error) => {
-          const notification = {
-            type: 'error',
-            message: 'There was a problem fetching event: ' + error.message,
-          }
-          dispatch('notification/add', notification, { root: true })
-        })
-    }
+
+  fetchUser({ commit, getters }, id) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      var user = getters.getUserById(id)
+      if (user) {
+        commit('SET_USER', user)
+      } else {
+        UserService.getUser(id)
+          .then((response) => {
+            if (response.status === 200) {
+              commit('SET_USER', response.data)
+              buildSuccess(null, commit, resolve)
+            }
+          })
+          .catch((error) => {
+            handleError(error, commit, reject)
+          })
+      }
+    })
   },
   saveUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      auth
-        .updateUser(payload.id, payload)
+      UserService.updateUser(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
             commit(types.FILL_USER, response.data)
             buildSuccess(
               {
-                msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',
+                msg: 'common.employee.SAVED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -245,14 +201,13 @@ const actions = {
   },
   deleteUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      auth
-        .deleteUser(payload.id, payload)
+      UserService.deleteUser(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
             commit(types.CHANGE_STATE, response.data)
             buildSuccess(
               {
-                msg: 'common.DELETED_SUCCESSFULLY',
+                msg: 'employee.DELETED_SUCCESSFULLY',
               },
               commit,
               resolve

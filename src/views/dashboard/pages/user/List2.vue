@@ -15,6 +15,14 @@
         <div class="display-2 font-weight-light">
           Lista de Empleados
         </div>
+
+        <!--<v-btn
+          @click="success"
+          class="btn btn-outline-primary col s12 m3"
+          type="button"
+        >
+          success
+        </v-btn>-->
       </template>
 
       <v-text-field
@@ -74,13 +82,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+//import { Vue } from 'vue-property-decorator'
 import { buildPayloadPagination } from '@/utils/utils.js'
 
 export default {
   name: 'UsersTable',
   data() {
     return {
-      dataTableLoading: true,
+      dataTableLoading: false,
       pagination: {},
 
       headers: [
@@ -88,7 +97,7 @@ export default {
           text: 'Nombre',
           value: 'empleado.nombre',
 
-          //sortable: true,
+          sortable: true,
         },
         {
           text: 'Apellido',
@@ -112,7 +121,7 @@ export default {
           value: 'actions',
         },
       ],
-      // loader: true,
+      loader: true,
       delayTimer: null,
       search: '',
       fieldsToSearch: [
@@ -182,16 +191,14 @@ export default {
     async deleteItem(item) {
       try {
         const response = await this.$confirm(
-          this.$t('common.employee.DELETE'),
+          this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
 
           {
             title: this.$t('common.WARNING'),
             buttonTrueText: this.$t('common.DELETE'),
             buttonFalseText: this.$t('common.CANCEL'),
-            //  buttonTrueColor: 'red lighten3',
-            // buttonFalseColor: 'yellow',
-            buttonTrueColor: 'purple',
-            buttonFalseColor: 'primary',
+            buttonTrueColor: 'red lighten3',
+            buttonFalseColor: 'yellow',
           }
         )
         if (response) {

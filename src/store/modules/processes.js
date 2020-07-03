@@ -7,7 +7,7 @@ const state = {
   processes: [],
   process: {
     id: null,
-    nombre:'' ,
+    nombre: '',
     categoria: '',
     tipo: '',
     estado: '',
@@ -104,6 +104,19 @@ const actions = {
   },
   fetchProcesses({ commit, dispatch }, id) {
     ProcessService.getProcesses(id)
+      .then((response) => {
+        commit('SET_PROCESSS', response.data)
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching processes: ' + error.message,
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+  },
+  fetchProcesses2({ commit, dispatch },payload) {
+    ProcessService.getProcesses2(payload.id, payload.categoria)
       .then((response) => {
         commit('SET_PROCESSS', response.data)
       })

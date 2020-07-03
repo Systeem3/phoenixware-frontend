@@ -4,6 +4,9 @@ export default {
   getProcesses(id) {
     return api.get(`/projects/${id}/listar_procesos`)
   },
+  getProcesses2(id,categoria){
+    return api.get(`/projects/${id}/listar_procesos_categoria/?categoria=${categoria}`)
+  },
   getMeeting(id) {
     return api.get(`/reunion/${id}/`)
   },

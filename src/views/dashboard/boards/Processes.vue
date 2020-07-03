@@ -52,10 +52,15 @@ export default {
     ...mapGetters('processes', ['processes']),
   },
   created() {
-    this.fetchProcesses(this.$route.params.id_project)
+    console.log(this.$route.query.categoria)
+    this.fetchProcesses2({
+      id:this.$route.params.id_project,
+      categoria:this.$route.query.categoria,
+    })
+    //this.fetchProcesses(this.$route.params.id_project)
   },
   methods: {
-    ...mapActions('processes',['fetchProcesses']),
+    ...mapActions('processes',['fetchProcesses', 'fetchProcesses2']),
     complete(index) {
       this.list[index] = !this.list[index]
     },

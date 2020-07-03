@@ -94,6 +94,18 @@ export default {
             to: 'list',
             icon: 'mdi-account-multiple',
           },
+          {
+            group: '/project/risks', //riesgos
+            icon: 'mdi mdi-rocket',
+            title: 'Riesgos',
+            children: [
+              {
+                title: 'Registrar Riesgo',
+                to: '/create',
+                icon: 'mdi mdi-account-plus',
+              },
+            ],
+          },
         ],
       },
       {

@@ -16,10 +16,7 @@
       <v-icon v-else>mdi-dots-vertical</v-icon>
     </v-btn>
 
-    <v-toolbar-title
-      class="hidden-sm-and-down font-weight-light"
-      v-text="$route.name"
-    />
+    <v-toolbar-title class="hidden-sm-and-down font-weight-light" v-text="$route.name" />
 
     <v-spacer />
 
@@ -29,13 +26,7 @@
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <v-menu
-      bottom
-      left
-      offset-y
-      origin="top right"
-      transition="scale-transition"
-    >
+    <v-menu bottom left offset-y origin="top right" transition="scale-transition">
       <template v-slot:activator="{ attrs, on }">
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-badge color="red" overlap bordered>
@@ -50,25 +41,14 @@
 
       <v-list :tile="false" nav>
         <div>
-          <app-bar-item
-            v-for="n in notifications.unread_list"
-            :key="n.id"
-            to="nnn"
-          >
+          <app-bar-item v-for="n in notifications.unread_list" :key="n.id" to="nnn">
             <v-list-item-title v-text="n.verb" />
           </app-bar-item>
         </div>
       </v-list>
     </v-menu>
 
-    <v-menu
-      bottom
-      left
-      min-width="200"
-      offset-y
-      origin="top right"
-      transition="scale-transition"
-    >
+    <v-menu bottom left min-width="200" offset-y origin="top right" transition="scale-transition">
       <template v-slot:activator="{ attrs, on }">
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-icon>mdi-account</v-icon>
@@ -80,11 +60,15 @@
           <v-divider v-if="p.divider" :key="`divider-${i}`" class="mb-2 mt-2" />
 
           <app-bar-item v-else :key="`item-${i}`">
-            <v-list-item-title v-text="p.title" />
+            <div v-if="p.title === 'Perfil'">
+              <v-list-item-title v-text="p.title" @click="edituser" />
+            </div>
+            <div v-if="p.title === 'Cerrar Sesión'">
+              <v-list-item-title v-text="p.title" @click="logout" />
+            </div>
           </app-bar-item>
         </template>
       </v-list>
-      <v-icon class="toolbar-items" color @click="logout">mdi-power</v-icon>
     </v-menu>
   </v-app-bar>
 </template>
@@ -139,7 +123,6 @@ export default {
   data: () => ({
     profile: [
       { title: 'Perfil' },
-      { title: 'Opciones' },
       { divider: true },
       { title: 'Cerrar Sesión' },
     ],
@@ -161,6 +144,9 @@ export default {
       this.$store
         .dispatch('auth/logout', { username, password })
         .then(() => this.$router.push('/login/identifier'))
+    },
+    edituser() {
+      this.$router.push('/userprofile/edit')
     },
     read(id) {
       console.log(id)

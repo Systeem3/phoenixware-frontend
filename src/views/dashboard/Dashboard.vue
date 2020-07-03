@@ -3,11 +3,11 @@
     <v-row>
       <v-col cols="12">
         <div class="font-weight-light mt-1" style="font-size: 25px;">
-          Estos son tus proyectos - ¿Qué harás hoy?
+          Estos son tus proyectos - ¿En cuál quieres trabajar?
         </div>
       </v-col>
 
-      <v-col sm="12" md="4">
+      <!-- <v-col sm="12" md="4">
         <base-material-card color="transparent" image hover-reveal>
           <template v-slot:image>
             <v-img
@@ -27,13 +27,9 @@
             </v-tooltip>
           </template>
 
-          <v-card-title class="justify-center font-weight-light"
-            >E-Market</v-card-title
-          >
+          <v-card-title class="justify-center font-weight-light">E-Market</v-card-title>
 
-          <v-card-text
-            class="body-1 text-center mb-3 font-weight-light grey--text"
-          >
+          <v-card-text class="body-1 text-center mb-3 font-weight-light grey--text">
             Un marketplace virtual de bienes y servicios electrónicos para
             smartphones.
           </v-card-text>
@@ -48,9 +44,9 @@
             </span>
           </template>
         </base-material-card>
-      </v-col>
+      </v-col> -->
 
-      <v-col sm="12" md="4">
+      <!-- <v-col sm="12" md="4">
         <base-material-card color="transparent" hover-reveal image>
           <template v-slot:image>
             <v-img
@@ -70,13 +66,9 @@
             </v-tooltip>
           </template>
 
-          <v-card-title class="justify-center font-weight-light"
-            >U-Social</v-card-title
-          >
+          <v-card-title class="justify-center font-weight-light">U-Social</v-card-title>
 
-          <v-card-text
-            class="body-1 text-center mb-3 font-weight-light grey--text"
-          >
+          <v-card-text class="body-1 text-center mb-3 font-weight-light grey--text">
             Una red social multiplataforma para todas las edades, basada en la
             Gamificación y en las interacciones entre comunidades.
           </v-card-text>
@@ -113,13 +105,9 @@
             </v-tooltip>
           </template>
 
-          <v-card-title class="justify-center font-weight-light"
-            >Coin-Z</v-card-title
-          >
+          <v-card-title class="justify-center font-weight-light">Coin-Z</v-card-title>
 
-          <v-card-text
-            class="body-1 text-center mb-3 font-weight-light grey--text"
-          >
+          <v-card-text class="body-1 text-center mb-3 font-weight-light grey--text">
             Una plataforma de Blockchain para plataformas móviles basada en
             microtransacciones.
           </v-card-text>
@@ -134,7 +122,7 @@
             </span>
           </template>
         </base-material-card>
-      </v-col>
+      </v-col> -->
       <v-col sm="12" md="4" v-for="project in projects" :key="project.id">
         <base-material-card color="transparent" hover-reveal image>
           <template v-slot:image>
@@ -161,15 +149,14 @@
             </v-tooltip>
           </template>
 
-          <v-card-title class="justify-center font-weight-light">{{
-            project.nombre
-          }}</v-card-title>
+          <v-card-title class="justify-center font-weight-light">
+            {{ project.nombre }}
+          </v-card-title>
 
           <v-card-text
             class="body-1 text-center mb-3 font-weight-light grey--text"
+            >{{ project.descripcion }}</v-card-text
           >
-            {{ project.descripcion }}
-          </v-card-text>
 
           <template v-slot:actions>
             <div class="display-2 font-weight-light grey--text">

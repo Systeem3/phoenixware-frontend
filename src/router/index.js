@@ -301,6 +301,13 @@ const routes = [
         props: true,
         //beforeEnter: requireAuthenticated,
       },
+      {
+        name: 'ProjectDash',
+        path: '/projects/dash/:id_project',
+        component: () => import('@/views/dashboard/pages/project/ProjectDash'),
+        props: true,
+        //beforeEnter: requireAuthenticated,
+      },
       //Profile
       {
         name: 'Profile',
@@ -350,7 +357,8 @@ const routes = [
       {
         name: 'Costs',
         path: 'projects/costs',
-        component: () => import('@/views/dashboard/pages/project/planning/costs'),
+        component: () =>
+          import('@/views/dashboard/pages/project/planning/costs'),
       },
       // Risk
       {

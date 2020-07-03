@@ -89,7 +89,7 @@ export default {
   name: 'UsersTable',
   data() {
     return {
-      dataTableLoading: true,
+      dataTableLoading: false,
       pagination: {},
 
       headers: [
@@ -97,7 +97,7 @@ export default {
           text: 'Nombre',
           value: 'empleado.nombre',
 
-          //sortable: true,
+          sortable: true,
         },
         {
           text: 'Apellido',
@@ -121,7 +121,7 @@ export default {
           value: 'actions',
         },
       ],
-      // loader: true,
+      loader: true,
       delayTimer: null,
       search: '',
       fieldsToSearch: [

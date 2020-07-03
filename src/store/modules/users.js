@@ -119,7 +119,7 @@ const actions = {
           if (response.status === 201) {
             buildSuccess(
               {
-                msg: 'common.SAVED_SUCCESSFULLY',
+                msg: 'employee.SAVED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -215,7 +215,7 @@ const actions = {
             commit(types.CHANGE_STATE, response.data)
             buildSuccess(
               {
-                msg: 'common.DELETED_SUCCESSFULLY',
+                msg: 'employee.DELETED_SUCCESSFULLY',
               },
               commit,
               resolve

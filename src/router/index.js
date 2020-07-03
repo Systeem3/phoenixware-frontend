@@ -380,12 +380,17 @@ const routes = [
       //Resources
       {
         name: 'ResourcesCreate',
-        path: '/resources/create',
+        path: '/resources/create/:id_project',
         component: () => import('@/views/dashboard/pages/resources/Create'),
       },
       {
+        name: 'ResourcesUpdate',
+        path: '/resources/edit/:id/:id_project',
+        component: () => import('@/views/dashboard/pages/resources/Update'),
+      },
+      {
         name: 'ResourcesList',
-        path: '/resources/list',
+        path: '/resources/list/:id_project',
         component: () => import('@/views/dashboard/pages/resources/List'),
       },
     ],

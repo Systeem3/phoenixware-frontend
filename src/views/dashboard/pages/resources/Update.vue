@@ -9,7 +9,7 @@
               <span class="body-1">— Registro de Recursos</span>
             </div>
           </template>
-          <ValidationObserver ref="odescbs">
+          <ValidationObserver ref="obs">
             <v-form>
               <v-container class="py-0">
                 <v-row>
@@ -31,7 +31,7 @@
                       :items="type"
                       item-text="name"
                       item-value="id"
-                      v-model="type"
+                      v-model="tipo"
                     >
                       <template v-slot:item="{ attrs, item, on }">
                         <v-list-item
@@ -58,7 +58,7 @@
                       :items="type2"
                       item-text="name"
                       item-value="id"
-                      v-model="type2"
+                      v-model="tipo_costo"
                     >
                       <template v-slot:item="{ attrs, item, on }">
                         <v-list-item
@@ -80,7 +80,7 @@
                       label="Costo"
                       color="secondary"
                       prepend-icon="mdi-account"
-                      v-model="cost"
+                      v-model="costo"
                       rules="required"
                       class="purple-input"
                       type="number"
@@ -93,15 +93,14 @@
                       color="primary"
                       float="right"
                       margin-left="6px"
-                      :to="{ name: 'ResourcesCreate' }"
+                      :to="{ name: 'ResourcesList' }"
                       >Recursos</v-btn
                     >
                     <v-btn
                       color="primary"
                       float="right"
                       margin-left="6px"
-                      @click.stop.prevent="submit"
-                      @click="createMeeting(inputs)"
+                      @click="submit"
                       >Registrar</v-btn
                     >
                   </v-col>
@@ -110,6 +109,8 @@
             </v-form>
           </ValidationObserver>
         </base-material-card>
+        <ErrorMessage />
+        <SuccessMessage />
       </v-col>
     </v-row>
   </v-container>
@@ -117,7 +118,7 @@
 
 <script>
 import { ValidationObserver } from 'vee-validate'
-//import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
+import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
 import { mapActions } from 'vuex'
 
 export default {
@@ -149,65 +150,44 @@ export default {
   },
   components: {
     ValidationObserver,
+    VTextFieldWithValidation,
   },
   computed: {
-    nombre: {
+    name: {
       get() {
         return this.$store.state.resources.resource.nombre
       },
       set(value) {
         const data = {
-          key: 'date',
+          key: 'name',
           value,
         }
-        this.addResourcesData(data)
+        this.addResourceData(data)
       },
     },
-    type3: {
+    tipo: {
       get() {
-        return this.$store.state.sources.source.tipo
+        return this.$store.state.resources.resource.tipo
       },
       set(value) {
         const data = {
-          key: 'type3',
+          key: 'tipo',
           value,
         }
-        this.addSourcesData(data)
+        this.addResourceData(data)
       },
     },
-    getTypeId(tipo) {
-      let typeId = null
-      this.items.forEach((item) => {
-        if (item.name === tipo) typeId = item.id
-      })
-
-      if (typeId === null) {
-        console.warn('Tipo not found with tipo: ', tipo)
-      }
-      return typeId
-    },
-    type4: {
+    tipo_costo: {
       get() {
-        return this.$store.state.resources.resource.tipoCosto
+        return this.$store.state.resources.resource.tipo_costo
       },
       set(value) {
         const data = {
-          key: 'type4',
+          key: 'tipo_costo',
           value,
         }
-        this.addRiskData(data)
+        this.addResourceData(data)
       },
-    },
-    getTypeId2(tipoCosto) {
-      let typeId = null
-      this.items.forEach((item) => {
-        if (item.name === tipoCosto) typeId = item.id
-      })
-
-      if (typeId === null) {
-        console.warn('TipoCosto not found with tipoCosto: ', tipoCosto)
-      }
-      return typeId
     },
     costo: {
       get() {
@@ -215,33 +195,33 @@ export default {
       },
       set(value) {
         const data = {
-          key: 'date',
+          key: 'costo',
           value,
         }
-        this.addResourcesData(data)
+        this.addResourceData(data)
       },
     },
+
   },
   methods: {
-    ...mapActions('risks', [
+    ...mapActions('resources', [
       'fetchResource',
       'addResourceData',
       'saveResource',
     ]),
     async submit() {
-      await this.saveRisk({
+      await this.saveResource({
         nombre: this.name,
-        tipo: this.type3,
-        tipoCosto: this.type4,
-        costo: this.cost,
-        id: this.id,
+        costo: this.costo,
+        tipo_costo: this.tipo_costo,
+        tipo: this.tipo,
+        id: this.$route.params.id,
       })
     },
-    //  ...mapMutations('users', ['SHOW_LOADING', 'ERROR']),
   },
   props: ['id'],
   async mounted() {
-    await this.fetchResource(this.id)
+    await this.fetchResource(this.$route.params.id)
   },
 }
 </script>

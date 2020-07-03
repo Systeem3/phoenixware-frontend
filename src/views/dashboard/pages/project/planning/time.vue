@@ -1448,7 +1448,6 @@ export default {
         tiempo:days,
         id: this.$route.params.id_project,
       })
-
     },
   },
 }

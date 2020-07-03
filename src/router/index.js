@@ -343,7 +343,7 @@ const routes = [
       //Time  and Costs (Calculadoras)
       {
         name: 'Time',
-        path: 'projects/time',
+        path: 'projects/time/:id_project',
         component: () =>
           import('@/views/dashboard/pages/project/planning/time'),
       },

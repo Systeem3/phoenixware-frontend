@@ -38,7 +38,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-memory</v-icon>
+                      >mdi mdi-memory</v-icon
+                    >
                   </template>
                   <span>
                     Otros sistemas que interactúan con el sistema a desarrollar
@@ -69,7 +70,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-console</v-icon>
+                      >mdi mdi-console</v-icon
+                    >
                   </template>
                   <span>
                     Otro sistema interactuando a través de un protocolo (ej.
@@ -100,7 +102,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi-monitor-multiple</v-icon>
+                      >mdi-monitor-multiple</v-icon
+                    >
                   </template>
                   <span>
                     Una persona que interactúa con el sistema mediante una
@@ -143,7 +146,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-numeric-3-box</v-icon>
+                      >mdi mdi-numeric-3-box</v-icon
+                    >
                   </template>
                   <span>Con 3 transacciones o menos</span>
                 </v-tooltip>
@@ -171,7 +175,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-numeric-7-box</v-icon>
+                      >mdi mdi-numeric-7-box</v-icon
+                    >
                   </template>
                   <span>De 4 a 7 transacciones</span>
                 </v-tooltip>
@@ -198,7 +203,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-numeric-7-box-multiple-outline</v-icon>
+                      >mdi mdi-numeric-7-box-multiple-outline</v-icon
+                    >
                   </template>
                   <span>Con más de 7 transacciones</span>
                 </v-tooltip>
@@ -209,7 +215,6 @@
         </base-material-card>
       </v-col>
     </v-row>
-
 
     <!-- Segunda Fila-->
 
@@ -224,7 +229,9 @@
           <v-form>
             <v-row>
               <v-col>
-                <span class="font-weight-light ml-3">Evalúa en escala del 0 al 5:</span>
+                <span class="font-weight-light ml-3"
+                  >Evalúa en escala del 0 al 5:</span
+                >
               </v-col>
               <v-col>
                 <v-tooltip right>
@@ -235,7 +242,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-1 mb-1"
-                    >mdi mdi-help-circle</v-icon>
+                      >mdi mdi-help-circle</v-icon
+                    >
                   </template>
                   <span>
                     De 0 a 2 (Irrelevante) / De 3 a 4 (Medio) / Igual a 5
@@ -267,7 +275,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-google-circles-extended</v-icon>
+                      >mdi mdi-google-circles-extended</v-icon
+                    >
                   </template>
                   <span>
                     Un sistema distribuido es un sistema cuyos componentes están
@@ -300,7 +309,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi mdi-auto-fix</v-icon>
+                      >mdi mdi-auto-fix</v-icon
+                    >
                   </template>
                   <span>
                     Los objetivos performance son específicos, mensurables,
@@ -334,7 +344,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-emoticon-happy</v-icon>
+                      >mdi mdi-emoticon-happy</v-icon
+                    >
                   </template>
                   <span>
                     La Eficiencia para Usuario Final es el grado de
@@ -368,7 +379,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-format-subscript</v-icon>
+                      >mdi-format-subscript</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe si se involucran cálculos o un nivel de abstracción
@@ -400,7 +412,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-download</v-icon>
+                      >mdi-download</v-icon
+                    >
                   </template>
                   <span>
                     La reusabilidad es la medida de la capacidad de los
@@ -419,7 +432,7 @@
                   :items="type1"
                   item-text="name"
                   item-value="id"
-                  v-model="inputs.ct_7"
+                  v-model="inputs.ct_6"
                   validate-on-blur
                   class="ml-3"
                 />
@@ -433,7 +446,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-database</v-icon>
+                      >mdi-database</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe el grado de complejidad que supone la instalación
@@ -466,7 +480,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-book-open</v-icon>
+                      >mdi-book-open</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe el grado de complejidad que supone el uso del sistema
@@ -499,7 +514,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-cellphone-android</v-icon>
+                      >mdi-cellphone-android</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan portable ha de ser el software para
@@ -532,7 +548,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-drawing-box</v-icon>
+                      >mdi-drawing-box</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanta complejidad supondría realizar cambios a
@@ -564,7 +581,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-equal-box</v-icon>
+                      >mdi-equal-box</v-icon
+                    >
                   </template>
                   <span>
                     La concurrencia es la capacidad de los elementos del
@@ -598,7 +616,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-security</v-icon>
+                      >mdi-security</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanto se involucran aspectos de seguridad
@@ -630,7 +649,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-wheelchair-accessibility</v-icon>
+                      >mdi-wheelchair-accessibility</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanto se involucran aspectos de Accesibilidad
@@ -663,7 +683,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-library</v-icon>
+                      >mdi-library</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanto se incorporan funcionalidades en su sistema
@@ -687,7 +708,9 @@
           <v-form>
             <v-row>
               <v-col>
-                <span class="font-weight-light ml-3">Evalúa en escala del 0 al 5:</span>
+                <span class="font-weight-light ml-3"
+                  >Evalúa en escala del 0 al 5:</span
+                >
               </v-col>
               <v-col>
                 <v-tooltip right>
@@ -698,7 +721,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-1 mb-1"
-                    >mdi mdi-help-circle</v-icon>
+                      >mdi mdi-help-circle</v-icon
+                    >
                   </template>
                   <span>
                     De 0 a 2 (Irrelevante) / De 3 a 4 (Medio) / Igual a 5
@@ -730,7 +754,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-history</v-icon>
+                      >mdi mdi-history</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan familiarizado está su equipo con el proceso
@@ -763,7 +788,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi mdi-human</v-icon>
+                      >mdi mdi-human</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan capacitado o experimentado está su equipo
@@ -772,7 +798,6 @@
                 </v-tooltip>
               </v-col>
             </v-row>
-
 
             <v-row>
               <v-col cols="9">
@@ -797,7 +822,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-hexagon</v-icon>
+                      >mdi mdi-hexagon</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tanta experiencia tiene su equipo con el
@@ -830,7 +856,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-android-studio</v-icon>
+                      >mdi-android-studio</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tan capacitado está su Analista Líder de su
@@ -862,7 +889,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-emoticon</v-icon>
+                      >mdi-emoticon</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan motivado está su equipo de trabajo para
@@ -895,7 +923,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-rename-box</v-icon>
+                      >mdi-rename-box</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tan sujetos a cambios están los requisitos de su
@@ -928,7 +957,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-calendar-clock</v-icon>
+                      >mdi-calendar-clock</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tanto se trabajará a media jornada (part-time) en
@@ -961,7 +991,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-television-guide</v-icon>
+                      >mdi-television-guide</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanta complejidad supone el uso de los Lenguajes
@@ -1056,7 +1087,9 @@
         >
           <v-form>
             <v-col>
-              <span class="font-weight-light ml-3 mt-4 mb-3">Esfuerzo Total:</span>
+              <span class="font-weight-light ml-3 mt-4 mb-3"
+                >Esfuerzo Total:</span
+              >
               <v-text-field
                 disabled
                 dense
@@ -1082,9 +1115,9 @@
                 class="mt-2"
               />
 
-              <span
-                class="font-weight-light ml-3 mt-4 mb-3"
-              >División del Tiempo por Actividad de Desarrollo:</span>
+              <span class="font-weight-light ml-3 mt-4 mb-3"
+                >División del Tiempo por Actividad de Desarrollo:</span
+              >
               <v-text-field
                 disabled
                 dense
@@ -1173,55 +1206,36 @@
                       @input="menu = false"
                     >
                       <v-spacer />
-                      <v-btn color="secondary" large @click="menu = false">Cancelar</v-btn>
+                      <v-btn color="secondary" large @click="menu = false"
+                        >Cancelar</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-col>
               </v-row>
               <v-row>
                 <v-col>
-                  <v-menu
-                    ref="menu"
-                    v-model="menu"
-                    :close-on-content-click="false"
-                    :return-value.sync="date"
-                    transition="scale-transition"
-                    min-width="290px"
-                    offset-y
-                  >
-                    <template v-slot:activator="{ on }">
-                      <v-text-field
-                        v-model="inputs.fecha_inicio"
-                        color="secondary"
-                        label="Fecha Final"
-                        prepend-icon="mdi-calendar-outline"
-                        readonly
-                        v-on="on"
-                      />
-                    </template>
-
-                    <v-date-picker
-                      v-model="inputs.fecha_final"
-                      color="secondary"
-                      landscape
-                      :min="inputs.fecha_inicio"
-                      :max="inputs.fecha_inicio"
-                      scrollable
-                      @input="menu = false"
-                    >
-                      <v-spacer />
-                      <v-btn color="secondary" large @click="menu = false">Cancelar</v-btn>
-                    </v-date-picker>
-                  </v-menu>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi-calendar"
+                    color="primary"
+                    label="Fecha final"
+                    class="mt-2"
+                    v-model="max"
+                  />
                 </v-col>
               </v-row>
-              
-                <v-row>
+              <v-row>
                 <v-spacer />
-                    <v-btn default color="secondary">Modificar Fechas</v-btn>
+                <v-btn default color="secondary" @click="submit"
+                  >Modificar Fechas</v-btn
+                >
                 <v-spacer />
-                </v-row>
-
+              </v-row>
             </v-col>
           </v-form>
         </base-material-card>
@@ -1233,26 +1247,17 @@
 <script>
 //import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
+import { mapActions } from 'vuex'
 
 export default {
   data: () => {
     return {
-      max: '',
-      min: '',
+      menu: false,
+      menu2: false,
+      date: '',
+      date2: '',
       number: null,
       resultado: '',
-      dias: '',
-      uucw: '',
-      uaw: '',
-      uucp: '',
-      tcf: '',
-      ecf: '',
-      udp: '',
-      analisis: '',
-      diseno: '',
-      programacion: '',
-      sobrecarga: '',
-
       inputs: {
         actores_simple: '',
         actores_medio: '',
@@ -1272,6 +1277,7 @@ export default {
         ct_10: '',
         ct_11: '',
         ct_12: '',
+        ct_13: '',
         a_1: '',
         a_2: '',
         a_3: '',
@@ -1280,8 +1286,7 @@ export default {
         a_6: '',
         a_7: '',
         a_8: '',
-        fecha_inicio: '',
-        fecha_fin: '',
+        fecha_inicio: new Date().toISOString().slice(0, 10),
       },
 
       type1: [
@@ -1297,6 +1302,154 @@ export default {
   components: {
     // ValidationObserver,
     VTextFieldWithValidation,
+  },
+  computed: {
+    uaw() {
+      if (
+        this.inputs.actores_simple &&
+        this.inputs.actores_medio &&
+        this.inputs.actores_complejo
+      ) {
+        const r1 = this.inputs.actores_simple * 1
+        const r2 = this.inputs.actores_medio * 2
+        const r3 = this.inputs.actores_complejo * 3
+        return r1 + r2 + r3
+      } else {
+        return 0
+      }
+    },
+    uucw() {
+      if (
+        this.inputs.cu_simple &&
+        this.inputs.cu_medio &&
+        this.inputs.cu_complejo
+      ) {
+        const r1 = this.inputs.cu_simple * 5
+        const r2 = this.inputs.cu_medio * 10
+        const r3 = this.inputs.cu_complejo * 15
+        return r1 + r2 + r3
+      } else {
+        return 0
+      }
+    },
+    uucp() {
+      return this.uaw + this.uucw
+    },
+    ecf() {
+      if (
+        this.inputs.a_1 &&
+        this.inputs.a_2 &&
+        this.inputs.a_3 &&
+        this.inputs.a_4 &&
+        this.inputs.a_5 &&
+        this.inputs.a_6 &&
+        this.inputs.a_7 &&
+        this.inputs.a_8
+      ) {
+        const a1 = parseInt(this.inputs.a_1) * 1.5
+        const a2 = parseInt(this.inputs.a_2) * 0.5
+        const a3 = parseInt(this.inputs.a_3)
+        const a4 = parseInt(this.inputs.a_4) * 0.5
+        const a5 = parseInt(this.inputs.a_5)
+        const a6 = parseInt(this.inputs.a_6) * 2
+        const a7 = -parseInt(this.inputs.a_7)
+        const a8 = -parseInt(this.inputs.a_8)
+
+        return 1.4 - 0.03 * (a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8)
+      } else {
+        return 0
+      }
+    },
+    tcf() {
+      if (
+        this.inputs.ct_1 &&
+        this.inputs.ct_2 &&
+        this.inputs.ct_3 &&
+        this.inputs.ct_4 &&
+        this.inputs.ct_5 &&
+        this.inputs.ct_6 &&
+        this.inputs.ct_7 &&
+        this.inputs.ct_8 &&
+        this.inputs.ct_9 &&
+        this.inputs.ct_10 &&
+        this.inputs.ct_11 &&
+        this.inputs.ct_12 &&
+        this.inputs.ct_13
+      ) {
+        const t1 = parseInt(this.inputs.ct_1) * 2
+        const t2 = parseInt(this.inputs.ct_2)
+        const t3 = parseInt(this.inputs.ct_3)
+        const t4 = parseInt(this.inputs.ct_4)
+        const t5 = parseInt(this.inputs.ct_5)
+        const t6 = parseInt(this.inputs.ct_6) * 0.5
+        const t7 = parseInt(this.inputs.ct_7) * 0.5
+        const t8 = parseInt(this.inputs.ct_8) * 2
+        const t9 = parseInt(this.inputs.ct_9)
+        const t10 = parseInt(this.inputs.ct_10)
+        const t11 = parseInt(this.inputs.ct_11)
+        const t12 = parseInt(this.inputs.ct_12)
+        const t13 = parseInt(this.inputs.ct_13)
+
+        return (
+          0.6 +
+          (t1 + t2 + t3 + t4 + t5 + t6 + t7 + t8 + t9 + t10 + t11 + t12 + t13) /
+            100
+        )
+      } else {
+        return 0
+      }
+    },
+    ucp() {
+      return this.uucp * this.tcf * this.ecf
+    },
+    total() {
+      return (this.ucp * 20 * 100) / 40
+    },
+    dias() {
+      return this.total / 24
+    },
+    analisis() {
+      return this.total * 0.15
+    },
+    diseno() {
+      return this.total * 0.12
+    },
+    programacion() {
+      return this.total * 0.4
+    },
+    pruebas() {
+      return this.total * 0.2
+    },
+    sobrecarga() {
+      return this.total * 0.13
+    },
+    max() {
+      let dias = parseInt(this.dias)
+      let fecha = new Date(this.inputs.fecha_inicio)
+      fecha.setDate(fecha.getDate() + dias + 1)
+      let d = fecha.getDate()
+      let m = fecha.getMonth() + 1
+      let y = fecha.getFullYear()
+      const date =
+        '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d)
+      return date
+    },
+  },
+  methods: {
+    ...mapActions('projects', ['saveProject']),
+    async submit() {
+      let fechaInicio=new Date(this.inputs.fecha_inicio).getTime();
+      let fechaFinal=new Date(this.max).getTime();
+      let diff = fechaFinal - fechaInicio
+      let days = diff/(1000*60*60*24)
+      await this.saveProject({
+        fecha_inicio: this.inputs.fecha_inicio,
+        fecha_finalizacion: this.max,
+        tiempo:days,
+        id: this.$route.params.id_project,
+      })
+
+    },
   },
 }
 </script>

@@ -9,14 +9,10 @@ export default {
   updateUser(id, payload) {
     return api.patch(`/auth/update-user/${id}`, payload)
   },
-  getUserAuth() {
-    return api.get('/auth/user/')
-  },
   postUser(user) {
     return api.post('/auth/registration/', user)
   },
-  deleteMember(id){
+  deleteMember(id) {
     return api.delete(`miembro/${id}/delete/`)
-  }
-
+  },
 }

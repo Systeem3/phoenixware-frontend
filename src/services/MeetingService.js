@@ -13,9 +13,6 @@ export default {
   deleteMeeting(id, payload) {
     return api.patch(`/api/auth/update-meeting/${id}/`, payload)
   },
-  getMeetingAuth() {
-    return api.get('/auth/meeting/')
-  },
   postMeeting(meeting, id) {
     return api.post(`/projects/${id}/crear_reunion/`, meeting)
   },

@@ -52,10 +52,4 @@ export default {
   verifyAccountEmail(key) {
     return session.post('/api/registration/verify-email/', { key })
   },
-  updateUser(id, payload) {
-    return session.patch(`/api/auth/update-user/${id}/`, payload)
-  },
-  deleteUser(id, payload) {
-    return session.patch(`/api/auth/update-user/${id}/`, payload)
-  },
 }

@@ -73,6 +73,7 @@ export default {
   },
 
   data: () => ({
+    icon: '',
     items: [
       {
         icon: 'mdi-view-dashboard', //inicio

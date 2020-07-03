@@ -15,14 +15,6 @@
         <div class="display-2 font-weight-light">
           Lista de Empleados
         </div>
-
-        <!--<v-btn
-          @click="success"
-          class="btn btn-outline-primary col s12 m3"
-          type="button"
-        >
-          success
-        </v-btn>-->
       </template>
 
       <v-text-field
@@ -82,7 +74,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-//import { Vue } from 'vue-property-decorator'
 import { buildPayloadPagination } from '@/utils/utils.js'
 
 export default {
@@ -191,14 +182,16 @@ export default {
     async deleteItem(item) {
       try {
         const response = await this.$confirm(
-          this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
+          this.$t('common.employee.DELETE'),
 
           {
             title: this.$t('common.WARNING'),
             buttonTrueText: this.$t('common.DELETE'),
             buttonFalseText: this.$t('common.CANCEL'),
-            buttonTrueColor: 'red lighten3',
-            buttonFalseColor: 'yellow',
+            //  buttonTrueColor: 'red lighten3',
+            // buttonFalseColor: 'yellow',
+            buttonTrueColor: 'purple',
+            buttonFalseColor: 'primary',
           }
         )
         if (response) {

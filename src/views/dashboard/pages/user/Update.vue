@@ -86,6 +86,7 @@
                       color="purple"
                       class="mr-0"
                       @click.stop.prevent="submit"
+                      :disabled="invalid"
                     >
                       Modificar
                     </v-btn>
@@ -206,7 +207,6 @@ export default {
 
       return typeId
     },
-    //...mapState('users', ['SHOW_LOADING', 'SUCCESS', 'ERROR']),
   },
   methods: {
     ...mapActions('users', ['fetchUser', 'addUserData', 'saveUser']),

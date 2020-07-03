@@ -6,6 +6,9 @@ export default {
       params,
     })
   },
+  getUsersNotProject(id){
+    return api.get(`/projects/${id}/usuarios_no_pertenecen/`)
+  },
   /* getUsers() {
     return api.get('/auth/list-users/')
   },*/

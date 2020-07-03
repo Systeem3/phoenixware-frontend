@@ -18,7 +18,7 @@
         class="align-self-center"
         color="grey"
       >
-        <v-img src="https://demos.creative-tim.com/material-dashboard-pro/assets/img/faces/avatar.jpg" />
+        <v-img :src="user.empleado.foto" />
       </v-list-item-avatar>
 
       <v-list-item-content>
@@ -46,7 +46,7 @@
 <script>
   // Utilities
   import kebabCase from 'lodash/kebabCase'
-  import { mapState } from 'vuex'
+  import { mapState, mapGetters, mapActions } from 'vuex'
 
   export default {
     name: 'ItemGroup',
@@ -75,6 +75,7 @@
 
     computed: {
       ...mapState(['barColor']),
+      ...mapGetters('users',['user']),
       children () {
         return this.item.children.map(item => ({
           ...item,
@@ -96,8 +97,11 @@
         return this.genGroup(this.item.children)
       },
     },
-
+    created() {
+      this.fetchUserAuth()
+    },
     methods: {
+      ...mapActions('users',['fetchUserAuth']),
       genGroup (children) {
         return children
           .filter(item => item.to)

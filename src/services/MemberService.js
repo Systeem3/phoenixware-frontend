@@ -3,14 +3,8 @@ export default {
   getMembers(id) {
     return api.get(`/projects/${id}/listar_miembros`)
   },
-  getUser(id) {
-    return api.get('/auth/update-user/' + id)
-  },
-  updateUser(id, payload) {
-    return api.patch(`/auth/update-user/${id}`, payload)
-  },
-  getUserAuth() {
-    return api.get('/auth/user/')
+  createMember(id, member){
+    return api.post(`/projects/${id}/agregar_miembro/`, member)
   },
   postUser(user) {
     return api.post('/auth/registration/', user)

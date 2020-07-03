@@ -6,28 +6,13 @@
           Procesos del Proyecto - ¿Qué harás hoy?
         </div>
       </v-col>
+      <v-col sm="12" md="4" v-for="process in processes" :key="process.id">
+        <v-card color="#1300FF" dark>
+          <v-card-title class="headline">{{process.nombre}}</v-card-title>
 
-      <v-col
-        v-for="(processes, i) in processes"
-        :key="i"
-        cols="12"
-        sm="8"
-        md="4"
-      >
-        <v-card :color="processes.color" dark>
-          <div class="d-flex flex-no-wrap justify-space-between">
-            <div>
-              <v-card-title
-                class="headline"
-                v-text="processes.name"
-              ></v-card-title>
-              <v-card-subtitle v-text="processes.type"></v-card-subtitle>
-            </div>
-
-            <v-avatar class="ma-3" size="125" tile>
-              <v-img :src="processes.src"></v-img>
-            </v-avatar>
-          </div>
+          <v-card-actions>
+            <v-btn text @click="hello(process.id)">Revisar</v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -36,7 +21,7 @@
 
 <script>
 // Utilities
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'DashboardDashboard',
 
@@ -56,137 +41,6 @@ export default {
           artist: 'Ellie Goulding',
         },
       ],
-
-      dataCompletedTasksChart: {
-        data: {
-          labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-          series: [[230, 750, 450, 300, 280, 240, 200, 190]],
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0,
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-          },
-        },
-      },
-      headers: [
-        {
-          sortable: false,
-          text: 'ID',
-          value: 'id',
-        },
-        {
-          sortable: false,
-          text: 'Name',
-          value: 'name',
-        },
-        {
-          sortable: false,
-          text: 'Salary',
-          value: 'salary',
-          align: 'right',
-        },
-        {
-          sortable: false,
-          text: 'Country',
-          value: 'country',
-          align: 'right',
-        },
-        {
-          sortable: false,
-          text: 'City',
-          value: 'city',
-          align: 'right',
-        },
-      ],
-      items2: [
-        {
-          id: 1,
-          name: 'Dakota Rice',
-          country: 'Niger',
-          city: 'Oud-Tunrhout',
-          salary: '$35,738',
-        },
-        {
-          id: 2,
-          name: 'Minerva Hooper',
-          country: 'Curaçao',
-          city: 'Sinaai-Waas',
-          salary: '$23,738',
-        },
-        {
-          id: 3,
-          name: 'Sage Rodriguez',
-          country: 'Netherlands',
-          city: 'Overland Park',
-          salary: '$56,142',
-        },
-        {
-          id: 4,
-          name: 'Philip Chanley',
-          country: 'Korea, South',
-          city: 'Gloucester',
-          salary: '$38,735',
-        },
-        {
-          id: 5,
-          name: 'Doris Greene',
-          country: 'Malawi',
-          city: 'Feldkirchen in Kārnten',
-          salary: '$63,542',
-        },
-      ],
-      sales: [
-        {
-          country: 'USA',
-          flag:
-            'https://demos.creative-tim.com/vue-material-dashboard-pro/img/flags/US.png',
-          salesInM: 2920,
-        },
-        {
-          country: 'Germany',
-          flag:
-            'https://demos.creative-tim.com/vue-material-dashboard-pro/img/flags/DE.png',
-          salesInM: 1300,
-        },
-        {
-          country: 'Australia',
-          flag:
-            'https://demos.creative-tim.com/vue-material-dashboard-pro/img/flags/AU.png',
-          salesInM: 760,
-        },
-        {
-          country: 'United Kingdom',
-          flag:
-            'https://demos.creative-tim.com/vue-material-dashboard-pro/img/flags/GB.png',
-          salesInM: 690,
-        },
-        {
-          country: 'Romania',
-          flag:
-            'https://demos.creative-tim.com/vue-material-dashboard-pro/img/flags/RO.png',
-          salesInM: 600,
-        },
-        {
-          country: 'Brasil',
-          flag:
-            'https://demos.creative-tim.com/vue-material-dashboard-pro/img/flags/BR.png',
-          salesInM: 550,
-        },
-      ],
-      tabs: 0,
-      list: {
-        0: false,
-        1: false,
-        2: false,
-      },
     }
   },
 
@@ -198,12 +52,16 @@ export default {
     ...mapGetters('processes', ['processes']),
   },
   created() {
-    this.$store.dispatch('processes/fetchProcesses')
+    this.fetchProcesses(this.$route.params.id_project)
   },
   methods: {
+    ...mapActions('processes',['fetchProcesses']),
     complete(index) {
       this.list[index] = !this.list[index]
     },
+    hello(value){
+      alert(value)
+    }
   },
 }
 </script>

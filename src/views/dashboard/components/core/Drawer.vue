@@ -60,7 +60,7 @@
 
 <script>
 // Utilities
-import { mapState } from 'vuex'
+import {mapActions, mapGetters, mapState} from 'vuex'
 
 export default {
   name: 'DashboardCoreDrawer',
@@ -147,6 +147,7 @@ export default {
 
   computed: {
     ...mapState(['barColor', 'barImage']),
+    ...mapGetters('users',['user']),
     drawer: {
       get() {
         return this.$store.state.drawer
@@ -162,7 +163,7 @@ export default {
       return {
         avatar: true,
         group: '/userprofile',
-        title: this.$t('avatar'),
+        title: this.user.empleado.nombre + " "+ this.user.empleado.apellido,
         //title: this.$t(user.employee.name),
         children: [
           {
@@ -179,8 +180,11 @@ export default {
       this.$emit('update:expandOnHover', !val)
     },
   },
-
+  created() {
+    this.fetchUserAuth()
+  },
   methods: {
+    ...mapActions('users',['fetchUserAuth']),
     mapItem(item) {
       return {
         ...item,

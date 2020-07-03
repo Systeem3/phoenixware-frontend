@@ -16,6 +16,7 @@ import success from './modules/success'
 import members from './modules/members'
 import projects from './modules/projects'
 import notifications from './modules/notification'
+import processes from './modules/processes'
 import locale from './modules/locale'
 
 //import * as user from '@/store/modules/user.js'
@@ -62,6 +63,7 @@ export default new Vuex.Store({
     meetings,
     members,
     notifications,
+    processes,
     board,
   },
   strict: debug,

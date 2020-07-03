@@ -15,6 +15,7 @@ const state = {
     costo: null,
     presupuesto: null,
     estado: '',
+    tiempo:null,
   },
   /*project2: {
     nombre: '',
@@ -84,6 +85,9 @@ const mutations = {
         break
       case 'state':
         state.project.estado = data.value
+        break
+      case 'time':
+        state.project.tiempo = data.value
         break
       default:
         break

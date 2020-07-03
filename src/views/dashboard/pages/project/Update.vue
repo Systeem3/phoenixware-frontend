@@ -356,6 +356,11 @@ export default {
       'saveProject',
     ]),
     async submit() {
+      let fechaInicio=new Date(this.dateCreated).getTime();
+      let fechaFinal=new Date(this.dateFinished).getTime();
+      let diff = fechaFinal - fechaInicio
+      let dias = diff/(1000*60*60*24)
+      console.log(dias)
       await this.saveProject({
         nombre: this.name,
         descripcion: this.description,
@@ -367,6 +372,7 @@ export default {
         costo: this.costo,
         presupuesto: this.presupuesto,
         estado: this.state,
+        tiempo:dias,
         id: this.id_project,
       })
     },

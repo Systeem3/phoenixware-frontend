@@ -17,6 +17,7 @@ const state = {
       apellido: '',
       direccion: '',
       telefono: '',
+      foto: '',
     },
     tipo_usuario: '',
   },
@@ -39,6 +40,7 @@ const mutations = {
     state.user.empleado.direccion = data.empleado.direccion
     state.user.empleado.telefono = data.empleado.telefono
     state.user.tipo_usuario = data.tipo_usuario
+    state.user.foto = data.foto
   },
   [types.CHANGE_STATE](state) {
     state.user.is_active = false
@@ -62,6 +64,9 @@ const mutations = {
         break
       case 'type':
         state.user.tipo_usuario = data.value
+        break
+      case 'image':
+        state.user.foto = data.value
         break
       default:
         break
@@ -139,6 +144,38 @@ const actions = {
             //commit(types.USERS, response.data.docs)
             // commit(types.TOTAL_USERS, response.data.totalDocs)
             commit('SET_USERS', response.data)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  fetchUsersNotProject({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      UserService.getUsersNotProject(id)
+        .then((response) => {
+          if (response.status === 200) {
+            //commit(types.USERS, response.data.docs)
+            // commit(types.TOTAL_USERS, response.data.totalDocs)
+            commit('SET_USERS', response.data)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  fetchUserAuth({ commit }) {
+    return new Promise((resolve, reject) => {
+      UserService.getUserAuth()
+        .then((response) => {
+          if (response.status === 200) {
+            //commit(types.USERS, response.data.docs)
+            // commit(types.TOTAL_USERS, response.data.totalDocs)
+            commit('SET_USER', response.data)
             resolve()
           }
         })

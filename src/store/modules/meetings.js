@@ -1,11 +1,11 @@
-import ProcessService from '@/services/ProcessService.js'
+import MeetingService from '@/services/MeetingService.js'
 import * as types from '@/store/mutation-types'
 import auth from '../../api/auth'
 import { buildSuccess, handleError } from '@/utils/utils.js'
 
 const state = {
-  processes: [],
-  process: {
+  meetings: [],
+  meeting: {
     nombre: '',
     descripcion: '',
     fecha: null,
@@ -15,48 +15,51 @@ const state = {
 }
 
 const mutations = {
-  ADD_PROCESS(state, process) {
-    state.processes.push(process)
+  ADD_MEETING(state, meeting) {
+    state.meetings.push(meeting)
   },
-  SET_PROCESSS(state, processes) {
-    //state.processes.push(processes)
-    state.processes = processes
+  SET_MEETINGS(state, meetings) {
+    //state.meetings.push(meetings)
+    state.meetings = meetings
   },
-  SET_PROCESS(state, process) {
-    //state.processes.push(processes)
-    state.process = process
+  SET_MEETING(state, meeting) {
+    //state.meetings.push(meetings)
+    state.meeting = meeting
   },
-  UPDATE_PROCESS(state, payload) {
-    state.processes = state.processes.map((process) => {
-      if (process.id === payload.id) {
-        return Object.assign({}, process, payload.data)
+  UPDATE_MEETING(state, payload) {
+    state.meetings = state.meetings.map((meeting) => {
+      if (meeting.id === payload.id) {
+        return Object.assign({}, meeting, payload.data)
       }
-      return process
+      return meeting
     })
   },
-  [types.FILL_PROCESS](state, data) {
-    state.process.nombre = data.nombre
-    state.process.descripcion = data.descripcion
-    state.process.fecha = data.fecha
-    state.process.hora = data.hora
-    state.process.lugar = data.lugar
+  [types.FILL_MEETING](state, data) {
+    state.meeting.nombre = data.nombre
+    state.meeting.descripcion = data.descripcion
+    state.meeting.fecha = data.fecha
+    state.meeting.hora = data.hora
+    state.meeting.lugar = data.lugar
   },
   [types.CHANGE_STATE](state) {
-    state.process.is_active = false
+    state.meeting.is_active = false
   },
-  [types.ADD_PROCESS_DATA](state, data) {
+  [types.ADD_MEETING_DATA](state, data) {
     switch (data.key) {
       case 'name':
-        state.process.nombre = data.value
+        state.meeting.nombre = data.value
         break
-      case 'category':
-        state.process.descripcion = data.value
+      case 'description':
+        state.meeting.descripcion = data.value
         break
-      case 'type':
-        state.process.fecha = data.value
+      case 'date':
+        state.meeting.fecha = data.value
         break
-      case 'project':
-        state.process.hora = data.value
+      case 'time':
+        state.meeting.hora = data.value
+        break
+      case 'place':
+        state.meeting.lugar = data.value
         break
       default:
         break
@@ -65,20 +68,20 @@ const mutations = {
 }
 
 const actions = {
-  createProcess({ commit, dispatch }, process) {
-    console.log(process.projectId)
-    return ProcessService.postProcess(process, process.projectId)
+  createMeeting({ commit, dispatch }, meeting) {
+    console.log(meeting.projectId)
+    return MeetingService.postMeeting(meeting, meeting.projectId)
       .then(() => {
-        commit('ADD_PROCESS', process)
+        commit('ADD_MEETING', meeting)
         const notification = {
           //type: 'success',
-          //message: 'Your process has been created!',
+          //message: 'Your meeting has been created!',
           success() {
             /* Vue.swal({
-              type: 'success',
-              title: 'Hello',
-              text: 'Hello brave new world!',
-            })*/
+                type: 'success',
+                title: 'Hello',
+                text: 'Hello brave new world!',
+              })*/
             this.$swal('Oops...', 'Something went wrong!', 'success')
           },
         }
@@ -87,13 +90,13 @@ const actions = {
       .catch((error) => {
         const notification = {
           //  type: 'error',
-          //message: 'There was a problem creating your process: ' + error.message,
+          //message: 'There was a problem creating your meeting: ' + error.message,
           success() {
             /* Vue.swal({
-              type: 'success',
-              title: 'Hello',
-              text: 'Hello brave new world!',
-            })*/
+                type: 'success',
+                title: 'Hello',
+                text: 'Hello brave new world!',
+              })*/
             this.$swal('Oops...', 'Something went wrong!!!!', 'error')
           },
         }
@@ -101,49 +104,49 @@ const actions = {
         throw error
       })
   },
-  fetchProcesses({ commit, dispatch }, id) {
-    ProcessService.getProcesses(id)
+  fetchMeetings({ commit, dispatch }, id) {
+    MeetingService.getMeetings(id)
       .then((response) => {
-        commit('SET_PROCESSS', response.data)
+        commit('SET_MEETINGS', response.data)
       })
       .catch((error) => {
-        console.log(this.process)
+        console.log(this.meeting)
         const notification = {
           type: 'error',
-          message: 'There was a problem fetching processes: ' + error.message,
+          message: 'There was a problem fetching meetings: ' + error.message,
         }
         dispatch('notification/add', notification, { root: true })
       })
   },
-  fetchProcess({ commit, getters, dispatch }, id) {
-    const process = getters.getProcessById(id)
-    if (process) {
-      commit('SET_PROCESS', process)
+  fetchMeeting({ commit, getters, dispatch }, id) {
+    const meeting = getters.getMeetingById(id)
+    if (meeting) {
+      commit('SET_MEETING', meeting)
     } else {
-      ProcessService.getProcess(id)
+      MeetingService.getMeeting(id)
         .then((response) => {
           console.log(response.data)
-          commit('SET_PROCESS', response.data)
+          commit('SET_MEETING', response.data)
         })
         .catch((error) => {
           const notification = {
             type: 'error',
-            message: 'There was a problem fetching process: ' + error.message,
+            message: 'There was a problem fetching meeting: ' + error.message,
           }
           dispatch('notification/add', notification, { root: true })
         })
     }
   },
 
-  saveProcess({ commit }, payload) {
+  saveMeeting({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      ProcessService.updateProcess(payload.id, payload)
+      MeetingService.updateMeeting(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
-            commit(types.FILL_PROCESS, response.data)
+            commit(types.FILL_MEETING, response.data)
             buildSuccess(
               {
-                msg: 'The process was updated',
+                msg: 'The meeting was updated',
               },
               commit,
               resolve
@@ -156,20 +159,20 @@ const actions = {
     })
   },
 
-  addProcessData({ commit }, data) {
-    commit(types.ADD_PROCESS_DATA, data)
+  addMeetingData({ commit }, data) {
+    commit(types.ADD_MEETING_DATA, data)
   },
 
-  deleteProcess({ commit }, payload) {
+  deleteMeeting({ commit }, payload) {
     return new Promise((resolve, reject) => {
       auth
-        .deleteProcess(payload.id, payload)
+        .deleteMeeting(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
             commit(types.CHANGE_STATE, response.data)
             buildSuccess(
               {
-                msg: 'The process was deleted',
+                msg: 'The meeting was deleted',
               },
               commit,
               resolve
@@ -183,13 +186,13 @@ const actions = {
   },
 }
 const getters = {
-  getProcessById: (state) => (id) => {
-    return state.processes.find((process) => process.id === id)
+  getMeetingById: (state) => (id) => {
+    return state.meetings.find((meeting) => meeting.id === id)
   },
-  processes: (state) => {
-    return state.processes
+  meetings: (state) => {
+    return state.meetings
   },
-  process: (state) => state.process,
+  meeting: (state) => state.meeting,
 }
 
 export default {

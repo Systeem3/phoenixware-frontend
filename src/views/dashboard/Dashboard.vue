@@ -139,14 +139,20 @@
         <base-material-card color="transparent" hover-reveal image>
           <template v-slot:image>
             <v-img
-                    src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/04/30/15566314118270.jpg"
+              src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/04/30/15566314118270.jpg"
             />
           </template>
 
           <template v-slot:reveal-actions>
             <v-tooltip bottom>
               <template v-slot:activator="{ attrs, on }">
-                <v-btn class="mx-1" v-bind="attrs" icon v-on="on" @click="hello(project.id)">
+                <v-btn
+                  class="mx-1"
+                  v-bind="attrs"
+                  icon
+                  v-on="on"
+                  @click="hello(project.id)"
+                >
                   <v-icon>mdi-view-split-vertical</v-icon>
                 </v-btn>
               </template>
@@ -155,14 +161,20 @@
             </v-tooltip>
           </template>
 
-          <v-card-title class="justify-center font-weight-light">{{project.nombre}}</v-card-title>
+          <v-card-title class="justify-center font-weight-light">{{
+            project.nombre
+          }}</v-card-title>
 
-          <v-card-text class="body-1 text-center mb-3 font-weight-light grey--text">
-            {{project.descripcion}}
+          <v-card-text
+            class="body-1 text-center mb-3 font-weight-light grey--text"
+          >
+            {{ project.descripcion }}
           </v-card-text>
 
           <template v-slot:actions>
-            <div class="display-2 font-weight-light grey--text">{{project.tipo}}</div>
+            <div class="display-2 font-weight-light grey--text">
+              {{ project.tipo }}
+            </div>
 
             <v-spacer />
 
@@ -215,20 +227,20 @@ export default {
     totalSales() {
       return this.sales.reduce((acc, val) => acc + val.salesInM, 0)
     },
-    ...mapGetters('projects',['projects'])
+    ...mapGetters('projects', ['projects']),
   },
 
   methods: {
-    ...mapActions('projects',['fetchProjects']),
+    ...mapActions('projects', ['fetchProjects']),
     complete(index) {
       this.list[index] = !this.list[index]
     },
-    hello(value){
+    hello(value) {
       alert(value)
     },
   },
   created() {
     this.fetchProjects()
-  }
+  },
 }
 </script>

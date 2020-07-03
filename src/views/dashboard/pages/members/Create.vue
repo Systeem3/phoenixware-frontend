@@ -15,7 +15,7 @@
                 <v-row>
                   <v-col cols="12" md="6">
                     <VSelectWithValidation
-                      v-model="tipo_usuario"
+                      v-model="rol"
                       :items="items"
                       item-text="name"
                       item-value="id"
@@ -27,11 +27,11 @@
                   </v-col>
                   <v-col cols="12" md="6">
                     <VSelectWithValidation
-                      v-model="tipo_usuario"
-                      :items="items"
-                      item-text="name"
+                      v-model="user"
+                      :items="users"
+                      item-text="email"
                       item-value="id"
-                      label="Rol"
+                      label="Usuario"
                       rules="required"
                       dense
                       prepend-icon="mdi-account-group"
@@ -78,17 +78,13 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      email: '',
-      nombre: '',
-      apellido: '',
-      direccion: '',
-      telefono: '',
       rol: '',
       items: [
         { name: 'Lider', id: 'L' },
         { name: 'Miembro', id: 'M' },
       ],
-      usuarios: [],
+      user:'',
+      proyecto_id:this.$route.params.id_project,
     }
   },
   components: {
@@ -96,24 +92,23 @@ export default {
     VSelectWithValidation,
   },
 created() {
-    this.fetchUsers()
+    this.fetchUsersNotProject(this.proyecto_id)
 },
   computed: {
     ...mapGetters('users', ['users']),
   },
   methods: {
     ...mapActions('members', ['createMember']),
-    ...mapActions('users', ['fetchUsers']),
+    ...mapActions('users', ['fetchUsersNotProject']),
     async submit() {
       // this.$refs.obs.validate()
+      console.log(this.proyecto_id)
       await this.createMember({
-        email: this.email,
-        nombre: this.nombre,
-        apellido: this.apellido,
-        direccion: this.direccion,
-        telefono: this.telefono,
-        tipo_usuario: this.tipo_usuario,
+        rol:this.rol,
+        usuario:this.user,
+        proyecto:this.proyecto_id,
       })
+      this.fetchUsersNotProject(this.proyecto_id)
     },
   },
 }

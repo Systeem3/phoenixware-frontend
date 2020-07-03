@@ -39,7 +39,12 @@
       <div />
 
       <template v-for="(item, i) in computedItems">
-        <base-item-group v-if="item.children" :key="`group-${i}`" :item="item" :icon="icon">
+        <base-item-group
+          v-if="item.children"
+          :key="`group-${i}`"
+          :item="item"
+          :icon="icon"
+        >
           <!--  -->
         </base-item-group>
 
@@ -88,6 +93,18 @@ export default {
             title: 'pr-list',
             to: 'list',
             icon: 'mdi-account-multiple',
+          },
+          {
+            group: '/project/risks', //riesgos
+            icon: 'mdi mdi-rocket',
+            title: 'Riesgos',
+            children: [
+              {
+                title: 'Registrar Riesgo',
+                to: '/create',
+                icon: 'mdi mdi-account-plus',
+              },
+            ],
           },
         ],
       },

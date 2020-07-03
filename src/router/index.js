@@ -282,12 +282,39 @@ const routes = [
         path: '/userprofile/edit',
         component: () => import('@/views/dashboard/pages/user/UserProfile'),
       },
-
       // Members
       {
         name: 'MembersList',
         path: '/members/list/:id_project',
         component: () => import('@/views/dashboard/pages/members/List'),
+      },
+      // Risk
+      {
+        name: 'RisksCreate',
+        path: '/project/risks/create',
+        component: () =>
+          import('@/views/dashboard/pages/project/risks/CreateR'),
+      },
+      {
+        name: 'RisksCreate1',
+        path: '/project/risks/createe',
+        component: () => import('@/views/dashboard/pages/project/risks/Create'),
+      },
+      {
+        name: 'RisksList',
+        path: '/project/risks/list',
+        component: () => import('@/views/dashboard/pages/project/risks/List'),
+      },
+      //Resources
+      {
+        name: 'ResourcesCreate',
+        path: '/resources/create',
+        component: () => import('@/views/dashboard/pages/resources/Create'),
+      },
+      {
+        name: 'ResourcesList',
+        path: '/resources/list',
+        component: () => import('@/views/dashboard/pages/resources/List'),
       },
     ],
   },

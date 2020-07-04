@@ -2,9 +2,10 @@
   <v-container id="dashboard" fluid tag="section">
     <v-row>
       <v-col cols="12">
-        <div class="font-weight-light mt-1" style="font-size: 25px;">
-          Estos son tus proyectos - ¿En cuál quieres trabajar?
-        </div>
+        <div
+          class="font-weight-light mt-1"
+          style="font-size: 25px;"
+        >Estos son tus proyectos - ¿En cuál quieres trabajar?</div>
       </v-col>
 
       <!-- <v-col sm="12" md="4">
@@ -44,7 +45,7 @@
             </span>
           </template>
         </base-material-card>
-      </v-col> -->
+      </v-col>-->
 
       <!-- <v-col sm="12" md="4">
         <base-material-card color="transparent" hover-reveal image>
@@ -122,13 +123,11 @@
             </span>
           </template>
         </base-material-card>
-      </v-col> -->
+      </v-col>-->
       <v-col sm="12" md="4" v-for="project in projects" :key="project.id">
         <base-material-card color="transparent" hover-reveal image>
           <template v-slot:image>
-            <v-img
-              src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/04/30/15566314118270.jpg"
-            />
+            <v-img :src="images[project.id]" />
           </template>
 
           <template v-slot:reveal-actions>
@@ -139,7 +138,10 @@
                   v-bind="attrs"
                   icon
                   v-on="on"
-                  @click="hello(project.id)"
+                  :to="{
+                    name: 'ProjectDash',
+                    params: { id_project: project.id },
+                  }"
                 >
                   <v-icon>mdi-view-split-vertical</v-icon>
                 </v-btn>
@@ -149,19 +151,14 @@
             </v-tooltip>
           </template>
 
-          <v-card-title class="justify-center font-weight-light">
-            {{ project.nombre }}
-          </v-card-title>
+          <v-card-title class="justify-center font-weight-light">{{ project.nombre }}</v-card-title>
 
           <v-card-text
             class="body-1 text-center mb-3 font-weight-light grey--text"
-            >{{ project.descripcion }}</v-card-text
-          >
+          >{{ project.descripcion }}</v-card-text>
 
           <template v-slot:actions>
-            <div class="display-2 font-weight-light grey--text">
-              {{ project.tipo }}
-            </div>
+            <div class="display-2 font-weight-light grey--text">{{ project.tipo }}</div>
 
             <v-spacer />
 
@@ -182,39 +179,19 @@ export default {
 
   data() {
     return {
-      dataCompletedTasksChart: {
-        data: {
-          labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-          series: [[230, 750, 450, 300, 280, 240, 200, 190]],
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0,
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-          },
-        },
-      },
-      tabs: 0,
-      list: {
-        0: false,
-        1: false,
-        2: false,
-      },
+      id_project: this.$route.params.id_project,
+      img: '',
+      images: [],
     }
   },
 
   computed: {
-    totalSales() {
-      return this.sales.reduce((acc, val) => acc + val.salesInM, 0)
-    },
     ...mapGetters('projects', ['projects']),
+    aleatorio() {
+      var random
+      random = Math.floor(Math.random() * 10)
+      return this.images[random]
+    },
   },
 
   methods: {
@@ -225,9 +202,23 @@ export default {
     hello(value) {
       alert(value)
     },
+
+    async llenarimages() {
+      var randomNumber
+
+      for (let index = 0; index < 10; index++) {
+        randomNumber = Math.floor(Math.random() * 94)
+        fetch(
+          `https://source.unsplash.com/collection/4540043/600x400/?sig=${randomNumber}`
+        ).then((response) => {
+          this.images.push(response.url)
+        })
+      }
+    },
   },
   created() {
     this.fetchProjects()
+    this.llenarimages()
   },
 }
 </script>

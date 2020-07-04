@@ -39,12 +39,7 @@
       <div />
 
       <template v-for="(item, i) in computedItems">
-        <base-item-group
-          v-if="item.children"
-          :key="`group-${i}`"
-          :item="item"
-          :icon="icon"
-        >
+        <base-item-group v-if="item.children" :key="`group-${i}`" :item="item" :icon="icon">
           <!--  -->
         </base-item-group>
 
@@ -60,7 +55,7 @@
 
 <script>
 // Utilities
-import {mapActions, mapGetters, mapState} from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'DashboardCoreDrawer',
@@ -95,18 +90,6 @@ export default {
             to: 'list',
             icon: 'mdi-account-multiple',
           },
-          {
-            group: '/project/risks', //riesgos
-            icon: 'mdi mdi-rocket',
-            title: 'Riesgos',
-            children: [
-              {
-                title: 'Registrar Riesgo',
-                to: '/create',
-                icon: 'mdi mdi-account-plus',
-              },
-            ],
-          },
         ],
       },
       {
@@ -121,7 +104,7 @@ export default {
           },
           {
             title: 'mee-list',
-            to: '',
+            to: 'list',
             icon: 'mdi-account-multiple',
           },
         ],
@@ -160,7 +143,7 @@ export default {
 
   computed: {
     ...mapState(['barColor', 'barImage']),
-    ...mapGetters('users',['user']),
+    ...mapGetters('users', ['user']),
     drawer: {
       get() {
         return this.$store.state.drawer
@@ -176,7 +159,7 @@ export default {
       return {
         avatar: true,
         group: '/userprofile',
-        title: this.user.empleado.nombre + " "+ this.user.empleado.apellido,
+        title: this.user.empleado.nombre + ' ' + this.user.empleado.apellido,
         //title: this.$t(user.employee.name),
         children: [
           {
@@ -197,7 +180,7 @@ export default {
     this.fetchUserAuth()
   },
   methods: {
-    ...mapActions('users',['fetchUserAuth']),
+    ...mapActions('users', ['fetchUserAuth']),
     mapItem(item) {
       return {
         ...item,

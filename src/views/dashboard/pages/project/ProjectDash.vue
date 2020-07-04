@@ -19,12 +19,21 @@
         <template v-slot:reveal-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ attrs, on }">
-              <v-btn class="mx-1" v-bind="attrs" icon v-on="on">
+              <v-btn
+                class="mx-1"
+                v-bind="attrs"
+                icon
+                v-on="on"
+                :to="{
+                  name: 'Processes',
+                  params: { id_project },
+                  query: { id_category: '1' },
+                }"
+              >
                 <v-icon>mdi-folder-multiple</v-icon>
               </v-btn>
             </template>
-
-            <span :to="{ name: 'Stages' }">Ver Procesos</span>
+            <span>Ver Procesos</span>
           </v-tooltip>
         </template>
 
@@ -35,12 +44,22 @@
         <template v-slot:reveal-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ attrs, on }">
-              <v-btn class="mx-1" v-bind="attrs" icon v-on="on">
+              <v-btn
+                class="mx-1"
+                v-bind="attrs"
+                icon
+                v-on="on"
+                :to="{
+                  name: 'Processes',
+                  params: { id_project },
+                  query: { id_category: '2' },
+                }"
+              >
                 <v-icon>mdi-folder-multiple</v-icon>
               </v-btn>
             </template>
 
-            <span :to="{ name: 'Stages' }">Ver Procesos</span>
+            <span>Ver Procesos</span>
           </v-tooltip>
         </template>
 
@@ -51,12 +70,22 @@
         <template v-slot:reveal-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ attrs, on }">
-              <v-btn class="mx-1" v-bind="attrs" icon v-on="on">
+              <v-btn
+                class="mx-1"
+                v-bind="attrs"
+                icon
+                v-on="on"
+                :to="{
+                  name: 'Processes',
+                  params: { id_project },
+                  query: { id_category: '3' },
+                }"
+              >
                 <v-icon>mdi-folder-multiple</v-icon>
               </v-btn>
             </template>
 
-            <span :to="{ name: 'Stages' }">Ver Procesos</span>
+            <span>Ver Procesos</span>
           </v-tooltip>
         </template>
 
@@ -67,12 +96,22 @@
         <template v-slot:reveal-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ attrs, on }">
-              <v-btn class="mx-1" v-bind="attrs" icon v-on="on">
+              <v-btn
+                class="mx-1"
+                v-bind="attrs"
+                icon
+                v-on="on"
+                :to="{
+                  name: 'Processes',
+                  params: { id_project },
+                  query: { id_category: '4' },
+                }"
+              >
                 <v-icon>mdi-folder-multiple</v-icon>
               </v-btn>
             </template>
 
-            <span :to="{ name: 'Stages' }">Ver Procesos</span>
+            <span>Ver Procesos</span>
           </v-tooltip>
         </template>
 
@@ -82,12 +121,22 @@
         <template v-slot:reveal-actions>
           <v-tooltip bottom>
             <template v-slot:activator="{ attrs, on }">
-              <v-btn class="mx-1" v-bind="attrs" icon v-on="on">
+              <v-btn
+                class="mx-1"
+                v-bind="attrs"
+                icon
+                v-on="on"
+                :to="{
+                  name: 'Processes',
+                  params: { id_project },
+                  query: { id_category: '5' },
+                }"
+              >
                 <v-icon>mdi-folder-multiple</v-icon>
               </v-btn>
             </template>
 
-            <span :to="{ name: 'Stages' }">Ver Procesos</span>
+            <span>Ver Procesos</span>
           </v-tooltip>
         </template>
 
@@ -97,11 +146,10 @@
     <v-divider />
     <v-row class="mx-auto" justify="center" dense align="center">
       <v-btn color="secondary">ARTEFACTOS</v-btn>
-      <v-btn color="secondary">REUNIONES</v-btn>
+      <v-btn color="secondary" :to="{ name: 'MeetingList', params: { id_project } }">REUNIONES</v-btn>
       <v-btn color="secondary">PROCESOS</v-btn>
-      <v-btn color="secondary">REQUISITOS</v-btn>
-      <v-btn color="secondary">MIEMBROS</v-btn>
-      <v-btn color="secondary">RIESGOS</v-btn>
+      <v-btn color="secondary" :to="{ name: 'MembersList', params: { id_project } }">MIEMBROS</v-btn>
+      <v-btn color="secondary" :to="{ name: 'RisksList', params: { id_project } }">RIESGOS</v-btn>
     </v-row>
     <v-row>
       <v-col>
@@ -115,9 +163,9 @@
             <div class="card-title font-weight-light ml-4 mb-3" style="font-size: 15;">ESTIMACIONES:</div>
           </v-row>
           <v-row class="mx-auto" justify="center" dense align="center">
-            <v-btn color="primary">TIEMPOS</v-btn>
-            <v-btn color="primary">COSTOS</v-btn>
-            <v-btn color="primary">ALCANCE</v-btn>
+            <v-btn color="primary" :to="{ name: 'Time', params: { id_project } }">TIEMPOS</v-btn>
+            <v-btn color="primary" :to="{ name: 'ResourcesList', params: { id_project } }">RECURSOS</v-btn>
+            <v-btn color="primary" :to="{ name: 'Scope', params: { id_project } }">ALCANCES</v-btn>
           </v-row>
         </v-row>
       </v-col>
@@ -142,12 +190,6 @@
           </v-row>
           <v-row>
             <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Metodología:</div>
-          </v-row>
-          <v-row>
-            <div
-              class="card-title font-weight-bold ml-4"
-              style="font-size: 15px;"
-            >Actividades Asignadas:</div>
           </v-row>
           <v-row>
             <div
@@ -186,9 +228,8 @@
 export default {
   data() {
     return {
-      dataCompletedTasksChart: {
-        data: {},
-      },
+      categoria: this.$route.query.categoria,
+      id_project: this.$route.params.id_project,
     }
   },
 

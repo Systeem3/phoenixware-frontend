@@ -60,6 +60,8 @@
         </template>
       </v-data-table>
     </base-material-card>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 

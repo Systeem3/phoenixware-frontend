@@ -32,8 +32,8 @@
 
       <v-data-table
         :loading="dataTableLoading"
-        :no-data-text="$t('dataTable.NO_DATA')"
-        :no-results-text="$t('dataTable.NO_RESULTS')"
+        :no-data-text="$t('common.dataTable.NO_DATA')"
+        :no-results-text="$t('common.dataTable.NO_RESULTS')"
         :headers="headers"
         :items="users"
         :search.sync="search"
@@ -63,8 +63,10 @@
             mdi-delete
           </v-icon>
         </template>
-        <template v-slot:no-data>{{ $t('dataTable.NO_DATA') }}</template>
-        <template v-slot:no-results>{{ $t('dataTable.NO_RESULTS') }}</template>
+        <template v-slot:no-data>{{ $t('common.dataTable.NO_DATA') }}</template>
+        <template v-slot:no-results>{{
+          $t('common.dataTable.NO_RESULTS')
+        }}</template>
       </v-data-table>
     </base-material-card>
     <ErrorMessage />
@@ -178,7 +180,7 @@ export default {
       this.$router.push(`/users/edit/${item.id}/`)
     },
     ...mapActions('users', ['deleteUser']),
-    props: ['id'],
+    //props: ['id'],
     async deleteItem(item) {
       try {
         const response = await this.$confirm(

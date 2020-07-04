@@ -83,10 +83,9 @@
                       Atrás
                     </v-btn>
                     <v-btn
-                      color="purple"
+                      color="primary"
                       class="mr-0"
                       @click.stop.prevent="submit"
-                      :disabled="invalid"
                     >
                       Modificar
                     </v-btn>
@@ -98,6 +97,8 @@
         </base-material-card>
       </v-col>
     </v-row>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 

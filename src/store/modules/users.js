@@ -16,6 +16,17 @@ const state = {
     },
     tipo_usuario: '',
   },
+  user_auth: {
+    email: '',
+    empleado: {
+      nombre: '',
+      apellido: '',
+      direccion: '',
+      telefono: '',
+      foto: '',
+    },
+    tipo_usuario: '',
+  },
 }
 
 const mutations = {
@@ -27,6 +38,9 @@ const mutations = {
   },
   SET_USER(state, user) {
     state.user = user
+  },
+  SET_USER_AUTH(state, user_auth) {
+    state.user_auth = user_auth
   },
   [types.FILL_USER](state, data) {
     state.user.email = data.email
@@ -78,7 +92,7 @@ const actions = {
           if (response.status === 201) {
             buildSuccess(
               {
-                msg: 'employee.SAVED_SUCCESSFULLY',
+                msg: 'common.employee.CREATED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -129,7 +143,7 @@ const actions = {
           if (response.status === 200) {
             //commit(types.USERS, response.data.docs)
             // commit(types.TOTAL_USERS, response.data.totalDocs)
-            commit('SET_USER', response.data)
+            commit('SET_USER_AUTH', response.data)
             resolve()
           }
         })
@@ -183,7 +197,7 @@ const actions = {
             commit(types.FILL_USER, response.data)
             buildSuccess(
               {
-                msg: 'common.employee.SAVED_SUCCESSFULLY',
+                msg: 'common.employee.EDITED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -207,7 +221,7 @@ const actions = {
             commit(types.CHANGE_STATE, response.data)
             buildSuccess(
               {
-                msg: 'employee.DELETED_SUCCESSFULLY',
+                msg: 'common.employee.DELETED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -230,6 +244,7 @@ const getters = {
     return state.users
   },
   user: (state) => state.user,
+  user_auth: (state) => state.user_auth,
 }
 
 export default {

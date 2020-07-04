@@ -1,8 +1,12 @@
 <template>
   <v-container id="validation-forms" fluid tag="section">
     <section class="mb-12 text-center">
-      <h1 class="font-weight-light mb-2 headline">Estimación de Tiempos del Proyecto</h1>
-      <span class="font-weight-light subtitle-1">Con uso del Método de Estimación por Casos de Usos</span>
+      <h1 class="font-weight-light mb-2 headline">
+        Estimación de Tiempos del Proyecto
+      </h1>
+      <span class="font-weight-light subtitle-1"
+        >Con uso del Método de Estimación por Casos de Usos</span
+      >
     </section>
     <v-row>
       <v-col cols="12" md="6">
@@ -34,7 +38,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-memory</v-icon>
+                      >mdi mdi-memory</v-icon
+                    >
                   </template>
                   <span>
                     Otros sistemas que interactúan con el sistema a desarrollar
@@ -65,7 +70,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-console</v-icon>
+                      >mdi mdi-console</v-icon
+                    >
                   </template>
                   <span>
                     Otro sistema interactuando a través de un protocolo (ej.
@@ -96,7 +102,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi-monitor-multiple</v-icon>
+                      >mdi-monitor-multiple</v-icon
+                    >
                   </template>
                   <span>
                     Una persona que interactúa con el sistema mediante una
@@ -139,7 +146,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-numeric-3-box</v-icon>
+                      >mdi mdi-numeric-3-box</v-icon
+                    >
                   </template>
                   <span>Con 3 transacciones o menos</span>
                 </v-tooltip>
@@ -167,7 +175,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-numeric-7-box</v-icon>
+                      >mdi mdi-numeric-7-box</v-icon
+                    >
                   </template>
                   <span>De 4 a 7 transacciones</span>
                 </v-tooltip>
@@ -194,7 +203,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-12"
-                    >mdi mdi-numeric-7-box-multiple-outline</v-icon>
+                      >mdi mdi-numeric-7-box-multiple-outline</v-icon
+                    >
                   </template>
                   <span>Con más de 7 transacciones</span>
                 </v-tooltip>
@@ -219,7 +229,9 @@
           <v-form>
             <v-row>
               <v-col>
-                <span class="font-weight-light ml-3">Evalúa en escala del 0 al 5:</span>
+                <span class="font-weight-light ml-3"
+                  >Evalúa en escala del 0 al 5:</span
+                >
               </v-col>
               <v-col>
                 <v-tooltip right>
@@ -230,7 +242,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-1 mb-1"
-                    >mdi mdi-help-circle</v-icon>
+                      >mdi mdi-help-circle</v-icon
+                    >
                   </template>
                   <span>
                     De 0 a 2 (Irrelevante) / De 3 a 4 (Medio) / Igual a 5
@@ -262,7 +275,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-google-circles-extended</v-icon>
+                      >mdi mdi-google-circles-extended</v-icon
+                    >
                   </template>
                   <span>
                     Un sistema distribuido es un sistema cuyos componentes están
@@ -295,7 +309,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi mdi-auto-fix</v-icon>
+                      >mdi mdi-auto-fix</v-icon
+                    >
                   </template>
                   <span>
                     Los objetivos performance son específicos, mensurables,
@@ -329,7 +344,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-emoticon-happy</v-icon>
+                      >mdi mdi-emoticon-happy</v-icon
+                    >
                   </template>
                   <span>
                     La Eficiencia para Usuario Final es el grado de
@@ -363,7 +379,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-format-subscript</v-icon>
+                      >mdi-format-subscript</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe si se involucran cálculos o un nivel de abstracción
@@ -395,7 +412,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-download</v-icon>
+                      >mdi-download</v-icon
+                    >
                   </template>
                   <span>
                     La reusabilidad es la medida de la capacidad de los
@@ -428,7 +446,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-database</v-icon>
+                      >mdi-database</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe el grado de complejidad que supone la instalación
@@ -461,7 +480,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-book-open</v-icon>
+                      >mdi-book-open</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe el grado de complejidad que supone el uso del sistema
@@ -494,7 +514,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-cellphone-android</v-icon>
+                      >mdi-cellphone-android</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan portable ha de ser el software para
@@ -527,7 +548,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-drawing-box</v-icon>
+                      >mdi-drawing-box</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanta complejidad supondría realizar cambios a
@@ -559,7 +581,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-equal-box</v-icon>
+                      >mdi-equal-box</v-icon
+                    >
                   </template>
                   <span>
                     La concurrencia es la capacidad de los elementos del
@@ -593,7 +616,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-security</v-icon>
+                      >mdi-security</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanto se involucran aspectos de seguridad
@@ -625,7 +649,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-wheelchair-accessibility</v-icon>
+                      >mdi-wheelchair-accessibility</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanto se involucran aspectos de Accesibilidad
@@ -658,7 +683,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-library</v-icon>
+                      >mdi-library</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanto se incorporan funcionalidades en su sistema
@@ -682,7 +708,9 @@
           <v-form>
             <v-row>
               <v-col>
-                <span class="font-weight-light ml-3">Evalúa en escala del 0 al 5:</span>
+                <span class="font-weight-light ml-3"
+                  >Evalúa en escala del 0 al 5:</span
+                >
               </v-col>
               <v-col>
                 <v-tooltip right>
@@ -693,7 +721,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-1 mb-1"
-                    >mdi mdi-help-circle</v-icon>
+                      >mdi mdi-help-circle</v-icon
+                    >
                   </template>
                   <span>
                     De 0 a 2 (Irrelevante) / De 3 a 4 (Medio) / Igual a 5
@@ -725,7 +754,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-history</v-icon>
+                      >mdi mdi-history</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan familiarizado está su equipo con el proceso
@@ -758,7 +788,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi mdi-human</v-icon>
+                      >mdi mdi-human</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan capacitado o experimentado está su equipo
@@ -791,7 +822,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-5"
-                    >mdi mdi-hexagon</v-icon>
+                      >mdi mdi-hexagon</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tanta experiencia tiene su equipo con el
@@ -824,7 +856,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-android-studio</v-icon>
+                      >mdi-android-studio</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tan capacitado está su Analista Líder de su
@@ -856,7 +889,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-emoticon</v-icon>
+                      >mdi-emoticon</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tan motivado está su equipo de trabajo para
@@ -889,7 +923,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-rename-box</v-icon>
+                      >mdi-rename-box</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tan sujetos a cambios están los requisitos de su
@@ -922,7 +957,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-calendar-clock</v-icon>
+                      >mdi-calendar-clock</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe que tanto se trabajará a media jornada (part-time) en
@@ -955,7 +991,8 @@
                       v-bind="attrs"
                       v-on="on"
                       class="ml-2 mt-6"
-                    >mdi-television-guide</v-icon>
+                      >mdi-television-guide</v-icon
+                    >
                   </template>
                   <span>
                     Evalúe qué tanta complejidad supone el uso de los Lenguajes
@@ -1050,7 +1087,9 @@
         >
           <v-form>
             <v-col>
-              <span class="font-weight-light ml-3 mt-4 mb-3">Esfuerzo Total:</span>
+              <span class="font-weight-light ml-3 mt-4 mb-3"
+                >Esfuerzo Total:</span
+              >
               <v-text-field
                 disabled
                 dense
@@ -1076,9 +1115,9 @@
                 class="mt-2"
               />
 
-              <span
-                class="font-weight-light ml-3 mt-4 mb-3"
-              >División del Tiempo por Actividad de Desarrollo:</span>
+              <span class="font-weight-light ml-3 mt-4 mb-3"
+                >División del Tiempo por Actividad de Desarrollo:</span
+              >
               <v-text-field
                 disabled
                 dense
@@ -1167,7 +1206,9 @@
                       @input="menu = false"
                     >
                       <v-spacer />
-                      <v-btn color="secondary" large @click="menu = false">Cancelar</v-btn>
+                      <v-btn color="secondary" large @click="menu = false"
+                        >Cancelar</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-col>
@@ -1193,15 +1234,15 @@
                 <v-snackbar
                   v-model="dialog"
                   color="secondary"
-                  multi-line="true"
-                  top="true"
+                  :multi-line="multiline"
+                  :top="top"
                   timeout="6000"
                 >
                   Las fechas del proyecto han sido modificadas exitosamente.
-                  <template
-                    v-slot:action="{ attrs }"
-                  >
-                    <v-btn dark text v-bind="attrs" @click="dialog = false">Cerrar</v-btn>
+                  <template v-slot:action="{ attrs }">
+                    <v-btn dark text v-bind="attrs" @click="dialog = false"
+                      >Cerrar</v-btn
+                    >
                   </template>
                 </v-snackbar>
 
@@ -1211,7 +1252,9 @@
                       ERROR:
                       <v-spacer />
 
-                      <v-icon aria-label="Close" @click="dialog2 = false">mdi-close</v-icon>
+                      <v-icon aria-label="Close" @click="dialog2 = false"
+                        >mdi-close</v-icon
+                      >
                     </v-card-title>
 
                     <v-card-text>
@@ -1222,11 +1265,15 @@
                     <v-card-actions>
                       <v-spacer />
 
-                      <v-btn color="error" text @click="dialog2 = false">Cerrar</v-btn>
+                      <v-btn color="error" text @click="dialog2 = false"
+                        >Cerrar</v-btn
+                      >
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
-                <v-btn default color="secondary" @click="check">Modificar Fechas</v-btn>
+                <v-btn default color="secondary" @click="check"
+                  >Modificar Fechas</v-btn
+                >
                 <v-spacer />
               </v-row>
             </v-col>
@@ -1241,7 +1288,6 @@
 //import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
 import { mapActions } from 'vuex'
-
 export default {
   data: () => {
     return {
@@ -1253,6 +1299,8 @@ export default {
       resultado: '',
       dialog: false,
       dialog2: false,
+      multiline:true,
+      top:true,
       inputs: {
         actores_simple: '',
         actores_medio: '',
@@ -1283,7 +1331,6 @@ export default {
         a_8: '',
         fecha_inicio: new Date().toISOString().slice(0, 10),
       },
-
       type1: [
         { name: '0', id: '0' },
         { name: '1', id: '1' },
@@ -1349,7 +1396,6 @@ export default {
         const a6 = parseInt(this.inputs.a_6) * 2
         const a7 = -parseInt(this.inputs.a_7)
         const a8 = -parseInt(this.inputs.a_8)
-
         return 1.4 - 0.03 * (a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8)
       } else {
         return 0
@@ -1384,7 +1430,6 @@ export default {
         const t11 = parseInt(this.inputs.ct_11)
         const t12 = parseInt(this.inputs.ct_12)
         const t13 = parseInt(this.inputs.ct_13)
-
         return (
           0.6 +
           (t1 + t2 + t3 + t4 + t5 + t6 + t7 + t8 + t9 + t10 + t11 + t12 + t13) /
@@ -1432,7 +1477,6 @@ export default {
   },
   methods: {
     ...mapActions('projects', ['saveProject']),
-
     async check() {
       if (this.total == 0) {
         this.dialog2 = true

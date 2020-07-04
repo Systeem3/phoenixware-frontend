@@ -20,6 +20,7 @@ import processes from './modules/processes'
 import locale from './modules/locale'
 import resources from './modules/resources'
 import artifacts from './modules/artifacts'
+import activities from './modules/activities'
 
 //import * as user from '@/store/modules/user.js'
 
@@ -69,6 +70,7 @@ export default new Vuex.Store({
     resources,
     artifacts,
     board,
+    activities,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

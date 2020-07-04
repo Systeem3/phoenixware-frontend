@@ -115,7 +115,7 @@ const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
-  fetchProcesses2({ commit, dispatch },payload) {
+  fetchProcesses2({ commit, dispatch }, payload) {
     ProcessService.getProcesses2(payload.id, payload.categoria)
       .then((response) => {
         commit('SET_PROCESSS', response.data)

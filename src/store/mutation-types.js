@@ -42,12 +42,16 @@ export const FILL_PROCESS = 'FILL_PROCESS'
 export const ADD_PROCESS_DATA = 'ADD_PROCESS_DATA'
 
 //resource
-export const FILL_RESOURCE= 'FILL_RESOURCE'
+export const FILL_RESOURCE = 'FILL_RESOURCE'
 export const ADD_RESOURCE_DATA = 'ADD_RESOURCE_DATA'
 
 //artifact
-export const FILL_ARTIFACT= 'FILL_ARTIFACT'
+export const FILL_ARTIFACT = 'FILL_ARTIFACT'
 export const ADD_ARTIFACT_DATA = 'ADD_ARTIFACT_DATA'
+
+// activity
+export const FILL_ACTIVITY = 'FILL_ACTIVITY'
+export const ADD_ACTIVITY_DATA = 'ADD_ACTIVITY_DATA'
 
 // cities
 export const FILL_ALL_CITIES = 'FILL_ALL_CITIES'

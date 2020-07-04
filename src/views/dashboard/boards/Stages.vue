@@ -16,6 +16,15 @@
           sub-icon="mdi-clock"
           sub-text="Just Updated"
         />
+        <v-btn
+          text
+          :to="{
+            name: 'Board',
+            params: { id_process: process.id },
+            query: { categoria: id_category },
+          }"
+          >Revisar</v-btn
+        >
       </v-col>
 
       <v-col cols="12" sm="6" lg="3">

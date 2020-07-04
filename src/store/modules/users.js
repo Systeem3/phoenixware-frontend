@@ -89,7 +89,9 @@ const actions = {
       commit(types.SHOW_LOADING, true, { root: true })
       UserService.postUser(payload)
         .then((response) => {
+          commit('ADD_USER', response.data)
           if (response.status === 201) {
+            console.log('working')
             buildSuccess(
               {
                 msg: 'common.employee.CREATED_SUCCESSFULLY',

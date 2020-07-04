@@ -1,54 +1,40 @@
-import MemberService from '@/services/MemberService.js'
-//import { buildSuccess, handleError } from '@/utils/utils.js'
+import MeetingService from '@/services/MeetingService.js'
 import * as types from '@/store/mutation-types'
+//import auth from '../../api/auth'
 import { buildSuccess, handleError } from '@/utils/utils.js'
 
 const state = {
-  members: [],
-  membersTotal: 0,
-  member: {
-    rol: '',
-    proyecto: {
-      nombre: '',
-    },
-    usuario: {
-      email: '',
-      nombre: '',
-    },
-  },
-  member2: {
-    rol: '',
-    proyecto: {
-      nombre: '',
-    },
-    usuario: {
-      email: '',
-      nombre: '',
-    },
+  meetings: [],
+  meeting: {
+    nombre: '',
+    descripcion: '',
+    fecha: null,
+    hora: null,
+    lugar: '',
   },
 }
 
 const mutations = {
-  ADD_MEMBER(state, member) {
-    state.members.push(member)
+  ADD_MEETING(state, meeting) {
+    state.meetings.push(meeting)
   },
-  SET_MEMBERS(state, member) {
+  SET_MEETINGS(state, meetings) {
     //state.meetings.push(meetings)
-    state.members = member
+    state.meetings = meetings
   },
-  SET_MEETING(state, member) {
+  SET_MEETING(state, meeting) {
     //state.meetings.push(meetings)
-    state.member = member
+    state.meeting = meeting
   },
   UPDATE_MEETING(state, payload) {
-    state.members = state.members.map((member) => {
-      if (member.id === payload.id) {
-        return Object.assign({}, member, payload.data)
+    state.meetings = state.meetings.map((meeting) => {
+      if (meeting.id === payload.id) {
+        return Object.assign({}, meeting, payload.data)
       }
-      return member
+      return meeting
     })
   },
-  [types.FILL_MEMBER](state, data) {
+  [types.FILL_MEETING](state, data) {
     state.meeting.nombre = data.nombre
     state.meeting.descripcion = data.descripcion
     state.meeting.fecha = data.fecha
@@ -58,7 +44,7 @@ const mutations = {
   [types.CHANGE_STATE](state) {
     state.meeting.is_active = false
   },
-  [types.ADD_MEMBER_DATA](state, data) {
+  [types.ADD_MEETING_DATA](state, data) {
     switch (data.key) {
       case 'name':
         state.meeting.nombre = data.value
@@ -82,13 +68,20 @@ const mutations = {
 }
 
 const actions = {
-  createMember({ commit }, payload) {
+  createUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      //commit(types.SHOW_LOADING, true, { root: true })
-      MemberService.createMember(payload.proyecto, payload)
+      commit(types.SHOW_LOADING, true, { root: true })
+      MeetingService.postMeeting(payload, payload.projectId)
         .then((response) => {
+          //   commit('ADD_MEETING', meeting)
           if (response.status === 201) {
-            console.log('creado')
+            buildSuccess(
+              {
+                msg: 'common.meeting.CREATED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )
           }
         })
         .catch((error) => {
@@ -96,13 +89,13 @@ const actions = {
         })
     })
   },
-  fetchMembers({ commit, dispatch }, id) {
-    MemberService.getMembers(id)
+  fetchMeetings({ commit, dispatch }, id) {
+    MeetingService.getMeetings(id)
       .then((response) => {
-        commit('SET_MEMBERS', response.data)
+        commit('SET_MEETINGS', response.data)
       })
       .catch((error) => {
-        console.log(this.member)
+        console.log(this.meeting)
         const notification = {
           type: 'error',
           message: 'There was a problem fetching meetings: ' + error.message,
@@ -110,35 +103,35 @@ const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
-  /*fetchMeeting({ commit, getters, dispatch }, id) {
-    const meeting = getters.getMeetingById(id);
+  fetchMeeting({ commit, getters, dispatch }, id) {
+    const meeting = getters.getMeetingById(id)
     if (meeting) {
       commit('SET_MEETING', meeting)
     } else {
       MeetingService.getMeeting(id)
-          .then((response) => {
-            console.log(response.data)
-            commit('SET_MEETING', response.data)
-          })
-          .catch((error) => {
-            const notification = {
-              type: 'error',
-              message: 'There was a problem fetching meeting: ' + error.message,
-            }
-            dispatch('notification/add', notification, { root: true })
-          })
+        .then((response) => {
+          console.log(response.data)
+          commit('SET_MEETING', response.data)
+        })
+        .catch((error) => {
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching meeting: ' + error.message,
+          }
+          dispatch('notification/add', notification, { root: true })
+        })
     }
-  },*/
+  },
 
-  saveMember({ commit }, payload) {
+  saveMeeting({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      MemberService.updateMeeting(payload.id, payload)
+      MeetingService.updateMeeting(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
-            commit(types.FILL_MEMBER, response.data)
+            commit(types.FILL_MEETING, response.data)
             buildSuccess(
               {
-                msg: 'The meeting was updated',
+                msg: 'common.meeting.EDITED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -152,17 +145,17 @@ const actions = {
   },
 
   addMeetingData({ commit }, data) {
-    commit(types.ADD_MEMBER_DATA, data)
+    commit(types.ADD_MEETING_DATA, data)
   },
 
-  deleteMember({ commit }, id) {
+  deleteMeeting({ commit }, id) {
     return new Promise((resolve, reject) => {
-      MemberService.deleteMember(id)
+      MeetingService.deleteMeeting(id)
         .then((response) => {
           if (response.status === 204) {
             buildSuccess(
               {
-                msg: 'The member was deleted',
+                msg: 'common.meeting.DELETED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -175,15 +168,14 @@ const actions = {
     })
   },
 }
-
 const getters = {
-  getMemberById: (state) => (id) => {
-    return state.members.find((member) => member.id === id)
+  getMeetingById: (state) => (id) => {
+    return state.meetings.find((meeting) => meeting.id === id)
   },
-  members: (state) => {
-    return state.members
+  meetings: (state) => {
+    return state.meetings
   },
-  member: (state) => state.member,
+  meeting: (state) => state.meeting,
 }
 
 export default {

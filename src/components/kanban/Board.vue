@@ -11,9 +11,9 @@
         />
       </transition-group>
     </draggable>
-    <div>
+    <!-- <div>
       <AddList @added="listAdded" />
-    </div>
+    </div>-->
     <CardDialog @addCheckItem="addCheckItem" ref="cardDialog" />
   </div>
 </template>
@@ -21,11 +21,11 @@
 <script>
 import draggable from 'vuedraggable'
 import List from './List.vue'
-import AddList from './board/AddList.vue'
+//import AddList from './board/AddList.vue'
 import CardDialog from './card/Dialog.vue'
 
 export default {
-  components: { draggable, List, AddList, CardDialog },
+  components: { draggable, List, CardDialog },
 
   props: {
     lists: { required: true, type: Array, default: () => [] },

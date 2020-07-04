@@ -1,11 +1,6 @@
 <template>
   <div class="kanban-board-list">
-    <v-btn
-      id="testing1"
-      @click="adding = true"
-      text
-      v-if="!adding"
-    >
+    <v-btn id="testing1" @click="adding = true" text v-if="!adding">
       Add list...
     </v-btn>
     <v-card v-else>
@@ -24,29 +19,28 @@
         <v-btn text @click="adding = false">Cancel</v-btn>
       </v-card-actions>
     </v-card>
-
   </div>
 </template>
 
 <script>
-import Vue from "vue";
+import Vue from 'vue'
 
 export default {
   data: () => ({
     adding: false,
-    name: null
+    name: null,
   }),
 
   methods: {
     save() {
-      if (!this.name) return;
-      this.$emit('added', this.name);
-      this.name = "";
+      if (!this.name) return
+      this.$emit('added', this.name)
+      this.name = ''
 
       Vue.nextTick(() => {
-        this.$el.scrollIntoView({ block: 'end',  behavior: 'smooth' });
+        this.$el.scrollIntoView({ block: 'end', behavior: 'smooth' })
       })
-    }
-  }
+    },
+  },
 }
 </script>

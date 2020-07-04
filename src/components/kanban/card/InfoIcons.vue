@@ -13,19 +13,19 @@
 <script>
 export default {
   props: {
-    card: { required: true, type: Object }
-  }
+    card: { required: true, type: Object },
+  },
 }
 </script>
 
 <style>
-  .kanban-card-info-icons {
-    display: flex;
-    flex-direction: row;
-  }
+.kanban-card-info-icons {
+  display: flex;
+  flex-direction: row;
+}
 
-  .kanban-card-info-icons > span {
-    margin-right: 12px;
-    font-size: 0.8rem;
-  }
+.kanban-card-info-icons > span {
+  margin-right: 12px;
+  font-size: 0.8rem;
+}
 </style>

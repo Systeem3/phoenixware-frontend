@@ -278,6 +278,19 @@ const routes = [
         component: () => import('@/views/dashboard/pages/meeting/Show'),
         props: true,
       },
+      //artifacts
+      {
+        name: 'ArtifactsCreate',
+        path: '/artifact/create/:id_project',
+        component: () => import('@/views/dashboard/pages/project/artifacts/Create'),
+        props: true,
+      },
+      {
+        name: 'ArtifactsList',
+        path: '/artifact/list/:id_project',
+        component: () => import('@/views/dashboard/pages/project/artifacts/List'),
+        props: true,
+      },
 
       //Project
       {

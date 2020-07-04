@@ -45,6 +45,10 @@ export const ADD_PROCESS_DATA = 'ADD_PROCESS_DATA'
 export const FILL_RESOURCE= 'FILL_RESOURCE'
 export const ADD_RESOURCE_DATA = 'ADD_RESOURCE_DATA'
 
+//artifact
+export const FILL_ARTIFACT= 'FILL_ARTIFACT'
+export const ADD_ARTIFACT_DATA = 'ADD_ARTIFACT_DATA'
+
 // cities
 export const FILL_ALL_CITIES = 'FILL_ALL_CITIES'
 // Admin - Cities

@@ -350,42 +350,42 @@ const routes = [
       //Time  and Costs (Calculadoras)
       {
         name: 'Time',
-        path: 'projects/time/:id_project',
+        path: 'projects/:id_project/time/',
         component: () =>
           import('@/views/dashboard/pages/project/planning/time'),
       },
       {
         name: 'Costs',
-        path: 'projects/costs',
+        path: 'projects/:id_project/costs/',
         component: () =>
           import('@/views/dashboard/pages/project/planning/costs'),
       },
       // Risk
       {
         name: 'RisksCreate',
-        path: '/project/risks/create',
+        path: '/project/:id_project/risks/create/',
         component: () =>
           import('@/views/dashboard/pages/project/risks/CreateR'),
       },
       {
         name: 'RisksCreate1',
-        path: '/project/risks/createe',
+        path: '/project/:id_project/risks/create',
         component: () => import('@/views/dashboard/pages/project/risks/Create'),
       },
       {
         name: 'RisksList',
-        path: '/project/risks/list',
+        path: '/project/:id_project/risks/list',
         component: () => import('@/views/dashboard/pages/project/risks/List'),
       },
       //Resources
       {
         name: 'ResourcesCreate',
-        path: '/resources/create',
+        path: '/project/:id_project/resources/create',
         component: () => import('@/views/dashboard/pages/resources/Create'),
       },
       {
         name: 'ResourcesList',
-        path: '/resources/list',
+        path: '/project/:id_project/resources/list',
         component: () => import('@/views/dashboard/pages/resources/List'),
       },
     ],

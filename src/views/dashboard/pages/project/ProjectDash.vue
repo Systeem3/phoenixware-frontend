@@ -115,8 +115,8 @@
             <div class="card-title font-weight-light ml-4 mb-3" style="font-size: 15;">ESTIMACIONES:</div>
           </v-row>
           <v-row class="mx-auto" justify="center" dense align="center">
-            <v-btn color="primary">TIEMPOS</v-btn>
-            <v-btn color="primary">COSTOS</v-btn>
+            <v-btn color="primary" :to="{ name: 'Time' }">TIEMPOS</v-btn>
+            <v-btn color="primary" :to="{ name: 'ResourcesList' }">COSTOS</v-btn>
             <v-btn color="primary">ALCANCE</v-btn>
           </v-row>
         </v-row>

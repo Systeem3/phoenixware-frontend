@@ -94,7 +94,7 @@
                       float="right"
                       margin-left="6px"
                       :to="{ name: 'ResourcesList' }"
-                      >Recursos</v-btn
+                      >Atrás</v-btn
                     >
                     <v-btn
                       color="primary"
@@ -201,7 +201,6 @@ export default {
         this.addResourceData(data)
       },
     },
-
   },
   methods: {
     ...mapActions('resources', [

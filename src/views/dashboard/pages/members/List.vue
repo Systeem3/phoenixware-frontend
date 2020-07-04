@@ -1,8 +1,14 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'MemberCreate' }">
-       <v-icon dark>mdi-plus</v-icon>
+      <v-btn
+        class="mx-2"
+        fab
+        dark
+        color="primary"
+        :to="{ name: 'MemberCreate' }"
+      >
+        <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
     <base-material-card
@@ -15,14 +21,6 @@
         <div class="display-2 font-weight-light">
           Lista de Miembros
         </div>
-
-        <v-btn
-          @click="success"
-          class="btn btn-outline-primary col s12 m3"
-          type="button"
-        >
-          success
-        </v-btn>
       </template>
 
       <v-text-field
@@ -106,7 +104,7 @@ export default {
   data() {
     return {
       //users: [],
-      dataTableLoading:false,
+      dataTableLoading: false,
       headers: [
         {
           text: 'Nombre',
@@ -133,13 +131,13 @@ export default {
       loader: true,
 
       search: undefined,
-      idProject:null,
+      idProject: null,
     }
   },
 
   created() {
     this.fetchMembers(this.$route.params.id_project)
-    this.idProject=this.$route.params.id_project
+    this.idProject = this.$route.params.id_project
     console.log(this.idProject)
   },
   computed: {

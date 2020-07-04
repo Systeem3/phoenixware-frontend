@@ -17,7 +17,7 @@ const actions = {
           if (response.status === 200) {
             buildSuccess(
               {
-                msg: 'myProfile.PASSWORD_CHANGED',
+                msg: 'common.myProfile.PASSWORD_CHANGED',
               },
               commit,
               resolve
@@ -55,7 +55,7 @@ const actions = {
             commit(types.FILL_USER, response.data)
             buildSuccess(
               {
-                msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',
+                msg: 'common.myProfile.PROFILE_SAVED_SUCCESSFULLY',
               },
               commit,
               resolve

@@ -20,12 +20,12 @@
       <template v-slot:after-heading>
         <div class="display-2 font-weight-light">Lista de Riesgos</div>
 
-        <v-btn
+        <!-- <v-btn
           @click="success"
           class="btn btn-outline-primary col s12 m3"
           type="button"
           >success</v-btn
-        >
+        >-->
       </template>
 
       <v-text-field

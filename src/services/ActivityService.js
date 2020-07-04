@@ -9,4 +9,10 @@ export default {
       `/projects/${id}/listar_procesos_categoria/?categoria=${categoria}`
     )
   },
+  getActivity(id) {
+    return api.get(`/actividad/${id}/`)
+  },
+  updateActivity(id, payload) {
+    return api.patch(`/actividad/${id}/`, payload)
+  },
 }

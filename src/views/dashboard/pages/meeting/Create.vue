@@ -138,7 +138,7 @@
                       float="right"
                       margin-left="6px"
                       :to="{ name: 'MeetingList' }"
-                      >Reuniones</v-btn
+                      >Atrás</v-btn
                     >
                     <v-btn
                       color="primary"

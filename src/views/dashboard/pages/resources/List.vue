@@ -21,14 +21,6 @@
         <div class="display-2 font-weight-light">
           Lista de Recursos
         </div>
-
-        <v-btn
-          @click="success"
-          class="btn btn-outline-primary col s12 m3"
-          type="button"
-        >
-          success
-        </v-btn>
       </template>
 
       <v-text-field
@@ -133,10 +125,10 @@ export default {
     async editItem(item) {
       // this.$store.dispatch('UserUpdate')
       this.$router.push(
-              `/resources/edit/${item.id}/${this.$route.params.id_project}`
+        `/resources/edit/${item.id}/${this.$route.params.id_project}`
       )
     },
-    ...mapActions('resources', ['deleteResource','fetchResources']),
+    ...mapActions('resources', ['deleteResource', 'fetchResources']),
     success() {
       this.$swal('Oops...', 'Something went wrong!', 'success')
     },

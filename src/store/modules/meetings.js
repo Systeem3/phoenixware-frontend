@@ -146,7 +146,7 @@ const actions = {
             commit(types.FILL_MEETING, response.data)
             buildSuccess(
               {
-                msg: 'The meeting was updated',
+                msg: 'common.meeting.EDITED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -172,7 +172,7 @@ const actions = {
             commit(types.CHANGE_STATE, response.data)
             buildSuccess(
               {
-                msg: 'The meeting was deleted',
+                msg: 'common.meeting.DELETED_SUCCESSFULLY',
               },
               commit,
               resolve

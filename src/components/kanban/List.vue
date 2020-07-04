@@ -49,6 +49,7 @@ import Vue from 'vue'
 import draggable from 'vuedraggable'
 import Card from './Card.vue'
 import AddCard from './list/AddCard.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { draggable, Card, AddCard },
@@ -56,8 +57,11 @@ export default {
   props: {
     list: { required: true, type: Object, default: () => ({}) },
   },
-
+  computed: {
+    ...mapGetters('activities', ['activities']),
+  },
   methods: {
+    ...mapActions('activities', ['fetchActivity']),
     addCard(name) {
       this.$emit('added', { list: this.list, name })
 
@@ -68,6 +72,7 @@ export default {
       })
     },
     selectCard(card) {
+      this.fetchActivity(card.id)
       this.$emit('cardSelected', { ...card, list: this.list })
     },
   },

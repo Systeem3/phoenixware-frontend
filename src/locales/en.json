@@ -101,9 +101,28 @@
     "EDIT": "¿Desea modificar este empleado?",
     "DELETE": "¿Desea eliminar este empleado?",
     "CREATED_SUCCESSFULLY": "Empleado se ha creado con éxito",
+    "EDITED_SUCCESSFULLY": "Empleado se ha modificado con éxito",
     "DELETED_SUCCESSFULLY": "Empleado se ha eliminado con éxito"
     },
-    
+
+    "project": {
+      "CREATE": "¿Desea crear este proyecto?",
+      "EDIT": "¿Desea modificar este proyecto?",
+      "DELETE": "¿Desea eliminar este proyecto?",
+      "CREATED_SUCCESSFULLY": "Proyecto se ha creado con éxito",
+      "EDITED_SUCCESSFULLY": "Proyecto se ha modificado con éxito",
+      "DELETED_SUCCESSFULLY": "Proyecto se ha eliminado con éxito"
+     },
+
+    "meeting": {
+      "CREATE": "¿Desea crear esta reunión?",
+      "EDIT": "¿Desea modificar esta reunión?",
+      "DELETE": "¿Desea eliminar esta reunión?",
+      "CREATED_SUCCESSFULLY": "Reunión se ha creado con éxito",
+      "EDITED_SUCCESSFULLY": "Reunión se ha modificado con éxito",
+      "DELETED_SUCCESSFULLY": "Reunión se ha eliminado con éxito"
+    },
+
     "loading": {
       "PLEASE_WAIT": "Espere por favor..."
     },
@@ -225,7 +244,7 @@
       "CURRENT_PASSWORD": "Co",
       "NEW_PASSWORD": "New Password",
       "CONFIRM_NEW_PASSWORD": "Confirm New Password",
-      "PASSWORD_CHANGED": "Password changed successfully",
+      "PASSWORD_CHANGED": "Contraseña cambiada con éxito",
       "NAME": "Name",
       "EMAIL": "E-mail",
       "PHONE": "Phone",

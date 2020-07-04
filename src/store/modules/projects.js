@@ -15,7 +15,7 @@ const state = {
     costo: null,
     presupuesto: null,
     estado: '',
-    tiempo:null,
+    tiempo: null,
   },
   /*project2: {
     nombre: '',
@@ -175,7 +175,7 @@ const actions = {
             //  commit(types.SHOW_LOADING, true)
             buildSuccess(
               {
-                msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',
+                msg: 'common.project.EDITED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -200,7 +200,7 @@ const actions = {
             commit(types.CHANGE_STATE_PROJECT, response.data)
             buildSuccess(
               {
-                msg: 'myProfile.PROFILE_SAVED_SUCCESSFULLY',
+                msg: 'common.project.DELETED_SUCCESSFULLY',
               },
               commit,
               resolve

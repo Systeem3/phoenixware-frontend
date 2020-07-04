@@ -94,7 +94,7 @@
                       float="right"
                       margin-left="6px"
                       :to="{ name: 'ResourcesList' }"
-                      >Recursos</v-btn
+                      >Atrás</v-btn
                     >
                     <v-btn
                       color="primary"
@@ -142,7 +142,7 @@ export default {
         tipo_costo: '',
         costo: '',
         projectId: this.$route.params.id_project,
-        estado:'A'
+        estado: 'A',
       },
       nowDate: new Date().toISOString().slice(0, 10),
       picker: new Date().toISOString().substr(0, 10),

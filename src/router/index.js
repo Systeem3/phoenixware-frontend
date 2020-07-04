@@ -110,6 +110,7 @@ const routes = [
         name: 'Processes',
         path: 'processes/:id_project',
         component: () => import('@/views/dashboard/boards/Processes'),
+        props: true,
       },
       // Level 4 - Kanban
       {
@@ -353,12 +354,14 @@ const routes = [
         path: 'projects/:id_project/time/',
         component: () =>
           import('@/views/dashboard/pages/project/planning/time'),
+        props: true,
       },
       {
         name: 'Costs',
         path: 'projects/:id_project/costs/',
         component: () =>
           import('@/views/dashboard/pages/project/planning/costs'),
+        props: true,
       },
       // Risk
       {
@@ -366,27 +369,48 @@ const routes = [
         path: '/project/:id_project/risks/create/',
         component: () =>
           import('@/views/dashboard/pages/project/risks/CreateR'),
+        props: true,
       },
       {
         name: 'RisksCreate1',
         path: '/project/:id_project/risks/create',
         component: () => import('@/views/dashboard/pages/project/risks/Create'),
+        props: true,
       },
       {
         name: 'RisksList',
         path: '/project/:id_project/risks/list',
         component: () => import('@/views/dashboard/pages/project/risks/List'),
+        props: true,
       },
+
+      //Scope
+      {
+        name: 'Scope',
+        path: '/project/:id_project/planning/scope',
+        component: () =>
+          import('@/views/dashboard/pages/project//planning/scope'),
+        props: true,
+      },
+
       //Resources
       {
         name: 'ResourcesCreate',
-        path: '/project/:id_project/resources/create',
+        path: '/resources/create/:id_project',
         component: () => import('@/views/dashboard/pages/resources/Create'),
+        props: true,
+      },
+      {
+        name: 'ResourcesUpdate',
+        path: '/resources/edit/:id/:id_project',
+        component: () => import('@/views/dashboard/pages/resources/Update'),
+        props: true,
       },
       {
         name: 'ResourcesList',
-        path: '/project/:id_project/resources/list',
+        path: '/resources/list/:id_project',
         component: () => import('@/views/dashboard/pages/resources/List'),
+        props: true,
       },
     ],
   },

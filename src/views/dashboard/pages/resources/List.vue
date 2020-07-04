@@ -6,7 +6,7 @@
         fab
         dark
         color="primary"
-        :to="{ name: 'ResourceCreate' }"
+        :to="{ name: 'ResourcesCreate' }"
       >
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
@@ -48,7 +48,7 @@
         :no-data-text="$t('dataTable.NO_DATA')"
         :no-results-text="$t('dataTable.NO_RESULTS')"
         :headers="headers"
-        :items="users"
+        :items="resources"
         :search.sync="search"
         :sort-by="['name', 'office']"
         :sort-desc="[false, true]"
@@ -92,25 +92,23 @@ export default {
   name: 'UsersTable',
   data() {
     return {
-      //users: [],
-
-      //dataTableLoading: true,
+      dataTableLoading: false,
       headers: [
         {
           text: 'Nombre',
-          value: 'resource.nombre',
+          value: 'nombre',
         },
         {
           text: 'Tipo de Recurso',
-          value: 'resource.tipo',
+          value: 'tipo',
         },
         {
           text: 'Tipo de Costo',
-          value: 'resource.tipoCosto',
+          value: 'tipo_costo',
         },
         {
           text: 'Costo',
-          value: 'resource.costo',
+          value: 'costo',
         },
         {
           sortable: false,
@@ -125,7 +123,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('resources/fetchResources')
+    this.fetchResources(this.$route.params.id_project)
   },
   computed: {
     ...mapGetters('resources', ['resources']),
@@ -134,18 +132,14 @@ export default {
   methods: {
     async editItem(item) {
       // this.$store.dispatch('UserUpdate')
-      this.$router.push(`/resources/edit/${item.id}/`)
+      this.$router.push(
+              `/resources/edit/${item.id}/${this.$route.params.id_project}`
+      )
     },
-    ...mapActions('resources', ['deleteResource']),
+    ...mapActions('resources', ['deleteResource','fetchResources']),
     success() {
-      /* Vue.swal({
-        type: 'success',
-        title: 'Hello',
-        text: 'Hello brave new world!',
-      })*/
       this.$swal('Oops...', 'Something went wrong!', 'success')
     },
-    props: ['id'],
     async deleteItem(item) {
       try {
         const response = await this.$confirm(
@@ -161,25 +155,14 @@ export default {
         )
         if (response) {
           console.log(item.id)
-          //  this.dataTableLoading = true
-          //await this.deleteUser(item.id, {})
-          await this.deleteUser({
-            id: item.id,
-            is_active: false,
-            nombre: this.nombre,
-            tipo: this.type,
-            tipoCosto: this.type2,
-            costo: this.costo,
-          })
-          /* await this
-            .fetchUsers
-            // buildPayloadPagination(this.pagination, this.buildSearch())
-            ()
-          this.dataTableLoading = false*/
+          this.dataTableLoading = true
+          await this.deleteResource(item.id)
+          await this.fetchResources(this.$route.params.id_project)
+          this.dataTableLoading = false
         }
-        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         this.dataTableLoading = false
+        console.log(error)
       }
     },
   },

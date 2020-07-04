@@ -58,7 +58,7 @@
                       :items="type2"
                       item-text="name"
                       item-value="id"
-                      v-model="inputs.tipoCosto"
+                      v-model="inputs.tipo_costo"
                     >
                       <template v-slot:item="{ attrs, item, on }">
                         <v-list-item
@@ -93,15 +93,14 @@
                       color="primary"
                       float="right"
                       margin-left="6px"
-                      :to="{ name: 'ResourcesCreate' }"
+                      :to="{ name: 'ResourcesList' }"
                       >Recursos</v-btn
                     >
                     <v-btn
                       color="primary"
                       float="right"
                       margin-left="6px"
-                      @click.stop.prevent="submit"
-                      @click="createMeeting(inputs)"
+                      @click="createResource(inputs)"
                       >Registrar</v-btn
                     >
                   </v-col>
@@ -140,9 +139,10 @@ export default {
       inputs: {
         nombre: '',
         tipo: '',
-        tipoCosto: '',
+        tipo_costo: '',
         costo: '',
         projectId: this.$route.params.id_project,
+        estado:'A'
       },
       nowDate: new Date().toISOString().slice(0, 10),
       picker: new Date().toISOString().substr(0, 10),
@@ -165,109 +165,9 @@ export default {
   created() {
     this.projectId = this.$route.params.id
   },
-  computed: {
-    /*test() {
-      return this.$store.state.registrationCompleted
-    },*/
-    //...mapState('meetings', ['createMeeting']),
-  },
+  computed: {},
   methods: {
-    submit() {
-      this.$refs.obs.validate()
-      /*    if (this.$store.commit('registrationCompleted')) {
-        //this.$router.push({ name: 'UserList' })
-
-        alert('test2')
-      }*/
-      //alert('test3')
-      //this.goBack()
-      /*this.$refs.obs.validate().then(function (response) {
-        if (response.data.success == true) {
-          alert('test5')
-          //  next('/users')
-          this.$router.push({ name: 'UserList' })
-        }
-      })*/
-      // this.$swal('Hello Vue world!!!')
-      // alert('test')
-      /* this.$refs.obs.validate().then((result) => {
-        if (result == true && this.$store.getters.test == true) {
-          alert('test5')*/
-      //  next('/users')
-      // this.$swal('test')
-      /*  this.$swal({
-            title: 'Yey',
-            text: 'Empleado registrado exitosamente',
-          })
-          this.$router.push({ name: 'UserList' })*/
-      //  }
-      ///  })
-      /*if (this.$store.state.registrationCompleted == true) {
-        alert('test')
-      }*/
-      /* this.$refs.obs.validate().then((result) => {
-        if (result == true) {
-          self.$store.commit('showLoader')
-          axios
-            .post('/admin/users', payload)
-            .then(function (response) {
-              self.$store.commit('showSnackbar', {
-                message: response.data.msg,
-                color: response.data.success,
-              })
-
-              self.$store.commit('hideLoader')
-
-              if (response.data.success === true) {
-                // reset
-                self.$validator.reset()
-                self.goBack()
-              }
-            })
-            .catch(function (error) {
-              self.$store.commit('hideLoader')
-
-              if (error.response) {
-                self.$store.commit('showSnackbar', {
-                  message: error.response.data.message,
-                  color: 'error',
-                  duration: 3000,
-                })
-              } else if (error.request) {
-                console.log(error.request)
-              } else {
-                console.log('Error', error.message)
-              }
-            })
-        
-      })*/
-    },
     ...mapActions('resources', ['createResource']),
-    beforeRouteLeave(to, from, next) {
-      //this.clearRegistrationStatus()
-      // this.goBack()
-      // this.$swal('Good job!', 'You clicked the button!', 'success')
-      // this.$router.push({ name: 'UserList' })
-      // alert('test')
-      // next(this.goBack())
-
-      /* this.$store.dispatch('auth/initialize').then(() => {
-    if (this.$store.getters['auth/isAuthenticated']) {
-      next('/')
-    } else {
-      next()
-       
-    }
-  })*/
-
-      alert('test2')
-      if (this.$store.commit('registrationCompleted')) {
-        next('/users')
-        alert('test')
-      } else {
-        next()
-      }
-    },
     goBack(goBackByStep) {
       //(-ve  => go back/ +ve => go forward)
       var step = goBackByStep || -1

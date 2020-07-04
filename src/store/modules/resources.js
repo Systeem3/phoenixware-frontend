@@ -1,0 +1,175 @@
+import resourceService from '@/services/resourceService.js'
+import * as types from '@/store/mutation-types'
+//import auth from '../../api/auth'
+import { buildSuccess, handleError } from '@/utils/utils.js'
+
+const state = {
+  resources: [],
+  resource: {
+    id: '',
+    nombre: '',
+    tipo: '',
+    tipo_costo: '',
+    costo: null,
+    estado: '',
+  },
+}
+
+const mutations = {
+  ADD_RESOURCE(state, resource) {
+    state.resources.push(resource)
+  },
+  SET_MEETINGS(state, resources) {
+    //state.meetings.push(meetings)
+    state.resources = resources
+  },
+  SET_RESOURCE(state, resource) {
+    //state.meetings.push(meetings)
+    state.resource = resource
+  },
+  UPDATE_MEETING(state, payload) {
+    state.meetings = state.meetings.map((meeting) => {
+      if (meeting.id === payload.id) {
+        return Object.assign({}, meeting, payload.data)
+      }
+      return meeting
+    })
+  },
+  [types.FILL_RESOURCE](state, data) {
+    state.resource.nombre = data.nombre
+    state.resource.costo = data.costo
+    state.resource.fecha = data.tipo
+    state.resource.hora = data.tipo_costo
+  },
+ /* [types.CHANGE_STATE_RESOURCE](state) {
+    state.resource.es = false
+  },*/
+  [types.ADD_RESOURCE_DATA](state, data) {
+    switch (data.key) {
+      case 'name':
+        state.resource.nombre = data.value
+        break
+      case 'tipo':
+        state.resource.tipo = data.value
+        break
+      case 'tipo_costo':
+        state.resource.tipo_costo = data.value
+        break
+      case 'costo':
+        state.resource.costo = data.value
+        break
+      case 'estado':
+        state.resource.estado = data.value
+        break
+      default:
+        break
+    }
+  },
+}
+
+const actions = {
+  createResource({ commit }, resource) {
+    console.log(resource.projectId)
+    return resourceService.postResource(resource.projectId, resource)
+      .then((response) => {
+        commit('ADD_RESOURCE', resource)
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  fetchResources({ commit}, id) {
+    resourceService.getResources(id)
+      .then((response) => {
+        console.log(response.data)
+        commit('SET_MEETINGS', response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+fetchResource({ commit, getters, dispatch }, id) {
+    console.log(id)
+    const resource = getters.getResourceById(id)
+    if (resource) {
+      commit('SET_RESOURCE', resource)
+    } else {
+      resourceService.getResource(id)
+        .then((response) => {
+          console.log(response.data)
+          commit('SET_RESOURCE', response.data)
+        })
+        .catch((error) => {
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching meeting: ' + error.message,
+          }
+          dispatch('notification/add', notification, { root: true })
+        })
+    }
+  },
+
+saveResource({ commit }, payload) {
+    console.log(payload.id)
+    return new Promise((resolve, reject) => {
+      resourceService.updateResource(payload.id, payload)
+        .then((response) => {
+          if (response.status === 200) {
+            commit(types.FILL_RESOURCE, response.data)
+            buildSuccess(
+              {
+                msg: 'The resource was updated',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  addResourceData({ commit }, data) {
+    commit(types.ADD_RESOURCE_DATA, data)
+  },
+
+deleteResource({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      resourceService
+        .deleteResource(id)
+        .then((response) => {
+          if (response.status === 204) {
+            buildSuccess(
+              {
+                msg: 'The resource was deleted',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+}
+const getters = {
+  getResourceById: (state) => (id) => {
+    return state.resources.find((resource) => resource.id === id)
+  },
+  resources: (state) => {
+    return state.resources
+  },
+  resource: (state) => state.resource,
+}
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations,
+}

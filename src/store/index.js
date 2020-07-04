@@ -18,6 +18,7 @@ import projects from './modules/projects'
 import notifications from './modules/notification'
 import processes from './modules/processes'
 import locale from './modules/locale'
+import resources from './modules/resources'
 
 //import * as user from '@/store/modules/user.js'
 
@@ -64,6 +65,7 @@ export default new Vuex.Store({
     members,
     notifications,
     processes,
+    resources,
     board,
   },
   strict: debug,

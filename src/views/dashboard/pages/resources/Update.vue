@@ -2,7 +2,7 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="10">
-        <base-material-card icon="mdi-account-multiple" color="primary">
+        <base-material-card icon="mdi mdi-currency-usd" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Recursos
@@ -86,6 +86,19 @@
                       type="number"
                     />
                   </v-col>
+                  <v-col cols="6" md="6">
+                    <VTextFieldWithValidation
+                      v-if="mostrar"
+                      label="Vida Util"
+                      color="secondary"
+                      prepend-icon="mdi-account"
+                      v-model="vida_util"
+                      rules="required"
+                      class="purple-input"
+                      type="number"
+                      min="0"
+                    />
+                  </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12" class="text-right">
@@ -101,7 +114,7 @@
                       float="right"
                       margin-left="6px"
                       @click="submit"
-                      >Registrar</v-btn
+                      >Guardar</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -203,6 +216,25 @@ export default {
         this.addResourceData(data)
       },
     },
+    vida_util: {
+      get() {
+        return this.$store.state.resources.resource.vida_util
+      },
+      set(value) {
+        const data = {
+          key: 'vida_util',
+          value,
+        }
+        this.addResourceData(data)
+      },
+    },
+    mostrar() {
+      if (this.tipo) {
+        return this.tipo === '3'
+      } else {
+        return false
+      }
+    },
   },
   methods: {
     ...mapActions('resources', [
@@ -216,6 +248,7 @@ export default {
         costo: this.costo,
         tipo_costo: this.tipo_costo,
         tipo: this.tipo,
+        vida_util:this.vida_util,
         id: this.$route.params.id,
       })
     },

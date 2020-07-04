@@ -7,7 +7,7 @@
         </div>
       </v-col>
       <v-col sm="12" md="4" v-for="process in processes" :key="process.id">
-        <v-card color="#1300FF" dark>
+        <v-card color="secondary" dark>
           <v-card-title class="headline">{{ process.nombre }}</v-card-title>
 
           <v-card-actions>

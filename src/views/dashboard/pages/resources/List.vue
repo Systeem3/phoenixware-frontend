@@ -11,6 +11,155 @@
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
+    <template>
+      <v-dialog v-model="dialog" persistent max-width="600px">
+
+        <base-material-card
+          color="primary"
+          icon="mdi mdi-currency-usd"
+          title="Costos del proyecto"
+          class="py-2 px-5 pt-10"
+        >
+          <v-form>
+            <v-col>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Costo Directos"
+                    class="mt-2"
+                    v-model="costos.directo"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Costos Indirectos"
+                    class="mt-2"
+                    v-model="costos.indirectos"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Costos Extraordinarios"
+                    class="mt-2"
+                    v-model="costos.extraordinarios"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Total de Costos"
+                    class="mt-2"
+                    v-model="costos.total"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Costos optimista"
+                    class="mt-2"
+                    v-model="costos.optimista"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Costo Probable"
+                    class="mt-2"
+                    v-model="costos.probable"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Costo Pesimista"
+                    class="mt-2"
+                    v-model="costos.pesimista"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    disabled
+                    dense
+                    regular
+                    outlined
+                    filled
+                    prepend-inner-icon="mdi mdi-currency-usd"
+                    color="primary"
+                    label="Costo Estimado"
+                    class="mt-2"
+                    v-model="costos.estimado"
+                  />
+                </v-col>
+              </v-row>
+              <v-row class="align-content-end">
+                <v-btn default color="secondary" @click="dialog = false"
+                  >Cerrar</v-btn
+                >
+              </v-row>
+            </v-col>
+          </v-form>
+        </base-material-card>
+      </v-dialog>
+    </template>
     <base-material-card
       color="secondary"
       icon="mdi-vuetify"
@@ -21,6 +170,14 @@
         <div class="display-2 font-weight-light">
           Lista de Recursos
         </div>
+        <v-btn
+          @click="open"
+          class="btn btn-outline-primary col s12 m3"
+          type="button"
+          color="primary"
+        >
+          Información de costos
+        </v-btn>
       </template>
 
       <v-text-field
@@ -85,6 +242,8 @@ export default {
   data() {
     return {
       dataTableLoading: false,
+      dialog: false,
+      show: true,
       headers: [
         {
           text: 'Nombre',
@@ -116,9 +275,10 @@ export default {
 
   created() {
     this.fetchResources(this.$route.params.id_project)
+    this.fetchCosto(this.$route.params.id_project)
   },
   computed: {
-    ...mapGetters('resources', ['resources']),
+    ...mapGetters('resources', ['resources', 'costos']),
   },
 
   methods: {
@@ -128,9 +288,13 @@ export default {
         `/resources/edit/${item.id}/${this.$route.params.id_project}`
       )
     },
-    ...mapActions('resources', ['deleteResource', 'fetchResources']),
-    success() {
-      this.$swal('Oops...', 'Something went wrong!', 'success')
+    ...mapActions('resources', [
+      'deleteResource',
+      'fetchResources',
+      'fetchCosto',
+    ]),
+    open() {
+      this.dialog = true
     },
     async deleteItem(item) {
       try {

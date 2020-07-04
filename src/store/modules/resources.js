@@ -11,7 +11,18 @@ const state = {
     tipo: '',
     tipo_costo: '',
     costo: null,
+    vida_util: null,
     estado: '',
+  },
+  costos: {
+    directo: null,
+    indirectos: null,
+    extraordinarios: null,
+    total: null,
+    optimista: null,
+    probable: null,
+    pesimista: null,
+    estimado: null,
   },
 }
 
@@ -19,13 +30,17 @@ const mutations = {
   ADD_RESOURCE(state, resource) {
     state.resources.push(resource)
   },
-  SET_MEETINGS(state, resources) {
+  SET_RESOURCES(state, resources) {
     //state.meetings.push(meetings)
     state.resources = resources
   },
   SET_RESOURCE(state, resource) {
     //state.meetings.push(meetings)
     state.resource = resource
+  },
+  SET_COSTOS(state, costos) {
+    //state.meetings.push(meetings)
+    state.costos = costos
   },
   UPDATE_MEETING(state, payload) {
     state.meetings = state.meetings.map((meeting) => {
@@ -58,6 +73,9 @@ const mutations = {
       case 'costo':
         state.resource.costo = data.value
         break
+      case 'vida_util':
+        state.resource.vida_util = data.value
+        break
       case 'estado':
         state.resource.estado = data.value
         break
@@ -85,7 +103,7 @@ const actions = {
       .getResources(id)
       .then((response) => {
         console.log(response.data)
-        commit('SET_RESOURCE', response.data)
+        commit('SET_RESOURCES', response.data)
       })
       .catch((error) => {
         console.log(error)
@@ -111,6 +129,18 @@ const actions = {
           dispatch('notification/add', notification, { root: true })
         })
     }
+  },
+  fetchCosto({ commit }, id) {
+    console.log(id)
+    resourceService
+      .getCosto(id)
+      .then((response) => {
+        console.log(response.data)
+        commit('SET_COSTOS', response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
 
   saveResource({ commit }, payload) {
@@ -168,6 +198,7 @@ const getters = {
     return state.resources
   },
   resource: (state) => state.resource,
+  costos: (state) => state.costos,
 }
 
 export default {

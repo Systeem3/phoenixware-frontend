@@ -1006,7 +1006,7 @@
           </v-form>
         </base-material-card>
 
-        <v-spacer class="mt-2" />
+        <v-spacer class="mt-3" />
 
         <!--RESULTADOS PESOS Y FACTORES-->
 
@@ -1014,7 +1014,8 @@
           color="grey darken-1"
           icon="mdi mdi-clipboard-check"
           title="Resultados (Pesos y Factores)"
-          class="py-2 px-5"
+          class="py-2 px-5 mb-2"
+
         >
           <v-form>
             <v-text-field

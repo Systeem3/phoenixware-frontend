@@ -6,10 +6,10 @@ export default {
       params,
     })
   },
-  getUserAuth(){
+  getUserAuth() {
     return api.get('/auth/user/')
   },
-  getUsersNotProject(id){
+  getUsersNotProject(id) {
     return api.get(`/projects/${id}/usuarios_no_pertenecen/`)
   },
   /* getUsers() {
@@ -22,9 +22,9 @@ export default {
     return api.post('/auth/registration/', payload)
   },
   updateUser(id, payload) {
-    return api.patch(`/api/auth/update-user/${id}/`, payload)
+    return api.patch(`/auth/update-user/${id}/`, payload)
   },
   deleteUser(id, payload) {
-    return api.patch(`/api/auth/update-user/${id}/`, payload)
+    return api.patch(`/auth/update-user/${id}/`, payload)
   },
 }

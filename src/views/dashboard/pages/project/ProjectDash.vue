@@ -176,8 +176,16 @@
     </v-row>
     <v-divider />
     <v-row class="mx-auto" justify="center" dense align="center">
-      <v-btn color="secondary" :to="{ name: 'ArtifactsList', params: { id_project } }">ARTEFACTOS</v-btn>
-      <v-btn color="secondary" :to="{ name: 'MeetingList', params: { id_project } }">REUNIONES</v-btn>
+      <v-btn
+        color="secondary"
+        :to="{ name: 'ArtifactsList', params: { id_project } }"
+        >ARTEFACTOS</v-btn
+      >
+      <v-btn
+        color="secondary"
+        :to="{ name: 'MeetingList', params: { id_project } }"
+        >REUNIONES</v-btn
+      >
       <v-btn color="secondary">PROCESOS</v-btn>
       <v-btn
         color="secondary"
@@ -235,53 +243,100 @@
         </v-row>
       </v-col>
       <v-col>
-        <base-material-card title="Estado del Proyecto:" icon="mdi-clipboard-text" color="primary">
+        <base-material-card
+          title="Estado del Proyecto:"
+          icon="mdi-clipboard-text"
+          color="primary"
+        >
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Nombre: {{projectInfo.nombre}}</div>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >
+              Nombre: {{ projectInfo.nombre }}
+            </div>
           </v-row>
 
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Presupuesto: {{projectInfo.presupuesto }}</div>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >
+              Presupuesto: {{ projectInfo.presupuesto }}
+            </div>
           </v-row>
 
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Costo: {{projectInfo.costo }}</div>
-          </v-row>
-          <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Miembros: {{projectInfo.miembros }}</div>
-          </v-row>
-          <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Líder: {{projectInfo.lider}}</div>
-          </v-row>
-          <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Metodología: {{projectInfo.metodologia }}</div>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >
+              Costo: {{ projectInfo.costo }}
+            </div>
           </v-row>
           <v-row>
             <div
               class="card-title font-weight-bold ml-4"
               style="font-size: 15px;"
-            >Actividades Asignadas: {{projectInfo.actividades_asignadas }}</div>
+            >
+              Miembros: {{ projectInfo.miembros }}
+            </div>
           </v-row>
           <v-row>
             <div
               class="card-title font-weight-bold ml-4"
               style="font-size: 15px;"
-            >Actividades Completadas: {{projectInfo.actividades_completadas }}</div>
+            >
+              Líder: {{ projectInfo.lider }}
+            </div>
           </v-row>
           <v-row>
             <div
               class="card-title font-weight-bold ml-4"
               style="font-size: 15px;"
-            >Procesos Instanciados: {{projectInfo.procesos_totales }}</div>
-          </v-row>
-          <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Fecha de Inicio: {{projectInfo.fecha_inicio }}</div>
+            >
+              Metodología: {{ projectInfo.metodologia }}
+            </div>
           </v-row>
           <v-row>
             <div
               class="card-title font-weight-bold ml-4"
               style="font-size: 15px;"
-            >Fecha de Finalización: {{projectInfo.fecha_finalizacion }}</div>
+            >
+              Actividades Asignadas: {{ projectInfo.actividades_asignadas }}
+            </div>
+          </v-row>
+          <v-row>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >
+              Actividades Completadas: {{ projectInfo.actividades_completadas }}
+            </div>
+          </v-row>
+          <v-row>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >
+              Procesos Instanciados: {{ projectInfo.procesos_totales }}
+            </div>
+          </v-row>
+          <v-row>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >
+              Fecha de Inicio: {{ projectInfo.fecha_inicio }}
+            </div>
+          </v-row>
+          <v-row>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >
+              Fecha de Finalización: {{ projectInfo.fecha_finalizacion }}
+            </div>
           </v-row>
         </base-material-card>
       </v-col>

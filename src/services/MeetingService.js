@@ -10,8 +10,8 @@ export default {
   updateMeeting(id, payload) {
     return api.patch(`/reunion/${id}/`, payload)
   },
-  deleteMeeting(id, payload) {
-    return api.patch(`/api/auth/update-meeting/${id}/`, payload)
+  deleteMeeting(id) {
+    return api.delete(`/reunion/${id}/`)
   },
   postMeeting(meeting, id) {
     return api.post(`/projects/${id}/crear_reunion/`, meeting)

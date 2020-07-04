@@ -113,6 +113,8 @@
         <SuccessMessage />
       </v-col>
     </v-row>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 

@@ -68,41 +68,26 @@ const mutations = {
 }
 
 const actions = {
-  createMeeting({ commit, dispatch }, meeting) {
-    console.log(meeting.projectId)
-    return MeetingService.postMeeting(meeting, meeting.projectId)
-      .then(() => {
-        commit('ADD_MEETING', meeting)
-        const notification = {
-          //type: 'success',
-          //message: 'Your meeting has been created!',
-          success() {
-            /* Vue.swal({
-                type: 'success',
-                title: 'Hello',
-                text: 'Hello brave new world!',
-              })*/
-            this.$swal('Oops...', 'Something went wrong!', 'success')
-          },
-        }
-        dispatch('notification/add', notification, { root: true })
-      })
-      .catch((error) => {
-        const notification = {
-          //  type: 'error',
-          //message: 'There was a problem creating your meeting: ' + error.message,
-          success() {
-            /* Vue.swal({
-                type: 'success',
-                title: 'Hello',
-                text: 'Hello brave new world!',
-              })*/
-            this.$swal('Oops...', 'Something went wrong!!!!', 'error')
-          },
-        }
-        dispatch('notification/add', notification, { root: true })
-        throw error
-      })
+  createUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      MeetingService.postMeeting(payload, payload.projectId)
+        .then((response) => {
+          //   commit('ADD_MEETING', meeting)
+          if (response.status === 201) {
+            buildSuccess(
+              {
+                msg: 'common.meeting.CREATED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
   },
   fetchMeetings({ commit, dispatch }, id) {
     MeetingService.getMeetings(id)

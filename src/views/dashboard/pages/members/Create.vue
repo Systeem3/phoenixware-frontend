@@ -83,17 +83,17 @@ export default {
         { name: 'Lider', id: 'L' },
         { name: 'Miembro', id: 'M' },
       ],
-      user:'',
-      proyecto_id:this.$route.params.id_project,
+      user: '',
+      proyecto_id: this.$route.params.id_project,
     }
   },
   components: {
     ValidationObserver,
     VSelectWithValidation,
   },
-created() {
+  created() {
     this.fetchUsersNotProject(this.proyecto_id)
-},
+  },
   computed: {
     ...mapGetters('users', ['users']),
   },
@@ -104,9 +104,9 @@ created() {
       // this.$refs.obs.validate()
       console.log(this.proyecto_id)
       await this.createMember({
-        rol:this.rol,
-        usuario:this.user,
-        proyecto:this.proyecto_id,
+        rol: this.rol,
+        usuario: this.user,
+        proyecto: this.proyecto_id,
       })
       this.fetchUsersNotProject(this.proyecto_id)
     },

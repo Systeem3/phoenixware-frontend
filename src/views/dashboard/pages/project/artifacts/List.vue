@@ -8,7 +8,9 @@
       </v-col>
       <v-col sm="12" md="4" v-for="artifact in artifacts" :key="artifact.id">
         <v-card color="#1300FF" dark>
-          <v-card-title class=" justify-center font-weight-light headline">{{ artifact.nombre }}</v-card-title>
+          <v-card-title class="justify-center font-weight-light headline">{{
+            artifact.nombre
+          }}</v-card-title>
           <v-card-text
             class="body-1 text-center mb-3 font-weight-light grey--text"
             >{{ artifact.descripcion }}
@@ -19,6 +21,8 @@
         </v-card>
       </v-col>
     </v-row>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 
@@ -46,7 +50,7 @@ export default {
       this.list[index] = !this.list[index]
     },
     letsGo(value) {
-      window.open(value, '_blank');
+      window.open(value, '_blank')
     },
   },
 }

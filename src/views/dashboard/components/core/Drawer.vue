@@ -39,7 +39,12 @@
       <div />
 
       <template v-for="(item, i) in computedItems">
-        <base-item-group v-if="item.children" :key="`group-${i}`" :item="item" :icon="icon">
+        <base-item-group
+          v-if="item.children"
+          :key="`group-${i}`"
+          :item="item"
+          :icon="icon"
+        >
           <!--  -->
         </base-item-group>
 
@@ -143,7 +148,7 @@ export default {
 
   computed: {
     ...mapState(['barColor', 'barImage']),
-    ...mapGetters('users', ['user']),
+    ...mapGetters('users', ['user_auth']),
     drawer: {
       get() {
         return this.$store.state.drawer
@@ -159,7 +164,10 @@ export default {
       return {
         avatar: true,
         group: '/userprofile',
-        title: this.user.empleado.nombre + ' ' + this.user.empleado.apellido,
+        title:
+          this.user_auth.empleado.nombre +
+          ' ' +
+          this.user_auth.empleado.apellido,
         //title: this.$t(user.employee.name),
         children: [
           {

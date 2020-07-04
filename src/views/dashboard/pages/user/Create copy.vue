@@ -6,11 +6,11 @@
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Empleado
-              <span class="body-1">— Modificar Empleado</span>
+              <span class="body-1">— Registro de Empleado</span>
             </div>
           </template>
-          <ValidationObserver ref="obs">
-            <v-form>
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
+            <v-form @submit.prevent="submit()">
               <v-container class="py-0">
                 <v-row>
                   <v-col cols="12" md="4">
@@ -18,8 +18,8 @@
                       label="Correo Electrónico"
                       color="secondary"
                       prepend-icon="mdi-at"
-                      rules="required|email"
                       v-model="email"
+                      rules="required|email"
                     />
                   </v-col>
                   <v-col cols="12" md="4">
@@ -27,9 +27,9 @@
                       label="Nombre"
                       color="secondary"
                       prepend-icon="mdi-account"
+                      v-model="nombre"
                       rules="required"
                       class="purple-input"
-                      v-model="name"
                     />
                   </v-col>
                   <v-col cols="12" md="4">
@@ -37,9 +37,9 @@
                       label="Apellido"
                       color="secondary"
                       prepend-icon="mdi-account"
+                      v-model="apellido"
                       rules="required"
                       class="purple-input"
-                      v-model="lastName"
                     />
                   </v-col>
                   <v-col cols="12">
@@ -47,9 +47,9 @@
                       label="Direccion"
                       color="secondary"
                       prepend-icon="mdi-home"
+                      v-model="direccion"
                       rules="required"
                       class="purple-input"
-                      v-model="address"
                     />
                   </v-col>
                   <v-col cols="12" md="6">
@@ -57,13 +57,14 @@
                       label="Telefono"
                       color="secondary"
                       prepend-icon="mdi-phone"
+                      v-model="telefono"
                       rules="required"
                       class="purple-input"
-                      v-model="phone"
                     />
                   </v-col>
                   <v-col cols="12" md="6">
                     <VSelectWithValidation
+                      v-model="tipo_usuario"
                       :items="items"
                       item-text="name"
                       item-value="id"
@@ -71,23 +72,27 @@
                       rules="required"
                       dense
                       prepend-icon="mdi-account-group"
-                      v-model="type"
                     />
                   </v-col>
                   <v-col cols="12" class="text-right">
                     <v-btn
                       color="purple"
                       class="ml-0"
+                      float="right"
+                      margin-left="6px"
                       :to="{ name: 'UserList' }"
                     >
                       Atrás
                     </v-btn>
                     <v-btn
                       color="primary"
+                      float="right"
+                      margin-left="6px"
                       class="mr-0"
-                      @click.stop.prevent="submit"
+                      @click="submit"
+                      :disabled="invalid"
                     >
-                      Modificar
+                      Registrar
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -111,10 +116,16 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      email: '',
+      nombre: '',
+      apellido: '',
+      direccion: '',
+      telefono: '',
+      tipo_usuario: '',
       items: [
-        { name: 'Administrador', id: '1' },
-        { name: 'Director', id: '2' },
-        { name: 'Regular', id: '3' },
+        { name: 'administrador', id: '1' },
+        { name: 'director', id: '2' },
+        { name: 'regular', id: '3' },
       ],
     }
   },
@@ -123,111 +134,20 @@ export default {
     VTextFieldWithValidation,
     VSelectWithValidation,
   },
-  computed: {
-    email: {
-      get() {
-        return this.$store.state.users.user.email
-      },
-      set(value) {
-        const data = {
-          key: 'email',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    name: {
-      get() {
-        return this.$store.state.users.user.empleado.nombre
-      },
-      set(value) {
-        const data = {
-          key: 'name',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    lastName: {
-      get() {
-        return this.$store.state.users.user.empleado.apellido
-      },
-      set(value) {
-        const data = {
-          key: 'lastName',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    address: {
-      get() {
-        return this.$store.state.users.user.empleado.direccion
-      },
-      set(value) {
-        const data = {
-          key: 'address',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    phone: {
-      get() {
-        return this.$store.state.users.user.empleado.telefono
-      },
-      set(value) {
-        const data = {
-          key: 'phone',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    type: {
-      get() {
-        return this.$store.state.users.user.tipo_usuario
-      },
-      set(value) {
-        const data = {
-          key: 'type',
-          value,
-        }
-        this.addUserData(data)
-      },
-    },
-    getTypeId(tipoUsuario) {
-      let typeId = null
-      this.items.forEach((item) => {
-        if (item.name === tipoUsuario) typeId = item.id
-      })
-
-      if (typeId === null) {
-        console.warn('Tipo usuario not found with tipoUsuario: ', tipoUsuario)
-      }
-
-      return typeId
-    },
-  },
+  computed: {},
   methods: {
-    ...mapActions('users', ['fetchUser', 'addUserData', 'saveUser']),
+    ...mapActions('users', ['createUser']),
     async submit() {
-      await this.saveUser({
-        id: this.id,
+      // this.$refs.obs.validate()
+      await this.createUser({
         email: this.email,
-        empleado: {
-          nombre: this.name,
-          apellido: this.lastName,
-          direccion: this.address,
-          telefono: this.phone,
-        },
-        tipo_usuario: this.type,
+        nombre: this.nombre,
+        apellido: this.apellido,
+        direccion: this.direccion,
+        telefono: this.telefono,
+        tipo_usuario: this.tipo_usuario,
       })
     },
-  },
-  props: ['id'],
-  async mounted() {
-    await this.fetchUser(this.id)
   },
 }
 </script>

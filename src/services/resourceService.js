@@ -10,13 +10,13 @@ export default {
   getResources(id) {
     return api.get(`info_proyecto/${id}/listar_recursos_proyecto/`)
   },
-  getResource(id){
+  getResource(id) {
     return api.get(`recurso/${id}/`)
   },
-  deleteResource(id){
+  deleteResource(id) {
     return api.delete(`recurso/${id}/`)
   },
-  updateResource(id, payload){
-    return api.patch(`recurso/${id}/`,payload)
+  updateResource(id, payload) {
+    return api.patch(`recurso/${id}/`, payload)
   },
 }

@@ -12,7 +12,7 @@ _<template>
       class="elevation-1"
       :footer-props="{
         'items-per-page-text': $t('dataTable.ROWS_PER_PAGE'),
-        'items-per-page-options': [5, 10, 25]
+        'items-per-page-options': [5, 10, 25],
       }"
     >
       <template v-slot:top>
@@ -172,7 +172,7 @@ export default {
   metaInfo() {
     return {
       title: this.$store.getters.appTitle,
-      titleTemplate: `${this.$t('cities.TITLE')} - %s`
+      titleTemplate: `${this.$t('cities.TITLE')} - %s`,
     }
   },
   data() {
@@ -184,7 +184,7 @@ export default {
       pagination: {},
       editedItem: {},
       defaultItem: {},
-      fieldsToSearch: ['name']
+      fieldsToSearch: ['name'],
     }
   },
   computed: {
@@ -199,26 +199,26 @@ export default {
           text: this.$i18n.t('dataTable.ACTIONS'),
           value: '_id',
           sortable: false,
-          width: 100
+          width: 100,
         },
         {
           text: this.$i18n.t('cities.headers.NAME'),
           align: 'left',
           sortable: true,
-          value: 'name'
+          value: 'name',
         },
         {
           text: this.$i18n.t('common.CREATED'),
           align: 'left',
           sortable: true,
-          value: 'createdAt'
+          value: 'createdAt',
         },
         {
           text: this.$i18n.t('common.UPDATED'),
           align: 'left',
           sortable: true,
-          value: 'updatedAt'
-        }
+          value: 'updatedAt',
+        },
       ]
     },
     items() {
@@ -226,7 +226,7 @@ export default {
     },
     totalItems() {
       return this.$store.state.adminCities.totalCities
-    }
+    },
   },
   watch: {
     dialog(value) {
@@ -245,14 +245,14 @@ export default {
           this.dataTableLoading = false
         }
       },
-      deep: true
+      deep: true,
     },
     async search() {
       clearTimeout(this.delayTimer)
       this.delayTimer = setTimeout(() => {
         this.doSearch()
       }, 400)
-    }
+    },
   },
   methods: {
     ...mapActions(['getCities', 'editCity', 'saveCity', 'deleteCity']),
@@ -290,7 +290,7 @@ export default {
             buttonTrueText: this.$t('common.DELETE'),
             buttonFalseText: this.$t('common.CANCEL'),
             buttonTrueColor: 'red lighten3',
-            buttonFalseColor: 'green'
+            buttonFalseColor: 'green',
           }
         )
         if (response) {
@@ -339,8 +339,8 @@ export default {
           this.close()
         }
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

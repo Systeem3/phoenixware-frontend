@@ -26,7 +26,7 @@
 
 <script>
 //import { ValidationObserver } from 'vee-validate'
-import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
+//import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
 import { mapActions } from 'vuex'
 
 export default {

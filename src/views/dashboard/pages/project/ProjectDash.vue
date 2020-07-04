@@ -27,7 +27,7 @@
                 :to="{
                   name: 'Processes',
                   params: { id_project },
-                  query: { id_category: '1' },
+                  query: { categoria: '1' },
                 }"
               >
                 <v-icon>mdi-folder-multiple</v-icon>
@@ -52,7 +52,7 @@
                 :to="{
                   name: 'Processes',
                   params: { id_project },
-                  query: { id_category: '2' },
+                  query: { categoria: 2 },
                 }"
               >
                 <v-icon>mdi-folder-multiple</v-icon>
@@ -78,7 +78,7 @@
                 :to="{
                   name: 'Processes',
                   params: { id_project },
-                  query: { id_category: '3' },
+                  query: { categoria: 3 },
                 }"
               >
                 <v-icon>mdi-folder-multiple</v-icon>
@@ -104,7 +104,7 @@
                 :to="{
                   name: 'Processes',
                   params: { id_project },
-                  query: { id_category: '4' },
+                  query: { categoria: 4 },
                 }"
               >
                 <v-icon>mdi-folder-multiple</v-icon>
@@ -129,7 +129,7 @@
                 :to="{
                   name: 'Processes',
                   params: { id_project },
-                  query: { id_category: '5' },
+                  query: { categoria: 5 },
                 }"
               >
                 <v-icon>mdi-folder-multiple</v-icon>
@@ -145,7 +145,7 @@
     </v-row>
     <v-divider />
     <v-row class="mx-auto" justify="center" dense align="center">
-      <v-btn color="secondary">ARTEFACTOS</v-btn>
+      <v-btn color="secondary" :to="{ name: 'ArtifactsList', params: { id_project } }">ARTEFACTOS</v-btn>
       <v-btn color="secondary" :to="{ name: 'MeetingList', params: { id_project } }">REUNIONES</v-btn>
       <v-btn color="secondary">PROCESOS</v-btn>
       <v-btn color="secondary" :to="{ name: 'MembersList', params: { id_project } }">MIEMBROS</v-btn>

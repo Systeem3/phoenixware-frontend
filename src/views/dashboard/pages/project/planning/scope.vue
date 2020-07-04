@@ -15,11 +15,15 @@
         <base-material-card
           color="primary"
           icon="mdi mdi-arrow-up-bold-hexagon-outline"
-          title="Delimitación de Alcance:"
-          subtitle="Una estimación de acuerdo a los datos del proyecto"
+          title="Delimitación de Alcance"
           class="py-2 px-5"
         >
           <v-form>
+            <span
+              class="card-title font-weight-light ml-4 mb-3 mt-6"
+              style="font-size: 14px;"
+              >Una estimación de acuerdo a los datos registrados:</span
+            >
             <v-textarea
               filled
               auto-grow
@@ -34,10 +38,7 @@
               <v-btn color="primary" v-clipboard="resultado">
                 COPIAR AL PORTAPAPELES
               </v-btn>
-              <v-btn
-                color="secondary"
-                :to="{ name: 'ProjectUpdate', params: { id_project } }"
-              >
+              <v-btn color="secondary" :to="{ name: 'ProjectUpdate' }">
                 EDITAR PROYECTO
               </v-btn>
             </v-row>
@@ -123,7 +124,78 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-dialog
+      v-model="dialog_o"
+      max-width="800px"
+      class="px-5 py-3 mx-10"
+      justify="center"
+      align="center"
+    >
+      <base-material-card color="primary">
+        <template v-slot:heading>
+          <v-tabs
+            v-model="tabs"
+            background-color="transparent"
+            slider-color="secondary"
+          >
+            <v-tab class="mr-3">
+              <v-icon class="mr-2">
+                mdi-chart-pie
+              </v-icon>
+              Agregar Objetivos
+            </v-tab>
+            <v-tab class="mr-3">
+              <v-icon class="mr-2">
+                mdi-comment-plus-outline
+              </v-icon>
+              Objetivos Registrados
+            </v-tab>
+          </v-tabs>
+        </template>
 
+        <v-tabs-items v-model="tabs" class="transparent">
+          <v-tab-item v-for="n in 2" :key="n">
+            <v-card-text>
+              <template v-for="(task, i) in tasks[tabs]">
+                <template v-if="n == 1">
+                  <v-row :key="i" align="center" justify="center">
+                    <v-col cols="1">
+                      <v-list-item-action>
+                        <v-checkbox v-model="task.value" color="secondary" />
+                      </v-list-item-action>
+                    </v-col>
+                    <v-col cols="9">
+                      <div class="font-weight-light" v-text="task.text" />
+                    </v-col>
+                  </v-row>
+                </template>
+
+                <template v-if="n == 2">
+                  <v-row :key="i" align="center" justify="center">
+                    <v-col cols="1">
+                      <v-list-item-action>
+                        <v-checkbox v-model="task.value" color="secondary" />
+                      </v-list-item-action>
+                    </v-col>
+                    <v-col cols="9">
+                      <div class="font-weight-light" v-text="task.text" />
+                    </v-col>
+                    <v-col cols="2" class="text-right">
+                      <v-icon color="error" class="mx-1">
+                        mdi-close
+                      </v-icon>
+                    </v-col>
+                  </v-row>
+                </template>
+              </template>
+              <v-row justify="center" align="center">
+                <v-btn color="secondary">ACTUALIZAR ALCANCE </v-btn>
+              </v-row>
+            </v-card-text>
+          </v-tab-item>
+        </v-tabs-items>
+      </base-material-card>
+    </v-dialog>
     <!-- Segunda Fila-->
   </v-container>
 </template>
@@ -150,9 +222,32 @@ export default {
         presupuesto: '',
         costo: '',
       },
-      id_project: this.$route.params.id_project,
+
+      tabs: 0,
+      tasks: {
+        0: [
+          {
+            text:
+              'Sign contract for "What are conference organizers afraid of?"',
+            value: false,
+          },
+        ],
+        1: [
+          {
+            text:
+              'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
+            value: true,
+          },
+          {
+            text:
+              'Sign contract for "What are conference organizers afraid of?"',
+            value: false,
+          },
+        ],
+      },
     }
   },
+
   components: {
     // ValidationObserver,
   },
@@ -312,11 +407,21 @@ export default {
       'addProjectData',
       'saveProject',
     ]),
+    //     async submit_o() {
+    //   // this.$refs.obs.validate()
+    //   await this.createObjective({
+    //     email: this.email,
+    //     nombre: this.nombre,
+    //     apellido: this.apellido,
+    //     direccion: this.direccion,
+    //     telefono: this.telefono,
+    //     tipo_usuario: this.tipo_usuario,
+    //   })
+    //},
   },
 
-  props: ['id_project'],
   async mounted() {
-    await this.fetchProject(this.id_project)
+    await this.fetchProject(this.$route.params.id_project)
   },
 }
 </script>

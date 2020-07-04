@@ -7,7 +7,7 @@
         </div>
       </v-col>
       <v-col sm="12" md="4" v-for="artifact in artifacts" :key="artifact.id">
-        <v-card color="#1300FF" dark>
+        <v-card color="secondary" dark>
           <v-card-title class=" justify-center font-weight-light headline">{{ artifact.nombre }}</v-card-title>
           <v-card-text
             class="body-1 text-center mb-3 font-weight-light grey--text"

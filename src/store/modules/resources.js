@@ -11,7 +11,18 @@ const state = {
     tipo: '',
     tipo_costo: '',
     costo: null,
+    vida_util: null,
     estado: '',
+  },
+  costos: {
+    directo: null,
+    indirectos: null,
+    extraordinarios: null,
+    total: null,
+    optimista: null,
+    probable: null,
+    pesimista: null,
+    estimado: null,
   },
 }
 
@@ -27,6 +38,10 @@ const mutations = {
     //state.meetings.push(meetings)
     state.resource = resource
   },
+  SET_COSTOS(state, costos) {
+    //state.meetings.push(meetings)
+    state.costos = costos
+  },
   UPDATE_MEETING(state, payload) {
     state.meetings = state.meetings.map((meeting) => {
       if (meeting.id === payload.id) {
@@ -41,7 +56,7 @@ const mutations = {
     state.resource.fecha = data.tipo
     state.resource.hora = data.tipo_costo
   },
- /* [types.CHANGE_STATE_RESOURCE](state) {
+  /* [types.CHANGE_STATE_RESOURCE](state) {
     state.resource.es = false
   },*/
   [types.ADD_RESOURCE_DATA](state, data) {
@@ -58,6 +73,9 @@ const mutations = {
       case 'costo':
         state.resource.costo = data.value
         break
+      case 'vida_util':
+        state.resource.vida_util = data.value
+        break
       case 'estado':
         state.resource.estado = data.value
         break
@@ -70,7 +88,8 @@ const mutations = {
 const actions = {
   createResource({ commit }, resource) {
     console.log(resource.projectId)
-    return resourceService.postResource(resource.projectId, resource)
+    return resourceService
+      .postResource(resource.projectId, resource)
       .then((response) => {
         commit('ADD_RESOURCE', resource)
         console.log(response.data)
@@ -79,8 +98,9 @@ const actions = {
         console.log(error)
       })
   },
-  fetchResources({ commit}, id) {
-    resourceService.getResources(id)
+  fetchResources({ commit }, id) {
+    resourceService
+      .getResources(id)
       .then((response) => {
         console.log(response.data)
         commit('SET_MEETINGS', response.data)
@@ -89,13 +109,14 @@ const actions = {
         console.log(error)
       })
   },
-fetchResource({ commit, getters, dispatch }, id) {
+  fetchResource({ commit, getters, dispatch }, id) {
     console.log(id)
     const resource = getters.getResourceById(id)
     if (resource) {
       commit('SET_RESOURCE', resource)
     } else {
-      resourceService.getResource(id)
+      resourceService
+        .getResource(id)
         .then((response) => {
           console.log(response.data)
           commit('SET_RESOURCE', response.data)
@@ -109,11 +130,24 @@ fetchResource({ commit, getters, dispatch }, id) {
         })
     }
   },
+  fetchCosto({ commit }, id) {
+    console.log(id)
+    resourceService
+      .getCosto(id)
+      .then((response) => {
+        console.log(response.data)
+        commit('SET_COSTOS', response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
 
-saveResource({ commit }, payload) {
+  saveResource({ commit }, payload) {
     console.log(payload.id)
     return new Promise((resolve, reject) => {
-      resourceService.updateResource(payload.id, payload)
+      resourceService
+        .updateResource(payload.id, payload)
         .then((response) => {
           if (response.status === 200) {
             commit(types.FILL_RESOURCE, response.data)
@@ -135,7 +169,7 @@ saveResource({ commit }, payload) {
     commit(types.ADD_RESOURCE_DATA, data)
   },
 
-deleteResource({ commit }, id) {
+  deleteResource({ commit }, id) {
     return new Promise((resolve, reject) => {
       resourceService
         .deleteResource(id)
@@ -164,6 +198,7 @@ const getters = {
     return state.resources
   },
   resource: (state) => state.resource,
+  costos: (state) => state.costos,
 }
 
 export default {

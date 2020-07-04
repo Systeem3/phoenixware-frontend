@@ -10,6 +10,9 @@ export default {
   getResources(id) {
     return api.get(`info_proyecto/${id}/listar_recursos_proyecto/`)
   },
+  getCosto(id) {
+    return api.get(`info_proyecto/${id}/costo_proyecto/`)
+  },
   getResource(id){
     return api.get(`recurso/${id}/`)
   },

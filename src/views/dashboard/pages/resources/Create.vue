@@ -2,7 +2,7 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="10">
-        <base-material-card icon="mdi-account-multiple" color="primary">
+        <base-material-card icon="mdi mdi-currency-usd" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Recursos
@@ -86,6 +86,19 @@
                       type="number"
                     />
                   </v-col>
+                  <v-col cols="6" md="6">
+                    <VTextFieldWithValidation
+                      v-if="mostrar"
+                      label="Vida Util"
+                      color="secondary"
+                      prepend-icon="mdi-account"
+                      v-model="inputs.vida_util"
+                      rules="required"
+                      class="purple-input"
+                      type="number"
+                      min="0"
+                    />
+                  </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12" class="text-right">
@@ -143,6 +156,7 @@ export default {
         costo: '',
         projectId: this.$route.params.id_project,
         estado: 'A',
+        vida_util: null,
       },
       nowDate: new Date().toISOString().slice(0, 10),
       picker: new Date().toISOString().substr(0, 10),
@@ -165,16 +179,17 @@ export default {
   created() {
     this.projectId = this.$route.params.id
   },
-  computed: {},
+  computed: {
+    mostrar() {
+      if (this.inputs.tipo) {
+        return this.inputs.tipo === '3'
+      } else {
+        return false
+      }
+    },
+  },
   methods: {
     ...mapActions('resources', ['createResource']),
-    goBack(goBackByStep) {
-      //(-ve  => go back/ +ve => go forward)
-      var step = goBackByStep || -1
-      setTimeout(() => {
-        this.$router.go(step)
-      }, 3000)
-    },
   },
 }
 </script>

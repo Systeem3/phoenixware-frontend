@@ -2,7 +2,7 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="10">
-        <base-material-card icon="mdi-account-multiple" color="primary">
+        <base-material-card icon="mdi mdi-clipboard-file" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
               Recursos
@@ -17,7 +17,7 @@
                     <VTextFieldWithValidation
                       label="Nombre de del artefacto"
                       color="secondary"
-                      prepend-icon="mdi-account"
+                      prepend-icon="mdi mdi-card-text-outline"
                       v-model="inputs.nombre"
                       rules="required"
                       class="purple-input"
@@ -83,21 +83,6 @@
                       margin-left="6px"
                       @click="create()"
                       >Crear</v-btn
-                    >
-                    <v-btn
-                      v-if="show"
-                      color="primary"
-                      float="right"
-                      margin-left="6px"
-                      @click="logout()"
-                      >Logout</v-btn
-                    >
-                    <v-btn
-                      color="primary"
-                      float="right"
-                      margin-left="6px"
-                      @click="createResource(inputs)"
-                      >Registrar</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -205,7 +190,7 @@ export default {
       this.show=true
     },
     async create() {
-        const body = {name: "Sistemas 3"};
+        const body = {name: this.inputs.nombre};
         const request = await gapi.client.drive.files.copy({
             fileId: this.originFileId,
             resource: body

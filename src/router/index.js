@@ -416,7 +416,7 @@ const routes = [
         name: 'Scope',
         path: '/project/:id_project/planning/scope',
         component: () =>
-          import('@/views/dashboard/pages/project//planning/scope'),
+          import('@/views/dashboard/pages/project/planning/scope'),
         props: true,
       },
 
@@ -438,6 +438,12 @@ const routes = [
         path: '/resources/list/:id_project',
         component: () => import('@/views/dashboard/pages/resources/List'),
         props: true,
+      },
+      // Risks
+      {
+        name: 'Risk',
+        path: '/risk',
+        component: () => import('@/views/dashboard/pages/Risk/Risk'),
       },
     ],
   },

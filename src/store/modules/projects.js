@@ -15,20 +15,21 @@ const state = {
     costo: null,
     presupuesto: null,
     estado: '',
-    tiempo:null,
+    tiempo: null,
   },
-  /*project2: {
+  projectInfo: {
     nombre: '',
-    descripcion: '',
+    presupuesto: null,
+    costo: null,
+    miembros: null,
+    actividades_asignadas: null,
+    actividades_completadas: null,
+    procesos_totales: null,
+    metodologia: '',
     fecha_inicio: '',
     fecha_finalizacion: '',
-    tipo: '',
-    metodologia: '',
-    alcance: '',
-    costo: null,
-    presupuesto: null,
-    estado: '',
-  },*/
+    lider:''
+  },
 }
 
 const mutations = {
@@ -40,6 +41,9 @@ const mutations = {
   },
   SET_PROJECT(state, project) {
     state.project = project
+  },
+  SET_PROJECTINFO(state, projectInfo) {
+    state.projectInfo = projectInfo
   },
   [types.FILL_PROJECT](state, data) {
     state.project.nombre = data.nombre
@@ -165,6 +169,15 @@ const actions = {
         })
     }
   },
+  fetchProjectInfo({ commit }, id) {
+    ProjectService.getInfoProject(id)
+      .then((response) => {
+        commit('SET_PROJECTINFO', response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
   saveProject({ commit }, payload) {
     return new Promise((resolve, reject) => {
       ProjectService.updateProject(payload.id, payload)
@@ -222,7 +235,8 @@ const getters = {
   projects: (state) => {
     return state.projects
   },
-  project: (state) => state.user,
+  project: (state) => state.project,
+  projectInfo: (state) => state.projectInfo,
 }
 
 export default {

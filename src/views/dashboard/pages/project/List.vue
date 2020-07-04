@@ -1,7 +1,13 @@
 <template>
   <v-container id="data-tables" tag="section">
     <div class="text-right">
-      <v-btn class="mx-2" fab dark color="primary" :to="{ name: 'ProjectCreate' }">
+      <v-btn
+        class="mx-2"
+        fab
+        dark
+        color="primary"
+        :to="{ name: 'ProjectCreate' }"
+      >
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>

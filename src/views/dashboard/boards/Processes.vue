@@ -8,10 +8,19 @@
       </v-col>
       <v-col sm="12" md="4" v-for="process in processes" :key="process.id">
         <v-card color="#1300FF" dark>
-          <v-card-title class="headline">{{process.nombre}}</v-card-title>
+          <v-card-title class="headline">{{ process.nombre }}</v-card-title>
 
           <v-card-actions>
-            <v-btn text @click="hello(process.id)">Revisar</v-btn>
+            <!--<v-btn text @click="hello(process.id)">Revisar</v-btn>-->
+            <v-btn
+              text
+              :to="{
+                name: 'Board',
+                params: { id_process: process.id },
+                query: { categoria: id_category },
+              }"
+              >Revisar</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>
@@ -27,6 +36,8 @@ export default {
 
   data() {
     return {
+      id_category: this.$route.query.categoria,
+
       items: [
         {
           color: '#1F7087',
@@ -43,7 +54,6 @@ export default {
       ],
     }
   },
-
   computed: {
     totalSales() {
       return this.sales.reduce((acc, val) => acc + val.salesInM, 0)
@@ -54,19 +64,19 @@ export default {
   created() {
     console.log(this.$route.query.categoria)
     this.fetchProcesses2({
-      id:this.$route.params.id_project,
-      categoria:this.$route.query.categoria,
+      id: this.$route.params.id_project,
+      categoria: this.$route.query.categoria,
     })
     //this.fetchProcesses(this.$route.params.id_project)
   },
   methods: {
-    ...mapActions('processes',['fetchProcesses', 'fetchProcesses2']),
+    ...mapActions('processes', ['fetchProcesses', 'fetchProcesses2']),
     complete(index) {
       this.list[index] = !this.list[index]
     },
-    hello(value){
+    hello(value) {
       alert(value)
-    }
+    },
   },
 }
 </script>

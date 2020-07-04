@@ -110,13 +110,25 @@ const routes = [
         name: 'Processes',
         path: 'processes/:id_project',
         component: () => import('@/views/dashboard/boards/Processes'),
+        props: true,
       },
+      /* children: [
+          // Level 4 - Kanban
+          {
+            name: 'Board',
+            path: 'board',
+            component: () => import('@/views/dashboard/boards/Kanban/Board'),
+            props: true,
+          },
+        ],*/
       // Level 4 - Kanban
       {
         name: 'Board',
-        path: 'board',
+        path: 'board/:id_process',
         component: () => import('@/views/dashboard/boards/Kanban/Board'),
+        // props: true,
       },
+
       // Pages
       {
         name: 'RTL',
@@ -350,7 +362,8 @@ const routes = [
       {
         name: 'Costs',
         path: 'projects/costs',
-        component: () => import('@/views/dashboard/pages/project/planning/costs'),
+        component: () =>
+          import('@/views/dashboard/pages/project/planning/costs'),
       },
       // Risk
       {

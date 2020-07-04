@@ -41,6 +41,10 @@ export const ADD_MEMBER_DATA = 'ADD_MEMBER_DATA'
 export const FILL_PROCESS = 'FILL_PROCESS'
 export const ADD_PROCESS_DATA = 'ADD_PROCESS_DATA'
 
+// activity
+export const FILL_ACTIVITY = 'FILL_ACTIVITY'
+export const ADD_ACTIVITY_DATA = 'ADD_ACTIVITY_DATA'
+
 // cities
 export const FILL_ALL_CITIES = 'FILL_ALL_CITIES'
 // Admin - Cities

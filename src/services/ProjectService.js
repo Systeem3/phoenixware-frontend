@@ -18,4 +18,7 @@ export default {
   deleteProject(id, payload) {
     return api.patch(`/projects/${id}/`, payload)
   },
+  getInfoProject(id){
+    return api.get(`/info_proyecto/${id}/info_proyecto/`)
+  }
 }

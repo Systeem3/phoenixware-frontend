@@ -172,51 +172,51 @@
       <v-col>
         <base-material-card title="Estado del Proyecto:" icon="mdi-clipboard-text" color="primary">
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Nombre:</div>
+            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Nombre: {{projectInfo.nombre}}</div>
           </v-row>
 
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Presupuesto:</div>
+            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Presupuesto: {{projectInfo.presupuesto }}</div>
           </v-row>
 
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Costo:</div>
+            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Costo: {{projectInfo.costo }}</div>
           </v-row>
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Miembros:</div>
+            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Miembros: {{projectInfo.miembros }}</div>
           </v-row>
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Líder:</div>
+            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Líder: {{projectInfo.lider}}</div>
           </v-row>
           <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Metodología:</div>
-          </v-row>
-          <v-row>
-            <div
-              class="card-title font-weight-bold ml-4"
-              style="font-size: 15px;"
-            >Actividades Asignadas:</div>
+            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Metodología: {{projectInfo.metodologia }}</div>
           </v-row>
           <v-row>
             <div
               class="card-title font-weight-bold ml-4"
               style="font-size: 15px;"
-            >Actividades Completadas:</div>
+            >Actividades Asignadas: {{projectInfo.actividades_asignadas }}</div>
           </v-row>
           <v-row>
             <div
               class="card-title font-weight-bold ml-4"
               style="font-size: 15px;"
-            >Procesos Instanciados:</div>
-          </v-row>
-          <v-row>
-            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Fecha de Inicio:</div>
+            >Actividades Completadas: {{projectInfo.actividades_completadas }}</div>
           </v-row>
           <v-row>
             <div
               class="card-title font-weight-bold ml-4"
               style="font-size: 15px;"
-            >Fecha de Finalización:</div>
+            >Procesos Instanciados: {{projectInfo.procesos_totales }}</div>
+          </v-row>
+          <v-row>
+            <div class="card-title font-weight-bold ml-4" style="font-size: 15px;">Fecha de Inicio: {{projectInfo.fecha_inicio }}</div>
+          </v-row>
+          <v-row>
+            <div
+              class="card-title font-weight-bold ml-4"
+              style="font-size: 15px;"
+            >Fecha de Finalización: {{projectInfo.fecha_finalizacion }}</div>
           </v-row>
         </base-material-card>
       </v-col>
@@ -225,6 +225,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -233,12 +234,16 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters('projects', ['projectInfo']),
+  },
 
-  methods: {},
+  methods: {
+    ...mapActions('projects', ['fetchProjectInfo']),
+  },
 
   created() {
-    // this.fetchProjects()
+    this.fetchProjectInfo(this.$route.params.id_project)
   },
 }
 </script>

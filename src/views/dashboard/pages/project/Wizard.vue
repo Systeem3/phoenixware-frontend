@@ -404,6 +404,32 @@
                       </v-select>
                     </v-col>
                   </v-row>
+                  <v-dialog v-model="dialog2" max-width="500">
+                    <v-card class="text-center">
+                      <v-card-title>
+                        Mensaje:
+                        <v-spacer />
+
+                        <v-icon aria-label="Close" @click="dialog2 = false"
+                          >mdi-close</v-icon
+                        >
+                      </v-card-title>
+
+                      <v-card-text>
+                        Tu Proyecto fue creado y se instanciaron en el varios
+                        procesos de desarrollo, pulsa el botón aceptar para ir a
+                        la ventana inicial del Proyecto para verificarlos
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-spacer />
+
+                        <v-btn color="error" text @click="dialog2 = false"
+                          >Cerrar</v-btn
+                        >
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
                 </v-responsive>
               </form>
             </v-tab-item>
@@ -552,6 +578,8 @@ export default {
       slider: 40,
       slider2: [30, 70],
       range: [-20, 70],
+
+      dialog2: false,
     }
   },
   components: {
@@ -610,9 +638,10 @@ export default {
         if (this.inputs.metodologia) {
           this.createProject(this.inputs)
         }
-        alert(
+        this.dialog2 = true
+        /*alert(
           'Tu Proyecto fue creado y se instanciaron en el varios procesos de desarrollo, pulsa aceptar para ir a la ventana inicial del Proyecto para verificarlos'
-        )
+        )*/
       } else {
         if (this.tab === this.tabs.length - 2) {
           //this.resultado = 'funciona'

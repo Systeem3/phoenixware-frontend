@@ -84,12 +84,35 @@
               <v-list-item-title v-text="p.title" @click="edituser" />
             </div>
             <div v-if="p.title === 'Cerrar Sesión'">
-              <v-list-item-title v-text="p.title" @click="logout" />
+              <v-list-item-title v-text="p.title" @click="dialog3 = true" />
             </div>
           </app-bar-item>
         </template>
       </v-list>
     </v-menu>
+    <v-dialog v-model="dialog3" max-width="300">
+      <v-card>
+        <v-card-title>
+          ¿Desea cerrar sesión?
+
+          <v-spacer />
+
+          <v-icon aria-label="Close" @click="dialog3 = false">
+            mdi-close
+          </v-icon>
+        </v-card-title>
+
+        <v-card-text class="pb-6 pt-12 text-center">
+          <v-btn class="mr-3" text @click="dialog3 = false">
+            No
+          </v-btn>
+
+          <v-btn color="success" text @click="logout">
+            Si
+          </v-btn>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-app-bar>
 </template>
 
@@ -141,6 +164,7 @@ export default {
   },
 
   data: () => ({
+    dialog3: false,
     profile: [
       { title: 'Perfil' },
       { divider: true },

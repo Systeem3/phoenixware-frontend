@@ -1299,8 +1299,8 @@ export default {
       resultado: '',
       dialog: false,
       dialog2: false,
-      multiline:true,
-      top:true,
+      multiline: true,
+      top: true,
       inputs: {
         actores_simple: '',
         actores_medio: '',

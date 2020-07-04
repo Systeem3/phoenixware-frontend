@@ -138,7 +138,7 @@ const actions = {
             commit(types.FILL_MEMBER, response.data)
             buildSuccess(
               {
-                msg: 'The meeting was updated',
+                msg: 'common.member.CREATED_SUCCESSFULLY',
               },
               commit,
               resolve
@@ -162,7 +162,7 @@ const actions = {
           if (response.status === 204) {
             buildSuccess(
               {
-                msg: 'The member was deleted',
+                msg: 'common.member.DELETED_SUCCESSFULLY',
               },
               commit,
               resolve

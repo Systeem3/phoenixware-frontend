@@ -18,7 +18,7 @@
         class="align-self-center"
         color="grey"
       >
-        <v-img :src="user.empleado.foto" />
+        <v-img :src="user_auth.empleado.foto" />
       </v-list-item-avatar>
 
       <v-list-item-content>
@@ -75,7 +75,7 @@
 
     computed: {
       ...mapState(['barColor']),
-      ...mapGetters('users',['user']),
+      ...mapGetters('users',['user_auth']),
       children () {
         return this.item.children.map(item => ({
           ...item,

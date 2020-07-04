@@ -2,11 +2,11 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="8">
-        <base-material-card icon="mdi-account-multiple" color="pink darken-1">
+        <base-material-card icon="mdi-rocket" color="pink darken-1">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
-              Reunión
-              <span class="body-1">— Modificar Reunión</span>
+              Proyecto
+              <span class="body-1">— Modificar Proyecto</span>
             </div>
           </template>
           <ValidationObserver ref="obs">
@@ -174,7 +174,7 @@
                         color="pink darken-1"
                         class="ml-0"
                         :to="{ name: 'ProjectList' }"
-                        >Atrás</v-btn
+                        >Proyectos</v-btn
                       >
                       <v-btn
                         color="pink darken-1"
@@ -356,10 +356,10 @@ export default {
       'saveProject',
     ]),
     async submit() {
-      let fechaInicio=new Date(this.dateCreated).getTime();
-      let fechaFinal=new Date(this.dateFinished).getTime();
+      let fechaInicio = new Date(this.dateCreated).getTime()
+      let fechaFinal = new Date(this.dateFinished).getTime()
       let diff = fechaFinal - fechaInicio
-      let dias = diff/(1000*60*60*24)
+      let dias = diff / (1000 * 60 * 60 * 24)
       console.log(dias)
       await this.saveProject({
         nombre: this.name,
@@ -372,7 +372,7 @@ export default {
         costo: this.costo,
         presupuesto: this.presupuesto,
         estado: this.state,
-        tiempo:dias,
+        tiempo: dias,
         id: this.id_project,
       })
     },

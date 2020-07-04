@@ -51,6 +51,9 @@ const options = {
 Vue.use(VueSweetalert2, options)
 Vue.use(VuetifyConfirm, { vuetify })
 
+import VueClipboards from 'vue-clipboards'
+Vue.use(VueClipboards)
+
 Vue.config.productionTip = false
 
 Vue.directive('focus', {
@@ -67,6 +70,7 @@ new Vue({
   router,
   store,
   vuetify,
+  el: '#app',
   i18n,
   render: (h) => h(App),
   created() {

@@ -1,6 +1,6 @@
 import MeetingService from '@/services/MeetingService.js'
 import * as types from '@/store/mutation-types'
-import auth from '../../api/auth'
+//import auth from '../../api/auth'
 import { buildSuccess, handleError } from '@/utils/utils.js'
 
 const state = {
@@ -163,13 +163,11 @@ const actions = {
     commit(types.ADD_MEETING_DATA, data)
   },
 
-  deleteMeeting({ commit }, payload) {
+  deleteMeeting({ commit }, id) {
     return new Promise((resolve, reject) => {
-      auth
-        .deleteMeeting(payload.id, payload)
+      MeetingService.deleteMeeting(id)
         .then((response) => {
-          if (response.status === 200) {
-            commit(types.CHANGE_STATE, response.data)
+          if (response.status === 204) {
             buildSuccess(
               {
                 msg: 'common.meeting.DELETED_SUCCESSFULLY',

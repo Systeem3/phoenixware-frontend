@@ -131,7 +131,7 @@ export default {
       })*/
       this.$swal('Oops...', 'Something went wrong!', 'success')
     },
-    props: ['id'],
+    //props: ['id'],
     async deleteItem(item) {
       try {
         const response = await this.$confirm(
@@ -147,14 +147,10 @@ export default {
         )
         if (response) {
           console.log(item.id)
-          await this.deleteMeeting({
-            id: item.id,
-            is_active: false,
-            nombre: this.name,
-            descripcion: this.description,
-            fecha: this.date,
-            lugar: this.place,
-          })
+          this.dataTableLoading = true
+          await this.deleteMeeting(item.id)
+          await this.fetchMeetings(this.$route.params.id_project)
+          this.dataTableLoading = false
         }
       } catch (error) {
         this.dataTableLoading = false

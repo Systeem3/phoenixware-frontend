@@ -289,6 +289,12 @@ const routes = [
         path: '/members/list/:id_project',
         component: () => import('@/views/dashboard/pages/members/List'),
       },
+      // Risks
+      {
+        name: 'Risk',
+        path: '/risk',
+        component: () => import('@/views/dashboard/pages/Risk/Risk'),
+      },
     ],
   },
   {

@@ -1,6 +1,5 @@
 import ProcessService from '@/services/ProcessService.js'
 import * as types from '@/store/mutation-types'
-import auth from '../../api/auth'
 import { buildSuccess, handleError } from '@/utils/utils.js'
 
 const state = {
@@ -37,10 +36,10 @@ const mutations = {
   },
   [types.FILL_PROCESS](state, data) {
     state.process.nombre = data.nombre
-    state.process.descripcion = data.descripcion
-    state.process.fecha = data.fecha
-    state.process.hora = data.hora
-    state.process.lugar = data.lugar
+    state.process.categoria = data.categoria
+    state.process.tipo = data.tipo
+    state.process.proyecto = data.proyecto
+    state.process.estado = data.estado
   },
   [types.CHANGE_STATE](state) {
     state.process.is_active = false
@@ -51,13 +50,16 @@ const mutations = {
         state.process.nombre = data.value
         break
       case 'category':
-        state.process.descripcion = data.value
+        state.process.categoria = data.value
         break
       case 'type':
-        state.process.fecha = data.value
+        state.process.tipo = data.value
         break
       case 'project':
-        state.process.hora = data.value
+        state.process.proyecto = data.value
+        break
+      case 'state':
+        state.process.estado = data.value
         break
       default:
         break
@@ -66,41 +68,30 @@ const mutations = {
 }
 
 const actions = {
-  createProcess({ commit, dispatch }, process) {
-    console.log(process.projectId)
-    return ProcessService.postProcess(process, process.projectId)
-      .then(() => {
-        commit('ADD_PROCESS', process)
-        const notification = {
-          //type: 'success',
-          //message: 'Your process has been created!',
-          success() {
-            /* Vue.swal({
-                type: 'success',
-                title: 'Hello',
-                text: 'Hello brave new world!',
-              })*/
-            this.$swal('Oops...', 'Something went wrong!', 'success')
-          },
-        }
-        dispatch('notification/add', notification, { root: true })
-      })
-      .catch((error) => {
-        const notification = {
-          //  type: 'error',
-          //message: 'There was a problem creating your process: ' + error.message,
-          success() {
-            /* Vue.swal({
-                type: 'success',
-                title: 'Hello',
-                text: 'Hello brave new world!',
-              })*/
-            this.$swal('Oops...', 'Something went wrong!!!!', 'error')
-          },
-        }
-        dispatch('notification/add', notification, { root: true })
-        throw error
-      })
+  createProcess({ commit }, process) {
+    console.log(process)
+
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      return ProcessService.postProcess(process, process.proyecto)
+        .then((response) => {
+          commit('ADD_PROCESS', process)
+          if (response.status === 201) {
+            console.log('working')
+            buildSuccess(
+              {
+                msg: 'Proceso se ha creado con exito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+          console.log(error)
+        })
+    })
   },
   fetchProcesses({ commit, dispatch }, id) {
     ProcessService.getProcesses(id)
@@ -156,7 +147,7 @@ const actions = {
             commit(types.FILL_PROCESS, response.data)
             buildSuccess(
               {
-                msg: 'The process was updated',
+                msg: 'Proceso se ha modificado con éxito',
               },
               commit,
               resolve
@@ -173,16 +164,14 @@ const actions = {
     commit(types.ADD_PROCESS_DATA, data)
   },
 
-  deleteProcess({ commit }, payload) {
+  deleteProcess({ commit }, id) {
     return new Promise((resolve, reject) => {
-      auth
-        .deleteProcess(payload.id, payload)
+      ProcessService.deleteProcess(id)
         .then((response) => {
-          if (response.status === 200) {
-            commit(types.CHANGE_STATE, response.data)
+          if (response.status === 204) {
             buildSuccess(
               {
-                msg: 'The process was deleted',
+                msg: 'Proceso se ha eliminado con éxito',
               },
               commit,
               resolve

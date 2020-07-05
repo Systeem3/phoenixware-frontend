@@ -2,10 +2,7 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="4">
-        <base-material-card
-          class="v-card-profile"
-          avatar="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
-        >
+        <base-material-card class="v-card-profile" :avatar="image">
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">{{ getNameById(type) }}</h6>
 
@@ -254,11 +251,23 @@ export default {
         this.addUserData(data)
       },
     },
+    image: {
+      get() {
+        return this.$store.state.profile.user.empleado.foto
+      },
+      set(value) {
+        const data = {
+          key: 'image',
+          value,
+        }
+        this.addUserData(data)
+      },
+    },
   },
   methods: {
     ...mapActions('profile', ['getProfile', 'addUserData', 'saveUser']),
 
-    ...mapActions('password', ['resetPassword', 'clearResetStatus']),
+    ...mapActions('password', ['changeMyPassword']),
     async submit() {
       await this.saveUser({
         email: this.email,
@@ -267,6 +276,7 @@ export default {
           apellido: this.lastName,
           direccion: this.address,
           telefono: this.phone,
+          // foto: this.image,
         },
         tipo_usuario: this.type,
       })

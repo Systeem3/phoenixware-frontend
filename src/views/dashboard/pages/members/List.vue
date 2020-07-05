@@ -2,6 +2,15 @@
   <v-container id="data-tables" tag="section">
     <div class="text-right">
       <v-btn
+        color="purple"
+        class="ml-0"
+        float="right"
+        margin-left="6px"
+        :to="{ name: 'ProjectDash' }"
+      >
+        Atrás
+      </v-btn>
+      <v-btn
         class="mx-2"
         fab
         dark
@@ -73,17 +82,6 @@
           </v-list>
         </template>-->
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="showItem(item)">
-            mdi-eye
-          </v-icon>
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(item)"
-            :to="{ name: 'UserUpdate' }"
-          >
-            mdi-pencil
-          </v-icon>
           <v-icon small @click="deleteItem(item)">
             mdi-delete
           </v-icon>
@@ -158,7 +156,7 @@ export default {
       })*/
       this.$swal('Oops...', 'Something went wrong!', 'success')
     },
-    props: ['id'],
+    //props: ['id'],
     async deleteItem(item) {
       try {
         const response = await this.$confirm(

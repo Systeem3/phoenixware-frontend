@@ -89,6 +89,13 @@ const actions = {
         .then((response) => {
           if (response.status === 201) {
             console.log('creado')
+            buildSuccess(
+              {
+                msg: 'common.member.CREATED_SUCCESSFULLY',
+              },
+              commit,
+              resolve
+            )
           }
         })
         .catch((error) => {

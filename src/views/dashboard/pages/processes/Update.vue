@@ -2,11 +2,11 @@
   <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="10">
-        <base-material-card icon="mdi mdi-currency-usd" color="primary">
+        <base-material-card icon="mdi mdi-cog" color="primary">
           <template v-slot:after-heading>
             <div class="font-weight-light card-title mt-2">
-              Recursos
-              <span class="body-1">— Registro de Recursos</span>
+              Procesos
+              <span class="body-1">— Modificar Procesos</span>
             </div>
           </template>
           <ValidationObserver ref="obs">
@@ -15,7 +15,7 @@
                 <v-row>
                   <v-col cols="6" md="6">
                     <VTextFieldWithValidation
-                      label="Nombre del Recurso"
+                      label="Nombre"
                       color="secondary"
                       prepend-icon="mdi-account"
                       v-model="name"
@@ -27,7 +27,7 @@
                     <v-select
                       color="secondary"
                       item-color="secondary"
-                      label="Tipo de Recurso"
+                      label="Tipo"
                       :items="type"
                       item-text="name"
                       item-value="id"
@@ -54,11 +54,11 @@
                     <v-select
                       color="secondary"
                       item-color="secondary"
-                      label="Tipo de Costo"
+                      label="Categoria"
                       :items="type2"
                       item-text="name"
                       item-value="id"
-                      v-model="tipo_costo"
+                      v-model="categoria"
                     >
                       <template v-slot:item="{ attrs, item, on }">
                         <v-list-item
@@ -75,30 +75,6 @@
                       </template>
                     </v-select>
                   </v-col>
-                  <v-col cols="6" md="6">
-                    <VTextFieldWithValidation
-                      label="Costo"
-                      color="secondary"
-                      prepend-icon="mdi-account"
-                      v-model="costo"
-                      rules="required"
-                      class="purple-input"
-                      type="number"
-                    />
-                  </v-col>
-                  <v-col cols="6" md="6">
-                    <VTextFieldWithValidation
-                      v-if="mostrar"
-                      label="Vida Util"
-                      color="secondary"
-                      prepend-icon="mdi-account"
-                      v-model="vida_util"
-                      rules="required"
-                      class="purple-input"
-                      type="number"
-                      min="0"
-                    />
-                  </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12" class="text-right">
@@ -106,7 +82,7 @@
                       color="primary"
                       float="right"
                       margin-left="6px"
-                      :to="{ name: 'ResourcesList' }"
+                      :to="{ name: 'ProcessesList' }"
                       >Atrás</v-btn
                     >
                     <v-btn
@@ -126,6 +102,8 @@
         <SuccessMessage />
       </v-col>
     </v-row>
+    <ErrorMessage />
+    <SuccessMessage />
   </v-container>
 </template>
 
@@ -138,27 +116,17 @@ export default {
   data() {
     return {
       type: [
-        { name: 'Recursos Humanos', id: '1' },
-        { name: 'Recursos físicos no depreciables', id: '2' },
-        { name: 'Recursos físicos depreciables', id: '3' },
-        { name: 'Recursos intangibles', id: '4' },
+        { name: 'Gerencial', id: 'G' },
+        { name: 'Tecnico', id: 'T' },
+        { name: 'Apoyo', id: 'A' },
       ],
       type2: [
-        { name: 'Costo Directos', id: '1' },
-        { name: 'Costos Indirectos', id: '2' },
-        { name: 'Costo Extraordinarios', id: '3' },
+        { name: 'Inicio', id: '1' },
+        { name: 'Diseño', id: '2' },
+        { name: 'Elaboración', id: '3' },
+        { name: 'ejecución', id: '4' },
+        { name: 'Cierre', id: '5' },
       ],
-      nowDate: new Date().toISOString().slice(0, 10),
-      picker: new Date().toISOString().substr(0, 10),
-      landscape: true,
-      reactive: false,
-      time2: '',
-      time3: '',
-      menu2: false,
-      menu3: false,
-      menu4: false,
-      date2: '',
-      date3: '',
     }
   },
   components: {
@@ -168,92 +136,59 @@ export default {
   computed: {
     name: {
       get() {
-        return this.$store.state.resources.resource.nombre
+        return this.$store.state.processes.process.nombre
       },
       set(value) {
         const data = {
           key: 'name',
           value,
         }
-        this.addResourceData(data)
+        this.addProcessData(data)
       },
     },
     tipo: {
       get() {
-        return this.$store.state.resources.resource.tipo
+        return this.$store.state.processes.process.tipo
       },
       set(value) {
         const data = {
-          key: 'tipo',
+          key: 'type',
           value,
         }
-        this.addResourceData(data)
+        this.addProcessData(data)
       },
     },
-    tipo_costo: {
+    categoria: {
       get() {
-        return this.$store.state.resources.resource.tipo_costo
+        return this.$store.state.processes.process.categoria
       },
       set(value) {
         const data = {
-          key: 'tipo_costo',
+          key: 'category',
           value,
         }
-        this.addResourceData(data)
+        this.addProcessData(data)
       },
-    },
-    costo: {
-      get() {
-        return this.$store.state.resources.resource.costo
-      },
-      set(value) {
-        const data = {
-          key: 'costo',
-          value,
-        }
-        this.addResourceData(data)
-      },
-    },
-    vida_util: {
-      get() {
-        return this.$store.state.resources.resource.vida_util
-      },
-      set(value) {
-        const data = {
-          key: 'vida_util',
-          value,
-        }
-        this.addResourceData(data)
-      },
-    },
-    mostrar() {
-      if (this.tipo) {
-        return this.tipo === '3'
-      } else {
-        return false
-      }
     },
   },
   methods: {
-    ...mapActions('resources', [
-      'fetchResource',
-      'addResourceData',
-      'saveResource',
+    ...mapActions('processes', [
+      'fetchProcess',
+      'addProcessData',
+      'saveProcess',
     ]),
     async submit() {
-      await this.saveResource({
+      await this.saveProcess({
         nombre: this.name,
-        costo: this.costo,
-        tipo_costo: this.tipo_costo,
+        categoria: this.categoria,
         tipo: this.tipo,
-        vida_util:this.vida_util,
         id: this.$route.params.id,
       })
     },
   },
   props: ['id'],
   async mounted() {
-    await this.fetchResource(this.$route.params.id)
+    await this.fetchProcess(this.$route.params.id)
   },
 }
 </script>

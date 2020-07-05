@@ -1015,7 +1015,6 @@
           icon="mdi mdi-clipboard-check"
           title="Resultados (Pesos y Factores)"
           class="py-2 px-5 mb-2"
-
         >
           <v-form>
             <v-text-field
@@ -1272,6 +1271,16 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
+
+                <v-btn
+                  color="purple"
+                  class="ml-0"
+                  float="right"
+                  margin-left="6px"
+                  :to="{ name: 'ProjectDash' }"
+                >
+                  Atrás
+                </v-btn>
                 <v-btn default color="secondary" @click="check"
                   >Modificar Fechas</v-btn
                 >
@@ -1288,7 +1297,7 @@
 <script>
 //import { ValidationObserver } from 'vee-validate'
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation'
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data: () => {
     return {
@@ -1346,7 +1355,11 @@ export default {
     // ValidationObserver,
     VTextFieldWithValidation,
   },
+  created() {
+    this.fetchProjectInfo(this.$route.params.id_project)
+  },
   computed: {
+    ...mapGetters('projects', ['projectInfo']),
     uaw() {
       if (
         this.inputs.actores_simple &&
@@ -1465,7 +1478,7 @@ export default {
       return this.total * 0.13
     },
     max() {
-      let dias = parseInt(this.dias)
+      let dias = parseInt(this.total / (this.projectInfo.miembros * 8))
       let fecha = new Date(this.inputs.fecha_inicio)
       fecha.setDate(fecha.getDate() + dias + 1)
       let d = fecha.getDate()
@@ -1477,7 +1490,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('projects', ['saveProject']),
+    ...mapActions('projects', ['saveProject', 'fetchProjectInfo']),
     async check() {
       if (this.total == 0) {
         this.dialog2 = true

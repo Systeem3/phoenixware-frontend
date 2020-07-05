@@ -11,6 +11,7 @@ const state = {
     fecha: null,
     hora: null,
     lugar: '',
+    proyecto: '',
   },
 }
 
@@ -68,44 +69,45 @@ const mutations = {
 }
 
 const actions = {
-  createMeeting({ commit, dispatch }, meeting) {
+  createMeeting({ commit }, meeting) {
     console.log(meeting.projectId)
-    return MeetingService.postMeeting(meeting, meeting.projectId)
-      .then(() => {
-        commit('ADD_MEETING', meeting)
-        const notification = {
-          //type: 'success',
-          //message: 'Your meeting has been created!',
-          success() {
-            /* Vue.swal({
-                type: 'success',
-                title: 'Hello',
-                text: 'Hello brave new world!',
-              })*/
-            this.$swal('Oops...', 'Something went wrong!', 'success')
-          },
-        }
-        dispatch('notification/add', notification, { root: true })
-      })
-      .catch((error) => {
-        const notification = {
-          //  type: 'error',
-          //message: 'There was a problem creating your meeting: ' + error.message,
-          success() {
-            /* Vue.swal({
-                type: 'success',
-                title: 'Hello',
-                text: 'Hello brave new world!',
-              })*/
-            this.$swal('Oops...', 'Something went wrong!!!!', 'error')
-          },
-        }
-        dispatch('notification/add', notification, { root: true })
-        throw error
-      })
+
+    return new Promise((resolve, reject) => {
+      return MeetingService.postMeeting(meeting, meeting.projectId)
+        .then((response) => {
+          commit('ADD_MEETING', meeting)
+          if (response.status === 201) {
+            console.log('working')
+            buildSuccess(
+              {
+                msg: 'Reunión se ha creado con exito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
   },
   fetchMeetings({ commit, dispatch }, id) {
     MeetingService.getMeetings(id)
+      .then((response) => {
+        commit('SET_MEETINGS', response.data)
+      })
+      .catch((error) => {
+        console.log(this.meeting)
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching meetings: ' + error.message,
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+  },
+  fetchMeetings2({ commit, dispatch }) {
+    MeetingService.getMeetings2()
       .then((response) => {
         commit('SET_MEETINGS', response.data)
       })

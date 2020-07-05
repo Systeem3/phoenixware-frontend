@@ -87,16 +87,27 @@ const mutations = {
 
 const actions = {
   createResource({ commit }, resource) {
-    console.log(resource.projectId)
-    return resourceService
-      .postResource(resource.projectId, resource)
-      .then((response) => {
-        commit('ADD_RESOURCE', resource)
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      resourceService
+        .postResource(resource.projectId, resource)
+        .then((response) => {
+          commit('ADD_RESOURCE', resource)
+          if (response.status === 201) {
+            console.log('working')
+            buildSuccess(
+              {
+                msg: 'Recurso se ha creado con exito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
   },
   fetchResources({ commit }, id) {
     resourceService
@@ -153,7 +164,7 @@ const actions = {
             commit(types.FILL_RESOURCE, response.data)
             buildSuccess(
               {
-                msg: 'The resource was updated',
+                msg: 'Recurso se ha modificado con éxito',
               },
               commit,
               resolve
@@ -177,7 +188,7 @@ const actions = {
           if (response.status === 204) {
             buildSuccess(
               {
-                msg: 'The resource was deleted',
+                msg: 'Recurso se ha eliminado con éxito',
               },
               commit,
               resolve

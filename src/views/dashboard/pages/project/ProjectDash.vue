@@ -176,6 +176,11 @@
     </v-row>
     <v-divider />
     <v-row class="mx-auto" justify="center" dense align="center">
+      <!-- <v-btn
+        color="secondary"
+        :to="{ name: 'ArtifactsList', params: { id_project } }"
+        >ARTEFACTOS</v-btn
+      >-->
       <v-btn
         color="secondary"
         :to="{ name: 'ArtifactsList', params: { id_project } }"
@@ -186,17 +191,21 @@
         :to="{ name: 'MeetingList', params: { id_project } }"
         >REUNIONES</v-btn
       >
-      <v-btn color="secondary">PROCESOS</v-btn>
+      <v-btn
+        color="secondary"
+        :to="{ name: 'ProcessesList', params: { id_project } }"
+        >PROCESOS</v-btn
+      >
       <v-btn
         color="secondary"
         :to="{ name: 'MembersList', params: { id_project } }"
         >MIEMBROS</v-btn
       >
-      <v-btn
+      <!--<v-btn
         color="secondary"
         :to="{ name: 'RisksList', params: { id_project } }"
         >RIESGOS</v-btn
-      >
+      >-->
       <v-btn
         class="mx-2 mt-3"
         fab

@@ -15,11 +15,12 @@
         fab
         dark
         color="primary"
-        :to="{ name: 'MeetingCreate', params: { id_project } }"
+        :to="{ name: 'ProcessCreate' }"
       >
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
     </div>
+
     <base-material-card
       color="secondary"
       icon="mdi-vuetify"
@@ -27,7 +28,9 @@
       class="px-5 py-3"
     >
       <template v-slot:after-heading>
-        <div class="display-2 font-weight-light">Lista de Reuniones</div>
+        <div class="display-2 font-weight-light">
+          Lista de Procesos
+        </div>
       </template>
 
       <v-text-field
@@ -43,11 +46,12 @@
       <v-divider class="mt-3" />
 
       <v-data-table
+        :loading="dataTableLoading"
         :headers="headers"
-        :items="meetings"
+        :items="processes"
         :search.sync="search"
-        :sort-by="['name']"
-        :sort-desc="[false]"
+        :sort-by="['name', 'office']"
+        :sort-desc="[false, true]"
         multi-sort
       >
         <template v-slot:item.actions="{ item }">
@@ -55,10 +59,13 @@
             small
             class="mr-2"
             @click="editItem(item)"
-            :to="{ name: 'MeetingUpdate' }"
-            >mdi-pencil</v-icon
+            :to="{ name: 'ProcessUpdate' }"
           >
-          <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+            mdi-pencil
+          </v-icon>
+          <v-icon small @click="deleteItem(item)">
+            mdi-delete
+          </v-icon>
         </template>
       </v-data-table>
     </base-material-card>
@@ -72,68 +79,54 @@ import { mapGetters, mapActions } from 'vuex'
 //import { Vue } from 'vue-property-decorator'
 
 export default {
-  name: 'MeetingTable',
+  name: 'UsersTable',
   data() {
     return {
+      dataTableLoading: false,
+      dialog: false,
+      show: true,
       headers: [
         {
           text: 'Nombre',
           value: 'nombre',
         },
         {
-          text: 'Descripción',
-          value: 'descripcion',
+          text: 'Categoria',
+          value: 'categoria',
         },
         {
-          text: 'Fecha',
-          value: 'fecha',
-        },
-        {
-          text: 'Hora',
-          value: 'hora',
-        },
-        {
-          text: 'Lugar',
-          value: 'lugar',
+          text: 'Tipo',
+          value: 'tipo',
         },
         {
           sortable: false,
-          text: 'Acciones',
+          text: 'Actions',
           value: 'actions',
         },
       ],
       loader: true,
 
       search: undefined,
-      id_project: this.$route.params.id_project,
     }
   },
 
   created() {
-    this.fetchMeetings(this.$route.params.id_project)
-    //console.log(this.$route.params.id)
-    //this.$store.dispatch('meetings/fetchMeetings')
+    this.fetchProcesses(this.$route.params.id_project)
   },
   computed: {
-    ...mapGetters('meetings', ['meetings']),
+    ...mapGetters('processes', ['processes']),
   },
 
   methods: {
     async editItem(item) {
       this.$router.push(
-        `/meetings/edit/${item.id}/${this.$route.params.id_project}`
+        `/process/edit/${item.id}/${this.$route.params.id_project}`
       )
     },
-    ...mapActions('meetings', ['deleteMeeting', 'fetchMeetings']),
-    success() {
-      /* Vue.swal({
-        type: 'success',
-        title: 'Hello',
-        text: 'Hello brave new world!',
-      })*/
-      this.$swal('Oops...', 'Something went wrong!', 'success')
+    ...mapActions('processes', ['deleteProcess', 'fetchProcesses']),
+    open() {
+      this.dialog = true
     },
-    //props: ['id'],
     async deleteItem(item) {
       try {
         const response = await this.$confirm(
@@ -150,12 +143,13 @@ export default {
         if (response) {
           console.log(item.id)
           this.dataTableLoading = true
-          await this.deleteMeeting(item.id)
-          await this.fetchMeetings(this.$route.params.id_project)
+          await this.deleteProcess(item.id)
+          await this.fetchProcesses(this.$route.params.id_project)
           this.dataTableLoading = false
         }
       } catch (error) {
         this.dataTableLoading = false
+        console.log(error)
       }
     },
   },

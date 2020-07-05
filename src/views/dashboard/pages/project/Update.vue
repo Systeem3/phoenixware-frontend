@@ -178,6 +178,12 @@
                       >
                       <v-btn
                         color="pink darken-1"
+                        class="ml-0"
+                        :to="{ name: 'ProjectDash' }"
+                        >Proyectos</v-btn
+                      >
+                      <v-btn
+                        color="pink darken-1"
                         class="mr-0"
                         type="submit"
                         @click.stop.prevent="submit"

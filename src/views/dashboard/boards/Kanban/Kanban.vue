@@ -5,7 +5,7 @@
       @listAdded="addList"
       @cardAdded="addCard"
       @addCheckItem="addCheckItem"
-    />
+    />>
   </v-container>
 </template>
 
@@ -147,9 +147,9 @@ export default {
     console.log(act)
     //console.log(this.activities)
     let act3 = [
-      { id: 1, name: 'To Do', order: 1, cards: act },
-      { id: 2, name: 'Doing', order: 2, cards: act_doing },
-      { id: 3, name: 'Done', order: 3, cards: act_done },
+      { id: 1, name: 'Por hacer', order: 1, cards: act },
+      { id: 2, name: 'Haciendo', order: 2, cards: act_doing },
+      { id: 3, name: 'Hecho', order: 3, cards: act_done },
     ]
     //console.log(act3)
     this.lists = act3

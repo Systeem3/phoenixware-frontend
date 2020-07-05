@@ -85,7 +85,7 @@ const actions = {
   fetchRisks({ commit, dispatch }, id) {
     RiskService.getRisk(id)
       .then((response) => {
-        commit('SET_RISK', response.data)
+        commit('SET_RISKS', response.data)
       })
       .catch((error) => {
         console.log(this.risk)

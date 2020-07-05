@@ -9,19 +9,17 @@ export default {
       `/projects/${id}/listar_procesos_categoria/?categoria=${categoria}`
     )
   },
-  getMeeting(id) {
-    return api.get(`/reunion/${id}/`)
+  getProcess(id){
+    return api.get(`/process/${id}`)
   },
-  updateMeeting(id, payload) {
-    return api.patch(`/reunion/${id}/`, payload)
+  postProcess(payload,id) {
+    return api.post(`/projects/${id}/crear_proceso/`, payload)
   },
-  deleteMeeting(id, payload) {
-    return api.patch(`/api/auth/update-meeting/${id}/`, payload)
+  updateProcess(id,payload) {
+    return api.patch(`/process/${id}/`, payload)
   },
-  getMeetingAuth() {
-    return api.get('/auth/meeting/')
-  },
-  postMeeting(meeting, id) {
-    return api.post(`/projects/${id}/crear_reunion/`, meeting)
-  },
+  deleteProcess(id){
+    return api.delete(`/process/${id}/`)
+  }
+
 }

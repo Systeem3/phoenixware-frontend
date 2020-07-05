@@ -46,14 +46,6 @@
           <v-icon
             small
             class="mr-2"
-            @click="showItem(item)"
-            :to="{ name: 'UserShow' }"
-          >
-            mdi-eye
-          </v-icon>
-          <v-icon
-            small
-            class="mr-2"
             @click="editItem(item)"
             :to="{ name: 'UserUpdate' }"
           >
@@ -213,9 +205,7 @@ export default {
             tipo_usuario: this.type,
           })
           this.dataTableLoading = false
-          await this.fetchUsers(
-            buildPayloadPagination(this.pagination, this.buildSearch())
-          )
+          this.$store.dispatch('users/fetchUsers')
           this.dataTableLoading = false
         }
         // eslint-disable-next-line no-unused-vars

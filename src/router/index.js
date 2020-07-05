@@ -274,6 +274,12 @@ const routes = [
         props: true,
       },
       {
+        name: 'Meetings2',
+        path: '/meetings2/list',
+        component: () => import('@/views/dashboard/pages/meeting/List2'),
+        props: true,
+      },
+      {
         name: 'MeetingCreate',
         path: '/meetings/create/:id_project',
         component: () => import('@/views/dashboard/pages/meeting/Create'),
@@ -299,10 +305,23 @@ const routes = [
         props: true,
       },
       {
-        name: 'ArtifactsList',
-        path: '/artifact/list/:id_project',
+        name: 'ProcessesList',
+        path: '/processes/list/:id_project',
         component: () =>
-          import('@/views/dashboard/pages/project/artifacts/List'),
+          import('@/views/dashboard/pages/processes/List'),
+        props: true,
+      },
+      {
+        name: 'ProcessCreate',
+        path: '/process/create/:id_project',
+        component: () =>
+          import('@/views/dashboard/pages/processes/Create'),
+        props: true,
+      },
+      {
+        name: 'ProcessUpdate',
+        path: '/process/edit/:id/:id_project',
+        component: () => import('@/views/dashboard/pages/processes/Update'),
         props: true,
       },
 

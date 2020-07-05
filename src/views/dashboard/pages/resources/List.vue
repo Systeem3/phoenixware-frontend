@@ -2,6 +2,15 @@
   <v-container id="data-tables" tag="section">
     <div class="text-right">
       <v-btn
+        color="purple"
+        class="ml-0"
+        float="right"
+        margin-left="6px"
+        :to="{ name: 'ProjectDash' }"
+      >
+        Atrás
+      </v-btn>
+      <v-btn
         class="mx-2"
         fab
         dark
@@ -13,7 +22,6 @@
     </div>
     <template>
       <v-dialog v-model="dialog" persistent max-width="600px">
-
         <base-material-card
           color="primary"
           icon="mdi mdi-currency-usd"
@@ -204,14 +212,6 @@
         multi-sort
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon
-            small
-            class="mr-2"
-            @click="showItem(item)"
-            :to="{ name: 'ResourceShow' }"
-          >
-            mdi-eye
-          </v-icon>
           <v-icon
             small
             class="mr-2"

@@ -28,7 +28,7 @@ const state = {
     metodologia: '',
     fecha_inicio: '',
     fecha_finalizacion: '',
-    lider:''
+    lider: '',
   },
 }
 

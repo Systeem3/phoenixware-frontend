@@ -98,29 +98,12 @@ export default {
         ],
       },
       {
-        group: '/meetings', //reuniones
+        group: '/meetings2', //reuniones
         icon: 'mdi mdi-account-multiple',
         title: 'meetings',
         children: [
           {
-            title: 'mee-create',
-            to: 'create',
-            icon: 'mdi mdi-account-plus',
-          },
-          {
             title: 'mee-list',
-            to: 'list',
-            icon: 'mdi-account-multiple',
-          },
-        ],
-      },
-      {
-        group: '/members',
-        icon: 'mdi mdi-google-circles-communities',
-        title: 'team',
-        children: [
-          {
-            title: 'te-list',
             to: 'list',
             icon: 'mdi-account-multiple',
           },

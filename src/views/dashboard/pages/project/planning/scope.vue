@@ -35,12 +35,12 @@
             ></v-textarea>
             <v-spacer />
             <v-row justify="center" align="center">
-              <v-btn color="primary" v-clipboard="resultado">
-                COPIAR AL PORTAPAPELES
-              </v-btn>
-              <v-btn color="secondary" :to="{ name: 'ProjectUpdate' }">
-                EDITAR PROYECTO
-              </v-btn>
+              <v-btn color="primary" v-clipboard="resultado"
+                >COPIAR AL PORTAPAPELES</v-btn
+              >
+              <v-btn color="secondary" :to="{ name: 'ProjectUpdate' }"
+                >EDITAR PROYECTO</v-btn
+              >
             </v-row>
           </v-form>
         </base-material-card>
@@ -114,7 +114,7 @@
         />
         <v-row dense justify="center" align="center" class="ml-3">
           <span class="font-weight-light subtitle-1 text-center mb-6"
-            >Agregue al alcance los items en los aspectos de:</span
+            >Agregue en el alcance los aspectos siguientes que desee:</span
           >
         </v-row>
         <v-row dense justify="center" align="center" class="ml-3">
@@ -139,16 +139,11 @@
             slider-color="secondary"
           >
             <v-tab class="mr-3">
-              <v-icon class="mr-2">
-                mdi-chart-pie
-              </v-icon>
-              Agregar Objetivos
+              <v-icon class="mr-2">mdi-chart-pie</v-icon>Agregar Objetivos
             </v-tab>
             <v-tab class="mr-3">
-              <v-icon class="mr-2">
-                mdi-comment-plus-outline
-              </v-icon>
-              Objetivos Registrados
+              <v-icon class="mr-2">mdi-comment-plus-outline</v-icon>Objetivos
+              Registrados
             </v-tab>
           </v-tabs>
         </template>
@@ -156,41 +151,74 @@
         <v-tabs-items v-model="tabs" class="transparent">
           <v-tab-item v-for="n in 2" :key="n">
             <v-card-text>
-              <template v-for="(task, i) in tasks[tabs]">
+              <template>
                 <template v-if="n == 1">
-                  <v-row :key="i" align="center" justify="center">
-                    <v-col cols="1">
-                      <v-list-item-action>
-                        <v-checkbox v-model="task.value" color="secondary" />
-                      </v-list-item-action>
-                    </v-col>
-                    <v-col cols="9">
-                      <div class="font-weight-light" v-text="task.text" />
+                  <v-row
+                    v-for="objetivo in objetivos"
+                    :key="objetivo.id"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-col align="center" justify="center">
+                      <v-btn
+                        color="secondary"
+                        class="font-weight-light"
+                        @click="agregarobj(objetivo.nombre)"
+                        >{{ objetivo.nombre }}</v-btn
+                      >
                     </v-col>
                   </v-row>
                 </template>
 
                 <template v-if="n == 2">
-                  <v-row :key="i" align="center" justify="center">
-                    <v-col cols="1">
-                      <v-list-item-action>
-                        <v-checkbox v-model="task.value" color="secondary" />
-                      </v-list-item-action>
+                  <v-row
+                    v-for="objetivo in objetivos"
+                    :key="objetivo.id"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-col align="center" justify="center">
+                      <v-col cols="9">
+                        <div
+                          class="font-weight-light"
+                          v-text="objetivo.nombre"
+                        />
+                      </v-col>
+                      <v-col class="text-right">
+                        <v-btn
+                          color="primary"
+                          class="mx-1"
+                          @click="deleteObjetivo(objetivo.id)"
+                          >ELIMINAR</v-btn
+                        >
+                      </v-col>
                     </v-col>
-                    <v-col cols="9">
-                      <div class="font-weight-light" v-text="task.text" />
-                    </v-col>
-                    <v-col cols="2" class="text-right">
-                      <v-icon color="error" class="mx-1">
-                        mdi-close
-                      </v-icon>
-                    </v-col>
+                  </v-row>
+
+                  <v-row>
+                    <v-text-field
+                      label="Nuevo Objetivo"
+                      color="secondary"
+                      outlined
+                      filled
+                      dense
+                      v-model="caja1"
+                      validate-on-blur
+                      class="ml-3"
+                    />
+                  </v-row>
+                  <v-row>
+                    <v-btn
+                      color="primary"
+                      class="mx-1"
+                      justify="center"
+                      align="center"
+                      @click="submit_objetivo(caja1)"
+                      >AGREGAR OBJETIVO</v-btn
+                    >
                   </v-row>
                 </template>
               </template>
-              <v-row justify="center" align="center">
-                <v-btn color="secondary">ACTUALIZAR ALCANCE </v-btn>
-              </v-row>
             </v-card-text>
           </v-tab-item>
         </v-tabs-items>
@@ -202,9 +230,7 @@
 
 <script>
 //import { ValidationObserver } from 'vee-validate'
-
-
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data: () => {
@@ -213,7 +239,9 @@ export default {
       dialog_r: false,
       dialog_s: false,
       alcance: '',
-
+      caja1: '',
+      caja2: '',
+      caja3: '',
       inputs: {
         titulo: '',
         tipo: '',
@@ -225,6 +253,8 @@ export default {
       },
 
       tabs: 0,
+      objetivos1: {},
+      objetivos2: '',
       tasks: {
         0: [
           {
@@ -248,11 +278,27 @@ export default {
       },
     }
   },
+  created() {
+    this.fetchObjetivos(this.$route.params.id_project)
+    this.fetchRequisitos(this.$route.params.id_project)
+    this.fetchSeguridad(this.$route.params.id_project)
 
+    this.objetivos1 = this.fetchObjetivos(this.$route.params.id_project)
+    console.log(this.objetivos1)
+  },
   components: {
     // ValidationObserver,
   },
   computed: {
+    ...mapGetters('projects', [
+      'objetivo',
+      'requisito',
+      'seguridad',
+      'objetivos',
+      'requisitos',
+      'seguridades',
+    ]),
+
     resultado() {
       return (
         this.name +
@@ -263,11 +309,9 @@ export default {
         this.description +
         '\n' +
         'Los Objetivos planteados para este proyecto son: ' +
-        '\n' +
-        'Mientras que los Requisitos propuestos del proyecto son: ' +
-        '\n' +
-        'En términos de Seguridad, el proyecto incorporará los siguientes aspectos: ' +
-        '\n' +
+        this.objetivos2 +
+        '\nMientras que los Requisitos propuestos del proyecto son: ' +
+        '\nEn términos de Seguridad, el proyecto incorporará los siguientes aspectos: ' +
         'El costo estimado para elaborar el proyecto es de: ' +
         this.costo +
         ' USD. ' +
@@ -275,7 +319,7 @@ export default {
         this.dateCreated +
         ' hasta la fecha: ' +
         this.dateFinished +
-        ' .Se cuenta con un presupuesto de: ' +
+        ' . Se cuenta con un presupuesto de: ' +
         this.presupuesto +
         ' USD ' +
         'para la elaboración del proyecto. '
@@ -407,18 +451,94 @@ export default {
       'fetchProject',
       'addProjectData',
       'saveProject',
+      'fetchObjetivos',
+      'fetchRequisitos',
+      'fetchSeguridad',
+      'fetchObjetivo',
+      'fetchRequisito',
+      'fetchSeguridad',
+      'createObjetivo',
+      'createRequisito',
+      'createSeguridad',
+      'deleteObjetivo',
+      'deleteSeguridad',
+      'deleteRequisito',
     ]),
-    //     async submit_o() {
-    //   // this.$refs.obs.validate()
-    //   await this.createObjective({
-    //     email: this.email,
-    //     nombre: this.nombre,
-    //     apellido: this.apellido,
-    //     direccion: this.direccion,
-    //     telefono: this.telefono,
-    //     tipo_usuario: this.tipo_usuario,
-    //   })
-    //},
+
+    async deleteObjetivo(item) {
+      const response = await this.$confirm(
+        this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
+
+        {
+          title: this.$t('common.WARNING'),
+          buttonTrueText: this.$t('common.DELETE'),
+          buttonFalseText: this.$t('common.CANCEL'),
+          buttonTrueColor: 'secondary',
+          buttonFalseColor: 'primary',
+        }
+      )
+      if (response) {
+        await this.deleteObjetivo(item)
+        await this.fetchObjetivos(this.$route.params.id_project)
+      }
+    },
+    async deleteRequisito(item) {
+      const response = await this.$confirm(
+        this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
+
+        {
+          title: this.$t('common.WARNING'),
+          buttonTrueText: this.$t('common.DELETE'),
+          buttonFalseText: this.$t('common.CANCEL'),
+          buttonTrueColor: 'secondary',
+          buttonFalseColor: 'primary',
+        }
+      )
+      if (response) {
+        await this.deleteRequisito(item)
+        await this.fetchRequisitos(this.$route.params.id_project)
+      }
+    },
+    async deleteSeguridad(item) {
+      const response = await this.$confirm(
+        this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
+
+        {
+          title: this.$t('common.WARNING'),
+          buttonTrueText: this.$t('common.DELETE'),
+          buttonFalseText: this.$t('common.CANCEL'),
+          buttonTrueColor: 'secondary',
+          buttonFalseColor: 'primary',
+        }
+      )
+      if (response) {
+        await this.deleteSeguridad(item)
+        await this.fetchSeguridades(this.$route.params.id_project)
+      }
+    },
+
+    async submit_objetivo() {
+      await this.createObjetivo({
+        nombre: this.caja1,
+        proyecto_id: this.$route.params.id_project,
+      })
+    },
+    async submit_requisito() {
+      await this.createRequisito({
+        nombre: this.caja2,
+        proyecto_id: this.$route.params.id_project,
+      })
+    },
+    async submit_seguridad() {
+      await this.createSeguridad({
+        nombre: this.caja3,
+        proyecto_id: this.$route.params.id_project,
+      })
+    },
+    agregarobj(item) {
+      this.objetivos2 = '\n' + this.objetivos2 + '\n' + item
+      this.dialog_o = false
+    },
   },
 
   async mounted() {

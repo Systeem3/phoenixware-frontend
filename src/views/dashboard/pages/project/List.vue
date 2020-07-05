@@ -43,7 +43,6 @@
         multi-sort
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="showItem(item)">mdi-eye</v-icon>
           <v-icon
             small
             class="mr-2"

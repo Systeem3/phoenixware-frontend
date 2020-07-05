@@ -12,7 +12,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit(types.SHOW_LOADING, true)
       api
-        .changeMyPassword(payload)
+        .changeAccountPassword(payload)
         .then((response) => {
           if (response.status === 200) {
             buildSuccess(
@@ -82,6 +82,7 @@ const mutations = {
     state.user.empleado.direccion = data.empleado.direccion
     state.user.empleado.telefono = data.empleado.telefono
     state.user.tipo_usuario = data.tipo_usuario
+    state.user.empleado.foto = data.empleado.foto
   },
   [types.ADD_USER_DATA](state, data) {
     switch (data.key) {
@@ -103,6 +104,9 @@ const mutations = {
       case 'type':
         state.user.tipo_usuario = data.value
         break
+      case 'image':
+        state.user.empleado.foto = data.value
+        break
       default:
         break
     }
@@ -117,6 +121,7 @@ const state = {
       apellido: '',
       direccion: '',
       telefono: '',
+      foto: '',
     },
     tipo_usuario: '',
   },

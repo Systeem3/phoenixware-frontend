@@ -72,9 +72,12 @@ export default {
   },
   methods: {
     login({ email, password }) {
+      this.loading = true
       this.$store
         .dispatch('auth/login', { email, password })
         .then(() => this.$router.push('/'))
+
+      this.loading = false
     },
     submit() {
       this.$refs.obs.validate()

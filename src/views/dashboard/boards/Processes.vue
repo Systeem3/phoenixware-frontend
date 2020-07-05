@@ -1,11 +1,21 @@
 <template>
   <v-container id="dashboard" fluid tag="section">
     <v-row>
+      <v-btn
+        color="purple"
+        class="ml-0"
+        float="right"
+        margin-left="6px"
+        :to="{ name: 'ProjectDash' }"
+      >
+        Atrás
+      </v-btn>
       <v-col cols="12">
         <div class="font-weight-light mt-1" style="font-size: 25px;">
           Procesos del Proyecto - ¿Qué harás hoy?
         </div>
       </v-col>
+
       <v-col sm="12" md="4" v-for="process in processes" :key="process.id">
         <v-card color="secondary" dark>
           <v-card-title class="headline">{{ process.nombre }}</v-card-title>

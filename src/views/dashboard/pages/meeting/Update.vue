@@ -129,7 +129,7 @@
                         outlined
                         autoGrow
                         filled
-                        rules="required"
+                        required
                         name="Description"
                         label="Descripción de la Reunión"
                       ></v-textarea>

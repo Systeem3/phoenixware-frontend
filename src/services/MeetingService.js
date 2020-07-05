@@ -4,6 +4,9 @@ export default {
   getMeetings(id) {
     return api.get(`/projects/${id}/listar_reuniones`)
   },
+  getMeetings2() {
+    return api.get(`/reunion/`)
+  },
   getMeeting(id) {
     return api.get(`/reunion/${id}/`)
   },

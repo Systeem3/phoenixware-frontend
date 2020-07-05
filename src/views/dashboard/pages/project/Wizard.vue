@@ -424,7 +424,7 @@
                       <v-card-actions>
                         <v-spacer />
 
-                        <v-btn color="error" text @click="dialog2 = false"
+                        <v-btn color="error" text @click="go"
                           >Cerrar</v-btn
                         >
                       </v-card-actions>
@@ -631,14 +631,18 @@ export default {
 
   methods: {
     ...mapActions('projects', ['createProject']),
+    go(){
+      this.dialog2=false
+      this.$router.push({ name: 'Dashboard' } )
+    },
     next() {
       //if (!valid) return
       const step = this.availableSteps
       if (this.tab === this.tabs.length - 1) {
         if (this.inputs.metodologia) {
           this.createProject(this.inputs)
+          this.dialog2 = true
         }
-        this.dialog2 = true
         /*alert(
           'Tu Proyecto fue creado y se instanciaron en el varios procesos de desarrollo, pulsa aceptar para ir a la ventana inicial del Proyecto para verificarlos'
         )*/

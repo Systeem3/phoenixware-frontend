@@ -93,7 +93,7 @@
     <v-dialog v-model="dialog3" max-width="300">
       <v-card>
         <v-card-title>
-          ¿Desea cerrar sesión?
+          ¿Está seguro de que desea cerrar sesión?
 
           <v-spacer />
 

@@ -76,7 +76,7 @@ const actions = {
         console.log(error)
       })
   },
-  fetchAtifacts({ commit }, id) {
+  fetchArtifacts({ commit }, id) {
     artifactsService
       .getArtefactos(id)
       .then((response) => {
@@ -143,7 +143,7 @@ const actions = {
           if (response.status === 204) {
             buildSuccess(
               {
-                msg: 'The artifat was deleted',
+                msg: 'El Artefacto fue eliminado con éxito',
               },
               commit,
               resolve

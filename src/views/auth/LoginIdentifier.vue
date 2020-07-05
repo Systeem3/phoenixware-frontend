@@ -61,8 +61,8 @@ export default {
 
       loading: false,
       inputs: {
-        password1: '',
-        password2: '',
+        email: '',
+        password: '',
       },
     }
   },
@@ -73,11 +73,9 @@ export default {
   methods: {
     login({ email, password }) {
       this.loading = true
-      this.$store
-        .dispatch('auth/login', { email, password })
-        .then(() => this.$router.push('/'))
+      this.$store.dispatch('auth/login', { email, password })
 
-      this.loading = false
+      this.loading = false.then(() => this.$router.push('/'))
     },
     submit() {
       this.$refs.obs.validate()

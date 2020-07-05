@@ -28,8 +28,8 @@ export default {
       tipo_usuario,
     })
   },
-  changeAccountPassword(password1, password2) {
-    return session.post('/api/auth/password/change/', { password1, password2 })
+  changeAccountPassword(payload) {
+    return session.post('/api/auth/password/change/', payload)
   },
   sendAccountPasswordResetEmail(email) {
     return session.post('/api/auth/password/reset/', { email })

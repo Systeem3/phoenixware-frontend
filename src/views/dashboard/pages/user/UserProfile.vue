@@ -31,7 +31,7 @@
                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show1 ? 'text' : 'password'"
                 @click:append="show1 = !show1"
-                v-model="inputs.password1"
+                v-model="inputs.new_password1"
                 :error-messages="errors"
                 :success="valid"
               />
@@ -49,7 +49,7 @@
                 :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show2 ? 'text' : 'password'"
                 @click:append="show2 = !show2"
-                v-model="inputs.password2"
+                v-model="inputs.new_password2"
                 :error-messages="errors"
                 :success="valid"
               />
@@ -60,7 +60,7 @@
               class="mx-auto"
               color="purple"
               type="submit"
-              @click="resetPassword(inputs)"
+              @click="changeMyPassword(inputs)"
               @click.stop.prevent="submit"
               >Cambiar</v-btn
             >
@@ -161,10 +161,11 @@ export default {
       show2: false,
 
       inputs: {
-        password1: '',
-        password2: '',
-        uid: this.$route.params.uid,
-        token: this.$route.params.token,
+        new_password1: '',
+        new_password2: '',
+
+        //uid: this.$route.params.uid,
+        //token: this.$route.params.token,
       },
       items: [
         { name: 'Administrador', id: '1' },
@@ -265,9 +266,13 @@ export default {
     },
   },
   methods: {
-    ...mapActions('profile', ['getProfile', 'addUserData', 'saveUser']),
+    ...mapActions('profile', [
+      'getProfile',
+      'addUserData',
+      'saveUser',
+      'changeMyPassword',
+    ]),
 
-    ...mapActions('password', ['changeMyPassword']),
     async submit() {
       await this.saveUser({
         email: this.email,

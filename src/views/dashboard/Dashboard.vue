@@ -210,7 +210,7 @@ export default {
     async llenarimages() {
       var randomNumber
 
-      for (let index = 0; index < 10; index++) {
+      for (let index = 0; index < 20; index++) {
         randomNumber = Math.floor(Math.random() * 94)
         fetch(
           `https://source.unsplash.com/collection/4540043/600x400/?sig=${randomNumber}`

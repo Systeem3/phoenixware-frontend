@@ -416,17 +416,15 @@
                       </v-card-title>
 
                       <v-card-text>
-                        Tu Proyecto fue creado y se instanciaron en el varios
-                        procesos de desarrollo, pulsa el botón aceptar para ir a
-                        la ventana inicial del Proyecto para verificarlos
+                        EL Proyecto se ha creado con éxito, puedes añadir los
+                        procesos que desees en la opción "Procesos" de tu
+                        espacio de trabajo.
                       </v-card-text>
 
                       <v-card-actions>
                         <v-spacer />
 
-                        <v-btn color="error" text @click="go"
-                          >Cerrar</v-btn
-                        >
+                        <v-btn color="error" text @click="go">Cerrar</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
@@ -631,9 +629,9 @@ export default {
 
   methods: {
     ...mapActions('projects', ['createProject']),
-    go(){
-      this.dialog2=false
-      this.$router.push({ name: 'Dashboard' } )
+    go() {
+      this.dialog2 = false
+      this.$router.push({ name: 'Dashboard' })
     },
     next() {
       //if (!valid) return

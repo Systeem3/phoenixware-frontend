@@ -152,7 +152,7 @@ export default {
         'https://www.googleapis.com/auth/drive.appdata' +
         ' ' +
         'https://www.googleapis.com/auth/documents',
-      originFileId: '19aPs4_Dxw3DuoSwjVr_21_V7r41IrX0tnLF4fyvPbNs',
+      originFileId: '1avazRMxhIi3RNFiwdZksOY1JlK_VAjLIXT6RIVuimKo',
     }
   },
   components: {
@@ -220,7 +220,7 @@ export default {
           projectId: this.$route.params.id_project,
           estado: 'A',
         })
-        this.$router.push('/artifact/list/id_project')
+        this.$router.push(`/artifact/list/${this.$route.params.id_project}`)
     },
     async logout() {
       gapi.auth2.getAuthInstance().signOut();

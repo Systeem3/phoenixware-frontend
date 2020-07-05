@@ -3,12 +3,14 @@
     <v-row justify="center">
       <v-col cols="12" md="10">
         <base-material-card icon="mdi mdi-clipboard-file" color="primary">
-          <template v-slot:after-heading>
-            <div class="font-weight-light card-title mt-2">
-              Recursos
-              <span class="body-1">— Registro de Artefactos</span>
-            </div>
-          </template>
+          <section class="mb-12 text-center">
+            <h1 class="font-weight-light mb-2 headline">Creador de Artefactos del Proyecto</h1>
+            <span class="font-weight-light subtitle-1">
+              Debes tener una cuenta de Google para poder utilizar esta
+              herramienta
+            </span>
+          </section>
+
           <ValidationObserver ref="odescbs">
             <v-form>
               <v-container class="py-0">
@@ -51,11 +53,22 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12" md="12">
+                    <VTextFieldWithValidation
+                      label="Versión del Artefacto"
+                      color="secondary"
+                      v-model="inputs.version"
+                      type="number"
+                      validate-on-blur
+                      min="0"
+                      class="ml-3"
+                    />
+                  </v-col>
+                  <v-col cols="12" md="12">
                     <v-textarea
                       name="input-7-1"
                       label="Descripción"
-                      hint="¿Descripción del proyecto?"
-                      v-model="inputs.descripcion"
+                      hint="Indica en qué consiste tu Artefacto"
+                      v-model="inputs.desc"
                     />
                   </v-col>
                 </v-row>
@@ -65,25 +78,22 @@
                       color="primary"
                       float="right"
                       margin-left="6px"
-                      :to="{ name: 'ResourcesList' }"
-                      >Artefactos</v-btn
-                    >
+                      :to="{ name: 'ArtifactsList' }"
+                    >Artefactos</v-btn>
                     <v-btn
                       v-if="!show"
-                      color="primary"
+                      color="Secondary"
                       float="right"
                       margin-left="6px"
                       @click="login()"
-                      >Login</v-btn
-                    >
+                    >Inicia Sesión en tu Cuenta de Google</v-btn>
                     <v-btn
                       v-if="show"
-                      color="primary"
+                      color="secondary"
                       float="right"
                       margin-left="6px"
                       @click="create()"
-                      >Crear</v-btn
-                    >
+                    >Crear Artefacto</v-btn>
                   </v-col>
                 </v-row>
               </v-container>
@@ -109,20 +119,19 @@ export default {
       show: false,
       show2: false,
       type: [
-        { name: 'Recursos Humanos', id: '1' },
-        { name: 'Recursos físicos no depreciables', id: '2' },
-        { name: 'Recursos físicos depreciables', id: '3' },
-        { name: 'Recursos intangibles', id: '4' },
+        { name: 'Inicio', id: '1' },
+        { name: 'Planificación', id: '2' },
+        { name: 'Desarrollo', id: '3' },
+        { name: 'Control', id: '4' },
+        { name: 'Cierre', id: '5' },
       ],
-      type2: [
-        { name: 'Costo Directos', id: '1' },
-        { name: 'Costos Indirectos', id: '2' },
-        { name: 'Costo Extraordinarios', id: '3' },
-      ],
+    
       inputs: {
         nombre: '',
         tipo: '',
+        desc:'',
         descripcion:'',
+        version:'',
         enlace:'',
         projectId: this.$route.params.id_project,
         estado: 'A',
@@ -182,6 +191,7 @@ export default {
           gapi.client.load("docs", "v1", () => console.log("loaded doc"));
       });
     },
+    
     async login() {
       const googleAuth = gapi.auth2.getAuthInstance();
       const googleUser = await googleAuth.signIn();
@@ -192,6 +202,7 @@ export default {
       this.show=true
     },
     async create() {
+        
         const body = {name: this.inputs.nombre};
         const request = await gapi.client.drive.files.copy({
             fileId: this.originFileId,
@@ -201,13 +212,15 @@ export default {
         console.log(id);
         this.inputs.enlace = `https://docs.google.com/document/d/${id}/edit`;
         console.log(this.inputs.enlace)
+       
         this.createArtifact({
           nombre: this.inputs.nombre,
-          descripcion:this.inputs.descripcion,
+          descripcion: this.inputs.desc+'\n\nVersión: '+this.inputs.version,
           enlace:this.inputs.enlace,
           projectId: this.$route.params.id_project,
           estado: 'A',
         })
+        this.$router.push('/artifact/list/id_project')
     },
     async logout() {
       gapi.auth2.getAuthInstance().signOut();

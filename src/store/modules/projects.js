@@ -30,11 +30,36 @@ const state = {
     fecha_finalizacion: '',
     lider: '',
   },
+  objetivos: [],
+  objetivo: {
+    id: null,
+    nombre: '',
+  },
+  seguridades: [],
+  seguridad: {
+    nombre: '',
+    id: '',
+  },
+  requisitos: [],
+  requisito: {
+    nombre: '',
+    id: '',
+  },
 }
 
 const mutations = {
   ADD_PROJECT(state, project) {
     state.projects.push(project)
+  },
+  ADD_OBJETIVO(state, objetivo) {
+    state.objetivos.push(objetivo)
+  },
+
+  ADD_REQUISITO(state, requisito) {
+    state.requisitos.push(requisito)
+  },
+  ADD_SEGURIDAD(state, seguridad) {
+    state.seguridades.push(seguridad)
   },
   SET_PROJECTS(state, projects) {
     state.projects = projects
@@ -44,6 +69,24 @@ const mutations = {
   },
   SET_PROJECTINFO(state, projectInfo) {
     state.projectInfo = projectInfo
+  },
+  SET_OBJETIVO(state, objetivo) {
+    state.objetivo = objetivo
+  },
+  SET_REQUISITO(state, requisito) {
+    state.requisito = requisito
+  },
+  SET_SEGURIDAD(state, seguridad) {
+    state.seguridad = seguridad
+  },
+  SET_OBJETIVOS(state, objetivos) {
+    state.objetivos = objetivos
+  },
+  SET_SEGURIDADES(state, seguridades) {
+    state.seguridades = seguridades
+  },
+  SET_REQUISITOS(state, requisitos) {
+    state.requisitos = requisitos
   },
   [types.FILL_PROJECT](state, data) {
     state.project.nombre = data.nombre
@@ -100,6 +143,130 @@ const mutations = {
 }
 
 const actions = {
+  deleteObjetivo({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      ProjectService.deleteObjetivo(id)
+        .then((response) => {
+          if (response.status === 204) {
+            buildSuccess(
+              {
+                msg: 'El Objetivo se ha eliminado con éxito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  deleteRequisito({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      ProjectService.deleteRequisito(id)
+        .then((response) => {
+          if (response.status === 204) {
+            buildSuccess(
+              {
+                msg: 'El Requisito se ha eliminado con éxito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  deleteSeguridad({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      ProjectService.deleteSeguridad(id)
+        .then((response) => {
+          if (response.status === 204) {
+            buildSuccess(
+              {
+                msg: 'El Aspecto de Seguridad se ha eliminado con éxito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  createObjetivo({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      ProjectService.postObjetivo(payload.id, payload)
+        .then((response) => {
+          commit('ADD_OBJETIVO', payload)
+          if (response.status === 201) {
+            console.log('working')
+            buildSuccess(
+              {
+                msg: 'Objetivo creado con exito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  createRequisito({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      ProjectService.postRequisito(payload.id, payload)
+        .then((response) => {
+          commit('ADD_REQUISITO', payload)
+          if (response.status === 201) {
+            console.log('working')
+            buildSuccess(
+              {
+                msg: 'Requisito creado con exito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  createSeguridad({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      commit(types.SHOW_LOADING, true, { root: true })
+      ProjectService.postSeguridad(payload.id, payload)
+        .then((response) => {
+          commit('ADD_SEGURIDAD', payload)
+          if (response.status === 201) {
+            console.log('working')
+            buildSuccess(
+              {
+                msg: 'Aspecto de Seguridad creado con exito',
+              },
+              commit,
+              resolve
+            )
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+
   createProject({ commit, dispatch }, project) {
     return ProjectService.postProject(project)
       .then(() => {
@@ -178,6 +345,75 @@ const actions = {
         console.log(error)
       })
   },
+  fetchObjetivo({ commit }, id) {
+    ProjectService.getObjetivo(id)
+      .then((response) => {
+        commit('SET_OBJETIVO', response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  fetchRequisito({ commit }, id) {
+    ProjectService.getRequisito(id)
+      .then((response) => {
+        commit('SET_REQUISITO', response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  fetchSeguridad({ commit }, id) {
+    ProjectService.getSeguridad(id)
+      .then((response) => {
+        commit('SET_SEGURIDAD', response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  fetchObjetivos({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      ProjectService.getObjetivos(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            commit('SET_OBJETIVOS', response.data)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  fetchRequisitos({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      ProjectService.getRequisitos(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            commit('SET_REQUISITOS', response.data)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
+  fetchSeguridades({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      ProjectService.getSeguridades(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            commit('SET_SEGURIDADES', response.data)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          handleError(error, commit, reject)
+        })
+    })
+  },
   saveProject({ commit }, payload) {
     return new Promise((resolve, reject) => {
       ProjectService.updateProject(payload.id, payload)
@@ -237,6 +473,19 @@ const getters = {
   },
   project: (state) => state.project,
   projectInfo: (state) => state.projectInfo,
+  objetivo: (state) => state.objetivo,
+  requisito: (state) => state.requisito,
+  seguridad: (state) => state.seguridad,
+
+  objetivos: (state) => {
+    return state.objetivos
+  },
+  seguridades: (state) => {
+    return state.seguridades
+  },
+  requisitos: (state) => {
+    return state.requisitos
+  },
 }
 
 export default {

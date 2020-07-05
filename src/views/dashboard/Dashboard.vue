@@ -147,11 +147,15 @@
                 </v-btn>
               </template>
 
-              <span>Ver Actividades</span>
+              <span>Ver Proyecto</span>
             </v-tooltip>
           </template>
 
-          <v-card-title class="justify-center font-weight-light">{{ project.nombre }}</v-card-title>
+          <v-card-title class="justify-center font-weight-light">
+            {{
+            project.nombre
+            }}
+          </v-card-title>
 
           <v-card-text
             class="body-1 text-center mb-3 font-weight-light grey--text"

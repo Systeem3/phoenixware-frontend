@@ -1,12 +1,10 @@
 <template>
   <v-container id="validation-forms" fluid tag="section">
     <section class="mb-12 text-center">
-      <h1 class="font-weight-light mb-2 headline">
-        Características del Proyecto
-      </h1>
-      <span class="font-weight-light subtitle-1"
-        >Alcances, Objetivos, Requisitos y Aspectos de Seguridad</span
-      >
+      <h1 class="font-weight-light mb-2 headline">Características del Proyecto</h1>
+      <span
+        class="font-weight-light subtitle-1"
+      >Alcances, Objetivos, Requisitos y Aspectos de Seguridad</span>
     </section>
     <v-divider />
 
@@ -22,8 +20,7 @@
             <span
               class="card-title font-weight-light ml-4 mb-3 mt-6"
               style="font-size: 14px;"
-              >Una estimación de acuerdo a los datos registrados:</span
-            >
+            >Una estimación de acuerdo a los datos registrados:</span>
             <v-textarea
               filled
               auto-grow
@@ -35,12 +32,8 @@
             ></v-textarea>
             <v-spacer />
             <v-row justify="center" align="center">
-              <v-btn color="primary" v-clipboard="resultado"
-                >COPIAR AL PORTAPAPELES</v-btn
-              >
-              <v-btn color="secondary" :to="{ name: 'ProjectUpdate' }"
-                >EDITAR PROYECTO</v-btn
-              >
+              <v-btn color="primary" v-clipboard="resultado">COPIAR AL PORTAPAPELES</v-btn>
+              <v-btn color="secondary" :to="{ name: 'ProjectUpdate' }">EDITAR PROYECTO</v-btn>
             </v-row>
           </v-form>
         </base-material-card>
@@ -113,9 +106,9 @@
           class="ml-3"
         />
         <v-row dense justify="center" align="center" class="ml-3">
-          <span class="font-weight-light subtitle-1 text-center mb-6"
-            >Agregue en el alcance los aspectos siguientes que desee:</span
-          >
+          <span
+            class="font-weight-light subtitle-1 text-center mb-6"
+          >Agregue en el alcance los aspectos siguientes que desee:</span>
         </v-row>
         <v-row dense justify="center" align="center" class="ml-3">
           <v-btn color="secondary" @click="dialog_o = true">OBJETIVOS</v-btn>
@@ -133,11 +126,7 @@
     >
       <base-material-card color="primary">
         <template v-slot:heading>
-          <v-tabs
-            v-model="tabs"
-            background-color="transparent"
-            slider-color="secondary"
-          >
+          <v-tabs v-model="tabs" background-color="transparent" slider-color="secondary">
             <v-tab class="mr-3">
               <v-icon class="mr-2">mdi-chart-pie</v-icon>Agregar Objetivos
             </v-tab>
@@ -164,40 +153,15 @@
                         color="secondary"
                         class="font-weight-light"
                         @click="agregarobj(objetivo.nombre)"
-                        >{{ objetivo.nombre }}</v-btn
-                      >
+                      >{{ objetivo.nombre }}</v-btn>
                     </v-col>
                   </v-row>
                 </template>
 
                 <template v-if="n == 2">
-                  <v-row
-                    v-for="objetivo in objetivos"
-                    :key="objetivo.id"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-col align="center" justify="center">
-                      <v-col cols="9">
-                        <div
-                          class="font-weight-light"
-                          v-text="objetivo.nombre"
-                        />
-                      </v-col>
-                      <v-col class="text-right">
-                        <v-btn
-                          color="primary"
-                          class="mx-1"
-                          @click="deleteObjetivo(objetivo.id)"
-                          >ELIMINAR</v-btn
-                        >
-                      </v-col>
-                    </v-col>
-                  </v-row>
-
                   <v-row>
                     <v-text-field
-                      label="Nuevo Objetivo"
+                      label="Registrar un Nuevo Objetivo"
                       color="secondary"
                       outlined
                       filled
@@ -207,15 +171,32 @@
                       class="ml-3"
                     />
                   </v-row>
-                  <v-row>
+                  <v-row justify="center" align="center">
                     <v-btn
-                      color="primary"
+                      color="secondary"
                       class="mx-1"
                       justify="center"
                       align="center"
                       @click="submit_objetivo(caja1)"
-                      >AGREGAR OBJETIVO</v-btn
-                    >
+                    >REGISTRAR OBJETIVO</v-btn>
+                  </v-row>
+                  <v-row>
+                    <v-divider />
+                  </v-row>
+                  <v-row
+                    v-for="objetivo in objetivos"
+                    :key="objetivo.id"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-col align="center" justify="center">
+                      <v-col>
+                        <div class="font-weight-light" v-text="objetivo.nombre" />
+                      </v-col>
+                      <v-col>
+                        <v-btn color="primary" class="mx-1" @click="deleteObj(objetivo.id)">ELIMINAR</v-btn>
+                      </v-col>
+                    </v-col>
                   </v-row>
                 </template>
               </template>
@@ -225,6 +206,193 @@
       </base-material-card>
     </v-dialog>
     <!-- Segunda Fila-->
+
+    <v-dialog
+      v-model="dialog_r"
+      max-width="800px"
+      class="px-5 py-3 mx-10"
+      justify="center"
+      align="center"
+    >
+      <base-material-card color="primary">
+        <template v-slot:heading>
+          <v-tabs v-model="tabs" background-color="transparent" slider-color="secondary">
+            <v-tab class="mr-3">
+              <v-icon class="mr-2">mdi-chart-pie</v-icon>Agregar Requisitos
+            </v-tab>
+            <v-tab class="mr-3">
+              <v-icon class="mr-2">mdi-comment-plus-outline</v-icon>Requisitos
+              Registrados
+            </v-tab>
+          </v-tabs>
+        </template>
+
+        <v-tabs-items v-model="tabs" class="transparent">
+          <v-tab-item v-for="n in 2" :key="n">
+            <v-card-text>
+              <template>
+                <template v-if="n == 1">
+                  <v-row
+                    v-for="requisito in requisitos"
+                    :key="requisito.id"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-col align="center" justify="center">
+                      <v-btn
+                        color="secondary"
+                        class="font-weight-light"
+                        @click="agregarreq(requisito.nombre)"
+                      >{{ requisito.nombre }}</v-btn>
+                    </v-col>
+                  </v-row>
+                </template>
+
+                <template v-if="n == 2">
+                  <v-row>
+                    <v-text-field
+                      label="Registrar un Nuevo Requisito"
+                      color="secondary"
+                      outlined
+                      filled
+                      dense
+                      v-model="caja2"
+                      validate-on-blur
+                      class="ml-3"
+                    />
+                  </v-row>
+                  <v-row justify="center" align="center">
+                    <v-btn
+                      color="secondary"
+                      class="mx-1"
+                      justify="center"
+                      align="center"
+                      @click="submit_requisito(caja2)"
+                    >REGISTRAR REQUISITO</v-btn>
+                  </v-row>
+                  <v-row>
+                    <v-divider />
+                  </v-row>
+                  <v-row
+                    v-for="requisito in requisitos"
+                    :key="requisito.id"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-col align="center" justify="center">
+                      <v-col>
+                        <div class="font-weight-light" v-text="requisito.nombre" />
+                      </v-col>
+                      <v-col>
+                        <v-btn
+                          color="primary"
+                          class="mx-1"
+                          @click="deleteReq(requisito.id)"
+                        >ELIMINAR</v-btn>
+                      </v-col>
+                    </v-col>
+                  </v-row>
+                </template>
+              </template>
+            </v-card-text>
+          </v-tab-item>
+        </v-tabs-items>
+      </base-material-card>
+    </v-dialog>
+    <!--Tercera Fila-->
+    <v-dialog
+      v-model="dialog_s"
+      max-width="800px"
+      class="px-5 py-3 mx-10"
+      justify="center"
+      align="center"
+    >
+      <base-material-card color="primary">
+        <template v-slot:heading>
+          <v-tabs v-model="tabs" background-color="transparent" slider-color="secondary">
+            <v-tab class="mr-3">
+              <v-icon class="mr-2">mdi-chart-pie</v-icon>Agregar Aspectos de
+              Seguridad
+            </v-tab>
+            <v-tab class="mr-3">
+              <v-icon class="mr-2">mdi-comment-plus-outline</v-icon>Aspectos de
+              Seguridad Registrados
+            </v-tab>
+          </v-tabs>
+        </template>
+
+        <v-tabs-items v-model="tabs" class="transparent">
+          <v-tab-item v-for="n in 2" :key="n">
+            <v-card-text>
+              <template>
+                <template v-if="n == 1">
+                  <v-row
+                    v-for="seguridad in seguridades"
+                    :key="seguridad.id"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-col align="center" justify="center">
+                      <v-btn
+                        color="secondary"
+                        class="font-weight-light"
+                        @click="agregarseg(seguridad.nombre)"
+                      >{{ seguridad.nombre }}</v-btn>
+                    </v-col>
+                  </v-row>
+                </template>
+
+                <template v-if="n == 2">
+                  <v-row>
+                    <v-text-field
+                      label="Registrar un Aspecto de Seguridad Nuevo"
+                      color="secondary"
+                      outlined
+                      filled
+                      dense
+                      v-model="caja3"
+                      validate-on-blur
+                      class="ml-3"
+                    />
+                  </v-row>
+                  <v-row justify="center" align="center">
+                    <v-btn
+                      color="secondary"
+                      class="mx-1"
+                      justify="center"
+                      align="center"
+                      @click="submit_seguridad(caja3)"
+                    >REGISTRAR ASPECTO DE SEGURIDAD</v-btn>
+                  </v-row>
+                  <v-row>
+                    <v-divider />
+                  </v-row>
+                  <v-row
+                    v-for="seguridad in seguridades"
+                    :key="seguridad.id"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-col align="center" justify="center">
+                      <v-col>
+                        <div class="font-weight-light" v-text="seguridad.nombre" />
+                      </v-col>
+                      <v-col>
+                        <v-btn
+                          color="primary"
+                          class="mx-1"
+                          @click="deleteSeg(seguridad.id)"
+                        >ELIMINAR</v-btn>
+                      </v-col>
+                    </v-col>
+                  </v-row>
+                </template>
+              </template>
+            </v-card-text>
+          </v-tab-item>
+        </v-tabs-items>
+      </base-material-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -238,7 +406,7 @@ export default {
       dialog_o: false,
       dialog_r: false,
       dialog_s: false,
-      alcance: '',
+
       caja1: '',
       caja2: '',
       caja3: '',
@@ -255,36 +423,14 @@ export default {
       tabs: 0,
       objetivos1: {},
       objetivos2: '',
-      tasks: {
-        0: [
-          {
-            text:
-              'Sign contract for "What are conference organizers afraid of?"',
-            value: false,
-          },
-        ],
-        1: [
-          {
-            text:
-              'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
-            value: true,
-          },
-          {
-            text:
-              'Sign contract for "What are conference organizers afraid of?"',
-            value: false,
-          },
-        ],
-      },
+      requisitos2: '',
+      seguridad2: '',
     }
   },
   created() {
     this.fetchObjetivos(this.$route.params.id_project)
     this.fetchRequisitos(this.$route.params.id_project)
-    this.fetchSeguridad(this.$route.params.id_project)
-
-    this.objetivos1 = this.fetchObjetivos(this.$route.params.id_project)
-    console.log(this.objetivos1)
+    this.fetchSeguridades(this.$route.params.id_project)
   },
   components: {
     // ValidationObserver,
@@ -311,8 +457,10 @@ export default {
         'Los Objetivos planteados para este proyecto son: ' +
         this.objetivos2 +
         '\nMientras que los Requisitos propuestos del proyecto son: ' +
+        this.requisitos2 +
         '\nEn términos de Seguridad, el proyecto incorporará los siguientes aspectos: ' +
-        'El costo estimado para elaborar el proyecto es de: ' +
+        this.seguridad2 +
+        '\nEl costo estimado para elaborar el proyecto es de: ' +
         this.costo +
         ' USD. ' +
         'El tiempo estimado para elaborar el proyecto es desde la fecha: ' +
@@ -453,7 +601,7 @@ export default {
       'saveProject',
       'fetchObjetivos',
       'fetchRequisitos',
-      'fetchSeguridad',
+      'fetchSeguridades',
       'fetchObjetivo',
       'fetchRequisito',
       'fetchSeguridad',
@@ -465,7 +613,7 @@ export default {
       'deleteRequisito',
     ]),
 
-    async deleteObjetivo(item) {
+    async deleteObj(item) {
       const response = await this.$confirm(
         this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
 
@@ -482,7 +630,7 @@ export default {
         await this.fetchObjetivos(this.$route.params.id_project)
       }
     },
-    async deleteRequisito(item) {
+    async deleteReq(item) {
       const response = await this.$confirm(
         this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
 
@@ -499,7 +647,7 @@ export default {
         await this.fetchRequisitos(this.$route.params.id_project)
       }
     },
-    async deleteSeguridad(item) {
+    async deleteSeg(item) {
       const response = await this.$confirm(
         this.$t('common.DO_YOU_REALLY_WANT_TO_DELETE_THIS_ITEM'),
 
@@ -520,24 +668,35 @@ export default {
     async submit_objetivo() {
       await this.createObjetivo({
         nombre: this.caja1,
-        proyecto_id: this.$route.params.id_project,
+        id: this.$route.params.id_project,
       })
+      await this.fetchObjetivos(this.$route.params.id_project)
     },
     async submit_requisito() {
       await this.createRequisito({
         nombre: this.caja2,
-        proyecto_id: this.$route.params.id_project,
+        id: this.$route.params.id_project,
       })
+      await this.fetchRequisitos(this.$route.params.id_project)
     },
     async submit_seguridad() {
       await this.createSeguridad({
         nombre: this.caja3,
-        proyecto_id: this.$route.params.id_project,
+        id: this.$route.params.id_project,
       })
+      await this.fetchSeguridades(this.$route.params.id_project)
     },
     agregarobj(item) {
-      this.objetivos2 = '\n' + this.objetivos2 + '\n' + item
+      this.objetivos2 = this.objetivos2 + '\n' + '  -' + item
       this.dialog_o = false
+    },
+    agregarreq(item) {
+      this.requisitos2 = this.requisitos2 + '\n' + '  -' + item
+      this.dialog_r = false
+    },
+    agregarseg(item) {
+      this.seguridad2 = this.seguridad2 + '\n' + '  -' + item
+      this.dialog_s = false
     },
   },
 

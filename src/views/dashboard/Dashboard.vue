@@ -127,7 +127,7 @@
       <v-col sm="12" md="4" v-for="project in projects" :key="project.id">
         <base-material-card color="transparent" hover-reveal image>
           <template v-slot:image>
-            <v-img :src="images[project.id]" />
+            <v-img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/04/30/15566314118270.jpg" />
           </template>
 
           <template v-slot:reveal-actions>
@@ -210,7 +210,7 @@ export default {
     async llenarimages() {
       var randomNumber
 
-      for (let index = 0; index < 20; index++) {
+      for (let index = 0; index < 10; index++) {
         randomNumber = Math.floor(Math.random() * 94)
         fetch(
           `https://source.unsplash.com/collection/4540043/600x400/?sig=${randomNumber}`

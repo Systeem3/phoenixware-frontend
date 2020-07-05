@@ -127,6 +127,7 @@
                         filled
                         name="Description"
                         label="Descripción de la Reunión"
+                        v-model="inputs.descripcion"
                       ></v-textarea>
                     </v-row>
                   </v-col>

@@ -197,11 +197,6 @@
         >MIEMBROS</v-btn
       >
       <v-btn
-        color="secondary"
-        :to="{ name: 'RisksList', params: { id_project } }"
-        >RIESGOS</v-btn
-      >
-      <v-btn
         class="mx-2 mt-3"
         fab
         dark

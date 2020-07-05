@@ -75,7 +75,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       return MeetingService.postMeeting(meeting, meeting.projectId)
         .then((response) => {
-          commit('ADD_MEETING', meeting)
+          commit('SET_MEETING', meeting)
           if (response.status === 201) {
             console.log('working')
             buildSuccess(

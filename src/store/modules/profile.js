@@ -55,7 +55,7 @@ const actions = {
             commit(types.FILL_USER, response.data)
             buildSuccess(
               {
-                msg: 'common.myProfile.PASSWORD_CHANGED',
+                msg: 'common.myProfile.PROFILE_SAVED_SUCCESSFULLY',
               },
               commit,
               resolve

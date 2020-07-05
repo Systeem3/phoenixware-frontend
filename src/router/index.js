@@ -305,17 +305,22 @@ const routes = [
         props: true,
       },
       {
+        name: 'ArtifactsList',
+        path: '/artifact/list/:id_project',
+        component: () =>
+          import('@/views/dashboard/pages/project/artifacts/List'),
+        props: true,
+      },
+      {
         name: 'ProcessesList',
         path: '/processes/list/:id_project',
-        component: () =>
-          import('@/views/dashboard/pages/processes/List'),
+        component: () => import('@/views/dashboard/pages/processes/List'),
         props: true,
       },
       {
         name: 'ProcessCreate',
         path: '/process/create/:id_project',
-        component: () =>
-          import('@/views/dashboard/pages/processes/Create'),
+        component: () => import('@/views/dashboard/pages/processes/Create'),
         props: true,
       },
       {

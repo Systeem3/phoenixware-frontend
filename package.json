@@ -38,7 +38,7 @@
     "vuex-crud": "^0.3.2",
     "vuex-map-fields": "^1.4.0",
     "vuex-router-sync": "^5.0.0",
-    "xlsx": "^0.16.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.1",
